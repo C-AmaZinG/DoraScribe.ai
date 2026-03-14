@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
     --primary: #C8F051; /* Makro Lime Green */
@@ -11,6 +11,10 @@
     --border-radius-pill: 100px;
     --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --max-width: 1200px;
+    
+    /* Typography based on Makro */
+    --font-heading: 'Instrument Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
 }
 
 * {
@@ -24,10 +28,12 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     background-color: var(--bg-light);
     color: var(--text-main);
+    font-size: 16px;
     line-height: 1.6;
+    font-weight: 400;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
@@ -81,6 +87,7 @@ header .container {
 .logo {
     display: flex;
     align-items: center;
+    font-family: var(--font-heading);
     font-weight: 800;
     font-size: 1.25rem;
     gap: 10px;
@@ -113,6 +120,7 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: var(--text-main);
+    font-family: var(--font-heading);
     font-weight: 500;
     font-size: 0.9rem;
     transition: var(--transition);
@@ -130,6 +138,7 @@ nav ul li a:hover {
     padding: 6px 6px 6px 18px;
     background: #fff;
     border-radius: var(--border-radius-pill);
+    font-family: var(--font-heading);
     font-weight: 600;
     text-decoration: none;
     color: var(--text-main);
@@ -174,6 +183,7 @@ nav ul li a:hover {
     padding: 8px 20px;
     background: rgba(0,0,0,0.04);
     border-radius: var(--border-radius-pill);
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: 0.8rem;
     margin-bottom: 32px;
@@ -182,14 +192,16 @@ nav ul li a:hover {
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.05em;
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 7vw, 64px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     margin-bottom: 28px;
 }
 
 .hero p {
+    font-family: var(--font-body);
     font-size: 1.25rem;
     color: var(--text-muted);
     max-width: 500px;
@@ -212,7 +224,9 @@ nav ul li a:hover {
     color: #fff;
     border-radius: var(--border-radius-pill);
     text-decoration: none;
+    font-family: var(--font-heading);
     font-weight: 600;
+    font-size: 14px;
     transition: var(--transition);
     border: none;
     cursor: pointer;
@@ -260,6 +274,7 @@ nav ul li a:hover {
 .profile-img:first-child { margin-left: 0; }
 
 .trusted-text {
+    font-family: var(--font-body);
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--text-muted);
@@ -289,6 +304,7 @@ nav ul li a:hover {
     z-index: 10;
     animation: float 8s ease-in-out infinite;
     border: 1px solid rgba(0,0,0,0.03);
+    font-family: var(--font-body);
 }
 
 @keyframes float {
@@ -308,10 +324,11 @@ section {
 }
 
 .section-head h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
 }
 
 /* Bento Grid */
@@ -346,13 +363,15 @@ section {
 .bento-card.tall { grid-row: span 2; }
 
 .bento-card h3 {
+    font-family: var(--font-heading);
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 500;
     margin-bottom: 16px;
     letter-spacing: -0.02em;
 }
 
 .bento-card p {
+    font-family: var(--font-body);
     color: var(--text-muted);
     font-size: 1.1rem;
     max-width: 320px;
@@ -397,6 +416,12 @@ section {
     gap: 20px;
     border: 1px solid rgba(0,0,0,0.04);
     transition: var(--transition);
+    font-family: var(--font-body);
+}
+
+.pricing-item h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
 }
 
 .pricing-item:hover {
@@ -415,8 +440,9 @@ section {
 .pricing-item.featured h4 { color: var(--primary); }
 
 .price-tag {
+    font-family: var(--font-heading);
     font-size: 3rem;
-    font-weight: 800;
+    font-weight: 500;
     letter-spacing: -0.04em;
 }
 
@@ -449,6 +475,7 @@ footer {
     color: white;
     padding: 100px 0 60px;
     border-radius: 60px 60px 0 0;
+    font-family: var(--font-body);
 }
 
 .footer-grid {
@@ -458,6 +485,7 @@ footer {
 }
 
 .footer-logo {
+    font-family: var(--font-heading);
     font-size: 1.75rem;
     font-weight: 800;
     margin-bottom: 32px;
@@ -468,6 +496,7 @@ footer {
 }
 
 .footer-col h4 {
+    font-family: var(--font-heading);
     margin-bottom: 28px;
     font-weight: 700;
     font-size: 1rem;
