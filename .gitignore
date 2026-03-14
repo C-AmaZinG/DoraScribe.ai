@@ -1,0 +1,14 @@
+# DoraScribe.ai Project
+# Git Ignore
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.log
+/tmp/
+
+# Geminis/Agent specific
+.gemini/
+.agents/
