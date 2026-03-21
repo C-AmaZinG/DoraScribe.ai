@@ -1,14 +1,24 @@
-# DoraScribe.ai Project
-# Git Ignore
-
-# System files
-.DS_Store
-Thumbs.db
-
-# Temp files
+# Logs
+logs
 *.log
-/tmp/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Geminis/Agent specific
-.gemini/
-.agents/
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

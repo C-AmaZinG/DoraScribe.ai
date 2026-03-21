@@ -1,0 +1,12 @@
+/* 
+ * Scoped Zerodrift CSS — only applies inside .zerodrift-scope
+ * This prevents Webflow's global resets from breaking Tailwind utilities
+ * in other sections (Pricing, Hero, etc.)
+ */
+
+/* Import the raw zerodrift styles but nest them under .zerodrift-scope */
+@import url('./zerodrift.css') layer(zerodrift);
+
+@layer zerodrift {
+  /* Reset any body/html level changes from webflow to scoped container only */
+}
