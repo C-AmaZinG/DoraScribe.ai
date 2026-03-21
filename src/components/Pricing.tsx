@@ -132,7 +132,7 @@ export default function Pricing() {
              borderBottomRightRadius: "0",
              position: "relative",
              zIndex: 1,
-             translateY: '1px'
+             transform: "translateY(1px)"
           }}>
             <button
               onClick={() => setIsYearly(true)}
@@ -140,7 +140,6 @@ export default function Pricing() {
                 flex: 1,
                 padding: "12px 24px",
                 border: "none",
-                borderRadius: "100px",
                 cursor: "pointer",
                 fontFamily: "'Inter', sans-serif",
                 fontWeight: 600,
@@ -160,7 +159,6 @@ export default function Pricing() {
                 flex: 1,
                 padding: "12px 24px",
                 border: "none",
-                borderRadius: "100px",
                 cursor: "pointer",
                 fontFamily: "'Inter', sans-serif",
                 fontWeight: 600,

@@ -8,16 +8,16 @@ export default function Sustainability() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { staggerChildren: 0.15 } as any
     }
   };
 
   const cardVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
+    hidden: { opacity: 0, y: 30 },
+    visible: {
       opacity: 1,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }
     }
   };
 
@@ -25,7 +25,7 @@ export default function Sustainability() {
     <section style={{ padding: '120px 24px', background: '#ffffff' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Section Heading */}
-        <motion.div 
+        <motion.div
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
@@ -84,11 +84,11 @@ export default function Sustainability() {
                 <span style={{ background: 'var(--primary)', color: 'white', padding: '4px 14px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>Ask Dora</span>
                 <span style={{ fontSize: '0.85rem', color: '#64748b', fontFamily: "'Inter', sans-serif" }}>analyzing sources...</span>
                 <div style={{ flex: 1, height: '10px', background: '#ffffff70', borderRadius: '5px', overflow: 'hidden' }}>
-                    <motion.div 
+                    <motion.div
                       initial={{ width: "0%" }}
                       whileInView={{ width: "75%" }}
                       transition={{ duration: 1.5, delay: 0.5 }}
-                      style={{ height: '100%', background: 'var(--primary)', borderRadius: '5px' }} 
+                      style={{ height: '100%', background: 'var(--primary)', borderRadius: '5px' }}
                     />
                 </div>
               </div>
@@ -110,12 +110,15 @@ export default function Sustainability() {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '24px' }}>
                 {['General', 'Cardiology', 'Pediatrics', 'Mental Health'].map((pill, i) => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     whileHover={{ scale: 1.05, background: 'rgba(255,255,255,0.15)' }}
                     style={{
                       padding: '8px 16px', background: 'rgba(255,255,255,0.08)',
                       borderRadius: '10px', color: '#fff', fontSize: '0.8rem', fontWeight: 500, fontFamily: "'Inter', sans-serif",
+                      position: "relative",
+                      zIndex: 1,
+                      transform: "translateY(1px)"
                     }}>
                     {pill}
                   </motion.div>
