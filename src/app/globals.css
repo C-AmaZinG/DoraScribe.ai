@@ -1,16 +1,15 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 
 :root {
-    --primary: #00B7AF; /* Teal */
-    --primary-dark: #006167; /* Dark Teal */
-    --secondary: #006167; /* Dark Teal */
-    --accent: #FDD401; /* Yellow */
-    --accent-alt: #FABF00; /* Golden */
-    --bg-light: #ECEFF6; /* Original Background */
+    --primary: #0B1D33;
+    --primary-dark: #05101F;
+    --secondary: #FF6F00; /* Vibrant Orange */
+    --makro-accent: #FF6F00; /* Lime Green */
+    --bg-light: #EBEFF5; /* Updated Background */
     --bg-white: #ffffff;
-    --text-main: #1C1C1C;
-    --text-muted: #5b6b7a;
+    --text-main: #0B1D33;
+    --text-muted: #64748b;
     --border-radius-lg: 32px;
     --border-radius-pill: 100px;
     --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -22,17 +21,15 @@
 }
 
 @theme {
-    --color-background: #ECEFF6;
-    --color-foreground: #1c1c1c;
-    --color-primary: #00B7AF;
+    --color-background: #EBEFF5;
+    --color-foreground: #0B1D33;
+    --color-primary: #0B1D33;
     --color-primary-foreground: #ffffff;
-    --color-secondary: #006167;
-    --color-secondary-foreground: #ffffff;
-    --color-accent: #FDD401;
-    --color-accent-alt: #FABF00;
+    --color-secondary:	#FF6F00;
+    --color-accent: #FF6F00;
     --color-muted: #f1f5f9;
-    --color-muted-foreground: #5b6b7a;
-    --color-border: #b8d9bc;
+    --color-muted-foreground: #64748b;
+    --color-border: rgba(11, 29, 51, 0.1);
     --font-sans: 'Inter', sans-serif;
     --font-serif: 'Playfair Display', serif;
 }
@@ -45,6 +42,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-margin-top: 100px;
 }
 
 body {
@@ -59,7 +57,23 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading) !important;
+    font-weight: 400 !important;
+}
+
+h2 {
+    font-size: 48px !important;
+}
+
+.hero-title,
+.pricing-title,
+.enterprise-title,
+.form-title,
+.plan-name,
+.faq-title,
+.faq-contact-title,
+.info-title {
+    font-family: var(--font-heading) !important;
 }
 
 /* Scroll Reveal Base Class */
@@ -306,7 +320,7 @@ nav ul li a:hover {
     display: inline-flex;
     align-items: center;
     background: #ffffff;
-    color: #1a1a1a;
+    color: #0B1D33;
     padding: 16px 32px;
     border-radius: 8px;
     font-family: var(--font-heading);
@@ -390,7 +404,7 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    color: #1a1a1a;
+    color: #0B1D33;
 }
 
 .zd-play-btn svg {
@@ -401,6 +415,7 @@ nav ul li a:hover {
 /* Sections */
 section {
     padding: 140px 0;
+    scroll-margin-top: 100px;
 }
 
 .section-head {
@@ -1144,3 +1159,4 @@ main > section:last-of-type {
     }
 }
 @import "tailwindcss";
+

@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import MakroButton from "@/components/ui/MakroButton";
 
 export default function CTASection() {
   const containerVariants = {
@@ -14,7 +15,7 @@ export default function CTASection() {
   };
 
   return (
-    <section style={{ padding: '80px 24px 120px', background: '#ffffff' }}>
+    <section style={{ padding: '80px 24px 120px', background: '#F8FAFC' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <motion.div
            variants={containerVariants}
@@ -22,7 +23,8 @@ export default function CTASection() {
            whileInView="visible"
            viewport={{ once: true }}
            style={{
-             background: '#111111',
+            background: '#0B1D33',
+             border: '1px solid rgba(11, 29, 51, 0.12)',
              borderRadius: '48px',
              padding: '80px 40px',
              color: '#ffffff',
@@ -85,7 +87,7 @@ export default function CTASection() {
             <h2 style={{ 
               fontFamily: "'Playfair Display', serif", 
               fontSize: 'clamp(2.5rem, 6vw, 5rem)', 
-              fontWeight: 500, 
+              fontWeight: 400, 
               marginBottom: '24px',
               lineHeight: 1.05,
               letterSpacing: '-0.03em'
@@ -104,49 +106,8 @@ export default function CTASection() {
             </p>
             
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="https://app.dorascribe.ai/signUp" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0 48px',
-                height: '64px',
-                background: 'var(--accent)',
-                color: 'var(--text-main)',
-                borderRadius: '100px',
-                textDecoration: 'none',
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 750,
-                fontSize: '1.05rem',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                boxShadow: '0 10px 30px rgba(253,212,1,0.2)'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0) scale(1)')}
-              >
-                Start Free Trial
-              </a>
-
-              <a href="https://dorascribe.ai/book-demo/" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0 40px',
-                height: '64px',
-                background: 'rgba(255,255,255,0.08)',
-                color: '#fff',
-                borderRadius: '100px',
-                textDecoration: 'none',
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 600,
-                fontSize: '1.05rem',
-                border: '1px solid rgba(255,255,255,0.15)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.15)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
-              >
-                Book a Demo
-              </a>
+              <MakroButton text="Start Free Trial" href="https://app.dorascribe.ai/signUp" variant="accent" />
+              <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" variant="outline" />
             </div>
           </div>
         </motion.div>
@@ -154,3 +115,5 @@ export default function CTASection() {
     </section>
   );
 }
+
+
