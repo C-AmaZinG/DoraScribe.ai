@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -66,7 +66,7 @@ export default function Testimonials() {
           <p style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: '0.8rem',
-            fontWeight: 700,
+            fontWeight: 400,
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             color: 'var(--primary)',
@@ -76,7 +76,7 @@ export default function Testimonials() {
           <h2 style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-            fontWeight: 500,
+            fontWeight: 400,
             letterSpacing: '-0.03em',
             color: 'var(--text-main)',
             lineHeight: 1.1,
@@ -149,7 +149,7 @@ export default function Testimonials() {
                   <h4 style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: '1rem',
-                    fontWeight: 700,
+                    fontWeight: 400,
                     color: 'var(--text-main)',
                     marginBottom: '2px'
                   }}>
@@ -171,3 +171,5 @@ export default function Testimonials() {
     </section>
   );
 }
+
+

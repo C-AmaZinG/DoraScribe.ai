@@ -1,50 +1,57 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import MockupSection from '../components/MockupSection';
-import HowItWorks from '../components/HowItWorks';
-import WhyChoose from '../components/WhyChoose';
-import Sustainability from '../components/Sustainability';
-import Pricing from '../components/Pricing';
-import Testimonials from '../components/Testimonials';
-import FAQ from '../components/FAQ';
-import CTASection from '../components/CTASection';
-import Footer from '../components/Footer';
+import React, { useEffect, useState } from 'react';
+import Header from '@/components/layout/Header';
+import Hero from '@/components/sections/Hero';
+import MockupSection from '@/components/sections/MockupSection';
+import HowItWorks from '@/components/sections/HowItWorks';
+import WidelyAdopted from '@/components/sections/WidelyAdopted';
+import WhyChoose from '@/components/sections/WhyChoose';
+import Sustainability from '@/components/sections/Sustainability';
+import Pricing from '@/components/sections/Pricing';
+import Specialties from '@/components/sections/Specialties';
+import Testimonials from '@/components/sections/Testimonials';
+import FAQ from '@/components/sections/FAQ';
+import BlogSection from '@/components/sections/BlogSection';
+import CTASection from '@/components/sections/CTASection';
+import Footer from '@/components/layout/Footer';
 
 export default function Page() {
+  const [navigationRefreshKey, setNavigationRefreshKey] = useState(0);
+
   useEffect(() => {
-    // Scroll reveal logic originally from HTML/JS
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const reveal = () => {
-      const windowHeight = window.innerHeight;
-      const elementVisible = 150;
-      revealElements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        if (elementTop < windowHeight - elementVisible) {
-          element.classList.add('visible');
-        }
-      });
+    const refreshSections = () => {
+      setNavigationRefreshKey((prev) => prev + 1);
     };
 
-    window.addEventListener('scroll', reveal);
-    reveal(); // Trigger on load
-    return () => window.removeEventListener('scroll', reveal);
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        refreshSections();
+      }
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('popstate', refreshSections);
+
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('popstate', refreshSections);
+    };
   }, []);
 
   return (
-    <div className="app-container">
+    <div className="app-container" key={navigationRefreshKey}>
       <Header />
       <main>
         <Hero />
-        <MockupSection />
         <HowItWorks />
-        <WhyChoose />
+        <MockupSection />
+        <WidelyAdopted />
         <Sustainability />
+        <Specialties />
         <Pricing />
         <Testimonials />
+        <BlogSection />
         <FAQ />
         <CTASection />
       </main>

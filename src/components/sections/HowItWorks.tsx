@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -49,7 +49,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section style={{ padding: "100px 24px", background: "#ffffff" }}>
+    <section id="how-it-works" style={{ padding: "100px 24px", background: "#ffffff" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "64px" }}>
@@ -57,7 +57,7 @@ export default function HowItWorks() {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.8rem",
-              fontWeight: 600,
+              fontWeight: 400,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               color: "var(--primary)",
@@ -70,7 +70,7 @@ export default function HowItWorks() {
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2rem, 5vw, 48px)",
-              fontWeight: 500,
+              fontWeight: 400,
               letterSpacing: "-0.02em",
               color: "var(--text-main)",
               marginBottom: "12px",
@@ -138,7 +138,7 @@ export default function HowItWorks() {
                 style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "0.75rem",
-                  fontWeight: 600,
+                  fontWeight: 400,
                   color: "var(--primary)",
                   marginBottom: "8px",
                   display: "block",
@@ -150,7 +150,7 @@ export default function HowItWorks() {
                 style={{
                   fontFamily: "'Playfair Display', serif",
                   fontSize: "1.5rem",
-                  fontWeight: 600,
+                  fontWeight: 400,
                   color: "var(--text-main)",
                   marginBottom: "10px",
                 }}
@@ -174,3 +174,5 @@ export default function HowItWorks() {
     </section>
   );
 }
+
+
