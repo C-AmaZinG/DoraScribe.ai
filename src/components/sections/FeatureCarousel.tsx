@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -43,7 +43,7 @@ export default function FeatureCarousel() {
   const [activeTab, setActiveTab] = useState(features[0]);
 
   return (
-    <section id="how-it-works" style={{ padding: '120px 24px', background: '#EBEFF5', overflow: 'hidden' }}>
+    <section id="how-it-works" style={{ padding: '100px 24px', background: '#FDFCFA', overflow: 'hidden' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 80px' }}>
           <h2 style={{ 
@@ -186,5 +186,6 @@ export default function FeatureCarousel() {
     </section>
   );
 }
+
 
 

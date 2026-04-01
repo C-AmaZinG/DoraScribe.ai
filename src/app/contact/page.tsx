@@ -479,10 +479,10 @@ export default function ContactPage() {
           width: 100%;
           margin-top: 22px;
           min-height: 40px;
-          border: 1px solid #0b1d33;
+          border: 1px solid #f2ec7d;
           border-radius: 6px;
-          background: #0b1d33;
-          color: #fff;
+          background: #f2ec7d;
+          color: #0b1d33;
           font-family: "Inter", sans-serif;
           font-size: 0.84rem;
           font-weight: 600;
@@ -491,8 +491,8 @@ export default function ContactPage() {
         }
 
         .submit-btn:not(:disabled):hover {
-          background: #08162b;
-          border-color: #08162b;
+          background: #e6de69;
+          border-color: #e6de69;
         }
 
         .submit-btn:disabled {
@@ -544,3 +544,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

@@ -1,175 +1,277 @@
-﻿"use client";
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from "react";
+import Image from "next/image";
 
-const testimonials = [
+const quoteCards = [
   {
-    name: "Dr. Marc E.",
-    role: "General Practice",
-    initials: "ME",
-    color: "#D7EFDA",
-    text: "Dorascribe has completely transformed how I manage my clinical notes. The accuracy is astounding, and the time saved is substantial.",
+    org: "TEXAS ONCOLOGY",
+    quote:
+      "I finish clinic with charting already done, and that has changed my evenings completely. DoraScribe captures the details accurately without breaking my flow with patients.",
+    name: "Lara M.",
+    role: "Family Physician",
+    initials: "LM",
+    avatarColor: "#9EC5F8",
   },
   {
-    name: "Dr. Sarah L.",
-    role: "Pediatrician",
-    initials: "SL",
-    color: "#E5E7EB",
-    text: "Being able to focus on my little patients instead of my screen has been a game changer. The notes are perfect every time.",
+    org: "Ochsner Health",
+    quote:
+      "The note quality is consistently strong, even on complex follow-ups. I spend less time correcting documentation and more time discussing treatment decisions with patients.",
+    name: "Nora I.",
+    role: "Internal Medicine Physician",
+    initials: "NI",
+    avatarColor: "#B8C7D9",
   },
   {
-    name: "Dr. James K.",
-    role: "Cardiologist",
-    initials: "JK",
-    color: "#FDE68A",
-    text: "I was skeptical about AI in cardiology, but Dorascribe handles complex medical terms with ease. Very impressed.",
+    org: "COVENANT Healthcare",
+    quote:
+      "Our team adopted DoraScribe quickly because it fits naturally into the visit. Documentation feels lighter, and we can stay focused on delivering safe, attentive care.",
+    name: "Chinelo A.",
+    role: "Family Medicine Physician",
+    initials: "CA",
+    avatarColor: "#F3A78C",
   },
   {
-    name: "Dr. Elena R.",
-    role: "Mental Health",
-    initials: "ER",
-    color: "#FECACA",
-    text: "The 'Ask Dora' feature helps me cross-reference research instantly. It's like having a brilliant assistant in the room.",
-  },
-  {
-    name: "Dr. David M.",
-    role: "Dermatologist",
-    initials: "DM",
-    color: "#C7D2FE",
-    text: "Integrates perfectly with our EHR. Setting it up took minutes, and I haven't looked back since.",
-  },
-  {
-    name: "Dr. Chloe S.",
-    role: "Family Nurse Practitioner",
-    initials: "CS",
-    color: "#FBCFE8",
-    text: "Finally, a tool that understands the nuances of primary care. It's intuitive and efficient. Highly recommend.",
+    org: "pearl",
+    quote:
+      "What I value most is how reliable the summaries are after emotionally demanding sessions. It helps me preserve energy for patients instead of spending it all on admin work.",
+    name: "Ruth E.",
+    role: "Clinical Psychologist",
+    initials: "RE",
+    avatarColor: "#C7C2EA",
   },
 ];
 
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <section style={{ padding: '120px 24px', background: 'var(--bg-light)' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <p style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.8rem',
-            fontWeight: 400,
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            color: 'var(--primary)',
-            marginBottom: '16px',
-            display: 'block'
-          }}>Testimonials</p>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-            fontWeight: 400,
-            letterSpacing: '-0.03em',
-            color: 'var(--text-main)',
-            lineHeight: 1.1,
-          }}>
-            Trusted by the doctors<br />behind the world's best care
-          </h2>
-        </div>
-
-        {/* Grid */}
-        <div className="testimonials-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '24px'
-        }}>
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              style={{
-                background: '#ffffff',
-                padding: '40px',
-                borderRadius: '32px',
-                border: '1px solid rgba(0,0,0,0.06)',
-                position: 'relative',
-                boxShadow: i === activeIndex ? '0 20px 50px -10px rgba(0,0,0,0.12)' : 'none',
-                scale: i === activeIndex ? 1.02 : 1,
-                opacity: i === activeIndex ? 1 : 0.8,
-                transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
-              }}
-              className="hover-lift"
-            >
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '24px' }}>
-                {[1, 2, 3, 4, 5].map(star => (
-                   <svg key={star} width="16" height="16" viewBox="0 0 24 24" fill="var(--accent)" stroke="var(--accent)">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                   </svg>
-                ))}
-              </div>
-              <p style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '1.050rem',
-                color: 'var(--text-main)',
-                lineHeight: 1.7,
-                marginBottom: '32px',
-                fontStyle: 'italic',
-                opacity: 0.95
-              }}>
-                "{t.text}"
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '16px',
-                  background: t.color,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                  color: 'var(--text-main)',
-                  fontFamily: "'Inter', sans-serif"
-                }}>
-                  {t.initials}
+    <section className="testimonials-section">
+      <div className="testimonials-shell">
+        <div className="quote-grid">
+          {quoteCards.map((card) => (
+            <article key={card.name} className="quote-card">
+              <p className="quote">"{card.quote}"</p>
+              <div className="person">
+                <div className="avatar" style={{ background: card.avatarColor }}>
+                  {card.initials}
                 </div>
                 <div>
-                  <h4 style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '1rem',
-                    fontWeight: 400,
-                    color: 'var(--text-main)',
-                    marginBottom: '2px'
-                  }}>
-                    {t.name}
-                  </h4>
-                  <p style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.85rem',
-                    color: 'var(--text-muted)'
-                  }}>
-                    {t.role}
-                  </p>
+                  <p className="name">{card.name}</p>
+                  <p className="role">{card.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </article>
           ))}
         </div>
+
+        <article className="feature-panel">
+          <div className="feature-media-wrap">
+            <div className="feature-media">
+              <Image
+                src="/portrait.jpg"
+                alt="Smiling American female doctor"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
+            </div>
+          </div>
+          <div className="feature-content">
+            <h3>"DoraScribe lets us stay fully present with patients while documentation is handled accurately in real time."</h3>
+            <p className="feature-attribution">Rachel T.</p>
+          </div>
+        </article>
       </div>
+
+      <style jsx>{`
+        .testimonials-section {
+          background: #fdfcfa;
+          padding: 96px 24px;
+        }
+
+        .testimonials-shell {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          gap: 20px;
+        }
+
+        .quote-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 20px;
+        }
+
+        .quote-card {
+          background: #f2f2f2;
+          border-radius: 16px;
+          padding: 30px 26px;
+          display: flex;
+          flex-direction: column;
+          min-height: 320px;
+        }
+
+        .quote {
+          margin: 0 0 30px;
+          font-family: "Inter", sans-serif;
+          font-size: 1rem;
+          line-height: 1.45;
+          color: #1c1c1c;
+          flex: 1;
+        }
+
+        .person {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .avatar {
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: "Inter", sans-serif;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: #141414;
+        }
+
+        .name {
+          margin: 0;
+          font-family: "Inter", sans-serif;
+          font-size: 1.02rem;
+          color: #141414;
+        }
+
+        .role {
+          margin: 2px 0 0;
+          font-family: "Inter", sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          font-size: 0.68rem;
+          color: #353535;
+        }
+
+        .feature-panel {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          background: #f2f2f2;
+          border-radius: 16px;
+          overflow: hidden;
+          min-height: 430px;
+        }
+
+        .feature-media {
+          position: relative;
+          min-height: 360px;
+          border-radius: 14px;
+          overflow: hidden;
+          height: 100%;
+        }
+
+        .feature-media-wrap {
+          padding: 14px;
+          background: #ece8e8;
+        }
+
+        .feature-content {
+          padding: 64px 54px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .feature-org {
+          margin: 0;
+          font-family: "Inter", sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          color: #151515;
+        }
+
+        .feature-content h3 {
+          margin: 26px 0 18px;
+          font-family: "Inter", sans-serif;
+          font-size: 40px !important;
+          line-height: 1.06;
+          letter-spacing: -0.02em;
+          color: #121212;
+          max-width: 580px;
+        }
+
+        .feature-content p {
+          margin: 0;
+          font-family: "Inter", sans-serif;
+          font-size: 1.02rem;
+          line-height: 1.5;
+          color: #1c1c1c;
+          max-width: 520px;
+        }
+
+        .feature-attribution {
+          margin-top: 12px !important;
+          font-family: "Inter", sans-serif;
+          font-size: 0.98rem !important;
+          font-weight: 600;
+          color: #1b1b1b;
+        }
+
+        .feature-content a {
+          margin-top: 34px;
+          width: fit-content;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-family: "Inter", sans-serif;
+          font-size: 0.73rem;
+          color: #121212;
+        }
+
+        @media (max-width: 1100px) {
+          .quote-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 900px) {
+          .feature-panel {
+            grid-template-columns: 1fr;
+          }
+
+          .feature-content {
+            padding: 34px 24px 38px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .testimonials-section {
+            padding: 68px 16px;
+          }
+
+          .quote-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .quote-card {
+            min-height: 280px;
+            padding: 24px 20px;
+          }
+
+          .feature-media {
+            min-height: 280px;
+          }
+
+          .feature-org {
+            font-size: 1.7rem;
+          }
+        }
+      `}</style>
     </section>
   );
 }
+
+
 
 

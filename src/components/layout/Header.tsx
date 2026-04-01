@@ -35,7 +35,7 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: 1000,
-        padding: "24px 24px",
+        padding: "0",
         display: "flex",
         justifyContent: "center",
       }}
@@ -45,84 +45,106 @@ export default function Header() {
         animate={{ y: 0, opacity: 1 }}
         style={{
           width: "100%",
-          maxWidth: "1200px",
+          maxWidth: "none",
           height: "64px",
-          background: "rgba(255, 255, 255, 0.9)",
+          background: "#FEFEFE",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
-          borderRadius: "100px",
+          borderRadius: "0",
           border: "1px solid rgba(0, 0, 0, 0.05)",
           boxShadow: isScrolled
             ? "0 10px 30px -10px rgba(0,0,0,0.08)"
             : "0 4px 20px -5px rgba(0,0,0,0.03)",
-          padding: "0 8px 0 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          padding: "0",
           transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        <Logo />
-
         <div
           style={{
+            maxWidth: "1200px",
+            width: "100%",
+            margin: "0 auto",
+            padding: "0 24px",
             display: "flex",
             alignItems: "center",
-            gap: "8px",
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
+            justifyContent: "space-between",
+            position: "relative",
+            height: "100%",
           }}
-          className="desktop-only"
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onMouseEnter={() => setHoveredLink(link.name)}
-              onMouseLeave={() => setHoveredLink(null)}
-              style={{
-                position: "relative",
-                padding: "8px 16px",
-                textDecoration: "none",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.9rem",
-                fontWeight: 400,
-                color: hoveredLink === link.name ? "#0B1D33" : "#64748b",
-                transition: "color 0.2s ease",
-              }}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+          <Logo />
 
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Link
-            href="https://app.dorascribe.ai/login"
+          <div
             style={{
-              textDecoration: "none",
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.9rem",
-              fontWeight: 400,
-              color: "#64748b",
-              marginRight: "8px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
             }}
             className="desktop-only"
           >
-            Log in
-          </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onMouseEnter={() => setHoveredLink(link.name)}
+                onMouseLeave={() => setHoveredLink(null)}
+                style={{
+                  position: "relative",
+                  padding: "8px 16px",
+                  textDecoration: "none",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.9rem",
+                  fontWeight: hoveredLink === link.name ? 500 : 400,
+                  color: hoveredLink === link.name ? "#2969B7" : "#0F172A",
+                  borderBottom:
+                    hoveredLink === link.name
+                      ? "2px solid #2969B7"
+                      : "2px solid transparent",
+                  transition: "color 0.2s ease, border-color 0.2s ease, font-weight 0.2s ease",
+                }}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
 
-          <MakroButton
-            text="Get started"
-            href="https://app.dorascribe.ai/signUp"
-            size="sm"
-            variant="secondary"
-          />
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <Link
+              href="https://app.dorascribe.ai/login"
+              style={{
+                textDecoration: "none",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                color: "#2C1810",
+                padding: "8px 20px",
+                borderRadius: "999px",
+                background: "#F0EBE4",
+                transition: "background 0.2s ease, color 0.2s ease",
+              }}
+              className="desktop-only login-link"
+            >
+              Log in
+            </Link>
+
+            <MakroButton
+              text="Get started"
+              href="https://app.dorascribe.ai/signUp"
+              size="sm"
+              variant="secondary"
+            />
+          </div>
         </div>
       </motion.nav>
 
       <style jsx>{`
+        .login-link:hover {
+          background: #E6DFD6 !important;
+        }
+
         @media (max-width: 900px) {
           .desktop-only {
             display: none !important;
@@ -132,4 +154,3 @@ export default function Header() {
     </header>
   );
 }
-

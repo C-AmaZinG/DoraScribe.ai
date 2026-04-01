@@ -86,7 +86,10 @@ export default function Pricing() {
         <div className="pricing-board">
           <div className="pricing-cards">
             {plans.map((plan) => (
-              <article key={plan.name} className="pricing-card">
+              <article
+                key={plan.name}
+                className={`pricing-card ${plan.name === "Premium" ? "is-premium" : ""}`}
+              >
                 <div className="plan-copy">
                   <p className="plan-name">{plan.name}</p>
                   <p className="plan-description">{plan.description}</p>
@@ -128,28 +131,13 @@ export default function Pricing() {
             ))}
           </div>
 
-          <div className="enterprise-row">
-            <div className="enterprise-copy">
-              <span className="section-chip enterprise-chip">
-                <span className="chip-dot" />
-                Enterprise plans
-              </span>
-              <p className="enterprise-title">Get custom pricing</p>
-              <p className="enterprise-subtitle">
-                If you manage high transaction volumes, multiple entities, or require
-                custom integrations, our team can tailor Makro to your needs.
-              </p>
-            </div>
-
-            <MakroButton text="Contact sales" href="/contact" className="enterprise-default-btn" />
-          </div>
         </div>
       </div>
 
       <style jsx>{`
         .pricing-clone {
-          padding: 120px 24px;
-          background: #ebeff5;
+          padding: 100px 24px;
+          background: #FDFCFA;
         }
 
         .pricing-wrap {
@@ -197,7 +185,7 @@ export default function Pricing() {
 
         .pricing-title mark {
           display: inline-block;
-          background: #d9ff5c;
+          background: #E6DE69;
           border-radius: 14px;
           padding: 0 16px 5px;
         }
@@ -218,17 +206,18 @@ export default function Pricing() {
         }
 
         .pricing-board {
-          border: 1.5px solid #cad3e3;
-          border-radius: 16px;
-          overflow: hidden;
-          background: linear-gradient(180deg, #ebeff5 0%, #a5b2cf 100%);
+          border: 0;
+          border-radius: 0;
+          overflow: visible;
+          background: transparent;
         }
 
         .pricing-cards {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 2px;
-          background: #cad3e3;
+          gap: 14px;
+          background: transparent;
+          padding: 14px;
         }
 
         .pricing-card {
@@ -237,6 +226,12 @@ export default function Pricing() {
           display: flex;
           flex-direction: column;
           min-height: 530px;
+          border-radius: 14px;
+          border: 1px solid #cad3e3;
+        }
+
+        .pricing-card.is-premium {
+          background: #0b1d33;
         }
 
         .plan-copy {
@@ -252,6 +247,10 @@ export default function Pricing() {
           font-weight: 400;
         }
 
+        .pricing-card.is-premium .plan-name {
+          color: #f7f9ff;
+        }
+
         .plan-description {
           margin-top: 8px;
           min-height: 42px;
@@ -261,6 +260,10 @@ export default function Pricing() {
           color: #9298a9;
         }
 
+        .pricing-card.is-premium .plan-description {
+          color: rgba(247, 249, 255, 0.72);
+        }
+
         .plan-price {
           margin-top: 24px;
           font-family: "Inter", sans-serif;
@@ -268,6 +271,10 @@ export default function Pricing() {
           line-height: 1;
           letter-spacing: -0.04em;
           color: #161a27;
+        }
+
+        .pricing-card.is-premium .plan-price {
+          color: #ffffff;
         }
 
         .plan-default-btn {
@@ -293,6 +300,11 @@ export default function Pricing() {
           color: #34384a;
         }
 
+        .pricing-card.is-premium .feature-row {
+          border-bottom-color: rgba(255, 255, 255, 0.18);
+          color: #f0f4ff;
+        }
+
         .feature-row:last-child {
           border-bottom: 0;
         }
@@ -314,40 +326,8 @@ export default function Pricing() {
           color: #212733;
         }
 
-        .enterprise-row {
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.5) 100%);
-          border-top: 1.5px solid rgba(255, 255, 255, 0.6);
-          padding: 26px;
-          display: grid;
-          grid-template-columns: 1fr 280px;
-          align-items: center;
-          gap: 24px;
-        }
-
-        .enterprise-chip {
-          background: rgba(255, 255, 255, 0.82);
-        }
-
-        .enterprise-title {
-          margin-top: 14px;
-          font-family: "Playfair Display", serif;
-          font-size: clamp(1.8rem, 3vw, 2.25rem);
-          letter-spacing: -0.03em;
-          color: #21222f;
-          font-weight: 400;
-        }
-
-        .enterprise-subtitle {
-          margin-top: 8px;
-          max-width: 560px;
-          font-family: "Inter", sans-serif;
-          font-size: 0.92rem;
-          line-height: 1.5;
-          color: rgba(51, 51, 94, 0.82);
-        }
-
-        .enterprise-default-btn {
-          width: 100%;
+        .pricing-card.is-premium .feature-icon.check {
+          color: #f2ec7d;
         }
 
         @media (max-width: 1200px) {
@@ -365,10 +345,6 @@ export default function Pricing() {
             min-height: unset;
           }
 
-          .enterprise-row {
-            grid-template-columns: 1fr;
-            padding: 22px;
-          }
         }
 
         @media (max-width: 680px) {
@@ -392,3 +368,4 @@ export default function Pricing() {
     </section>
   );
 }
+

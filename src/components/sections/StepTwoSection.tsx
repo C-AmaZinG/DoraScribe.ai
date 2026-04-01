@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Mic } from "lucide-react";
+import { FileText } from "lucide-react";
 
-const quickActions = ["Referral letter", "Prescription", "Assessment"];
+const quickActions = ["Subjective", "Objective", "Assessment"];
 
-export default function Sustainability() {
+export default function StepTwoSection() {
   const [activeAction, setActiveAction] = useState(0);
 
   useEffect(() => {
@@ -18,44 +18,44 @@ export default function Sustainability() {
   }, []);
 
   return (
-    <section className="burnout-section">
-      <div className="burnout-shell">
+    <section className="step-two-section">
+      <div className="step-two-shell">
         <motion.div
-          className="burnout-copy"
+          className="step-two-left"
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="burnout-chip">Step 1</span>
-          <h2>Record</h2>
+          <span className="step-two-chip">Step 2</span>
+          <h2>Document</h2>
           <p>
-            Instantly capture live conversations with your patient or dictate a
-            summary of the interaction.
+            Get a detailed summary of the encounter as a SOAP note that is ready
+            to copy and paste into your patient's EMR.
           </p>
         </motion.div>
 
         <motion.div
-          className="burnout-visual"
+          className="step-two-right"
           initial={{ opacity: 0, y: 22, scale: 0.98 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="visual-top">
-            <div className="mic-zone">
+            <div className="icon-zone">
               <motion.div
-                className="mic-shell"
+                className="icon-shell"
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="mic-ring" />
+                <div className="icon-ring" />
                 <motion.div
-                  className="mic-core"
+                  className="icon-core"
                   animate={{ scale: [1, 1.02, 1] }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Mic size={42} strokeWidth={2.2} />
+                  <FileText size={40} strokeWidth={2.2} />
                 </motion.div>
               </motion.div>
             </div>
@@ -65,7 +65,7 @@ export default function Sustainability() {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <h4>Note</h4>
+              <h4>SOAP Note</h4>
               <div className="line w-100" />
               <div className="line w-88" />
               <div className="line w-92" />
@@ -95,17 +95,16 @@ export default function Sustainability() {
               </div>
             </motion.div>
           </div>
-
         </motion.div>
       </div>
 
       <style jsx>{`
-        .burnout-section {
+        .step-two-section {
           padding: 100px 24px;
           background: #FDFCFA;
         }
 
-        .burnout-shell {
+        .step-two-shell {
           max-width: 1240px;
           margin: 0 auto;
           display: grid;
@@ -114,11 +113,11 @@ export default function Sustainability() {
           align-items: center;
         }
 
-        .burnout-copy {
+        .step-two-left {
           max-width: 620px;
         }
 
-        .burnout-chip {
+        .step-two-chip {
           display: inline-flex;
           align-items: center;
           border-radius: 999px;
@@ -131,7 +130,7 @@ export default function Sustainability() {
           letter-spacing: 0.01em;
         }
 
-        .burnout-copy :global(h2) {
+        .step-two-left :global(h2) {
           margin-top: 18px;
           font-family: "Playfair Display", serif;
           font-size: clamp(2.4rem, 5vw, 4rem);
@@ -141,7 +140,7 @@ export default function Sustainability() {
           max-width: 14ch;
         }
 
-        .burnout-copy p {
+        .step-two-left p {
           margin-top: 20px;
           font-family: "Inter", sans-serif;
           font-size: 1.02rem;
@@ -150,7 +149,7 @@ export default function Sustainability() {
           max-width: 58ch;
         }
 
-        .burnout-visual {
+        .step-two-right {
           background: #f3f2f2;
           border: 1px solid #ece9e8;
           border-radius: 24px;
@@ -166,7 +165,7 @@ export default function Sustainability() {
           align-items: end;
         }
 
-        .mic-zone {
+        .icon-zone {
           position: relative;
           height: 240px;
           display: flex;
@@ -175,7 +174,7 @@ export default function Sustainability() {
           overflow: visible;
         }
 
-        .mic-zone::after {
+        .icon-zone::after {
           content: "";
           position: absolute;
           right: -16px;
@@ -188,7 +187,7 @@ export default function Sustainability() {
           transform: translateY(-50%);
         }
 
-        .mic-shell {
+        .icon-shell {
           width: 188px;
           height: 188px;
           border-radius: 50%;
@@ -198,14 +197,14 @@ export default function Sustainability() {
           position: relative;
         }
 
-        .mic-ring {
+        .icon-ring {
           position: absolute;
           inset: 21px;
           border-radius: 50%;
           background: #c9dbf8;
         }
 
-        .mic-core {
+        .icon-core {
           width: 98px;
           height: 98px;
           border-radius: 50%;
@@ -304,19 +303,19 @@ export default function Sustainability() {
         }
 
         @media (max-width: 1080px) {
-          .burnout-shell {
+          .step-two-shell {
             grid-template-columns: 1fr;
             gap: 34px;
           }
 
-          .burnout-copy {
+          .step-two-left {
             max-width: none;
           }
         }
 
         @media (max-width: 820px) {
-          .burnout-section {
-            padding: 88px 16px;
+          .step-two-section {
+            padding: 18px 16px 88px;
           }
 
           .visual-top {
@@ -324,11 +323,11 @@ export default function Sustainability() {
             gap: 10px;
           }
 
-          .mic-zone {
+          .icon-zone {
             height: 160px;
           }
 
-          .mic-zone::after {
+          .icon-zone::after {
             display: none;
           }
         }

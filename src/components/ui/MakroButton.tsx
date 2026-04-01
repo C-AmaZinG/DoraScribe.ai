@@ -18,6 +18,7 @@ const MakroButton = ({
   text,
   href,
   className,
+  variant = "primary",
   tone = "default",
   size = "md",
 }: MakroButtonProps) => {
@@ -25,21 +26,29 @@ const MakroButton = ({
   const isSm = size === "sm";
   const isInternalRoute = href.startsWith("/") && !href.startsWith("//");
   const palette =
-    tone === "gray"
+    variant === "outline"
       ? {
-          background: "#D7DDE7",
-          border: "#D7DDE7",
-          text: "#0B1D33",
-          hoverBackground: "#C9D0DB",
-          hoverBorder: "#C9D0DB",
+          background: "transparent",
+          border: "#F2EC7D",
+          text: "#F2EC7D",
+          hoverBackground: "rgba(242, 236, 125, 0.12)",
+          hoverBorder: "#F2EC7D",
         }
-      : {
-          background: "#0B1D33",
-          border: "#0B1D33",
-          text: "#ffffff",
-          hoverBackground: "#08162b",
-          hoverBorder: "#08162b",
-        };
+      : tone === "gray"
+        ? {
+            background: "#F2EC7D",
+            border: "#F2EC7D",
+            text: "#0B1D33",
+            hoverBackground: "#E6DE69",
+            hoverBorder: "#E6DE69",
+          }
+        : {
+            background: "#F2EC7D",
+            border: "#F2EC7D",
+            text: "#0B1D33",
+            hoverBackground: "#E6DE69",
+            hoverBorder: "#E6DE69",
+          };
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (isInternalRoute) {
