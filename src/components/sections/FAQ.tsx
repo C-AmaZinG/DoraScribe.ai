@@ -240,8 +240,8 @@ export default function FAQ() {
 
       <style jsx>{`
         .faq-makro-clone {
-          padding: 120px 24px;
-          background: #ebeff5;
+          padding: 100px 24px;
+          background: #FDFCFA;
         }
 
         .faq-wrap {
@@ -293,7 +293,7 @@ export default function FAQ() {
         .faq-title mark {
           display: inline-block;
           margin-left: 2px;
-          background: #d9ff5c;
+          background: #E6DE69;
           color: var(--text-main);
           border-radius: 14px;
           padding: 0 16px 5px;
@@ -326,7 +326,7 @@ export default function FAQ() {
         }
 
         .faq-cats {
-          background: #ebedfa;
+          background: #F9F4F1;
           padding: 8px 0 8px 8px;
           border-radius: 24px 0 0 24px;
           display: flex;
@@ -347,7 +347,7 @@ export default function FAQ() {
           right: 0;
           width: 24px;
           height: 24px;
-          background: radial-gradient(circle at 0 0, transparent 0 68%, #ebedfa 69% 100%);
+          background: radial-gradient(circle at 0 0, transparent 0 68%, #F9F4F1 69% 100%);
           pointer-events: none;
         }
 
@@ -394,7 +394,7 @@ export default function FAQ() {
         }
 
         .faq-main {
-          background: #ebedfa;
+          background: #F9F4F1;
           border-radius: 0 24px 24px 24px;
           padding: 8px;
           display: flex;
@@ -406,7 +406,7 @@ export default function FAQ() {
           display: flex;
           flex-direction: column;
           gap: 0;
-          background: #ebedfa;
+          background: #F9F4F1;
         }
 
         .faq-item {
@@ -590,3 +590,4 @@ export default function FAQ() {
     </section>
   );
 }
+

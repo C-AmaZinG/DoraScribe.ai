@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -49,7 +49,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" style={{ padding: "100px 24px", background: "#ffffff" }}>
+    <section id="how-it-works" style={{ padding: "100px 24px", background: "#FDFCFA" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "64px" }}>
@@ -174,5 +174,6 @@ export default function HowItWorks() {
     </section>
   );
 }
+
 
 

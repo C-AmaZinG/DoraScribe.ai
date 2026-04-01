@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
@@ -24,7 +24,7 @@ export default function BlogSection() {
 
   useEffect(() => {
     (async () => {
-      const data = await fetchPosts(1, 6);
+      const data = await fetchPosts(1, 3);
       setPosts(data.posts);
       setLoading(false);
     })();
@@ -48,7 +48,7 @@ export default function BlogSection() {
   };
 
   return (
-    <section style={{ padding: '100px 24px', background: '#ffffff', overflow: 'hidden' }}>
+    <section style={{ padding: '100px 24px', background: '#FDFCFA', overflow: 'hidden' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header with nav arrows */}
         <div style={{
@@ -133,22 +133,21 @@ export default function BlogSection() {
         >
           {loading ? (
             // Skeleton loading
-            [1, 2, 3, 4].map(i => (
-              <div key={i} style={{
-                minWidth: '300px',
-                maxWidth: '300px',
-                borderRadius: '20px',
-                overflow: 'hidden',
-                border: '1px solid rgba(0,0,0,0.06)',
-                background: '#ffffff',
-              }}>
-                <div style={{ height: '200px', background: '#e2e8f0', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                <div style={{ padding: '24px' }}>
-                  <div style={{ height: '12px', width: '50px', background: '#e2e8f0', borderRadius: '4px', marginBottom: '14px', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  <div style={{ height: '18px', width: '90%', background: '#e2e8f0', borderRadius: '4px', marginBottom: '8px', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  <div style={{ height: '18px', width: '60%', background: '#e2e8f0', borderRadius: '4px', marginBottom: '14px', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  <div style={{ height: '14px', width: '100%', background: '#e2e8f0', borderRadius: '4px', marginBottom: '6px', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  <div style={{ height: '14px', width: '80%', background: '#e2e8f0', borderRadius: '4px', animation: 'pulse 1.5s ease-in-out infinite' }} />
+            [1, 2, 3].map(i => (
+              <div key={i} className="blog-item blog-item-wrap">
+                <div style={{
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  background: '#ffffff',
+                }}>
+                  <div style={{ height: '200px', background: '#e2e8f0', animation: 'pulse 1.5s ease-in-out infinite' }} />
+                  <div style={{ padding: '30px' }}>
+                    <div style={{ height: '12px', width: '50px', background: '#e2e8f0', borderRadius: '4px', marginBottom: '14px', animation: 'pulse 1.5s ease-in-out infinite' }} />
+                    <div style={{ height: '18px', width: '90%', background: '#e2e8f0', borderRadius: '4px', marginBottom: '8px', animation: 'pulse 1.5s ease-in-out infinite' }} />
+                    <div style={{ height: '18px', width: '60%', background: '#e2e8f0', borderRadius: '4px', marginBottom: '14px', animation: 'pulse 1.5s ease-in-out infinite' }} />
+                    <div style={{ height: '14px', width: '100%', background: '#e2e8f0', borderRadius: '4px', marginBottom: '6px', animation: 'pulse 1.5s ease-in-out infinite' }} />
+                    <div style={{ height: '14px', width: '80%', background: '#e2e8f0', borderRadius: '4px', animation: 'pulse 1.5s ease-in-out infinite' }} />
+                  </div>
                 </div>
               </div>
             ))
@@ -167,20 +166,18 @@ export default function BlogSection() {
               const catColor = categoryColors[catName] || '#0B1D33';
 
               return (
-                <motion.div
-                  key={post.id}
+                <div key={post.id} className="blog-item blog-item-wrap">
+                  <motion.div
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
                   style={{
-                    minWidth: '300px',
-                    maxWidth: '300px',
+                    width: '100%',
                     scrollSnapAlign: 'start',
                     borderRadius: '20px',
                     overflow: 'hidden',
-                    border: '1px solid rgba(0,0,0,0.06)',
                     background: '#ffffff',
                     display: 'flex',
                     flexDirection: 'column',
@@ -217,7 +214,7 @@ export default function BlogSection() {
                     </div>
 
                     {/* Content */}
-                    <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ padding: '30px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                       <div style={{
                         display: 'inline-block',
                         padding: '4px 12px',
@@ -258,12 +255,15 @@ export default function BlogSection() {
                         fontSize: '0.8rem',
                         fontWeight: 600,
                         color: '#0B1D33',
+                        whiteSpace: 'nowrap',
                       }}>
-                        Read article â†’
+
+                        Read article {"->"}
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                  </motion.div>
+                </div>
               );
             })
           )}
@@ -305,6 +305,35 @@ export default function BlogSection() {
         .blog-card:hover img {
           transform: scale(1.05);
         }
+        .blog-card {
+          height: 100%;
+        }
+        .blog-item {
+          flex: 0 0 calc((100% - 40px) / 3);
+          max-width: calc((100% - 40px) / 3);
+          min-width: calc((100% - 40px) / 3);
+        }
+        .blog-item-wrap {
+          padding: 12px;
+          border-radius: 24px;
+          background: #ffffff;
+          border: 1px solid rgba(11, 29, 51, 0.06);
+          display: flex;
+        }
+        @media (max-width: 980px) {
+          .blog-item {
+            flex: 0 0 calc((100% - 20px) / 2);
+            max-width: calc((100% - 20px) / 2);
+            min-width: calc((100% - 20px) / 2);
+          }
+        }
+        @media (max-width: 640px) {
+          .blog-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            min-width: 100%;
+          }
+        }
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
@@ -313,5 +342,7 @@ export default function BlogSection() {
     </section>
   );
 }
+
+
 
 

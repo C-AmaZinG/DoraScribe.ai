@@ -1,15 +1,11 @@
-﻿"use client";
+"use client";
 
 import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Logo from '@/components/ui/Logo';
 import MakroButton from '@/components/ui/MakroButton';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -24,7 +20,6 @@ export default function Footer() {
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         
-        {/* Main Footer Content */}
         <div style={{ 
           display: 'flex', 
           flexDirection: 'column', 
@@ -32,7 +27,6 @@ export default function Footer() {
           marginBottom: '100px'
         }}>
           
-          {/* Top Section */}
           <div style={{ 
             display: 'flex', 
             justifyContent: 'space-between', 
@@ -62,14 +56,12 @@ export default function Footer() {
             <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" />
           </div>
 
-          {/* Middle Section: Links Grid */}
           <div style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
             gap: '60px',
             alignItems: 'flex-start'
           }}>
-            {/* Brand Col */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <Logo />
               <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '240px', fontFamily: "'Inter', sans-serif" }}>
@@ -78,7 +70,6 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Menu Cols */}
             {[
               { title: 'Resources', links: [{l:'Pricing Plans', h:'/#pricing'}, {l:'Tutorials', h:'#'}] },
               { title: 'Quick Links', links: [{l:'Support', h:'/contact'}, {l:'Dashboard', h:'https://app.dorascribe.ai/login'}] },
@@ -142,7 +133,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Big Watermark */}
         <div style={{ 
           marginTop: '60px',
           paddingTop: '60px',
@@ -164,11 +154,10 @@ export default function Footer() {
              userSelect: 'none',
              whiteSpace: 'nowrap'
            }}>
-             DORASCRIBE
+             Dorascribe
            </h1>
         </div>
 
-        {/* Footer Bottom */}
         <div style={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
@@ -217,5 +206,4 @@ export default function Footer() {
     </footer>
   );
 }
-
 

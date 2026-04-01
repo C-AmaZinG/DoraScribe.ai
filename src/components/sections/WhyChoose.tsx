@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ const features = [
     label: "Transcribe",
     title: "Real-time clinical transcription",
     description:
-      "AI listens to every patient encounter and converts natural conversation into structured, specialist-grade clinical notes â€” instantly.",
+      "AI listens to every patient encounter and converts natural conversation into structured, specialist-grade clinical notes — instantly.",
     highlight: "No more typing during appointments.",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -24,7 +24,7 @@ const features = [
     label: "Adapt",
     title: "AI that adapts to your specialty",
     description:
-      "Whether you're in cardiology, psychiatry, or general practice â€” Dorascribe learns your terminology and structures notes to match your workflow.",
+      "Whether you're in cardiology, psychiatry, or general practice — Dorascribe learns your terminology and structures notes to match your workflow.",
     highlight: "Customizable templates for every specialty.",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -37,7 +37,7 @@ const features = [
     label: "Integrate",
     title: "Seamless EMR integration",
     description:
-      "One-click export to Epic, Cerner, AthenaHealth, and more. Your notes appear in the right place, formatted correctly â€” every time.",
+      "One-click export to Epic, Cerner, AthenaHealth, and more. Your notes appear in the right place, formatted correctly — every time.",
     highlight: "Zero friction between capture and record.",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -53,10 +53,10 @@ export default function WhyChoose() {
   const [activeIndex, setActiveIndex] = useState(1);
 
   return (
-    <section id="why-choose" style={{ padding: "120px 24px", background: "#ffffff" }}>
+    <section id="why-choose" style={{ padding: "100px 24px", background: "#FDFCFA" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
-        {/* Split Layout â€” Makro "Financial insight" Clone */}
+        {/* Split Layout — Makro "Financial insight" Clone */}
         <div className="ai-adapts-layout" style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
@@ -64,7 +64,7 @@ export default function WhyChoose() {
           alignItems: "center",
         }}>
 
-          {/* Left Column â€” Text + Feature Cards */}
+          {/* Left Column — Text + Feature Cards */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -193,11 +193,11 @@ export default function WhyChoose() {
               ))}
             </div>
 
-            {/* CTA Button â€” Makro Style */}
+            {/* CTA Button — Makro Style */}
             <MakroButton text="Get started" href="https://app.dorascribe.ai/signUp" />
           </motion.div>
 
-          {/* Right Column â€” Visual Card */}
+          {/* Right Column — Visual Card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -258,7 +258,7 @@ export default function WhyChoose() {
                     </div>
                   </div>
 
-                  {/* Mock UI â€” Different for each feature */}
+                  {/* Mock UI — Different for each feature */}
                   {activeIndex === 0 && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                       {/* Waveform animation */}
@@ -424,5 +424,6 @@ export default function WhyChoose() {
     </section>
   );
 }
+
 
 

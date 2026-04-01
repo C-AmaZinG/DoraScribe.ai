@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 
 :root {
@@ -6,7 +6,7 @@
     --primary-dark: #05101F;
     --secondary: #FF6F00; /* Vibrant Orange */
     --makro-accent: #FF6F00; /* Lime Green */
-    --bg-light: #EBEFF5; /* Updated Background */
+    --bg-light: #FCFAF8; /* Updated Background */
     --bg-white: #ffffff;
     --text-main: #0B1D33;
     --text-muted: #64748b;
@@ -21,7 +21,7 @@
 }
 
 @theme {
-    --color-background: #EBEFF5;
+    --color-background: #FCFAF8;
     --color-foreground: #0B1D33;
     --color-primary: #0B1D33;
     --color-primary-foreground: #ffffff;
@@ -63,6 +63,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h2 {
     font-size: 48px !important;
+}
+
+h3 {
+    font-size: 20px !important;
+}
+
+[style*="DM Serif Display"] {
+    font-family: "Playfair Display", serif !important;
 }
 
 .hero-title,
@@ -117,14 +125,14 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(236, 239, 246, 0.7);
+    background: #FEFEFE;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     transition: background 0.3s ease;
 }
 
 header.scrolled {
-    background: rgba(236, 239, 246, 0.9);
+    background: #FEFEFE;
 }
 
 header .container {
@@ -1158,5 +1166,15 @@ main > section:last-of-type {
         grid-column: span 1;
     }
 }
+
+/* Force-hide legacy CTA decorative motifs */
+.cta-pattern {
+    display: none !important;
+}
+
+.cta-button svg {
+    display: none !important;
+}
 @import "tailwindcss";
+
 

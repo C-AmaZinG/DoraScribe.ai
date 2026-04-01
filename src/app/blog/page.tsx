@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
@@ -69,7 +69,7 @@ export default function BlogPage() {
                 fontSize: '0.85rem',
                 fontWeight: 500,
                 color: '#0B1D33'
-              }}>ðŸ“ Blog</span>
+              }}>📝 Blog</span>
             </div>
 
             <h1 style={{
@@ -317,5 +317,6 @@ export default function BlogPage() {
     </div>
   );
 }
+
 
 

@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { BookOpen, FileText, Languages, Mic, Sparkles } from "lucide-react";
 
 const productPills = [
   "Dictation",
@@ -11,6 +11,29 @@ const productPills = [
   "EMR Ready",
   "Referrals",
   "Billing",
+];
+
+const heroFeatureCards = [
+  {
+    title: "Templates",
+    Icon: FileText,
+  },
+  {
+    title: "Easy to Use",
+    Icon: Sparkles,
+  },
+  {
+    title: "Supports Multiple Languages",
+    Icon: Languages,
+  },
+  {
+    title: "Patient Handouts",
+    Icon: BookOpen,
+  },
+  {
+    title: "Transcribe & Dictate",
+    Icon: Mic,
+  },
 ];
 
 export default function Hero() {
@@ -24,15 +47,26 @@ export default function Hero() {
           className="hero-copy"
         >
           <p className="hero-badge">
-            HIPAA-ready clinical documentation for private practices and hospitals
+            Designed by Healthcare Professionals
           </p>
 
-          <h1 className="hero-title">The AI Clinical Notes Assistant doctors love</h1>
+          <h1 className="hero-title">AI Medical Scribe: Turn Consults Into Accurate Medical Notes</h1>
 
           <p className="hero-subtitle">
-            DoraScribe instantly captures patient encounters and turns them into clean,
-            structured notes in seconds so you can focus on care, not typing.
+            Focus on your patients, not the paperwork. Let Dorascribe&apos;s AI handle the note-taking for you.
           </p>
+
+          <div className="hero-compliance-row">
+            {["PIPEDA COMPLIANT", "HIPAA COMPLIANT", "POPIA COMPLIANT"].map((label) => (
+              <span key={label} className="compliance-badge">
+                <svg className="compliance-check" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <circle cx="11" cy="11" r="10" stroke="#2ABFBF" strokeWidth="1.5" fill="none"/>
+                  <path d="M7 11.5L9.5 14L15 8.5" stroke="#2ABFBF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                {label}
+              </span>
+            ))}
+          </div>
 
           <div className="hero-cta-wrap">
             <a
@@ -45,75 +79,30 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="hero-rating">
-            <span className="stars">â˜…â˜…â˜…â˜…â˜…</span>
-            <span>Trusted by clinicians across specialties</span>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="hero-device-zone"
-        >
-          <div className="pill-row-wrap">
-            <button aria-label="Previous product tab" className="circle-nav">
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M9.5 4.5L6 8L9.5 11.5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-
-            <div className="pill-row">
-              {productPills.map((pill, index) => (
-                <span
-                  key={pill}
-                  className={`product-pill ${index === 1 ? "is-active" : ""}`}
-                >
-                  {pill}
-                </span>
+          <div className="hero-template-box">
+            <div className="hero-template-grid">
+              {heroFeatureCards.map(({ title, Icon }) => (
+                <div key={title} className="hero-template-card">
+                  <div className="template-icon">
+                    <Icon size={20} strokeWidth={2} />
+                  </div>
+                  <span className="template-title">{title}</span>
+                </div>
               ))}
             </div>
-
-            <button aria-label="Next product tab" className="circle-nav">
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M6.5 4.5L10 8L6.5 11.5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
           </div>
 
-          <div className="tablet-frame">
-            <div className="tablet-screen">
-              <Image
-                src="/assets/Dora_scribe_landing_page.png"
-                alt="DoraScribe tablet mockup"
-                fill
-                style={{ objectFit: "cover", objectPosition: "72% center" }}
-                priority
-              />
-            </div>
-          </div>
         </motion.div>
       </div>
 
       <style jsx>{`
         .hero-playground-clone {
           position: relative;
-          background: #e8eaee;
-          padding: 122px 24px 54px;
+          background: #ffffff;
+          padding: 148px 24px 100px;
           overflow: hidden;
+          border-bottom-left-radius: 28px;
+          border-bottom-right-radius: 28px;
         }
 
         .hero-shell {
@@ -139,9 +128,9 @@ export default function Hero() {
           width: fit-content;
           padding: 8px 14px;
           border-radius: 999px;
-          border: 1px solid rgba(31, 92, 247, 0.2);
+          border: 1.5px solid #0B1D33;
           background: rgba(255, 255, 255, 0.55);
-          color: #1f5cf7;
+          color: #0B1D33;
           font-family: "Inter", sans-serif;
           font-size: 0.75rem;
           font-weight: 500;
@@ -175,11 +164,84 @@ export default function Hero() {
           text-align: center;
         }
 
+        .hero-compliance-row {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 32px;
+          margin-top: 24px;
+          flex-wrap: wrap;
+        }
+
+        .compliance-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: #0B1D33;
+        }
+
         .hero-cta-wrap {
           margin-top: 30px;
           width: 100%;
           display: flex;
           justify-content: center;
+        }
+
+        .hero-template-box {
+          margin-top: 24px;
+          width: min(1180px, calc(100vw - 48px));
+          border: none;
+          border-radius: 20px;
+          padding: 12px;
+          background: #F1EEED;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .hero-template-grid {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 24px 32px;
+        }
+
+        .hero-template-card {
+          background: transparent;
+          border: none;
+          border-radius: 0;
+          padding: 0;
+          min-height: 0;
+          text-align: left;
+          box-shadow: none;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: "Inter", sans-serif;
+        }
+
+        .template-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 0;
+          color: #0B1D33;
+          flex-shrink: 0;
+        }
+
+        .template-title {
+          margin: 0;
+          font-family: "Inter", sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: #0B1D33;
         }
 
         .hero-main-cta {
@@ -193,38 +255,19 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #fff;
-          background: #0B1D33;
-          border: 1px solid #0B1D33;
+          color: #0B1D33;
+          background: #F2EC7D;
+          border: 1px solid #F2EC7D;
           box-shadow: none;
           transition: background-color 0.2s ease;
         }
 
         .hero-main-cta:hover {
-          background: #08162b;
-        }
-
-        .hero-rating {
-          margin-top: 16px;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          font-family: "Inter", sans-serif;
-          font-size: 0.77rem;
-          color: #6b7280;
-          flex-wrap: wrap;
-        }
-
-        .stars {
-          color: #f59e0b;
-          letter-spacing: 0.12em;
-          font-size: 0.82rem;
+          background: #E0D96E;
         }
 
         .hero-device-zone {
-          margin-top: 34px;
+          margin-top: 52px;
           width: 100%;
         }
 
@@ -293,8 +336,8 @@ export default function Hero() {
 
         .tablet-frame {
           margin: 16px auto 0;
-          width: 150%;
-          max-width: 1470px;
+          width: 120%;
+          max-width: 1176px;
           position: relative;
           left: 50%;
           transform: translateX(-50%);
@@ -317,6 +360,17 @@ export default function Hero() {
         @media (max-width: 820px) {
           .hero-playground-clone {
             padding: 110px 16px 36px;
+            border-bottom-left-radius: 22px;
+            border-bottom-right-radius: 22px;
+          }
+
+          .hero-template-box {
+            width: calc(100vw - 32px);
+            padding: 10px;
+          }
+
+          .hero-template-grid {
+            gap: 14px 18px;
           }
 
           .pill-row-wrap {
@@ -342,6 +396,14 @@ export default function Hero() {
             border-radius: 10px;
             padding: 7px;
           }
+        }
+
+        @media (max-width: 560px) {
+          .hero-template-box {
+            padding: 8px;
+          }
+
+          .hero-template-grid { gap: 10px 12px; }
         }
       `}</style>
     </section>

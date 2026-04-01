@@ -8,8 +8,8 @@ export default function MockupSection() {
   return (
     <section
       style={{
-        padding: '120px 24px',
-        background: '#ffffff',
+        padding: '100px 24px',
+        background: '#F9F4F1',
         overflow: 'hidden',
       }}
     >
@@ -66,8 +66,56 @@ export default function MockupSection() {
               />
             </a>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              marginTop: '48px',
+              width: '80%',
+              maxWidth: '941px',
+              margin: '48px auto 0',
+              background: 'rgba(128, 128, 128, 0.2)',
+              border: '1px solid rgba(128, 128, 128, 0.2)',
+              borderRadius: '12px',
+              padding: '10px',
+            }}
+          >
+            <div style={{
+              width: '100%',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              background: 'rgba(255, 255, 255, 0.96)',
+            }}>
+              <Image
+                src="/assets/Dora_scribe_landing_page.png"
+                alt="DoraScribe tablet mockup"
+                width={1470}
+                height={827}
+                style={{ width: '100%', height: 'auto', objectFit: 'cover', objectPosition: '72% center' }}
+                priority
+              />
+            </div>
+          </motion.div>
+
+          <div
+            style={{
+              marginTop: '28px',
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '1rem',
+              fontWeight: 500,
+              color: 'var(--text-main)',
+              opacity: 0.85,
+              textAlign: 'center',
+            }}
+          >
+            Trusted by healthcare professionals
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
+

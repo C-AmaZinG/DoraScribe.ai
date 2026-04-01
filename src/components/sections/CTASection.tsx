@@ -1,119 +1,125 @@
-﻿"use client";
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import MakroButton from "@/components/ui/MakroButton";
+import React from "react";
+import { motion } from "framer-motion";
 
 export default function CTASection() {
-  const containerVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }
-    }
-  };
-
   return (
-    <section style={{ padding: '80px 24px 120px', background: '#F8FAFC' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <section className="cta-adoption">
+      <div className="cta-shell">
         <motion.div
-           variants={containerVariants}
-           initial="hidden"
-           whileInView="visible"
-           viewport={{ once: true }}
-           style={{
-            background: '#0B1D33',
-             border: '1px solid rgba(11, 29, 51, 0.12)',
-             borderRadius: '48px',
-             padding: '80px 40px',
-             color: '#ffffff',
-             textAlign: 'center',
-             position: 'relative',
-             overflow: 'hidden'
-           }}
+          className="cta-panel"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Decorative blurred accents */}
-          <div style={{ 
-            position: 'absolute', top: '-100px', right: '-100px', 
-            width: '400px', height: '400px', background: 'var(--primary)', 
-            borderRadius: '50%', opacity: 0.15, filter: 'blur(80px)' 
-          }} />
-          <div style={{ 
-            position: 'absolute', bottom: '-80px', left: '-80px', 
-            width: '300px', height: '300px', background: 'var(--accent)', 
-            borderRadius: '50%', opacity: 0.1, filter: 'blur(60px)' 
-          }} />
-
-          {/* Social Proof Avatars */}
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            marginBottom: '32px',
-            gap: '-12px'
-          }}>
-            {[1,2,3,4].map(i => (
-              <div key={i} style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                border: '3px solid #111',
-                background: `hsl(${i * 60}, 60%, 80%)`,
-                marginLeft: i > 1 ? '-16px' : '0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                color: '#111',
-                fontFamily: "'Inter', sans-serif"
-              }}>
-                {['DR', 'SM', 'KA', 'LJ'][i-1]}
-              </div>
-            ))}
-            <div style={{
-              marginLeft: '12px',
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.9rem',
-              color: '#94a3b8',
-              fontWeight: 500
-            }}>
-              Join 1,000+ clinicians
-            </div>
-          </div>
-
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ 
-              fontFamily: "'Playfair Display', serif", 
-              fontSize: 'clamp(2.5rem, 6vw, 5rem)', 
-              fontWeight: 400, 
-              marginBottom: '24px',
-              lineHeight: 1.05,
-              letterSpacing: '-0.03em'
-            }}>
-              Do less Admin,<br />Provide More Care.
-            </h2>
-            <p style={{ 
-              fontFamily: "'Inter', sans-serif", 
-              fontSize: '1.25rem', 
-              color: '#94a3b8', 
-              maxWidth: '600px', 
-              margin: '0 auto 48px',
-              lineHeight: 1.6
-            }}>
-              Experience the power of clinical AI. Start your 14-day free trial today and save up to 2 hours of documentation every day.
-            </p>
-            
-            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <MakroButton text="Start Free Trial" href="https://app.dorascribe.ai/signUp" variant="accent" />
-              <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" variant="outline" />
-            </div>
+          <div className="cta-content">
+            <h2>Real adoption drives real transformation</h2>
+            <p>Join thousands of teams worldwide who&apos;ve made Dora part of their daily practice</p>
+            <motion.a
+              href="/contact"
+              className="cta-button"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Contact sales
+            </motion.a>
           </div>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        .cta-adoption {
+          padding: 20px 24px 44px;
+          background: #FDFCFA;
+        }
+
+        .cta-shell {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .cta-panel {
+          position: relative;
+          overflow: hidden;
+          border-radius: 34px;
+          background: #145524;
+          min-height: 280px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(16, 77, 35, 0.65);
+        }
+
+        .cta-content {
+          position: relative;
+          z-index: 1;
+          text-align: center;
+          max-width: 920px;
+          padding: 20px 24px;
+        }
+
+        .cta-content :global(h2) {
+          margin: 0;
+          color: #f2efe8;
+          font-family: "Playfair Display", serif;
+          font-size: clamp(2.5rem, 5vw, 5rem);
+          line-height: 0.95;
+          letter-spacing: -0.03em;
+          text-wrap: balance;
+        }
+
+        .cta-content p {
+          margin: 14px auto 0;
+          max-width: 760px;
+          color: rgba(246, 243, 236, 0.95);
+          font-family: "Inter", sans-serif;
+          font-size: 1.06rem;
+          line-height: 1.55;
+        }
+
+        .cta-button {
+          margin: 16px auto 0;
+          width: fit-content;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          border-radius: 14px;
+          background: #f4efea;
+          color: #2e0518;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          text-decoration: none;
+          font-family: "Inter", sans-serif;
+          font-size: 0.95rem;
+          font-weight: 600;
+          padding: 12px 20px;
+          transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .cta-button:hover {
+          background: #ffffff;
+          color: #1f1020;
+        }
+
+        @media (max-width: 900px) {
+          .cta-panel {
+            min-height: 240px;
+            border-radius: 24px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .cta-adoption {
+            padding: 24px 16px 44px;
+          }
+
+          .cta-panel {
+            min-height: 210px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
-
 
