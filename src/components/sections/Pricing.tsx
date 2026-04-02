@@ -179,19 +179,19 @@ export default function Pricing() {
           font-weight: 400;
           letter-spacing: -0.04em;
           line-height: 1.05;
-          color: #21222f;
+          color: #000000;
           text-wrap: balance;
         }
 
         .pricing-title mark {
           display: inline-block;
-          background: #E6DE69;
+          background: #FBF582;
           border-radius: 14px;
           padding: 0 16px 5px;
         }
 
         .pricing-title mark span {
-          color: #161a28;
+          color: #000000;
           font-family: inherit;
         }
 
@@ -231,7 +231,7 @@ export default function Pricing() {
         }
 
         .pricing-card.is-premium {
-          background: #0b1d33;
+          background: #00AAAA;
         }
 
         .plan-copy {
@@ -327,7 +327,7 @@ export default function Pricing() {
         }
 
         .pricing-card.is-premium .feature-icon.check {
-          color: #f2ec7d;
+          color: #FBF582;
         }
 
         @media (max-width: 1200px) {

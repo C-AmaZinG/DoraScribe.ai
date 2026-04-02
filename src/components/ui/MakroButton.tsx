@@ -29,25 +29,25 @@ const MakroButton = ({
     variant === "outline"
       ? {
           background: "transparent",
-          border: "#F2EC7D",
-          text: "#F2EC7D",
-          hoverBackground: "rgba(242, 236, 125, 0.12)",
-          hoverBorder: "#F2EC7D",
+          border: "#FBF582",
+          text: "#FBF582",
+          hoverBackground: "rgba(251, 245, 130, 0.12)",
+          hoverBorder: "#FBF582",
         }
       : tone === "gray"
         ? {
-            background: "#F2EC7D",
-            border: "#F2EC7D",
+            background: "#FBF582",
+            border: "#FBF582",
             text: "#000000",
-            hoverBackground: "#E6DE69",
-            hoverBorder: "#E6DE69",
+            hoverBackground: "#EBE570",
+            hoverBorder: "#EBE570",
           }
         : {
-            background: "#F2EC7D",
-            border: "#F2EC7D",
+            background: "#FBF582",
+            border: "#FBF582",
             text: "#000000",
-            hoverBackground: "#E6DE69",
-            hoverBorder: "#E6DE69",
+            hoverBackground: "#EBE570",
+            hoverBorder: "#EBE570",
           };
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

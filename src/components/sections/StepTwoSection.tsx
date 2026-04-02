@@ -181,8 +181,8 @@ export default function StepTwoSection() {
           top: 54%;
           width: 56px;
           height: 56px;
-          border-right: 1.5px solid rgba(11, 29, 51, 0.42);
-          border-bottom: 1.5px solid rgba(11, 29, 51, 0.42);
+          border-right: 1.5px solid rgba(0, 170, 170, 0.42);
+          border-bottom: 1.5px solid rgba(0, 170, 170, 0.42);
           border-radius: 0 0 56px 0;
           transform: translateY(-50%);
         }
@@ -215,7 +215,7 @@ export default function StepTwoSection() {
           justify-content: center;
           position: relative;
           z-index: 2;
-          box-shadow: 0 10px 26px rgba(11, 29, 51, 0.28);
+          box-shadow: 0 10px 26px rgba(0, 170, 170, 0.28);
         }
 
         .note-card,

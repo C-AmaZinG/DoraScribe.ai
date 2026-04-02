@@ -133,7 +133,7 @@ export default function Specialties() {
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "1.25rem",
-                color: "rgba(11,29,51,0.6)",
+                color: "#8E8E8E",
                 lineHeight: 1.5,
                 marginBottom: "60px",
                 maxWidth: "420px",
@@ -252,18 +252,8 @@ export default function Specialties() {
         }
 
         .feature-icon-box {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.4);
-          border: 1px solid rgba(11, 29, 51, 0.15);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 4px 12px rgba(11, 29, 51, 0.05);
-          display: flex;
-          alignItems: center;
-          justify-content: center;
-          margin-bottom: 20px;
-          color: #0b1d33;
+          margin-bottom: 24px;
+          color: #000000;
         }
 
         .specialty-scroll-grid {
@@ -302,7 +292,7 @@ export default function Specialties() {
         .specialty-pill {
           padding: 16px 28px;
           border-radius: 16px;
-          border: 1px solid rgba(11,29,51,0.12);
+          border: 1px solid rgba(0,170,170,0.12);
           background: rgba(255,255,255,0.6);
           color: #000000;
           font-family: "'Inter', sans-serif";
@@ -320,7 +310,7 @@ export default function Specialties() {
         .specialty-pill:hover {
           opacity: 1;
           background: rgba(255,255,255,0.9);
-          border-color: rgba(11,29,51,0.25);
+          border-color: rgba(0,170,170,0.25);
         }
 
         .specialty-pill__label {
@@ -330,7 +320,7 @@ export default function Specialties() {
         }
 
         .specialty-pill__icon {
-          color: rgba(11,29,51,0.6);
+          color: rgba(0,170,170,0.6);
           flex-shrink: 0;
         }
 

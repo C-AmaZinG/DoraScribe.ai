@@ -14,7 +14,7 @@ const features = [
     description: 'DoraScribe listens to your patient encounters and generates perfect, structured clinical notes in seconds. Spend more time with patients and less time charting.',
     icon: <Sparkles className="w-4 h-4" />,
     image: '/notes.png',
-    bgColor: 'rgba(11, 29, 51, 0.03)',
+    bgColor: 'rgba(0, 170, 170, 0.03)',
     cta: 'Explore Scribe',
   },
   {
@@ -34,7 +34,7 @@ const features = [
     description: 'Automate follow-up messages, referrals, and patient education. Keep your patients informed and engaged without adding to your administrative burden.',
     icon: <MessageSquare className="w-4 h-4" />,
     image: '/mobile.png',
-    bgColor: 'rgba(11, 29, 51, 0.03)',
+    bgColor: 'rgba(0, 170, 170, 0.03)',
     cta: 'Explore Comms',
   },
 ];

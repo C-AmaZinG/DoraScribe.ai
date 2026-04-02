@@ -317,7 +317,7 @@ export default function BlogSection() {
           padding: 12px;
           border-radius: 24px;
           background: #ffffff;
-          border: 1px solid rgba(11, 29, 51, 0.06);
+          border: 1px solid rgba(0, 170, 170, 0.06);
           display: flex;
         }
         @media (max-width: 980px) {

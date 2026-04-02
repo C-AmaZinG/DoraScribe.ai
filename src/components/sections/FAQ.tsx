@@ -272,8 +272,8 @@ export default function FAQ() {
         .faq-title mark {
           display: inline-block;
           margin-left: 2px;
-          background: #E6DE69;
-          color: var(--text-main);
+          background: #FBF582;
+          color: #000000;
           border-radius: 14px;
           padding: 0 16px 5px;
         }
@@ -349,7 +349,7 @@ export default function FAQ() {
           cursor: pointer;
           font-family: "Inter", sans-serif;
           font-size: 1rem;
-          color: rgba(11, 29, 51, 0.48);
+          color: #8E8E8E;
           transition: background-color 0.2s ease, color 0.2s ease;
         }
 
@@ -448,7 +448,7 @@ export default function FAQ() {
           font-family: "Inter", sans-serif;
           font-size: 1rem;
           line-height: 1.55;
-          color: var(--text-muted);
+          color: #8E8E8E;
         }
 
         .faq-contact {

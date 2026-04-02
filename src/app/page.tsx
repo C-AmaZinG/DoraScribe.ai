@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import MockupSection from '@/components/sections/MockupSection';
 import FeatureCards from '@/components/sections/FeatureCards';
-import DiscoverAmbientAI from '@/components/sections/DiscoverAmbientAI';
+import WhyChoose from '@/components/sections/WhyChoose';
 import Pricing from '@/components/sections/Pricing';
 import Specialties from '@/components/sections/Specialties';
 import DutyOfCare from '@/components/sections/DutyOfCare';
@@ -45,7 +45,7 @@ export default function Page() {
         <Hero />
         <MockupSection />
         <FeatureCards />
-        <DiscoverAmbientAI />
+        <WhyChoose />
         <Specialties />
         <Pricing />
         <DutyOfCare />

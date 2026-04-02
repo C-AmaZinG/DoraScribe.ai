@@ -119,6 +119,30 @@ export default function FeatureCards() {
           transform: translateX(-50%);
           overflow: hidden;
           padding: 20px 0;
+          position: relative;
+        }
+
+        .fc-container::before,
+        .fc-container::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 15vw;
+          max-width: 300px;
+          min-width: 100px;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .fc-container::before {
+          left: 0;
+          background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .fc-container::after {
+          right: 0;
+          background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
         }
 
         .fc-marquee {
@@ -171,6 +195,11 @@ export default function FeatureCards() {
           justify-content: center;
           margin-bottom: 24px;
           flex-shrink: 0;
+          background: rgba(255, 255, 255, 0.4);
+          border: 1.5px solid rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+          transition: transform 0.3s ease;
         }
 
         .fc-title {

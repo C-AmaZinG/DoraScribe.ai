@@ -92,8 +92,8 @@ export default function Hero() {
           width: fit-content;
           padding: 8px 14px;
           border-radius: 999px;
-          border: 1.5px solid #000000;
-          background: rgba(255, 255, 255, 0.55);
+          border: 1.5px solid #00AAAA;
+          background: rgba(0, 170, 170, 0.15);
           color: #000000;
           font-family: "Inter", sans-serif;
           font-size: 0.75rem;
@@ -191,6 +191,13 @@ export default function Hero() {
         }
 
         .template-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.45);
+          border: 1.5px solid rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -220,14 +227,14 @@ export default function Hero() {
           font-size: 0.9rem;
           font-weight: 600;
           color: #000000;
-          background: #F2EC7D;
-          border: 1px solid #F2EC7D;
+          background: #FBF582;
+          border: 1px solid #FBF582;
           box-shadow: none;
           transition: background-color 0.2s ease;
         }
 
         .hero-main-cta:hover {
-          background: #E0D96E;
+          background: #EBE570;
         }
 
         .hero-device-zone {

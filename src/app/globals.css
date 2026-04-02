@@ -29,7 +29,7 @@
 
 :root {
     --primary: #000000;
-    --primary-dark: #05101F;
+    --primary-dark: #00AAAA;
     --secondary: #FF6F00; /* Vibrant Orange */
     --makro-accent: #FF6F00; /* Lime Green */
     --bg-light: #FCFAF8; /* Updated Background */
@@ -55,7 +55,7 @@
     --color-accent: #FF6F00;
     --color-muted: #f1f5f9;
     --color-muted-foreground: #64748b;
-    --color-border: rgba(11, 29, 51, 0.1);
+    --color-border: rgba(0, 170, 170, 0.1);
     --font-sans: 'Monument Grotesk', sans-serif;
     --font-serif: 'Playfair Display', serif;
 }
@@ -1203,4 +1203,115 @@ main > section:last-of-type {
 }
 @import "tailwindcss";
 
+/* WhyChoose Section Redesign CSS extracted to prevent FOUC */
+.why-choose-redesign {
+  padding: 120px 24px;
+  background: #FFFFFF;
+}
 
+.wc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wc-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.wc-title {
+  font-family: 'Monument Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.wc-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.wc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.wc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wc-card {
+  background: #F9F4F1;
+  padding: 40px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.wc-card:hover {
+  transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+
+.wc-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.wc-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4A4A4A;
+  margin: 0;
+}
+
+.wc-card-hero {
+  background: #FBF582;
+  border-radius: 12px;
+  height: 100%;
+  min-height: 400px;
+}
+
+@media (max-width: 1024px) {
+  .wc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wc-card-hero {
+    grid-column: span 2;
+    order: -1;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wc-grid {
+    grid-template-columns: 1fr;
+  }
+  .wc-card-hero {
+    grid-column: span 1;
+    order: -1;
+  }
+  .why-choose-redesign {
+    padding: 80px 20px;
+  }
+}
