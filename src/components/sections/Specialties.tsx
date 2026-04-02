@@ -255,10 +255,12 @@ export default function Specialties() {
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          background: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.06);
+          background: rgba(255, 255, 255, 0.4);
+          border: 1px solid rgba(11, 29, 51, 0.15);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 4px 12px rgba(11, 29, 51, 0.05);
           display: flex;
-          align-items: center;
+          alignItems: center;
           justify-content: center;
           margin-bottom: 20px;
           color: #0b1d33;
