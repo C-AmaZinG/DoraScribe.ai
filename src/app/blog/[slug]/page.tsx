@@ -52,7 +52,7 @@ export default function BlogPostPage() {
         <Header />
         <main style={{ paddingTop: '120px', background: '#EBEFF5', minHeight: '100vh' }}>
           <div style={{ maxWidth: '600px', margin: '0 auto', padding: '120px 24px', textAlign: 'center' }}>
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.5rem', fontWeight: 400, color: '#0B1D33', marginBottom: '16px' }}>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.5rem', fontWeight: 400, color: '#000000', marginBottom: '16px' }}>
               Post not found
             </h1>
             <p style={{ fontFamily: "'Inter', sans-serif", color: '#64748b', marginBottom: '32px' }}>
@@ -63,7 +63,7 @@ export default function BlogPostPage() {
               alignItems: 'center',
               gap: '8px',
               padding: '12px 28px',
-              background: '#0B1D33',
+              background: '#000000',
               color: '#fff',
               borderRadius: '100px',
               textDecoration: 'none',
@@ -129,7 +129,7 @@ export default function BlogPostPage() {
                   fontFamily: "'Playfair Display', serif",
                   fontSize: 'clamp(2rem, 5vw, 3rem)',
                   fontWeight: 400,
-                  color: '#0B1D33',
+                  color: '#000000',
                   lineHeight: 1.2,
                   marginBottom: '24px'
                 }}
@@ -212,7 +212,7 @@ export default function BlogPostPage() {
         .wp-content h1, .wp-content h2, .wp-content h3, .wp-content h4 {
           font-family: 'Playfair Display', serif;
           font-weight: 400;
-          color: #0B1D33;
+          color: #000000;
           margin-top: 2em;
           margin-bottom: 0.75em;
           line-height: 1.3;

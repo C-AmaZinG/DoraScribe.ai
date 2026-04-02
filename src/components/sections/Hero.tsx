@@ -13,29 +13,6 @@ const productPills = [
   "Billing",
 ];
 
-const heroFeatureCards = [
-  {
-    title: "Templates",
-    Icon: FileText,
-  },
-  {
-    title: "Easy to Use",
-    Icon: Sparkles,
-  },
-  {
-    title: "Supports Multiple Languages",
-    Icon: Languages,
-  },
-  {
-    title: "Patient Handouts",
-    Icon: BookOpen,
-  },
-  {
-    title: "Transcribe & Dictate",
-    Icon: Mic,
-  },
-];
-
 export default function Hero() {
   return (
     <section className="hero-playground-clone">
@@ -79,19 +56,6 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="hero-template-box">
-            <div className="hero-template-grid">
-              {heroFeatureCards.map(({ title, Icon }) => (
-                <div key={title} className="hero-template-card">
-                  <div className="template-icon">
-                    <Icon size={20} strokeWidth={2} />
-                  </div>
-                  <span className="template-title">{title}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </motion.div>
       </div>
 
@@ -128,9 +92,9 @@ export default function Hero() {
           width: fit-content;
           padding: 8px 14px;
           border-radius: 999px;
-          border: 1.5px solid #0B1D33;
+          border: 1.5px solid #000000;
           background: rgba(255, 255, 255, 0.55);
-          color: #0B1D33;
+          color: #000000;
           font-family: "Inter", sans-serif;
           font-size: 0.75rem;
           font-weight: 500;
@@ -143,7 +107,7 @@ export default function Hero() {
           width: 100%;
           max-width: 900px;
           font-family: "Inter", sans-serif;
-          color: #0f172a;
+          color: #000000;
           letter-spacing: -0.04em;
           font-size: clamp(2.15rem, 6vw, 4.15rem);
           line-height: 0.98;
@@ -181,7 +145,7 @@ export default function Hero() {
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.06em;
-          color: #0B1D33;
+          color: #000000;
         }
 
         .hero-cta-wrap {
@@ -197,7 +161,7 @@ export default function Hero() {
           border: none;
           border-radius: 20px;
           padding: 12px;
-          background: #F1EEED;
+          background: #F9F4F1;
           position: relative;
           left: 50%;
           transform: translateX(-50%);
@@ -231,7 +195,7 @@ export default function Hero() {
           align-items: center;
           justify-content: center;
           margin-bottom: 0;
-          color: #0B1D33;
+          color: #000000;
           flex-shrink: 0;
         }
 
@@ -241,7 +205,7 @@ export default function Hero() {
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.06em;
-          color: #0B1D33;
+          color: #000000;
         }
 
         .hero-main-cta {
@@ -255,7 +219,7 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #0B1D33;
+          color: #000000;
           background: #F2EC7D;
           border: 1px solid #F2EC7D;
           box-shadow: none;

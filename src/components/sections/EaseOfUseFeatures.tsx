@@ -281,7 +281,7 @@ export default function EaseOfUseFeatures() {
         }
 
         .step-pill.is-active {
-          color: #0b1d33;
+          color: #000000;
           border-color: #b8d2ff;
           background: #eef4ff;
         }
@@ -428,7 +428,7 @@ export default function EaseOfUseFeatures() {
           height: 56px;
           border-radius: 50%;
           background: #eef4ff;
-          color: #0b1d33;
+          color: #000000;
           display: grid;
           place-items: center;
           gap: 1px;

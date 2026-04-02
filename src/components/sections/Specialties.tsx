@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Stethoscope, Baby, Brain, Microscope, Building2, Activity } from 'lucide-react';
+import { Stethoscope, Baby, Brain, Microscope, Building2, Activity, FileText, BrainCircuit, Settings } from 'lucide-react';
 
 const professionals = [
   "Internal Medicine",
@@ -52,16 +52,19 @@ const professionals = [
 const icons = [Stethoscope, Baby, Brain, Microscope, Building2, Activity];
 const templateFeatures = [
   {
+    icon: FileText,
     title: "Custom templates in seconds",
     description:
       "Paste or upload any document and Scope will create a matching template instantly.",
   },
   {
+    icon: BrainCircuit,
     title: "Learns your style",
     description:
       "Scope adapts to your edits and feedback, getting better with every note.",
   },
   {
+    icon: Settings,
     title: "Template editor",
     description:
       "Complete control over formatting, style, and verbosity.",
@@ -77,7 +80,7 @@ export default function Specialties() {
     <section
       style={{
         padding: "100px 24px",
-        background: "#ffffff",
+        background: "#FDFCFA",
         display: "flex",
         justifyContent: "center",
       }}
@@ -87,7 +90,7 @@ export default function Specialties() {
           style={{
             maxWidth: "1200px",
             width: "100%",
-            background: "#F1EEED",
+            background: "#F9F4F1",
             borderRadius: "32px",
             padding: "80px 60px",
             display: "flex",
@@ -109,7 +112,7 @@ export default function Specialties() {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "clamp(2.5rem, 4vw, 3.2rem)",
                 fontWeight: 700,
-                color: "#0B1D33",
+                color: "#000000",
                 lineHeight: 1.1,
                 marginBottom: "20px",
                 letterSpacing: "-0.02em",
@@ -190,12 +193,18 @@ export default function Specialties() {
         </div>
 
         <div className="specialty-notes-grid">
-          {templateFeatures.map((feature) => (
-            <div key={feature.title} className="specialty-note">
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
-          ))}
+          {templateFeatures.map((feature) => {
+            const Icon = feature.icon;
+            return (
+              <div key={feature.title} className="specialty-note">
+                <div className="feature-icon-box">
+                  <Icon size={18} />
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -215,22 +224,44 @@ export default function Specialties() {
           padding: 0;
         }
 
+        .specialty-note {
+          background: #F9F4F1;
+          padding: 32px;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+          display: flex;
+          flex-direction: column;
+        }
+
         .specialty-note h3 {
           margin: 0;
-          font-family: "Playfair Display", serif;
+          font-family: "Monument Grotesk", sans-serif;
           font-size: 20px;
           font-weight: 600;
           line-height: 1.15;
-          color: #0b1d33;
+          color: #000000;
         }
 
         .specialty-note p {
-          margin: 10px 0 0;
+          margin: 12px 0 0;
           font-family: "Inter", sans-serif;
-          font-size: 1.1rem;
-          line-height: 1.45;
-          color: #4f5f75;
-          max-width: 37ch;
+          font-size: 0.95rem;
+          line-height: 1.5;
+          color: rgba(0, 0, 0, 0.7);
+          max-width: 100%;
+        }
+
+        .feature-icon-box {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 20px;
+          color: #0b1d33;
         }
 
         .specialty-scroll-grid {
@@ -271,7 +302,7 @@ export default function Specialties() {
           border-radius: 16px;
           border: 1px solid rgba(11,29,51,0.12);
           background: rgba(255,255,255,0.6);
-          color: #0B1D33;
+          color: #000000;
           font-family: "'Inter', sans-serif";
           font-size: 1.1rem;
           font-weight: 500;
@@ -302,7 +333,7 @@ export default function Specialties() {
         }
 
         .specialty-pill__icon.is-highlight {
-          color: #0B1D33;
+          color: #000000;
         }
 
         @keyframes specialty-scroll-up {

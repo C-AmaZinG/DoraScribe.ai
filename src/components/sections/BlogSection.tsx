@@ -7,8 +7,8 @@ import { fetchPosts, getFeaturedImage, getCategories, formatDate, stripHtml } fr
 import type { WPPost } from '@/lib/wordpress';
 
 const categoryColors: Record<string, string> = {
-  "Uncategorized": "#0B1D33",
-  "Media": "#0B1D33",
+  "Uncategorized": "#000000",
+  "Media": "#000000",
   "Newsletter": "#FF6F00",
   "Guide": "#FF6F00",
   "Webinar": "#7c3aed",
@@ -65,7 +65,7 @@ export default function BlogSection() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(2rem, 4.5vw, 2.8rem)',
               fontWeight: 400,
-              color: '#0B1D33',
+              color: '#000000',
               lineHeight: 1.2,
               maxWidth: '600px'
             }}
@@ -90,7 +90,7 @@ export default function BlogSection() {
                 transition: 'all 0.2s ease'
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1D33" strokeWidth="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2">
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
@@ -110,7 +110,7 @@ export default function BlogSection() {
                 transition: 'all 0.2s ease'
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1D33" strokeWidth="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2">
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>
@@ -163,7 +163,7 @@ export default function BlogSection() {
               const image = getFeaturedImage(post);
               const categories = getCategories(post);
               const catName = categories[0]?.name || 'Article';
-              const catColor = categoryColors[catName] || '#0B1D33';
+              const catColor = categoryColors[catName] || '#000000';
 
               return (
                 <div key={post.id} className="blog-item blog-item-wrap">
@@ -205,7 +205,7 @@ export default function BlogSection() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          background: 'linear-gradient(135deg, #0B1D33, #1e3a5f)',
+                          background: 'linear-gradient(135deg, #000000, #1e3a5f)',
                           color: '#fff',
                           fontFamily: "'Playfair Display', serif",
                           fontSize: '2rem'
@@ -232,7 +232,7 @@ export default function BlogSection() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: '1.05rem',
                         fontWeight: 600,
-                        color: '#0B1D33',
+                        color: '#000000',
                         lineHeight: 1.3,
                         marginBottom: '10px'
                       }} dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
@@ -254,7 +254,7 @@ export default function BlogSection() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: '0.8rem',
                         fontWeight: 600,
-                        color: '#0B1D33',
+                        color: '#000000',
                         whiteSpace: 'nowrap',
                       }}>
 
@@ -277,7 +277,7 @@ export default function BlogSection() {
               alignItems: 'center',
               gap: '8px',
               padding: '14px 32px',
-              background: '#0B1D33',
+              background: '#000000',
               color: '#fff',
               borderRadius: '100px',
               textDecoration: 'none',

@@ -68,7 +68,7 @@ export default function BlogPage() {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '0.85rem',
                 fontWeight: 500,
-                color: '#0B1D33'
+                color: '#000000'
               }}>📝 Blog</span>
             </div>
 
@@ -76,7 +76,7 @@ export default function BlogPage() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 400,
-              color: '#0B1D33',
+              color: '#000000',
               lineHeight: 1.15,
               marginBottom: '20px'
             }}>
@@ -121,7 +121,7 @@ export default function BlogPage() {
               </div>
             ) : posts.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '80px 24px' }}>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', color: '#0B1D33', marginBottom: '16px' }}>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', color: '#000000', marginBottom: '16px' }}>
                   No posts yet
                 </h3>
                 <p style={{ fontFamily: "'Inter', sans-serif", color: '#64748b', fontSize: '1rem' }}>
@@ -177,7 +177,7 @@ export default function BlogPage() {
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center',
-                                  background: 'linear-gradient(135deg, #0B1D33, #1e3a5f)',
+                                  background: 'linear-gradient(135deg, #000000, #1e3a5f)',
                                   color: '#fff',
                                   fontFamily: "'Playfair Display', serif",
                                   fontSize: '2rem'
@@ -208,7 +208,7 @@ export default function BlogPage() {
                                 fontFamily: "'Inter', sans-serif",
                                 fontSize: '1.1rem',
                                 fontWeight: 600,
-                                color: '#0B1D33',
+                                color: '#000000',
                                 lineHeight: 1.3,
                                 marginBottom: '10px'
                               }} dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
@@ -264,7 +264,7 @@ export default function BlogPage() {
                         alignItems: 'center',
                         gap: '10px',
                         padding: '14px 36px',
-                        background: '#0B1D33',
+                        background: '#000000',
                         color: '#fff',
                         border: 'none',
                         borderRadius: '100px',

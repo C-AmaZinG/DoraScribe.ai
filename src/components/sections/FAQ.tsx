@@ -11,9 +11,9 @@ type FAQItem = {
 
 const categories = [
   "General",
-  "Forecasting",
-  "Setup & integrations",
-  "Security and privacy",
+  "Getting Started",
+  "Using Dorascribe",
+  "Security & Privacy",
 ] as const;
 
 type Category = (typeof categories)[number];
@@ -21,82 +21,62 @@ type Category = (typeof categories)[number];
 const faqContent: Record<Category, FAQItem[]> = {
   General: [
     {
-      q: "What makes Makro different from a normal dashboard?",
-      a: "It's built for decisions, not reporting. Instead of only showing charts, it explains what matters, what changed, and what you should review next.",
+      q: "What is Dorascribe?",
+      a: "Dorascribe is a medical transcription app that converts patient consultations into text for seamless integration with Electronic Medical Records (EMRs).",
     },
     {
-      q: "How does the AI help (in plain English)?",
-      a: "It categorizes and summarizes activity, highlights what's unusual, explains drivers behind changes, and turns raw transactions into an actionable weekly finance brief.",
+      q: "How does Dorascribe work?",
+      a: "Dorascribe utilizes a combination of large medical language models, artificial intelligence and web3 technologies to generate medical dictations, transcriptions, and chart notes. Simply speak into the app, and it will transcribe your voice into accurate and detailed medical notes.",
     },
     {
-      q: "Does Makro replace my accountant or bookkeeper?",
-      a: "No. Makro complements them by keeping your internal view clean and current so month-end is easier and decisions are faster.",
+      q: "How much time will Dorascribe save me?",
+      a: "The time saved will vary based on your individual workflow and the complexity of your medical cases. However, initial users have reported reducing their charting time by up to 60–70%. On average, users can expect to save 2–3 hours daily.",
     },
     {
-      q: "What problems does it solve day-to-day?",
-      a: "Forecasting cash flow, organizing expenses, tracking invoice status, spotting anomalies, and keeping a clear weekly view of what changed in your finances.",
+      q: "What specialties is Dorascribe designed for?",
+      a: "Dorascribe is designed for a wide range of healthcare professionals, offering AI-powered medical transcription tailored to different specialties. Whether you’re a doctor, surgeon, psychiatrist, physiotherapist, massage therapist, optometrist, or specialize in another area, Dorascribe provides structured note formats to fit your practice.",
     },
     {
-      q: "Who is Makro for?",
-      a: "Small teams, agencies, and digital businesses that want clear visibility into runway, upcoming bills, and spend drivers, especially if finance is handled part-time.",
-    },
-    {
-      q: "What is Makro?",
-      a: "Makro is an AI-powered finance workspace that helps operators and founders stay on top of cash flow, expenses, and invoices without living in spreadsheets.",
+      q: "How accurate is Dorascribe?",
+      a: "Dorascribe’s AI-powered technology delivers over 99% accuracy for clear recordings and continues to learn and improve with usage.",
     },
   ],
-  Forecasting: [
+  "Getting Started": [
     {
-      q: "How often does forecasting update?",
-      a: "Forecasts refresh as new transactions and invoice events come in, so your view stays current without manual spreadsheet updates.",
+      q: "Does Dorascribe work on multiple devices?",
+      a: "Yes. Dorascribe supports multiple devices including smartphones, tablets and computers.",
     },
     {
-      q: "Can I model different scenarios?",
-      a: "Yes. You can compare best-case, expected, and downside assumptions to understand runway and cash timing before making decisions.",
+      q: "What browser should I use?",
+      a: "While all commonly used browsers are supported, we recommend using Google Chrome for the best Dorascribe experience, including for Apple device users.",
     },
     {
-      q: "Does it account for recurring revenue and costs?",
-      a: "It recognizes recurring patterns and scheduled obligations, then rolls them into projections to reduce surprises.",
-    },
-    {
-      q: "Will it flag anomalies early?",
-      a: "Yes. Unusual movements are highlighted with context so you can investigate quickly and avoid downstream cash issues.",
+      q: "Does it support multiple languages?",
+      a: "Yes. We support transcription in Spanish, French, Italian, German, Portuguese and English. After your note is generated, you can also ask the AI to translate it to any language you want in the “interact with note” section.",
     },
   ],
-  "Setup & integrations": [
+  "Using Dorascribe": [
     {
-      q: "How long does setup take?",
-      a: "Most teams can connect data sources and see their first dashboard in minutes, not days.",
+      q: "How are errors addressed?",
+      a: "Dorascribe addresses potential errors in transcriptions through advanced algorithms and user-editing capabilities, ensuring a high level of accuracy in the final output.",
     },
     {
-      q: "Can I connect accounting tools and banks?",
-      a: "Yes. Makro supports integrations across core finance tools and data providers to keep information centralized.",
+      q: "Any tips for best recording results?",
+      a: "If you’re using Dorascribe on a desktop or laptop, make sure the microphone is turned on. You can also use an external microphone for clearer audio. On a mobile device, keep the screen active and avoid letting it go to sleep.",
     },
     {
-      q: "Can teams share one workspace?",
-      a: "Absolutely. Workspaces support collaboration so founders, operators, and finance leads can work from the same source of truth.",
-    },
-    {
-      q: "Do I need technical help to get started?",
-      a: "No. The onboarding flow is designed for non-technical users, with support available if you need custom setup.",
+      q: "How long are notes kept?",
+      a: "Notes are kept for 28 days to comply with HIPAA guidelines and allow time for EMR transfers. They stay in your inbox for 14 days, then move to the trash for another 14 days before permanent deletion.",
     },
   ],
-  "Security and privacy": [
+  "Security & Privacy": [
     {
-      q: "How is financial data protected?",
-      a: "Data is encrypted in transit and at rest, with strict access controls and environment hardening across infrastructure.",
+      q: "Is my data secure and HIPAA-compliant?",
+      a: "Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and HIPAA regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous.",
     },
     {
-      q: "Can I manage team permissions?",
-      a: "Yes. Role-based access lets you control who can view, edit, or export information across your workspace.",
-    },
-    {
-      q: "Do you share customer data with third parties?",
-      a: "No. Customer financial data is not sold or repurposed, and integrations follow scoped permissions.",
-    },
-    {
-      q: "Is there auditability for critical actions?",
-      a: "Yes. Key actions can be tracked so teams have visibility and accountability over important workflow changes.",
+      q: "Is my payment information secure?",
+      a: "Your payment information is fully secure. Dorascribe uses Stripe, a globally trusted and PCI-DSS Level 1 certified payment processor, to handle all transactions.",
     },
   ],
 };
@@ -146,8 +126,7 @@ export default function FAQ() {
           </p>
 
           <p className="faq-subtitle">
-            Simple plans for founders and teams. No contracts, no hidden fees.
-            Upgrade, downgrade, or cancel anytime.
+            Have questions about Dorascribe? Our FAQ provides the information you need to maximize your medical documentation efficiency.
           </p>
         </div>
 
@@ -227,11 +206,11 @@ export default function FAQ() {
                 <p className="faq-contact-title">Still have questions? We're here to help.</p>
 
                 <p className="faq-contact-text">
-                  If you manage high transaction volumes, multiple entities, or require
-                  custom integrations, our team can tailor Makro to your needs.
+                  If you have unique practice setups, EMR integrations, or require
+                  custom workflows, our team can tailor Dorascribe to your needs.
                 </p>
 
-                <MakroButton text="Contact us" href="/contact" className="faq-contact-default-btn" />
+                <MakroButton text="Contact us" href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
               </div>
             </div>
           </div>

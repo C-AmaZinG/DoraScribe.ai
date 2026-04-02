@@ -87,7 +87,7 @@ export default function WhyChoose() {
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.2rem, 4vw, 3.2rem)",
               fontWeight: 400,
-              color: "#0B1D33",
+              color: "#000000",
               lineHeight: 1.15,
               marginBottom: "20px",
             }}>
@@ -134,7 +134,7 @@ export default function WhyChoose() {
                       height: "36px",
                       borderRadius: "10px",
                       background: activeIndex === i ? "var(--makro-accent, #FF6F00)" : "#f1f5f9",
-                      color: "#0B1D33",
+                      color: "#000000",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -149,7 +149,7 @@ export default function WhyChoose() {
                       fontWeight: 400,
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
-                      color: activeIndex === i ? "#0B1D33" : "#94a3b8",
+                      color: activeIndex === i ? "#000000" : "#94a3b8",
                       transition: "color 0.3s ease",
                     }}>{feature.label}</span>
                   </div>
@@ -168,7 +168,7 @@ export default function WhyChoose() {
                           fontFamily: "'Playfair Display', serif",
                           fontSize: "1.3rem",
                           fontWeight: 400,
-                          color: "#0B1D33",
+                          color: "#000000",
                           marginBottom: "8px",
                           paddingLeft: "48px",
                         }}>{feature.title}</h3>
@@ -253,7 +253,7 @@ export default function WhyChoose() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "1rem",
                         fontWeight: 400,
-                        color: "#0B1D33",
+                        color: "#000000",
                       }}>{features[activeIndex].title}</p>
                     </div>
                   </div>
@@ -314,7 +314,7 @@ export default function WhyChoose() {
                             <div key={s} style={{
                               padding: "8px 16px",
                               borderRadius: "100px",
-                              background: i === 0 ? "#0B1D33" : "#f1f5f9",
+                              background: i === 0 ? "#000000" : "#f1f5f9",
                               color: i === 0 ? "#FF6F00" : "#64748b",
                               fontFamily: "'Inter', sans-serif",
                               fontSize: "0.8rem",
@@ -330,7 +330,7 @@ export default function WhyChoose() {
                         border: "1px solid rgba(0,0,0,0.04)",
                       }}>
                         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.75rem", color: "#94a3b8", marginBottom: "8px" }}>Template adapted for</p>
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", color: "#0B1D33", fontWeight: 400 }}>Cardiology Consultation Note</p>
+                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", color: "#000000", fontWeight: 400 }}>Cardiology Consultation Note</p>
                         <div style={{ display: "flex", gap: "6px", marginTop: "12px" }}>
                           <div style={{ padding: "4px 10px", borderRadius: "6px", background: "rgba(212,255,89,0.2)", fontSize: "0.7rem", color: "#4d7c0f" }}>SOAP</div>
                           <div style={{ padding: "4px 10px", borderRadius: "6px", background: "#f1f5f9", fontSize: "0.7rem", color: "#64748b" }}>ECG Review</div>
@@ -362,7 +362,7 @@ export default function WhyChoose() {
                             padding: "12px 0",
                             borderBottom: "1px solid #f1f5f9",
                           }}>
-                            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", color: "#0B1D33" }}>{emr.name}</span>
+                            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", color: "#000000" }}>{emr.name}</span>
                             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                               <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: emr.color }} />
                               <span style={{ fontFamily: "'Fragment Mono', monospace", fontSize: "0.75rem", color: emr.color }}>{emr.status}</span>
@@ -380,7 +380,7 @@ export default function WhyChoose() {
                         gap: "12px",
                       }}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#84CC16" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", color: "#0B1D33" }}>Last synced 2 min ago</span>
+                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", color: "#000000" }}>Last synced 2 min ago</span>
                       </div>
                     </div>
                   )}

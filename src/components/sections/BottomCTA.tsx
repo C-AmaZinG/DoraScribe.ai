@@ -13,7 +13,7 @@ export default function BottomCTA() {
           style={{
             position: "relative",
             width: "100%",
-            background: "#0B1D33",
+            background: "#0b1d33",
             borderRadius: "32px",
             padding: "160px 24px",
             display: "flex",

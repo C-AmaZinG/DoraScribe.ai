@@ -46,6 +46,7 @@ export default function Testimonials() {
   return (
     <section className="testimonials-section">
       <div className="testimonials-shell">
+        <h2 className="section-title">Don't just take our word for it.</h2>
         <div className="quote-grid">
           {quoteCards.map((card) => (
             <article key={card.name} className="quote-card">
@@ -65,7 +66,7 @@ export default function Testimonials() {
 
         <article className="feature-panel">
           <div className="feature-media-wrap">
-            <div className="feature-media">
+            <div className="feature-media" style={{ position: 'relative', minHeight: '360px', height: '100%', width: '100%', borderRadius: '14px', overflow: 'hidden' }}>
               <Image
                 src="/portrait.jpg"
                 alt="Smiling American female doctor"
@@ -91,8 +92,18 @@ export default function Testimonials() {
         .testimonials-shell {
           max-width: 1200px;
           margin: 0 auto;
-          display: grid;
+          display: flex;
+          flex-direction: column;
           gap: 20px;
+        }
+
+        .section-title {
+          font-family: "Playfair Display", serif;
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 400;
+          color: #000000;
+          text-align: center;
+          margin: 0 0 32px 0;
         }
 
         .quote-grid {
@@ -102,7 +113,7 @@ export default function Testimonials() {
         }
 
         .quote-card {
-          background: #f2f2f2;
+          background: #F9F4F1;
           border-radius: 16px;
           padding: 30px 26px;
           display: flex;
@@ -115,7 +126,7 @@ export default function Testimonials() {
           font-family: "Inter", sans-serif;
           font-size: 1rem;
           line-height: 1.45;
-          color: #1c1c1c;
+          color: #000000;
           flex: 1;
         }
 
@@ -135,14 +146,14 @@ export default function Testimonials() {
           font-family: "Inter", sans-serif;
           font-size: 0.82rem;
           font-weight: 700;
-          color: #141414;
+          color: #000000;
         }
 
         .name {
           margin: 0;
           font-family: "Inter", sans-serif;
           font-size: 1.02rem;
-          color: #141414;
+          color: #000000;
         }
 
         .role {
@@ -157,7 +168,7 @@ export default function Testimonials() {
         .feature-panel {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          background: #f2f2f2;
+          background: #F9F4F1;
           border-radius: 16px;
           overflow: hidden;
           min-height: 430px;
@@ -197,7 +208,7 @@ export default function Testimonials() {
           font-size: 40px !important;
           line-height: 1.06;
           letter-spacing: -0.02em;
-          color: #121212;
+          color: #000000;
           max-width: 580px;
         }
 
@@ -206,7 +217,7 @@ export default function Testimonials() {
           font-family: "Inter", sans-serif;
           font-size: 1.02rem;
           line-height: 1.5;
-          color: #1c1c1c;
+          color: #000000;
           max-width: 520px;
         }
 
@@ -226,7 +237,7 @@ export default function Testimonials() {
           letter-spacing: 0.08em;
           font-family: "Inter", sans-serif;
           font-size: 0.73rem;
-          color: #121212;
+          color: #000000;
         }
 
         @media (max-width: 1100px) {

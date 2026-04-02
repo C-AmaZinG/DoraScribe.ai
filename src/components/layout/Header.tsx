@@ -98,7 +98,7 @@ export default function Header() {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "0.9rem",
                   fontWeight: hoveredLink === link.name ? 500 : 400,
-                  color: hoveredLink === link.name ? "#2969B7" : "#0F172A",
+                  color: hoveredLink === link.name ? "#2969B7" : "#000000",
                   borderBottom:
                     hoveredLink === link.name
                       ? "2px solid #2969B7"

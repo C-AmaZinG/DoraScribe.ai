@@ -482,7 +482,7 @@ export default function ContactPage() {
           border: 1px solid #f2ec7d;
           border-radius: 6px;
           background: #f2ec7d;
-          color: #0b1d33;
+          color: #000000;
           font-family: "Inter", sans-serif;
           font-size: 0.84rem;
           font-weight: 600;

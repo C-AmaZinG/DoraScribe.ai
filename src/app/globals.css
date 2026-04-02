@@ -1,14 +1,40 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Regular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Medium.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Bold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
-    --primary: #0B1D33;
+    --primary: #000000;
     --primary-dark: #05101F;
     --secondary: #FF6F00; /* Vibrant Orange */
     --makro-accent: #FF6F00; /* Lime Green */
     --bg-light: #FCFAF8; /* Updated Background */
     --bg-white: #ffffff;
-    --text-main: #0B1D33;
+    --text-main: #000000;
     --text-muted: #64748b;
     --border-radius-lg: 32px;
     --border-radius-pill: 100px;
@@ -17,20 +43,20 @@
     
     /* Typography */
     --font-heading: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
+    --font-body: 'Monument Grotesk', sans-serif;
 }
 
 @theme {
     --color-background: #FCFAF8;
-    --color-foreground: #0B1D33;
-    --color-primary: #0B1D33;
+    --color-foreground: #000000;
+    --color-primary: #000000;
     --color-primary-foreground: #ffffff;
     --color-secondary:	#FF6F00;
     --color-accent: #FF6F00;
     --color-muted: #f1f5f9;
     --color-muted-foreground: #64748b;
     --color-border: rgba(11, 29, 51, 0.1);
-    --font-sans: 'Inter', sans-serif;
+    --font-sans: 'Monument Grotesk', sans-serif;
     --font-serif: 'Playfair Display', serif;
 }
 
@@ -328,7 +354,7 @@ nav ul li a:hover {
     display: inline-flex;
     align-items: center;
     background: #ffffff;
-    color: #0B1D33;
+    color: #000000;
     padding: 16px 32px;
     border-radius: 8px;
     font-family: var(--font-heading);
@@ -412,7 +438,7 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    color: #0B1D33;
+    color: #000000;
 }
 
 .zd-play-btn svg {

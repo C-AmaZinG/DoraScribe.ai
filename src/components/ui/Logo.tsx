@@ -8,7 +8,7 @@ interface LogoProps {
   showText?: boolean;
 }
 
-const Logo = ({ color = "#0B1D33", showText = true }: LogoProps) => {
+const Logo = ({ color = "#000000", showText = true }: LogoProps) => {
   return (
     <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
       <img

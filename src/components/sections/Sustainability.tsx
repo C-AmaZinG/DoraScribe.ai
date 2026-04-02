@@ -209,7 +209,7 @@ export default function Sustainability() {
           width: 98px;
           height: 98px;
           border-radius: 50%;
-          background: #0b1d33;
+          background: #000000;
           color: #ffffff;
           display: inline-flex;
           align-items: center;

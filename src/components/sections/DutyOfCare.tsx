@@ -4,49 +4,28 @@ import React from "react";
 
 function PracticeIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M12 3.5L18.5 6.2V11C18.5 15.1 16 18.8 12 20.4C8 18.8 5.5 15.1 5.5 11V6.2L12 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9.3 11.9L11.1 13.8L14.8 10.2"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg className={className} width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="8" r="7" />
+      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
     </svg>
   );
 }
 
 function ReviewIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="6.2" y="4.8" width="11.6" height="14.5" rx="2.2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M9 9.1H15.1M9 12H13.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <circle cx="14.7" cy="14.8" r="2.1" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M16.2 16.3L18 18.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <svg className={className} width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
     </svg>
   );
 }
 
 function PrivacyIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M8 3.8H14.2L18.2 7.8V19.1C18.2 20 17.5 20.7 16.6 20.7H8C7.1 20.7 6.4 20 6.4 19.1V5.4C6.4 4.5 7.1 3.8 8 3.8Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M14.2 3.8V7.8H18.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <rect x="9.2" y="13.1" width="6.2" height="4.8" rx="1.2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M10.7 13.1V11.9C10.7 11 11.4 10.3 12.3 10.3C13.2 10.3 13.9 11 13.9 11.9V13.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <svg className={className} width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 15v2" />
     </svg>
   );
 }
@@ -123,7 +102,7 @@ export default function DutyOfCare() {
           max-width: 1200px;
           margin: 0 auto;
           border-radius: 34px;
-          background: #f1eeed;
+          background: #F9F4F1;
           padding: 52px;
           display: grid;
           gap: 38px;
@@ -142,7 +121,7 @@ export default function DutyOfCare() {
           font-size: clamp(2.3rem, 5vw, 4.4rem);
           line-height: 0.94;
           letter-spacing: -0.03em;
-          color: #2a0016;
+          color: #000000;
           white-space: nowrap;
         }
 
@@ -151,7 +130,7 @@ export default function DutyOfCare() {
           font-family: "Inter", sans-serif;
           font-size: 1.06rem;
           line-height: 1.5;
-          color: #260e1d;
+          color: #000000;
           max-width: 58ch;
         }
 
@@ -177,7 +156,7 @@ export default function DutyOfCare() {
           font-family: "Inter", sans-serif;
           font-size: 0.68rem;
           font-weight: 700;
-          color: #2a0016;
+          color: #000000;
           text-align: center;
         }
 
@@ -189,21 +168,15 @@ export default function DutyOfCare() {
 
         .duty-card {
           border-radius: 18px;
-          background: #f8f7f6;
+          background: #FFFFFF;
           padding: 24px 24px 22px;
           border: 1px solid rgba(33, 8, 23, 0.08);
         }
 
         .card-icon {
-          width: 46px;
-          height: 46px;
-          border-radius: 12px;
-          background: #ffffff;
-          border: 1px solid rgba(42, 0, 22, 0.12);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #2a0016;
+          display: inline-block;
+          margin-bottom: 4px;
+          color: #000000;
         }
 
         .icon-svg {
@@ -233,7 +206,7 @@ export default function DutyOfCare() {
           font-size: 1.9rem;
           line-height: 1.05;
           letter-spacing: -0.02em;
-          color: #2a0016;
+          color: #000000;
         }
 
         .duty-card p {
@@ -241,7 +214,7 @@ export default function DutyOfCare() {
           font-family: "Inter", sans-serif;
           font-size: 1rem;
           line-height: 1.5;
-          color: #2b1321;
+          color: #000000;
         }
 
         @media (max-width: 1080px) {

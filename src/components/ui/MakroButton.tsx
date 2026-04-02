@@ -38,14 +38,14 @@ const MakroButton = ({
         ? {
             background: "#F2EC7D",
             border: "#F2EC7D",
-            text: "#0B1D33",
+            text: "#000000",
             hoverBackground: "#E6DE69",
             hoverBorder: "#E6DE69",
           }
         : {
             background: "#F2EC7D",
             border: "#F2EC7D",
-            text: "#0B1D33",
+            text: "#000000",
             hoverBackground: "#E6DE69",
             hoverBorder: "#E6DE69",
           };

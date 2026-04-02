@@ -39,7 +39,7 @@ export default function Footer() {
                 fontFamily: "'Playfair Display', serif", 
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)', 
                 fontWeight: 400, 
-                color: '#0B1D33',
+                color: '#000000',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
                 margin: 0
@@ -66,7 +66,7 @@ export default function Footer() {
               <Logo />
               <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '240px', fontFamily: "'Inter', sans-serif" }}>
                 Designed and developed by clinical professionals.<br />
-                <a href="mailto:help@dorascribe.com" style={{ color: '#0B1D33', textDecoration: 'none', fontWeight: 600 }}>help@dorascribe.com</a>
+                <a href="mailto:help@dorascribe.com" style={{ color: '#000000', textDecoration: 'none', fontWeight: 600 }}>help@dorascribe.com</a>
               </p>
             </div>
 
@@ -82,7 +82,7 @@ export default function Footer() {
                   fontWeight: 400, 
                   textTransform: 'uppercase', 
                   letterSpacing: '0.05em',
-                  color: '#0B1D33',
+                  color: '#000000',
                   marginBottom: '24px'
                 }}>{col.title}</h4>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -145,7 +145,7 @@ export default function Footer() {
              fontFamily: "'Playfair Display', serif",
              fontSize: 'clamp(3rem, 11.2vw, 12.2rem)',
              fontWeight: 400,
-             color: '#0B1D33',
+             color: '#000000',
              textAlign: 'center',
              margin: '0',
              opacity: 0.05,
@@ -189,7 +189,7 @@ export default function Footer() {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '0.9rem',
                 fontWeight: 600,
-                color: '#0B1D33',
+                color: '#000000',
                 textDecoration: 'underline'
               }}
             >

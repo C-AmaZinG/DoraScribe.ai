@@ -50,7 +50,7 @@ export default function FeatureCarousel() {
             fontFamily: "'Playfair Display', serif", 
             fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
             fontWeight: 400, 
-            color: '#0B1D33', 
+            color: '#000000', 
             lineHeight: 1.1,
             marginBottom: '24px'
           }}>
@@ -140,7 +140,7 @@ export default function FeatureCarousel() {
                       padding: '12px 28px',
                       borderRadius: '100px',
                       border: 'none',
-                      background: isActive ? '#0B1D33' : 'transparent',
+                      background: isActive ? '#000000' : 'transparent',
                       color: isActive ? '#ffffff' : '#64748b',
                       fontSize: '0.9rem',
                       fontWeight: 400,
