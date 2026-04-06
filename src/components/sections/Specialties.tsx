@@ -139,8 +139,7 @@ export default function Specialties() {
                 maxWidth: "420px",
               }}
             >
-              Master your clinical documentation and practice workflows, no matter your
-              medical field.
+              create custom templates in seconds
             </motion.p>
           </div>
 
@@ -155,13 +154,7 @@ export default function Specialties() {
                   return (
                     <div key={`left-${professional}-${i}`} className="specialty-pill">
                       <span className="specialty-pill__label">{professional}</span>
-                      <div
-                        className={`specialty-pill__icon ${
-                          highlight ? "is-highlight" : ""
-                        }`}
-                      >
-                        <Icon size={20} />
-                      </div>
+                      
                     </div>
                   );
                 })}
@@ -177,13 +170,7 @@ export default function Specialties() {
                   return (
                     <div key={`right-${professional}-${i}`} className="specialty-pill">
                       <span className="specialty-pill__label">{professional}</span>
-                      <div
-                        className={`specialty-pill__icon ${
-                          highlight ? "is-highlight" : ""
-                        }`}
-                      >
-                        <Icon size={20} />
-                      </div>
+                      
                     </div>
                   );
                 })}
@@ -192,21 +179,7 @@ export default function Specialties() {
           </div>
         </div>
 
-        <div className="specialty-notes-grid">
-          {templateFeatures.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <div key={feature.title} className="specialty-note">
-                <div className="feature-icon-box">
-                  <Icon size={18} />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            );
-          })}
         </div>
-      </div>
 
       <style jsx>{`
         .specialty-stack {

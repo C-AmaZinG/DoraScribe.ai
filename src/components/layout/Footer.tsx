@@ -50,7 +50,7 @@ export default function Footer() {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '1.2rem',
                 color: '#64748b'
-              }}>AI that takes medical notes for you</p>
+              }}>Advance your clinical workflow with Dorascribe.</p>
             </div>
             
             <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" />
