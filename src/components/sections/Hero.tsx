@@ -23,37 +23,39 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="hero-copy"
         >
-          <p className="hero-badge">
-            Designed by Healthcare Professionals
-          </p>
-
-          <h1 className="hero-title">AI Medical Scribe: Turn Consults Into Accurate Medical Notes</h1>
-
-          <p className="hero-subtitle">
-            Focus on your patients, not the paperwork. Let Dorascribe&apos;s AI handle the note-taking for you.
-          </p>
-
-          <div className="hero-compliance-row">
-            {["PIPEDA COMPLIANT", "HIPAA COMPLIANT", "POPIA COMPLIANT"].map((label) => (
-              <span key={label} className="compliance-badge">
-                <svg className="compliance-check" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                  <circle cx="11" cy="11" r="10" stroke="#2ABFBF" strokeWidth="1.5" fill="none"/>
-                  <path d="M7 11.5L9.5 14L15 8.5" stroke="#2ABFBF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                {label}
-              </span>
-            ))}
+          <div className="hero-badge-wrap">
+            <p className="hero-badge">
+              Designed by Healthcare Professionals
+            </p>
           </div>
 
+          <h1 className="hero-title">Ambient Ai Medical Scribe</h1>
+
+          <p className="hero-subtitle">
+            Capture conversations, generate notes, streamline clinical workflows.
+          </p>
+
+          
+
           <div className="hero-cta-wrap">
-            <a
-              href="https://dorascribe.ai/book-demo/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hero-main-cta"
-            >
-              Get a free demo
-            </a>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a
+                href="https://app.dorascribe.ai/signUp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-main-cta"
+              >
+                Start a free trial
+              </a>
+              <a
+                href="https://dorascribe.ai/book-demo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-secondary-cta"
+              >
+                Book a demo
+              </a>
+            </div>
           </div>
 
         </motion.div>
@@ -63,10 +65,10 @@ export default function Hero() {
         .hero-playground-clone {
           position: relative;
           background: #ffffff;
-          padding: 148px 24px 100px;
+          padding: 148px 24px 0px;
           overflow: hidden;
-          border-bottom-left-radius: 28px;
-          border-bottom-right-radius: 28px;
+          
+          
         }
 
         .hero-shell {
@@ -87,19 +89,42 @@ export default function Hero() {
           align-items: center;
         }
 
-        .hero-badge {
-          display: block;
+        .hero-badge-wrap {
+          position: relative;
           width: fit-content;
+          margin: 0 auto 18px;
+          border-radius: 999px;
+          padding: 1.5px;
+          background: rgba(0,0,0,0.03);
+          overflow: hidden;
+        }
+
+        .hero-badge-wrap::before {
+          content: "";
+          position: absolute;
+          top: -100%; left: -100%; width: 300%; height: 300%;
+          background: conic-gradient(from 0deg, transparent 60%, #0B1D33 100%, transparent);
+          animation: badge-spin 2.5s linear infinite;
+          z-index: 0;
+        }
+
+        .hero-badge {
+          position: relative;
+          display: block;
           padding: 8px 14px;
           border-radius: 999px;
-          border: 1.5px solid #00AAAA;
-          background: rgba(0, 170, 170, 0.15);
+          background: #ffffff;
           color: #000000;
-          font-family: "Inter", sans-serif;
+          font-family: inherit;
           font-size: 0.75rem;
           font-weight: 500;
-          margin: 0 auto 18px;
           text-align: center;
+          margin: 0;
+          z-index: 1;
+        }
+
+        @keyframes badge-spin {
+          to { transform: rotate(360deg); }
         }
 
         .hero-title {
@@ -237,6 +262,28 @@ export default function Hero() {
           background: #EBE570;
         }
 
+        .hero-secondary-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          min-height: 0;
+          padding: 10px 20px;
+          border-radius: 14px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #000000;
+          background: #ffffff;
+          border: 1px solid #E2E8F0;
+          box-shadow: none;
+          transition: background-color 0.2s ease;
+        }
+        .hero-secondary-cta:hover {
+          background: #F8FAFC;
+        }
+
+
         .hero-device-zone {
           margin-top: 52px;
           width: 100%;
@@ -330,9 +377,9 @@ export default function Hero() {
         }
         @media (max-width: 820px) {
           .hero-playground-clone {
-            padding: 110px 16px 36px;
-            border-bottom-left-radius: 22px;
-            border-bottom-right-radius: 22px;
+            padding: 110px 16px 0px;
+            
+            
           }
 
           .hero-template-box {

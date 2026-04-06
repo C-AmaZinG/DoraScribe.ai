@@ -71,15 +71,11 @@ export default function Pricing() {
           </span>
 
           <p className="pricing-title">
-            Your smart finance assistant,{" "}
-            <mark>
-              <span>starting free</span>
-            </mark>
+            Find the right package
           </p>
 
           <p className="pricing-subtitle">
-            Simple plans for founders and teams. No contracts, no hidden fees.
-            Upgrade, downgrade, or cancel anytime.
+            Enhance your medical scribing experience at a price that fits your budget.
           </p>
         </div>
 
@@ -231,7 +227,7 @@ export default function Pricing() {
         }
 
         .pricing-card.is-premium {
-          background: #00AAAA;
+          background: #0B1D33;
         }
 
         .plan-copy {

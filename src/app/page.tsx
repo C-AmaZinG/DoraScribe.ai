@@ -43,8 +43,8 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
-        <MockupSection />
         <FeatureCards />
+        <MockupSection />
         <WhyChoose />
         <Specialties />
         <Pricing />

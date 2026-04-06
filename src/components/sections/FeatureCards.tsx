@@ -106,11 +106,9 @@ export default function FeatureCards() {
 
       <style jsx>{`
         .feature-cards-section {
-          padding: 80px 24px;
+          padding: 20px 24px 80px;
           background-color: #FFFFFF;
           position: relative;
-          border-top: 1px solid #EFEFEF;
-          border-bottom: 1px solid #EFEFEF;
         }
 
         .fc-container {
