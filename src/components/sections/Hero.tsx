@@ -273,14 +273,15 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #000000;
-          background: #ffffff;
-          border: 1px solid #E2E8F0;
+          color: #2C1810;
+          background: #F0EBE4;
+          border: 1px solid transparent;
           box-shadow: none;
-          transition: background-color 0.2s ease;
+          transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
         }
         .hero-secondary-cta:hover {
-          background: #F8FAFC;
+          background: #E6DFD6;
+          transform: scale(0.98);
         }
 
 

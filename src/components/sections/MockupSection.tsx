@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import MakroButton from '@/components/ui/MakroButton';
 
 export default function MockupSection() {
   return (
@@ -14,7 +15,8 @@ export default function MockupSection() {
       }}
     >
       <div style={{ 
-        maxWidth: '1300px', 
+        maxWidth: '1200px', 
+        width: '100%',
         margin: '0 auto', 
         display: 'flex', 
         alignItems: 'center', 
@@ -56,26 +58,7 @@ export default function MockupSection() {
           </p>
 
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
-            <a href="https://apps.apple.com/ca/app/dorascribe/id6751861797" target="_blank" rel="noopener noreferrer">
-              <Image
-                src="/assets/app-store.svg"
-                alt="App Store"
-                width={140}
-                height={42}
-                priority
-                style={{ height: '42px', width: 'auto' }}
-              />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=app.dorascribe.ai" target="_blank" rel="noopener noreferrer">
-              <Image
-                src="/assets/google-play.svg"
-                alt="Google Play"
-                width={140}
-                height={42}
-                priority
-                style={{ height: '42px', width: 'auto' }}
-              />
-            </a>
+            <MakroButton href="https://app.dorascribe.ai/signUp" text="Start a free trial" />
           </div>
 
           <div
@@ -116,7 +99,7 @@ export default function MockupSection() {
           }}>
             <Image
               src="/assets/Dora_scribe_landing_page.png"
-              alt="DoraScribe tablet mockup"
+              alt="DoraScribe dashboard mockup"
               width={1470}
               height={827}
               style={{ width: '100%', height: 'auto', objectFit: 'cover', objectPosition: 'left center', display: 'block' }}

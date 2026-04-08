@@ -116,11 +116,6 @@ export default function FAQ() {
     <section id="faq" className="faq-makro-clone">
       <div className="faq-wrap">
         <div className="faq-head">
-          <span className="faq-chip">
-            <span className="faq-chip-icon">?</span>
-            FAQ
-          </span>
-
           <p className="faq-title">
             We have the <mark>answers</mark>
           </p>
@@ -231,32 +226,6 @@ export default function FAQ() {
         .faq-head {
           text-align: center;
           margin-bottom: 32px;
-        }
-
-        .faq-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 11px;
-          border: 1px solid rgba(140, 149, 170, 0.25);
-          border-radius: 999px;
-          background: #f5f7fb;
-          color: var(--text-main);
-          font-family: "Inter", sans-serif;
-          font-size: 0.75rem;
-          font-weight: 500;
-        }
-
-        .faq-chip-icon {
-          width: 14px;
-          height: 14px;
-          border-radius: 999px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #e8edf4;
-          color: var(--text-main);
-          font-size: 0.67rem;
         }
 
         .faq-title {

@@ -1,10 +1,9 @@
 "use client"
 
 import React, { useRef } from "react"
+import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useIsMobile } from "@/lib/hooks"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
 
 const whyChooseSteps = [
   {
@@ -14,7 +13,7 @@ const whyChooseSteps = [
     description:
       "Eliminate note-taking distractions, allowing you to focus on your patients and foster meaningful connections.",
     benefit: "More face time, stronger patient relationships",
-    visual: "/assets/discover-4.webp",
+    image: "/assets/img_patient_engagement_people.png",
   },
   {
     index: "02",
@@ -23,7 +22,7 @@ const whyChooseSteps = [
     description:
       "Instantly capture live conversations with your patient or dictate a summary of the interaction.",
     benefit: "Save hours of documentation time every day",
-    visual: "/assets/discover-2.webp",
+    image: "/assets/img_clinical_efficiency_people.png",
   },
   {
     index: "03",
@@ -32,7 +31,7 @@ const whyChooseSteps = [
     description:
       "AI-powered transcription ensures every detail is captured accurately, reducing errors and improving note quality.",
     benefit: "Clinically accurate notes, every time",
-    visual: "/assets/discover-3.webp",
+    image: "/assets/img_accurate_documentation_people.png",
   },
   {
     index: "04",
@@ -41,7 +40,34 @@ const whyChooseSteps = [
     description:
       "Customize templates and workflows to suit your specific practice, making documentation tailored and efficient.",
     benefit: "Fits your practice, not the other way around",
-    visual: "/assets/discover-1.webp",
+    image: "/assets/img_custom_workflows_people.png",
+  },
+  {
+    index: "05",
+    badge: "Privacy compliance",
+    title: "Privacy Compliance",
+    description:
+      "HIPAA, POPIA, PIPEDA, GDPR, SOC2 — We adhere to established healthcare privacy guidelines to ensure your data and your patients' information remain protected.",
+    benefit: "Your data is safe, always",
+    image: "/assets/layer_1.png",
+  },
+  {
+    index: "06",
+    badge: "Ambient AI",
+    title: "Smart Ambient AI Medical Tool",
+    description:
+      "This is more than just a scribe — easy EMR integration, experience clinical freedom.",
+    benefit: "AI that works with you, not against you",
+    image: "/assets/img_ambient_ai_people.png",
+  },
+  {
+    index: "07",
+    badge: "Cross-platform",
+    title: "Work Across All Devices",
+    description:
+      "Access Dorascribe anytime, anywhere, on desktop, tablet, or mobile. Available on the App Store and Google Play.",
+    benefit: "Seamless experience on every device",
+    image: "/assets/img_cross_platform_people.png",
   },
 ]
 
@@ -62,70 +88,6 @@ function CheckIcon() {
       <circle cx="12" cy="12" r="10" />
       <path d="M9 12l2 2 4-4" />
     </svg>
-  )
-}
-
-/* ── iPhone Mockup ── */
-function IPhoneMockup({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{
-      position: "relative",
-      margin: "0 auto",
-      width: "260px",
-      height: "540px",
-      background: "#1a1a1a",
-      borderRadius: "3rem",
-      padding: "12px",
-      boxShadow: "0 25px 60px rgba(0,0,0,0.15)",
-      border: "1px solid rgba(224,224,224,0.2)",
-      overflow: "visible"
-    }}>
-      <div style={{ position: "absolute", inset: 0, borderRadius: "3rem", border: "4px solid #2a2a2a", zIndex: 40, pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "112px", height: "28px", background: "#1a1a1a", borderRadius: "0 0 16px 16px", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: "40px", height: "6px", background: "#2a2a2a", borderRadius: "999px", marginRight: "12px" }} />
-        <div style={{ width: "8px", height: "8px", borderRadius: "999px", background: "#2a2a2a" }} />
-      </div>
-      <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "2.2rem", overflow: "hidden", background: "#000", zIndex: 30 }}>
-        {children}
-      </div>
-      <div style={{ position: "absolute", left: "-2px", top: "96px", width: "3px", height: "32px", background: "#2a2a2a", borderRadius: "0 4px 4px 0", zIndex: 20 }} />
-      <div style={{ position: "absolute", left: "-2px", top: "144px", width: "3px", height: "56px", background: "#2a2a2a", borderRadius: "0 4px 4px 0", zIndex: 20 }} />
-      <div style={{ position: "absolute", left: "-2px", top: "224px", width: "3px", height: "56px", background: "#2a2a2a", borderRadius: "0 4px 4px 0", zIndex: 20 }} />
-      <div style={{ position: "absolute", right: "-2px", top: "176px", width: "3px", height: "80px", background: "#2a2a2a", borderRadius: "4px 0 0 4px", zIndex: 20 }} />
-      <div style={{ position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)", width: "112px", height: "6px", background: "rgba(255,255,255,0.2)", borderRadius: "999px", zIndex: 50, pointerEvents: "none" }} />
-    </div>
-  )
-}
-
-/* ── Tablet Mockup ── */
-function TabletMockup({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{
-      width: "100%",
-      maxWidth: "700px",
-      margin: "0 auto",
-      background: "#e4e4e6",
-      padding: "10px",
-      borderRadius: "28px",
-      border: "1px solid rgba(0,0,0,0.05)",
-      boxShadow: "0 20px 50px rgba(0,0,0,0.08)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-      <div style={{
-        width: "100%",
-        background: "#f4f5f7",
-        borderRadius: "22px",
-        overflow: "hidden",
-        display: "flex",
-        boxShadow: "inset 0 1px 4px rgba(0,0,0,0.1)",
-        aspectRatio: "16 / 10",
-        position: "relative"
-      }}>
-        {children}
-      </div>
-    </div>
   )
 }
 
@@ -275,11 +237,11 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
           )}
         </div>
 
-        {/* ── Right: Visual ── */}
+        {/* ── Right: Visual Panel ── */}
         <div
           style={{
             width: isMobile ? "100%" : "52%",
-            background: "#F9F4F1",
+            background: "#C7C3C1",
             minHeight: isMobile ? "400px" : "auto",
             position: "relative",
             display: "flex",
@@ -290,42 +252,55 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
             marginTop: isMobile ? "10px" : "0",
             marginLeft: isMobile ? "0" : "10px",
             zIndex: 0,
-            boxShadow: "0 20px 50px rgba(0,0,0,0.2)",
-            border: "1px solid rgba(255,255,255,0.05)",
+            padding: 0,
           }}
         >
-          <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "32px" : "56px" }}>
-            {step.index === "01" || step.index === "02" ? (
-              <IPhoneMockup>
-                <Image
-                  src={step.visual}
-                  alt={step.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  loading="lazy"
-                />
-              </IPhoneMockup>
-            ) : step.index === "03" ? (
-              <TabletMockup>
-                <Image
-                  src={step.visual}
-                  alt={step.title}
-                  fill
-                  style={{ objectFit: "contain" }}
-                  loading="lazy"
-                />
-              </TabletMockup>
-            ) : (
+          {step.badge === "Privacy compliance" ? (
+            <div style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: "640px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: isMobile ? "24px" : "32px",
+            }}>
               <Image
-                src={step.visual}
+                src={step.image}
                 alt={step.title}
-                width={600}
-                height={600}
-                style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.3))" }}
-                loading="lazy"
+                width={1000}
+                height={800}
+                style={{
+                  width: "70%",
+                  maxWidth: "450px",
+                  height: "auto",
+                  objectFit: "contain",
+                  filter: "brightness(0)",
+                }}
+                priority
               />
-            )}
-          </div>
+            </div>
+          ) : (
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Image
+                src={step.image}
+                alt={step.title}
+                fill
+                style={{
+                  objectFit: "cover",
+                }}
+                priority
+              />
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -368,27 +343,7 @@ export default function WhyChoose() {
             margin: "0 auto 112px",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{
-              background: "#ED2224",
-              padding: "8px 24px",
-              borderRadius: "999px",
-              fontSize: "14px",
-              fontWeight: 500,
-              color: "#ffffff",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              width: "fit-content",
-              fontFamily: "'Inter', sans-serif",
-            }}
-          >
-            Why Dorascribe
-          </motion.div>
+
           <motion.div
             role="heading"
             aria-level={2}
