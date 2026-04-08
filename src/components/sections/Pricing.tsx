@@ -65,11 +65,6 @@ export default function Pricing() {
     <section id="pricing" className="pricing-clone">
       <div className="pricing-wrap">
         <div className="pricing-top">
-          <span className="section-chip">
-            <span className="chip-dot" />
-            Pricing
-          </span>
-
           <p className="pricing-title">
             Find the right package
           </p>
@@ -144,27 +139,6 @@ export default function Pricing() {
         .pricing-top {
           text-align: center;
           margin-bottom: 18px;
-        }
-
-        .section-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 12px;
-          border-radius: 999px;
-          background: #f6f8fc;
-          border: 1px solid rgba(140, 149, 170, 0.28);
-          font-family: "Inter", sans-serif;
-          font-size: 0.76rem;
-          color: #656c80;
-          line-height: 1;
-        }
-
-        .chip-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 999px;
-          background: #98a2b3;
         }
 
         .pricing-title {

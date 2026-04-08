@@ -1,179 +1,203 @@
-"use client";
+"use client"
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react"
+import { useIsMobile } from "@/lib/hooks"
+import MakroButton from "@/components/ui/MakroButton"
 
 const steps = [
   {
-    number: "01",
-    title: "Record",
-    description:
-      "Instantly capture live conversations with your patient or dictate a summary of the interaction.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-        <line x1="12" y1="19" x2="12" y2="23"/>
-        <line x1="8" y1="23" x2="16" y2="23"/>
-      </svg>
-    ),
+    title: "Record Your Patient Encounter",
+    desc: "Simply start a recording during your patient visit. Dorascribe captures the conversation naturally, so you can focus entirely on your patient — no typing, no distractions.",
   },
   {
-    number: "02",
-    title: "Document",
-    description:
-      "Get a detailed summary of the encounter as a SOAP note to copy/paste into patient\u2019s EMR.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
-        <polyline points="10 9 9 9 8 9"/>
-      </svg>
-    ),
+    title: "AI Generates Clinical Notes",
+    desc: "Dorascribe's advanced AI instantly transcribes the encounter and produces structured, accurate clinical notes in your preferred format — SOAP, DAP, or custom templates.",
   },
   {
-    number: "03",
-    title: "Save Time",
-    description:
-      "Easily generate new patient records, allowing you to efficiently move on to your next patient without delay.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <polyline points="12 6 12 12 16 14"/>
-      </svg>
-    ),
+    title: "Review, Edit & Export",
+    desc: "Review the generated notes, make any adjustments, and export directly into your EMR. Your documentation is complete in seconds, not hours.",
   },
-];
+]
 
-export default function HowItWorks() {
+/* ── Dashboard GIF ── */
+function DashboardGif() {
   return (
-    <section id="how-it-works" style={{ padding: "100px 24px", background: "#FDFCFA" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8rem",
-              fontWeight: 400,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--primary)",
-              marginBottom: "12px",
-            }}
-          >
-            How it works
-          </p>
-          <h2
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2rem, 5vw, 48px)",
-              fontWeight: 400,
-              letterSpacing: "-0.02em",
-              color: "var(--text-main)",
-              marginBottom: "12px",
-            }}
-          >
-            Optimize Your Medical Documentation
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "1rem",
-              color: "var(--text-muted)",
-              maxWidth: "520px",
-              margin: "0 auto",
-              lineHeight: 1.6,
-            }}
-          >
-            Simple-to-use medical transcription app that converts medical
-            consultations into patient notes
-          </p>
-        </div>
-
-        {/* Steps */}
-        <div
-          className="howitworks-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "32px",
-            position: "relative",
-          }}
-        >
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              style={{
-                position: "relative",
-                background: "#f8faf8",
-                borderRadius: "24px",
-                padding: "36px 28px",
-                border: "1px solid rgba(0,0,0,0.04)",
-              }}
-              className="howitworks-card"
-            >
-              <div
-                style={{
-                  width: "56px",
-                  height: "56px",
-                  borderRadius: "16px",
-                  background: i === 1 ? "var(--primary)" : "var(--primary-dark)",
-                  color: "#ffffff",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "24px",
-                }}
-              >
-                {step.icon}
-              </div>
-              <span
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.75rem",
-                  fontWeight: 400,
-                  color: "var(--primary)",
-                  marginBottom: "8px",
-                  display: "block",
-                }}
-              >
-                Step {step.number}
-              </span>
-              <h3
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "1.5rem",
-                  fontWeight: 400,
-                  color: "var(--text-main)",
-                  marginBottom: "10px",
-                }}
-              >
-                {step.title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.9rem",
-                  color: "var(--text-muted)",
-                  lineHeight: 1.7,
-                }}
-              >
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/New-UI-home-page-walkthrough.gif"
+      alt="Dorascribe dashboard walkthrough"
+      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+    />
+  )
 }
 
+export default function HowItWorks() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const isMobile = useIsMobile()
 
+  return (
+    <section
+      ref={sectionRef}
+      id="how-it-works"
+      style={{
+        width: "100%",
+        padding: isMobile ? "80px 0" : "120px 0",
+        background: "#0B1D33",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        fontFamily: "'Inter', sans-serif",
+      }}
+    >
+      {/* Header */}
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "0 24px",
+        width: "100%",
+        maxWidth: "900px",
+        marginBottom: isMobile ? "48px" : "80px",
+      }}>
+        <div style={{
+          background: "#ffffff",
+          padding: "8px 20px",
+          borderRadius: "12px",
+          fontSize: "14px",
+          fontWeight: 500,
+          color: "#1c1c1c",
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          marginBottom: "24px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+          border: "1px solid rgba(0,0,0,0.05)",
+        }}>
+          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#26A69A" }} />
+          How it works
+        </div>
 
+        <div
+          role="heading"
+          aria-level={2}
+          style={{
+            fontSize: isMobile ? "32px" : "56px",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
+            fontWeight: 500,
+            color: "#ffffff",
+            marginBottom: "24px",
+            fontFamily: "'Playfair Display', Georgia, serif",
+          }}
+        >
+          Dorascribe simplifies clinical documentation at the point of care.
+        </div>
+
+        <p style={{
+          fontSize: isMobile ? "16px" : "19px",
+          color: "#A1A1A5",
+          fontWeight: 400,
+          maxWidth: "600px",
+          lineHeight: 1.6,
+        }}>
+          All in seconds. Real time transcription. No interruptions.
+        </p>
+      </div>
+
+      {/* Giant Center Tablet (Intro Mockup) */}
+      <div style={{
+        width: "100%",
+        maxWidth: "1000px",
+        padding: isMobile ? "0 24px" : "0 48px",
+        marginBottom: isMobile ? "64px" : "120px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        <div style={{
+          width: "100%",
+          background: "#E5E5EA",
+          padding: isMobile ? "8px" : "14px",
+          borderRadius: isMobile ? "20px" : "40px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
+        }}>
+          <div style={{
+            width: "100%",
+            background: "#ffffff",
+            borderRadius: isMobile ? "14px" : "28px",
+            overflow: "hidden",
+            display: "flex",
+            boxShadow: "inset 0 2px 10px rgba(0,0,0,0.1)",
+            border: "1px solid rgba(0,0,0,0.05)",
+            aspectRatio: isMobile ? "4 / 3" : "16 / 10",
+            position: "relative",
+          }}>
+            <DashboardGif />
+          </div>
+        </div>
+      </div>
+
+      {/* Cards Layout for Steps */}
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: isMobile ? "0 24px" : "0 48px",
+      }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+          gap: isMobile ? "24px" : "32px",
+          width: "100%",
+          marginBottom: isMobile ? "48px" : "64px",
+        }}>
+          {steps.map((step, idx) => (
+            <div
+              key={idx}
+              style={{
+                background: "rgba(255, 255, 255, 0.03)",
+                border: "1px solid rgba(255, 255, 255, 0.06)",
+                borderRadius: "24px",
+                padding: "32px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+              }}
+            >
+              <div style={{ color: "#26A69A", fontWeight: 700, fontSize: "14px", letterSpacing: "0.1em" }}>
+                STEP 0{idx + 1}
+              </div>
+              <h3 style={{ fontSize: "24px", lineHeight: 1.2, fontWeight: 500, color: "#ffffff", letterSpacing: "-0.01em", margin: 0 }}>
+                {step.title}
+              </h3>
+              <p style={{ fontSize: "15px", color: "#A1A1A5", fontWeight: 400, lineHeight: 1.6, margin: 0 }}>
+                {step.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div style={{ width: isMobile ? "100%" : "auto", maxWidth: isMobile ? "300px" : "none" }}>
+          <MakroButton
+            href="https://app.dorascribe.ai/signUp"
+            text="Start a free trial"
+            className="how-it-works-cta"
+          />
+        </div>
+      </div>
+
+      <style jsx>{`
+        .how-it-works-cta {
+          width: 100%;
+          justify-content: center;
+        }
+      `}</style>
+    </section>
+  )
+}

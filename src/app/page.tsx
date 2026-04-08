@@ -5,10 +5,11 @@ import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import MockupSection from '@/components/sections/MockupSection';
 import FeatureCards from '@/components/sections/FeatureCards';
+import HowItWorks from '@/components/sections/HowItWorks';
 import WhyChoose from '@/components/sections/WhyChoose';
 import Pricing from '@/components/sections/Pricing';
 import Specialties from '@/components/sections/Specialties';
-import DutyOfCare from '@/components/sections/DutyOfCare';
+
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
 import CTASection from '@/components/sections/CTASection';
@@ -45,10 +46,11 @@ export default function Page() {
         <Hero />
         <FeatureCards />
         <MockupSection />
+        <HowItWorks />
         <WhyChoose />
         <Specialties />
         <Pricing />
-        <DutyOfCare />
+
         <Testimonials />
         <BottomCTA />
         <FAQ />

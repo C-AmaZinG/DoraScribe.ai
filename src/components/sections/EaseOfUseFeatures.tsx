@@ -96,7 +96,9 @@ export default function EaseOfUseFeatures() {
               </div>
             </div>
             <p className="ease-title">Accurate notes</p>
-            <p className="ease-desc">Supports multiple Languages.</p>
+            <p className="ease-desc">
+              Capture every clinical detail with clarity and precision.
+            </p>
           </motion.article>
 
           <motion.article

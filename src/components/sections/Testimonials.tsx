@@ -77,10 +77,6 @@ export default function Testimonials() {
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-shell">
         <div className="header-container">
-          <div className="badge">
-            <div className="badge-dot" />
-            Testimonials
-          </div>
           <h2 className="section-title">Don't just take our word for it.</h2>
           <p className="section-subtitle">
             See how DoraScribe is transforming practices across various specialties.
@@ -219,30 +215,6 @@ export default function Testimonials() {
           align-items: center;
           text-align: center;
           margin-bottom: 64px;
-        }
-
-        .badge {
-          background: #ffffff;
-          padding: 8px 16px;
-          border-radius: 10px;
-          font-size: 14px;
-          font-weight: 500;
-          color: #1c1c1c;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          width: fit-content;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-          border: 1px solid rgba(0, 0, 0, 0.05);
-          font-family: 'Inter', sans-serif;
-          margin-bottom: 24px;
-        }
-
-        .badge-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 999px;
-          background: #0B1D33;
         }
 
         .section-title {

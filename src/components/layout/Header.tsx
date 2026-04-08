@@ -11,7 +11,13 @@ const navLinks = [
   { name: "Why Dora", href: "#why-choose" },
   { name: "Pricing", href: "#pricing" },
   { name: "FAQ", href: "#faq" },
-  { name: "Blog", href: "/blog" },
+  {
+    name: "Resources",
+    children: [
+      { name: "Blog", href: "/blog" },
+      { name: "Tutorials", href: "/tutorials" },
+    ],
+  },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -78,7 +84,7 @@ export default function Header() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px",
+              gap: "32px",
               position: "absolute",
               left: "50%",
               transform: "translateX(-50%)",
@@ -86,28 +92,64 @@ export default function Header() {
             className="desktop-only"
           >
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onMouseEnter={() => setHoveredLink(link.name)}
-                onMouseLeave={() => setHoveredLink(null)}
-                style={{
-                  position: "relative",
-                  padding: "8px 16px",
-                  textDecoration: "none",
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.9rem",
-                  fontWeight: hoveredLink === link.name ? 500 : 400,
-                  color: hoveredLink === link.name ? "#2969B7" : "#000000",
-                  borderBottom:
-                    hoveredLink === link.name
-                      ? "2px solid #2969B7"
-                      : "2px solid transparent",
-                  transition: "color 0.2s ease, border-color 0.2s ease, font-weight 0.2s ease",
-                }}
-              >
-                {link.name}
-              </Link>
+              link.children ? (
+                <div
+                  key={link.name}
+                  className="nav-dropdown"
+                  onMouseEnter={() => setHoveredLink(link.name)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                >
+                  <button
+                    type="button"
+                    className="nav-link nav-button"
+                    style={{
+                      fontWeight: hoveredLink === link.name ? 500 : 400,
+                      color: hoveredLink === link.name ? "#2969B7" : "#000000",
+                      borderBottom:
+                        hoveredLink === link.name
+                          ? "2px solid #2969B7"
+                          : "2px solid transparent",
+                    }}
+                  >
+                    {link.name}
+                    <span
+                      className="nav-caret"
+                      style={{
+                        transform:
+                          hoveredLink === link.name ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                    >
+                      ▾
+                    </span>
+                  </button>
+
+                  <div className="dropdown-menu">
+                    {link.children.map((child) => (
+                      <Link key={child.name} href={child.href} className="dropdown-link">
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onMouseEnter={() => setHoveredLink(link.name)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                  className="nav-link"
+                  style={{
+                    fontWeight: hoveredLink === link.name ? 500 : 400,
+                    color: hoveredLink === link.name ? "#2969B7" : "#000000",
+                    borderBottom:
+                      hoveredLink === link.name
+                        ? "2px solid #2969B7"
+                        : "2px solid transparent",
+                  }}
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -116,14 +158,15 @@ export default function Header() {
               href="https://app.dorascribe.ai/login"
               style={{
                 textDecoration: "none",
+                display: "inline-block",
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "0.9rem",
                 fontWeight: 500,
                 color: "#2C1810",
                 padding: "8px 20px",
-                borderRadius: "999px",
+                borderRadius: "10px",
                 background: "#F0EBE4",
-                transition: "background 0.2s ease, color 0.2s ease",
+                transition: "background 0.2s ease, color 0.2s ease, transform 0.2s ease",
               }}
               className="desktop-only login-link"
             >
@@ -141,8 +184,104 @@ export default function Header() {
       </motion.nav>
 
       <style jsx>{`
+        .nav-link {
+          position: relative;
+          padding: 8px 16px;
+          text-decoration: none;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          border-radius: 999px;
+          transition: color 0.2s ease, border-color 0.2s ease, font-weight 0.2s ease;
+        }
+
+        .nav-button {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .nav-link:hover {
+          background: rgba(41, 105, 183, 0.08);
+        }
+
+        .nav-dropdown:hover .nav-button {
+          background: rgba(41, 105, 183, 0.08);
+        }
+
+        .nav-dropdown {
+          position: relative;
+        }
+
+        .nav-caret {
+          font-size: 0.72rem;
+          transition: transform 0.2s ease;
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 50%;
+          transform: translateX(-50%);
+          min-width: 160px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding: 10px;
+          background: rgba(255, 255, 255, 0.98);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 16px;
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        .dropdown-menu::before {
+          content: "";
+          position: absolute;
+          top: -20px;
+          left: 0;
+          right: 0;
+          height: 20px;
+        }
+
+        .dropdown-menu::before {
+          content: "";
+          position: absolute;
+          top: -20px;
+          left: 0;
+          right: 0;
+          height: 20px;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-link {
+          text-decoration: none;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.88rem;
+          font-weight: 500;
+          color: #2C1810;
+          padding: 10px 12px;
+          border-radius: 10px;
+          transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-link:hover {
+          background: #F6F1EA;
+          color: #2969B7;
+        }
+
         .login-link:hover {
           background: #E6DFD6 !important;
+          transform: scale(0.98);
         }
 
         @media (max-width: 900px) {

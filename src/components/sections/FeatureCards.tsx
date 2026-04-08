@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { FileText, PlusCircle, ClipboardList, Mic, ChevronRight, Sparkles, Monitor, CheckCircle, ClipboardSignature, PenTool, Send, Pill, FileEdit, Library, FileCheck2 } from "lucide-react";
+import { Sparkles, Monitor, CheckCircle, ClipboardSignature, PenTool, Send, Pill, FileEdit, Library, FileCheck2, Languages, ChevronRight } from "lucide-react";
 
 const features = [
   {
@@ -21,9 +21,16 @@ const features = [
   },
   {
     title: "Accurate notes",
-    description: "Supports multiple Languages",
+    description: "Capture every clinical detail with clarity and precision",
     icon: <CheckCircle size={16} color="white" />,
     iconBg: "#6E5B87", // Soft purple
+    type: "text"
+  },
+  {
+    title: "Supports Multiple Languages",
+    description: "Transcribe patient conversations across multiple languages with confidence.",
+    icon: <Languages size={16} color="white" />,
+    iconBg: "#2F6F8F", // Deep blue
     type: "text"
   },
   {
@@ -106,7 +113,7 @@ export default function FeatureCards() {
 
       <style jsx>{`
         .feature-cards-section {
-          padding: 20px 24px 80px;
+          padding: 100px 24px 80px;
           background-color: #FFFFFF;
           position: relative;
         }
