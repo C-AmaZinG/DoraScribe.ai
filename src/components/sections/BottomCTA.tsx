@@ -106,7 +106,7 @@ export default function BottomCTA() {
               }}
             >
               <MakroButton text="Start Free Trial" href="https://dorascribe.ai/book-demo/" />
-              <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" variant="outline" />
+              <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" tone="accent" />
             </motion.div>
           </div>
         </div>

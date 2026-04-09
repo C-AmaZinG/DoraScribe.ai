@@ -249,16 +249,11 @@ export default function BlogSection() {
                         overflow: 'hidden'
                       }} dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
 
-                      <div style={{
-                        marginTop: 'auto',
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        color: '#000000',
-                        whiteSpace: 'nowrap',
-                      }}>
-
-                        Read article {"->"}
+                      <div className="story-cta">
+                        Read article
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
                       </div>
                     </div>
                   </Link>
@@ -299,14 +294,45 @@ export default function BlogSection() {
         div::-webkit-scrollbar {
           display: none;
         }
+        .blog-card {
+          height: 100%;
+          transition: border-color 0.3s ease;
+        }
         .blog-card:hover {
-          border-color: #FF6F00 !important;
+          border-color: rgba(41, 105, 183, 0.3) !important;
         }
         .blog-card:hover img {
           transform: scale(1.05);
         }
-        .blog-card {
-          height: 100%;
+        .story-cta {
+          margin-top: auto;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: #000000;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          position: relative;
+          width: fit-content;
+          transition: color 0.3s ease;
+          padding-top: 12px;
+        }
+        .story-cta::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #2969b7;
+          transition: width 0.3s ease;
+        }
+        .blog-card:hover .story-cta {
+          color: #2969b7;
+        }
+        .blog-card:hover .story-cta::after {
+          width: 100%;
         }
         .blog-item {
           flex: 0 0 calc((100% - 40px) / 3);

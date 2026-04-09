@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Logo from '@/components/ui/Logo';
 import MakroButton from '@/components/ui/MakroButton';
 
@@ -53,7 +54,7 @@ export default function Footer() {
               }}>Advance your clinical workflow with Dorascribe.</p>
             </div>
             
-            <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" />
+            <MakroButton text="Start a free trial" href="https://app.dorascribe.ai/signUp" />
           </div>
 
           <div style={{ 
@@ -68,6 +69,26 @@ export default function Footer() {
                 Designed and developed by clinical professionals.<br />
                 <a href="mailto:help@dorascribe.com" style={{ color: '#000000', textDecoration: 'none', fontWeight: 600 }}>help@dorascribe.com</a>
               </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                <a href="https://apps.apple.com/" aria-label="Download on the App Store" style={{ display: 'inline-flex' }}>
+                  <Image
+                    src="/assets/app-store.svg"
+                    alt="Download on the App Store"
+                    width={145}
+                    height={44}
+                    style={{ width: 'auto', height: '44px' }}
+                  />
+                </a>
+                <a href="https://play.google.com/store" aria-label="Get it on Google Play" style={{ display: 'inline-flex' }}>
+                  <Image
+                    src="/assets/google-play.svg"
+                    alt="Get it on Google Play"
+                    width={145}
+                    height={44}
+                    style={{ width: 'auto', height: '44px' }}
+                  />
+                </a>
+              </div>
             </div>
 
             {[

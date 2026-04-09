@@ -7,11 +7,11 @@ import MakroButton from "@/components/ui/MakroButton"
 const steps = [
   {
     title: "Record Your Patient Encounter",
-    desc: "Simply start a recording during your patient visit. Dorascribe captures the conversation naturally, so you can focus entirely on your patient — no typing, no distractions.",
+    desc: "Simply start a recording during your patient visit. Dorascribe captures the conversation naturally, so you can focus entirely on your patient with no typing and no distractions.",
   },
   {
     title: "AI Generates Clinical Notes",
-    desc: "Dorascribe's advanced AI instantly transcribes the encounter and produces structured, accurate clinical notes in your preferred format — SOAP, DAP, or custom templates.",
+    desc: "Dorascribe's advanced AI instantly transcribes the encounter and produces structured, accurate clinical notes in your preferred format, including SOAP, DAP, or custom templates.",
   },
   {
     title: "Review, Edit & Export",
@@ -201,3 +201,4 @@ export default function HowItWorks() {
     </section>
   )
 }
+

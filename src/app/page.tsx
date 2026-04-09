@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
-import MockupSection from '@/components/sections/MockupSection';
+
 import FeatureCards from '@/components/sections/FeatureCards';
 import HowItWorks from '@/components/sections/HowItWorks';
 import WhyChoose from '@/components/sections/WhyChoose';
@@ -12,8 +12,6 @@ import Specialties from '@/components/sections/Specialties';
 
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
-import CTASection from '@/components/sections/CTASection';
-import BottomCTA from '@/components/sections/BottomCTA';
 import Footer from '@/components/layout/Footer';
 
 export default function Page() {
@@ -45,14 +43,12 @@ export default function Page() {
       <main>
         <Hero />
         <FeatureCards />
-        <MockupSection />
         <HowItWorks />
         <WhyChoose />
         <Specialties />
         <Pricing />
 
         <Testimonials />
-        <BottomCTA />
         <FAQ />
       </main>
       <Footer />

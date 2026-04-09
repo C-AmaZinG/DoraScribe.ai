@@ -30,7 +30,7 @@ const faqContent: Record<Category, FAQItem[]> = {
     },
     {
       q: "How much time will Dorascribe save me?",
-      a: "The time saved will vary based on your individual workflow and the complexity of your medical cases. However, initial users have reported reducing their charting time by up to 60–70%. On average, users can expect to save 2–3 hours daily.",
+      a: "The time saved will vary based on your individual workflow and the complexity of your medical cases. However, initial users have reported reducing their charting time by up to 60 to 70%. On average, users can expect to save 2 to 3 hours daily.",
     },
     {
       q: "What specialties is Dorascribe designed for?",
@@ -241,7 +241,7 @@ export default function FAQ() {
         .faq-title mark {
           display: inline-block;
           margin-left: 2px;
-          background: #FBF582;
+          background: #EBF8F8;
           color: #000000;
           border-radius: 14px;
           padding: 0 16px 5px;
@@ -432,6 +432,8 @@ export default function FAQ() {
 
         .faq-contact-copy {
           padding: 36px 0;
+          display: flex;
+          flex-direction: column;
         }
 
         .faq-contact-chip {
@@ -461,6 +463,7 @@ export default function FAQ() {
 
         .faq-contact-text {
           margin-top: 10px;
+          margin-bottom: 44px;
           max-width: 640px;
           font-family: "Inter", sans-serif;
           font-size: 0.92rem;
@@ -469,7 +472,8 @@ export default function FAQ() {
         }
 
         .faq-contact-default-btn {
-          margin-top: 36px;
+          margin-top: 0;
+          align-self: flex-start;
         }
 
         @media (max-width: 1020px) {
@@ -538,4 +542,5 @@ export default function FAQ() {
     </section>
   );
 }
+
 

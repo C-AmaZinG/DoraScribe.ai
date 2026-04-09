@@ -7,16 +7,12 @@ import { useParams } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import type { WPPost } from "@/lib/wordpress";
-import { getFeaturedImage, getCategories, fetchPostBySlug, fetchPosts } from "@/lib/wordpress";
+import { getFeaturedImage, fetchPostBySlug, fetchPosts } from "@/lib/wordpress";
 
 // Lucide icons replacements 
 import { Mail, Link as LinkIcon, Check, MoreHorizontal, MoreVertical, Sparkles, List } from "lucide-react";
 
 // ── Helpers ──────────────────────────────────────────────────
-function getCategory(post: WPPost) {
-  return getCategories(post)[0]?.name ?? null;
-}
-
 function ReadingTime({ content }: { content: string }) {
   const text = content.replace(/<[^>]+>/g, "");
   const words = text.trim().split(/\s+/).length;
@@ -411,54 +407,206 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
   if (posts.length === 0) return null;
 
   return (
-    <section className="pt-14 pb-8">
-      <h2
-        className="text-[28px] sm:text-[32px] font-bold text-[#1a1a1a] tracking-[-0.02em] mb-8"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        Related Articles
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {posts.map((post) => {
-          const img = getFeaturedImage(post) || undefined;
-          const d = new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-          const cat = getCategory(post);
-          const words = post.content.rendered.replace(/<[^>]+>/g, "").trim().split(/\s+/).length;
-          const mins = Math.max(1, Math.round(words / 230));
-          return (
-            <Link key={post.id} href={`/blog/${post.slug}`} className="group block h-full">
-              <div className="rounded-[12px] overflow-hidden border border-[#e2e0dc] bg-white flex flex-col h-full transition-all duration-300 hover:shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
-                <div className="h-[180px] overflow-hidden bg-[#f0efeb]">
-                  <img src={img} alt={stripHtml(post.title.rendered)} className="w-full h-full object-cover" loading="lazy" decoding="async" />
-                </div>
-                <div className="p-5 flex flex-col flex-1">
-                  <div className="flex items-center justify-between mb-3">
-                    {cat ? (
-                      <span className="text-[11px] font-semibold text-[#FB1A0E] bg-[#FB1A0E]/[0.07] px-2.5 py-1 rounded-md">{cat}</span>
-                    ) : <span />}
-                    <time className="text-[12px] text-[#999] font-medium">{d}</time>
+    <>
+      <section className="pt-14 pb-8">
+        <h2
+          className="text-[28px] sm:text-[32px] font-bold text-[#1a1a1a] tracking-[-0.02em] mb-8"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          Related Articles
+        </h2>
+        <section className="stories-grid">
+          {posts.map((post, index) => {
+            const img = getFeaturedImage(post) || undefined;
+            const minutes = Math.max(
+              1,
+              Math.round(post.content.rendered.replace(/<[^>]+>/g, "").trim().split(/\s+/).length / 230)
+            );
+            return (
+              <motion.article
+                key={post.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.42, delay: (index % 3) * 0.05 }}
+                className="grid-story"
+              >
+                <Link href={`/blog/${post.slug}`} className="grid-link">
+                  <div className="grid-image-wrap">
+                    <img
+                      src={img}
+                      alt={stripHtml(post.title.rendered)}
+                      className="grid-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                  <h3
-                    className="text-[16px] font-bold text-[#1a1a1a] leading-[1.35] mb-2 line-clamp-2"
-                    dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                  />
-                  <div
-                    className="text-[#888] text-[13px] leading-[1.6] line-clamp-3 mb-3"
-                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                  />
-                  <div className="text-[12px] text-[#aaa] font-medium mt-auto">{mins} min read</div>
-                  <div className="flex items-center justify-end mt-4 pt-3 border-t border-[#f0efeb]">
-                    <div className="w-8 h-8 rounded-full border border-[#e8e5e0] flex items-center justify-center text-[#ccc] group-hover:border-[#FB1A0E] group-hover:text-[#FB1A0E] transition-all duration-300">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+
+                  <div className="grid-copy">
+                    <div className="grid-meta">
+                      <time>
+                        {new Date(post.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </time>
+                    </div>
+
+                    <h3
+                      className="grid-title"
+                      dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                    />
+                    <p className="grid-excerpt">{stripHtml(post.excerpt.rendered)}</p>
+
+                    <div className="grid-footer">
+                      <span>{minutes} min read</span>
+                      <span className="story-cta">
+                        Read article
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </section>
+                </Link>
+              </motion.article>
+            );
+          })}
+        </section>
+      </section>
+
+      <style jsx>{`
+        .stories-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+        }
+        .grid-story {
+          border-radius: 18px;
+          overflow: hidden;
+          border: 1px solid #e5e1d9;
+          background: #ffffff;
+          box-shadow: 0 6px 24px rgba(15, 23, 42, 0.05);
+          transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+        .grid-story:hover {
+          transform: translateY(-3px);
+          border-color: rgba(41, 105, 183, 0.24);
+          box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+        }
+        .grid-link {
+          color: inherit;
+          text-decoration: none;
+        }
+        .grid-image-wrap {
+          height: 210px;
+          overflow: hidden;
+          background: #eff3f8;
+        }
+        .grid-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.45s ease;
+        }
+        .grid-story:hover .grid-image {
+          transform: scale(1.04);
+        }
+        .grid-copy {
+          display: flex;
+          flex-direction: column;
+          min-height: 250px;
+          height: 250px;
+          padding: 20px;
+        }
+        .grid-meta {
+          display: flex;
+          justify-content: flex-start;
+          font-family: "Inter", sans-serif;
+          font-size: 0.8rem;
+          color: #9ca3af;
+        }
+        .grid-title {
+          margin-top: 14px;
+          font-family: "Inter", sans-serif;
+          font-size: 1.04rem;
+          font-weight: 700;
+          line-height: 1.4;
+          color: #171717;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .grid-excerpt {
+          margin-top: 10px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.9rem;
+          line-height: 1.7;
+          color: #6b7280;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .grid-footer {
+          margin-top: auto;
+          padding-top: 16px;
+          border-top: 1px solid #f0ece6;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.8rem;
+          color: #9ca3af;
+        }
+        .grid-footer > span:first-child {
+          white-space: nowrap;
+          line-height: 1;
+        }
+        .story-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          line-height: 1;
+          white-space: nowrap;
+          flex-shrink: 0;
+          color: #171717;
+          font-family: "Inter", sans-serif;
+          font-size: 0.85rem;
+          font-weight: 700;
+          transition: color 0.3s ease;
+        }
+        .story-cta svg {
+          width: 32px;
+          height: 32px;
+          padding: 8px;
+          border-radius: 999px;
+          border: 1px solid #ece8e1;
+          color: #b8bcc4;
+          transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .grid-story:hover .story-cta {
+          color: #2969b7;
+        }
+        .grid-story:hover .story-cta svg {
+          color: #2969b7;
+          border-color: #2969b7;
+        }
+        @media (max-width: 1040px) {
+          .stories-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        @media (max-width: 760px) {
+          .stories-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+    </>
   );
 }
 
@@ -517,8 +665,6 @@ export default function BlogPostPage() {
   const date = new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   const isoDate = new Date(post.date).toISOString();
   const title = post.title.rendered.replace(/<[^>]+>/g, "");
-  const category = getCategory(post);
-
   return (
     <div className="min-h-screen bg-[#FAFAF8] flex flex-col font-sans">
       <Header />

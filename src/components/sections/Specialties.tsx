@@ -324,6 +324,16 @@ export default function Specialties() {
           .specialty-scroll-shell {
             height: 420px;
           }
+
+          .specialty-pill {
+            justify-content: center;
+            text-align: center;
+            padding: 16px 18px;
+          }
+
+          .specialty-pill__label {
+            padding-right: 0;
+          }
         }
 
         @media (max-width: 700px) {
