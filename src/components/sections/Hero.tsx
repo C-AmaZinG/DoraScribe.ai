@@ -251,15 +251,15 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #000000;
-          background: #FBF582;
-          border: 1px solid #FBF582;
+          color: #ffffff;
+          background: #00AAAA;
+          border: 1px solid #00AAAA;
           box-shadow: none;
           transition: background-color 0.2s ease;
         }
 
         .hero-main-cta:hover {
-          background: #EBE570;
+          background: #008888;
         }
 
         .hero-secondary-cta {
@@ -273,14 +273,14 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #2C1810;
-          background: #F0EBE4;
-          border: 1px solid transparent;
+          color: #000000;
+          background: #EBF8F8;
+          border: 1px solid #EBF8F8;
           box-shadow: none;
-          transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+          transition: background-color 0.2s ease, transform 0.2s ease;
         }
         .hero-secondary-cta:hover {
-          background: #E6DFD6;
+          background: #d8f2f2;
           transform: scale(0.98);
         }
 

@@ -4,539 +4,505 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
-type SubmitStatus = "idle" | "sending" | "sent";
-
-const serviceOptions = [
-  "Website design",
-  "UX design",
-  "User research",
-  "Content creation",
-  "Strategy & consulting",
-  "Other",
-];
-
-function InfoIcon({ type }: { type: "chat" | "pin" | "phone" }) {
-  if (type === "chat") {
-    return (
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      </svg>
-    );
-  }
-
-  if (type === "pin") {
-    return (
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10z" />
-        <circle cx="12" cy="11" r="2" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.84.56 2.8.69A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function SocialIcon({ label }: { label: string }) {
-  return (
-    <span className="social-icon" aria-label={label} title={label}>
-      {label}
-    </span>
-  );
-}
+type SubmitStatus = "idle" | "sending" | "sent" | "error";
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<SubmitStatus>("idle");
-  const [selectedServices, setSelectedServices] = useState<string[]>(["Website design", "UX design"]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    project: "",
+    message: "",
+    newsletter: false,
   });
+  const [status, setStatus] = useState<SubmitStatus>("idle");
 
-  const toggleService = (service: string) => {
-    setSelectedServices((prev) =>
-      prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]
-    );
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const target = e.target;
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
+      setFormData((prev) => ({ ...prev, [target.name]: target.checked }));
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [target.name]: target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    setStatus("sent");
-    setFormData({ name: "", email: "", project: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subscribe: formData.newsletter,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setStatus("sent");
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+        newsletter: false,
+      });
+
+      window.setTimeout(() => setStatus("idle"), 4000);
+    } catch (error) {
+      console.error("Contact submission error:", error);
+      setStatus("error");
+      window.setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
-    <div className="app-container">
+    <div className="contact-page">
       <Header />
 
       <main className="contact-main">
         <section className="contact-section">
-          <motion.div
-            className="contact-shell"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-          >
-            <aside className="contact-left">
-              <div>
-                <div className="brand-row">
-                  <span className="brand-mark" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </span>
-                  <p>Untitled UI</p>
-                </div>
+          <div className="contact-shell">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="contact-kicker-wrap"
+            >
+              <div className="contact-kicker">
+                <span className="contact-kicker-dot" />
+                Contact Us
+              </div>
+            </motion.div>
 
-                <div className="info-list">
-                  <div className="info-item">
-                    <span className="info-item-icon"><InfoIcon type="chat" /></span>
-                    <div>
-                      <p className="info-title">Chat to us</p>
-                      <p className="info-copy">Our friendly team is here to help.</p>
-                      <a href="mailto:hi@untitledui.com" className="info-link">hi@untitledui.com</a>
-                    </div>
-                  </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="contact-card"
+            >
+              <div className="contact-visual-panel">
+                <AnimatedBackground
+                  orbColors={[
+                    "rgba(251, 26, 14, 0.32)",
+                    "rgba(255, 255, 255, 0.08)",
+                    "rgba(41, 105, 183, 0.16)",
+                    "rgba(251, 26, 14, 0.14)",
+                  ]}
+                />
+                <div className="contact-visual-overlay" />
 
-                  <div className="info-item">
-                    <span className="info-item-icon"><InfoIcon type="pin" /></span>
-                    <div>
-                      <p className="info-title">Visit us</p>
-                      <p className="info-copy">Come say hello at our office HQ.</p>
-                      <p className="info-link">100 Smith Street</p>
-                      <p className="info-link">Collingwood VIC 3066 AU</p>
-                    </div>
-                  </div>
-
-                  <div className="info-item">
-                    <span className="info-item-icon"><InfoIcon type="phone" /></span>
-                    <div>
-                      <p className="info-title">Call us</p>
-                      <p className="info-copy">Mon-Fri from 8am to 5pm.</p>
-                      <a href="tel:+15550000000" className="info-link">+1 (555) 000-0000</a>
-                    </div>
+                <div className="contact-visual-content">
+                  <div>
+                    <p className="contact-panel-label">DoraScribe</p>
+                    <h1 className="contact-title">
+                      Tell us how we can help your team move faster.
+                    </h1>
+                    <p className="contact-subtitle">
+                      Whether you are exploring DoraScribe for a clinic, a growing
+                      practice, or a large organization, we are here to help you find
+                      the right next step.
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="social-row" aria-label="Social links">
-                <SocialIcon label="f" />
-                <SocialIcon label="t" />
-                <SocialIcon label="in" />
-                <SocialIcon label="yt" />
-                <SocialIcon label="dr" />
-              </div>
-            </aside>
-
-            <section className="contact-right">
-              {status === "sent" ? (
-                <div className="sent-state">
-                  <p className="form-title">Message sent.</p>
-                  <p className="form-subtitle">Thanks for reaching out. We will contact you shortly.</p>
-                  <button type="button" className="submit-btn" onClick={() => setStatus("idle")}>Send another message</button>
+              <div className="contact-form-panel">
+                <div className="contact-form-intro">
+                  <p className="contact-form-kicker">Start the conversation</p>
+                  <h2>Contact the DoraScribe team</h2>
+                  <p>
+                    Send us a message and we will get back to you as soon as we can.
+                  </p>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <h1 className="form-title">Got ideas? We've got the skills. Let's team up.</h1>
-                  <p className="form-subtitle">Tell us more about yourself and what you've got in mind.</p>
 
-                  <div className="field-wrap">
-                    <label htmlFor="name">Your name</label>
-                    <input
-                      id="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                      required
-                    />
+                <form onSubmit={handleSubmit} className="contact-form">
+                  <div className="contact-field-grid">
+                    <label className="contact-field">
+                      <span>Name</span>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Your full name"
+                        required
+                      />
+                    </label>
+
+                    <label className="contact-field">
+                      <span>Email</span>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="you@company.com"
+                        required
+                      />
+                    </label>
                   </div>
 
-                  <div className="field-wrap">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-                      placeholder="you@company.com"
-                      required
-                    />
-                  </div>
-
-                  <div className="field-wrap">
-                    <label htmlFor="project">Project details</label>
+                  <label className="contact-field">
+                    <span>Message</span>
                     <textarea
-                      id="project"
-                      rows={2}
-                      value={formData.project}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, project: e.target.value }))}
-                      placeholder="Tell us a little about the project..."
+                      name="message"
+                      rows={7}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us about your team, your workflow, or what you want to achieve with DoraScribe."
                       required
                     />
-                  </div>
+                  </label>
 
-                  <div className="checks-wrap">
-                    <p className="checks-title">How can we help?</p>
-                    <div className="checks-grid">
-                      {serviceOptions.map((option) => {
-                        const checked = selectedServices.includes(option);
-                        return (
-                          <label key={option} className="check-item">
-                            <input
-                              type="checkbox"
-                              checked={checked}
-                              onChange={() => toggleService(option)}
-                            />
-                            <span>{option}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
+                  <label className="contact-checkbox">
+                    <input
+                      type="checkbox"
+                      name="newsletter"
+                      checked={formData.newsletter}
+                      onChange={handleChange}
+                    />
+                    <span>
+                      Keep me updated with DoraScribe product news, tutorials, and
+                      helpful workflow tips.
+                    </span>
+                  </label>
 
-                  <button type="submit" className="submit-btn" disabled={status === "sending"}>
-                    {status === "sending" ? "Sending..." : "Let's get started!"}
+                  <button
+                    type="submit"
+                    className="contact-submit"
+                    disabled={status === "sending"}
+                  >
+                    {status === "sending" ? "Sending..." : "Send message"}
                   </button>
+
+                  {status === "sent" && (
+                    <p className="contact-status success">
+                      Your message has been sent. We will be in touch shortly.
+                    </p>
+                  )}
+
+                  {status === "error" && (
+                    <p className="contact-status error">
+                      Something went wrong. Please try again in a moment.
+                    </p>
+                  )}
                 </form>
-              )}
-            </section>
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </section>
       </main>
 
       <Footer />
 
       <style jsx>{`
-        .contact-main {
+        .contact-page {
           min-height: 100vh;
-          padding-top: 118px;
-          background: #ebeff5;
+          background: #f7f7f5;
+        }
+
+        .contact-main {
+          padding-top: 112px;
+          background:
+            radial-gradient(circle at top left, rgba(251, 26, 14, 0.08), transparent 20%),
+            radial-gradient(circle at top right, rgba(41, 105, 183, 0.08), transparent 24%),
+            #f7f7f5;
         }
 
         .contact-section {
-          padding: 44px 24px 120px;
+          padding: 32px 24px 110px;
         }
 
         .contact-shell {
-          max-width: 1210px;
+          max-width: 1400px;
           margin: 0 auto;
-          border: 4px solid #101727;
-          border-radius: 34px;
-          background: #f4f6f9;
-          padding: 12px;
-          display: grid;
-          grid-template-columns: 300px 1fr;
-          gap: 12px;
         }
 
-        .contact-left {
-          border-radius: 22px;
-          padding: 18px 14px 14px;
+        .contact-kicker-wrap {
+          margin-bottom: 22px;
+        }
+
+        .contact-kicker {
+          width: fit-content;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 14px;
+          border-radius: 12px;
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          background: #ffffff;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+          font-family: "Inter", sans-serif;
+          font-size: 0.92rem;
+          font-weight: 600;
+          color: #1c1c1c;
+        }
+
+        .contact-kicker-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 999px;
+          background: #fb1a0e;
+        }
+
+        .contact-card {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: 640px;
+          overflow: hidden;
+          border-radius: 32px;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          background: #ffffff;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-visual-panel {
+          position: relative;
+          overflow: hidden;
+          background: #1a1a1a;
+          min-height: 350px;
+        }
+
+        .contact-visual-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.22) 0%,
+            rgba(0, 0, 0, 0.38) 52%,
+            rgba(0, 0, 0, 0.76) 100%
+          );
+          pointer-events: none;
+        }
+
+        .contact-visual-content {
+          position: relative;
+          z-index: 1;
+          height: 100%;
+          padding: 42px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          min-height: 660px;
+          gap: 28px;
         }
 
-        .brand-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .brand-row p {
+        .contact-panel-label {
           margin: 0;
           font-family: "Inter", sans-serif;
-          font-size: 0.98rem;
+          font-size: 0.86rem;
           font-weight: 700;
-          color: #0d1526;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.76);
         }
 
-        .brand-mark {
-          width: 14px;
-          height: 14px;
-          position: relative;
-          display: inline-block;
+        .contact-title {
+          margin: 16px 0 0;
+          max-width: 12ch;
+          font-family: "Playfair Display", Georgia, serif;
+          font-size: clamp(2.4rem, 4.2vw, 4.2rem);
+          font-weight: 400;
+          line-height: 0.98;
+          letter-spacing: -0.04em;
+          color: #ffffff;
         }
 
-        .brand-mark span {
-          position: absolute;
-          width: 5px;
-          height: 5px;
-          border-radius: 1px;
-          background: #0d1526;
-          transform: rotate(45deg);
+        .contact-subtitle {
+          margin: 18px 0 0;
+          max-width: 46ch;
+          font-family: "Inter", sans-serif;
+          font-size: 1rem;
+          line-height: 1.75;
+          color: rgba(255, 255, 255, 0.72);
         }
 
-        .brand-mark span:nth-child(1) { top: 0; left: 0; }
-        .brand-mark span:nth-child(2) { top: 0; right: 0; }
-        .brand-mark span:nth-child(3) { bottom: 0; left: 0; }
-        .brand-mark span:nth-child(4) { bottom: 0; right: 0; }
-
-        .info-list {
-          margin-top: 32px;
+        .contact-form-panel {
+          padding: 42px;
           display: flex;
           flex-direction: column;
-          gap: 24px;
-        }
-
-        .info-item {
-          display: flex;
-          gap: 10px;
-          align-items: flex-start;
-        }
-
-        .info-item-icon {
-          width: 26px;
-          height: 26px;
-          border: 1px solid #d7dce6;
-          border-radius: 7px;
-          display: inline-flex;
-          align-items: center;
           justify-content: center;
-          color: #293246;
-          flex-shrink: 0;
-          margin-top: 2px;
+          background: linear-gradient(180deg, #ffffff 0%, #fcfbf8 100%);
         }
 
-        .info-title {
-          margin: 0;
-          font-family: "Playfair Display", serif;
-          font-size: 1.02rem;
-          font-weight: 400;
-          color: #0f1627;
-          line-height: 1.25;
+        .contact-form-intro {
+          margin-bottom: 26px;
         }
 
-        .info-copy {
-          margin: 4px 0 0;
+        .contact-form-kicker {
+          margin: 0 0 10px;
           font-family: "Inter", sans-serif;
-          font-size: 0.9rem;
-          color: #50596f;
-          line-height: 1.4;
-        }
-
-        .info-link {
-          display: block;
-          margin: 4px 0 0;
-          font-family: "Inter", sans-serif;
-          font-size: 0.9rem;
-          color: #121a2c;
-          text-decoration: none;
-          line-height: 1.4;
-        }
-
-        .social-row {
-          display: flex;
-          gap: 8px;
-          align-items: center;
-        }
-
-        .social-icon {
-          width: 26px;
-          height: 26px;
-          border-radius: 999px;
-          border: 1px solid #d5dae4;
-          background: #fff;
-          color: #455067;
-          font-family: "Inter", sans-serif;
-          font-size: 0.66rem;
+          font-size: 0.78rem;
           font-weight: 700;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          text-transform: lowercase;
-          line-height: 1;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #fb1a0e;
         }
 
-        .contact-right {
-          border-radius: 18px;
-          background: #b3f15d;
-          padding: 34px 30px 26px;
-          min-height: 660px;
-        }
-
-        .form-title {
+        .contact-form-intro h2 {
           margin: 0;
-          max-width: 760px;
-          font-family: "Playfair Display", serif;
-          font-size: clamp(2rem, 4.8vw, 3.4rem);
+          font-family: "Playfair Display", Georgia, serif;
+          font-size: clamp(2rem, 3.2vw, 3rem);
           font-weight: 400;
-          line-height: 1.07;
-          letter-spacing: -0.03em;
-          color: #111827;
-          text-wrap: balance;
+          line-height: 1.02;
+          letter-spacing: -0.035em;
+          color: #171717;
         }
 
-        .form-subtitle {
-          margin: 12px 0 0;
+        .contact-form-intro p {
+          margin: 14px 0 0;
+          max-width: 42ch;
           font-family: "Inter", sans-serif;
-          font-size: 1.02rem;
-          color: #1f293a;
-          line-height: 1.45;
+          font-size: 1rem;
+          line-height: 1.7;
+          color: #6b7280;
         }
 
-        .field-wrap {
-          margin-top: 22px;
+        .contact-form {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
         }
 
-        .field-wrap label {
-          display: block;
-          margin-bottom: 5px;
-          font-family: "Inter", sans-serif;
-          font-size: 0.84rem;
-          font-weight: 600;
-          color: #111827;
-        }
-
-        .field-wrap input,
-        .field-wrap textarea {
-          width: 100%;
-          border: 0;
-          border-bottom: 1.5px solid rgba(17, 24, 39, 0.55);
-          background: transparent;
-          padding: 6px 0 8px;
-          font-family: "Inter", sans-serif;
-          font-size: 0.95rem;
-          color: #111827;
-          outline: none;
-          resize: none;
-        }
-
-        .field-wrap input::placeholder,
-        .field-wrap textarea::placeholder {
-          color: rgba(17, 24, 39, 0.65);
-        }
-
-        .field-wrap input:focus,
-        .field-wrap textarea:focus {
-          border-bottom-color: #111827;
-        }
-
-        .checks-wrap {
-          margin-top: 18px;
-        }
-
-        .checks-title {
-          margin: 0;
-          font-family: "Inter", sans-serif;
-          font-size: 0.84rem;
-          font-weight: 600;
-          color: #111827;
-        }
-
-        .checks-grid {
-          margin-top: 8px;
+        .contact-field-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 8px 22px;
-          max-width: 560px;
+          gap: 16px;
         }
 
-        .check-item {
-          display: inline-flex;
-          align-items: center;
+        .contact-field {
+          display: flex;
+          flex-direction: column;
           gap: 8px;
+        }
+
+        .contact-field span {
           font-family: "Inter", sans-serif;
           font-size: 0.88rem;
-          color: #111827;
-          cursor: pointer;
-        }
-
-        .check-item input {
-          appearance: none;
-          width: 13px;
-          height: 13px;
-          border: 1.5px solid #111827;
-          border-radius: 3px;
-          background: transparent;
-          margin: 0;
-          position: relative;
-          cursor: pointer;
-        }
-
-        .check-item input:checked::after {
-          content: "";
-          position: absolute;
-          left: 3px;
-          top: 1px;
-          width: 3px;
-          height: 6px;
-          border: solid #111827;
-          border-width: 0 1.6px 1.6px 0;
-          transform: rotate(45deg);
-        }
-
-        .submit-btn {
-          width: 100%;
-          margin-top: 22px;
-          min-height: 40px;
-          border: 1px solid #FBF582;
-          border-radius: 6px;
-          background: #FBF582;
-          color: #000000;
-          font-family: "Inter", sans-serif;
-          font-size: 0.84rem;
           font-weight: 600;
+          color: #171717;
+        }
+
+        .contact-field input,
+        .contact-field textarea {
+          width: 100%;
+          border: 1px solid #e5e7eb;
+          border-radius: 18px;
+          background: #ffffff;
+          padding: 16px 18px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.96rem;
+          color: #171717;
+          outline: none;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          resize: vertical;
+        }
+
+        .contact-field input::placeholder,
+        .contact-field textarea::placeholder {
+          color: #9ca3af;
+        }
+
+        .contact-field input:focus,
+        .contact-field textarea:focus {
+          border-color: rgba(41, 105, 183, 0.5);
+          box-shadow: 0 0 0 4px rgba(41, 105, 183, 0.08);
+        }
+
+        .contact-checkbox {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          margin-top: 2px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.92rem;
+          line-height: 1.6;
+          color: #4b5563;
           cursor: pointer;
-          transition: background-color 0.2s ease, border-color 0.2s ease;
         }
 
-        .submit-btn:not(:disabled):hover {
-          background: #FBF582;
-          border-color: #FBF582;
+        .contact-checkbox input {
+          margin: 3px 0 0;
+          width: 18px;
+          height: 18px;
+          accent-color: #2969b7;
+          flex-shrink: 0;
         }
 
-        .submit-btn:disabled {
+        .contact-submit {
+          min-height: 52px;
+          border: 1px solid #fbf582;
+          border-radius: 16px;
+          background: #fbf582;
+          color: #171717;
+          font-family: "Inter", sans-serif;
+          font-size: 0.96rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        .contact-submit:hover:not(:disabled) {
+          transform: translateY(-1px);
+          box-shadow: 0 14px 28px rgba(251, 245, 130, 0.32);
+        }
+
+        .contact-submit:disabled {
           opacity: 0.72;
           cursor: wait;
         }
 
-        .sent-state {
-          max-width: 560px;
+        .contact-status {
+          margin: 0;
+          font-family: "Inter", sans-serif;
+          font-size: 0.92rem;
+          line-height: 1.5;
         }
 
-        @media (max-width: 980px) {
-          .contact-shell {
+        .contact-status.success {
+          color: #166534;
+        }
+
+        .contact-status.error {
+          color: #b91c1c;
+        }
+
+        @media (max-width: 1080px) {
+          .contact-card {
             grid-template-columns: 1fr;
           }
-
-          .contact-left,
-          .contact-right {
-            min-height: unset;
-          }
         }
 
-        @media (max-width: 680px) {
+        @media (max-width: 760px) {
+          .contact-main {
+            padding-top: 100px;
+          }
+
           .contact-section {
-            padding: 20px 12px 90px;
+            padding: 22px 14px 90px;
           }
 
-          .contact-shell {
-            border-width: 2px;
-            border-radius: 22px;
-            padding: 8px;
+          .contact-card {
+            border-radius: 24px;
           }
 
-          .contact-left {
-            border-radius: 14px;
-            padding: 14px 10px;
+          .contact-visual-content,
+          .contact-form-panel {
+            padding: 24px;
           }
 
-          .contact-right {
-            border-radius: 14px;
-            padding: 22px 16px 18px;
-          }
-
-          .checks-grid {
+          .contact-field-grid {
             grid-template-columns: 1fr;
           }
         }
@@ -544,4 +510,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

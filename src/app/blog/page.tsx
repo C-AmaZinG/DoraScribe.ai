@@ -1,33 +1,21 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import MakroButton from "@/components/ui/MakroButton";
 import {
   fetchPosts,
   getFeaturedImage,
-  getCategories,
   formatDate,
   stripHtml,
 } from "@/lib/wordpress";
 import type { WPPost } from "@/lib/wordpress";
 
-type CategoryOption = {
-  key: string;
-  label: string;
-  count: number;
-};
-
 function getReadTime(content: string) {
   const words = stripHtml(content).split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 230));
-}
-
-function getPrimaryCategory(post: WPPost) {
-  return getCategories(post)[0] ?? null;
 }
 
 function ArticleFallback() {
@@ -41,7 +29,6 @@ export default function BlogPage() {
   const [totalPosts, setTotalPosts] = useState(0);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("all");
 
   const loadPosts = useCallback(async (pageNum: number, append = false) => {
     if (append) setLoadingMore(true);
@@ -65,37 +52,7 @@ export default function BlogPage() {
     loadPosts(1);
   }, [loadPosts]);
 
-  const categoryOptions = useMemo(() => {
-    const counts = new Map<string, CategoryOption>();
-
-    posts.forEach((post) => {
-      getCategories(post).forEach((category) => {
-        const existing = counts.get(category.slug);
-        counts.set(category.slug, {
-          key: category.slug,
-          label: category.name,
-          count: (existing?.count ?? 0) + 1,
-        });
-      });
-    });
-
-    const ranked = Array.from(counts.values())
-      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
-      .slice(0, 4);
-
-    return [{ key: "all", label: "Blog", count: posts.length }, ...ranked];
-  }, [posts]);
-
-  const filteredPosts = useMemo(() => {
-    if (activeCategory === "all") return posts;
-    return posts.filter((post) =>
-      getCategories(post).some((category) => category.slug === activeCategory)
-    );
-  }, [posts, activeCategory]);
-
-  const featuredPost = filteredPosts[0] ?? null;
-  const sidePosts = filteredPosts.slice(1, 5);
-  const gridPosts = filteredPosts.slice(5);
+  const displayPosts = posts;
 
   const handleLoadMore = () => {
     if (page < totalPages) {
@@ -111,35 +68,16 @@ export default function BlogPage() {
       <main className="blog-main">
         <section className="blog-top">
           <div className="blog-shell">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="blog-head"
-            >
-              <p className="blog-kicker">DoraScribe Blog</p>
-              <h1>Latest Stories</h1>
+            <div className="blog-head">
+              <h1>Clinical AI insights for modern healthcare teams.</h1>
               <p className="blog-subtitle">
-                Practical insights, product updates, and clinical AI perspectives for
-                healthcare teams building better documentation workflows.
+                Explore practical guidance, product updates, and real-world workflows to
+                help clinicians reduce admin burden and document with confidence.
               </p>
-            </motion.div>
+            </div>
 
             {loading ? (
               <div className="blog-loading">
-                <div className="blog-tabs">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="tab-skeleton shimmer" />
-                  ))}
-                </div>
-                <div className="featured-skeleton-wrap">
-                  <div className="featured-skeleton shimmer" />
-                  <div className="stack-skeleton">
-                    {[1, 2, 3].map((item) => (
-                      <div key={item} className="stack-card-skeleton shimmer" />
-                    ))}
-                  </div>
-                </div>
                 <div className="grid-skeleton">
                   {[1, 2, 3].map((item) => (
                     <div key={item} className="grid-card-skeleton shimmer" />
@@ -153,104 +91,10 @@ export default function BlogPage() {
               </div>
             ) : (
               <>
-                <div className="blog-tabs" role="tablist" aria-label="Blog categories">
-                  {categoryOptions.map((category) => (
-                    <button
-                      key={category.key}
-                      type="button"
-                      className={
-                        activeCategory === category.key ? "blog-tab is-active" : "blog-tab"
-                      }
-                      onClick={() => setActiveCategory(category.key)}
-                    >
-                      {category.label}
-                    </button>
-                  ))}
-                </div>
-
-                {featuredPost && (
-                  <section className="stories-showcase">
-                    <motion.article
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.45 }}
-                      className="featured-story"
-                    >
-                      <Link href={`/blog/${featuredPost.slug}`} className="featured-link">
-                        <div className="featured-image-wrap">
-                          {getFeaturedImage(featuredPost) ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              src={getFeaturedImage(featuredPost) ?? ""}
-                              alt={stripHtml(featuredPost.title.rendered)}
-                              className="featured-image"
-                            />
-                          ) : (
-                            <ArticleFallback />
-                          )}
-                        </div>
-
-                        <div className="featured-copy">
-                          <span className="featured-label">Featured</span>
-                          <div className="featured-meta">
-                            {getPrimaryCategory(featuredPost) && (
-                              <span className="story-category">
-                                {getPrimaryCategory(featuredPost)?.name}
-                              </span>
-                            )}
-                            <time>{formatDate(featuredPost.date)}</time>
-                          </div>
-                          <h2
-                            className="featured-title"
-                            dangerouslySetInnerHTML={{ __html: featuredPost.title.rendered }}
-                          />
-                          <p className="featured-excerpt">
-                            {stripHtml(featuredPost.excerpt.rendered)}
-                          </p>
-                          <span className="featured-cta">
-                            Read full article
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                          </span>
-                        </div>
-                      </Link>
-                    </motion.article>
-
-                    <div className="story-stack">
-                      {sidePosts.map((post, index) => {
-                        const category = getPrimaryCategory(post);
-                        return (
-                          <motion.article
-                            key={post.id}
-                            initial={{ opacity: 0, y: 24 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: index * 0.06 }}
-                            className="stack-story"
-                          >
-                            <Link href={`/blog/${post.slug}`} className="stack-link">
-                              <div className="stack-meta">
-                                {category ? <span className="story-category subtle">{category.name}</span> : <span />}
-                                <time>{formatDate(post.date)}</time>
-                              </div>
-                              <h3
-                                className="stack-title"
-                                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                              />
-                              <p className="stack-excerpt">{stripHtml(post.excerpt.rendered)}</p>
-                            </Link>
-                          </motion.article>
-                        );
-                      })}
-                    </div>
-                  </section>
-                )}
-
-                {gridPosts.length > 0 && (
+                {displayPosts.length > 0 && (
                   <section className="stories-grid">
-                    {gridPosts.map((post, index) => {
+                    {displayPosts.map((post, index) => {
                       const image = getFeaturedImage(post);
-                      const category = getPrimaryCategory(post);
                       const minutes = getReadTime(post.content.rendered);
 
                       return (
@@ -277,11 +121,6 @@ export default function BlogPage() {
 
                             <div className="grid-copy">
                               <div className="grid-meta">
-                                {category ? (
-                                  <span className="story-category subtle">{category.name}</span>
-                                ) : (
-                                  <span />
-                                )}
                                 <time>{formatDate(post.date)}</time>
                               </div>
 
@@ -295,7 +134,8 @@ export default function BlogPage() {
 
                               <div className="grid-footer">
                                 <span>{minutes} min read</span>
-                                <span className="grid-arrow">
+                                <span className="story-cta">
+                                  Read article
                                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                   </svg>
@@ -320,43 +160,12 @@ export default function BlogPage() {
                       {loadingMore ? "Loading..." : "Load more"}
                     </button>
                     <p className="load-more-meta">
-                      Showing {filteredPosts.length} of {totalPosts} stories
+                      Showing {posts.length} of {totalPosts} stories
                     </p>
                   </div>
                 )}
               </>
             )}
-          </div>
-        </section>
-
-        <section className="blog-cta-section">
-          <div className="blog-shell">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.45 }}
-              className="blog-cta-panel"
-            >
-              <div className="blog-cta-copy">
-                <span className="cta-kicker">Explore DoraScribe</span>
-                <h2>Realize the full potential of clinical AI with DoraScribe.</h2>
-                <p>
-                  See how our ambient medical documentation workflow can help you
-                  save time, reduce admin, and stay more present with patients.
-                </p>
-              </div>
-
-              <div className="blog-cta-actions">
-                <MakroButton
-                  text="Start a free trial"
-                  href="https://app.dorascribe.ai/signUp"
-                />
-                <Link href="/contact" className="cta-secondary-link">
-                  Get in touch
-                </Link>
-              </div>
-            </motion.div>
           </div>
         </section>
       </main>
@@ -387,8 +196,8 @@ export default function BlogPage() {
         }
 
         .blog-head {
-          max-width: 760px;
-          margin-bottom: 34px;
+          width: 100%;
+          margin-bottom: 16px;
         }
 
         .blog-kicker,
@@ -422,7 +231,7 @@ export default function BlogPage() {
         .blog-subtitle,
         .blog-cta-copy p {
           margin: 18px 0 0;
-          max-width: 44ch;
+          max-width: 100%;
           font-family: "Inter", sans-serif;
           font-size: 1.04rem;
           line-height: 1.7;
@@ -543,8 +352,6 @@ export default function BlogPage() {
           text-transform: uppercase;
         }
 
-        .featured-meta,
-        .stack-meta,
         .grid-meta,
         .grid-footer,
         .load-more-meta {
@@ -557,25 +364,8 @@ export default function BlogPage() {
           color: #9ca3af;
         }
 
-        .featured-meta {
-          margin-top: 18px;
-        }
-
-        .story-category {
-          display: inline-flex;
-          align-items: center;
-          padding: 5px 10px;
-          border-radius: 999px;
-          background: #171717;
-          color: #ffffff;
-          font-family: "Inter", sans-serif;
-          font-size: 0.72rem;
-          font-weight: 700;
-        }
-
-        .story-category.subtle {
-          background: rgba(41, 105, 183, 0.08);
-          color: #2969b7;
+        .grid-meta {
+          justify-content: flex-start;
         }
 
         .featured-title,
@@ -609,7 +399,7 @@ export default function BlogPage() {
           font-size: 0.98rem;
         }
 
-        .featured-cta {
+        .story-cta {
           margin-top: 24px;
           display: inline-flex;
           align-items: center;
@@ -618,6 +408,45 @@ export default function BlogPage() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 700;
+          position: relative;
+          width: fit-content;
+          transition: color 0.3s ease;
+        }
+
+        .story-cta::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #2969b7;
+          transition: width 0.3s ease;
+        }
+
+        .featured-story:hover .story-cta,
+        .stack-story:hover .story-cta,
+        .grid-story:hover .story-cta {
+          color: #2969b7;
+        }
+
+        .featured-story:hover .story-cta::after,
+        .stack-story:hover .story-cta::after,
+        .grid-story:hover .story-cta::after {
+          width: 100%;
+        }
+
+        .stack-story .story-cta {
+          margin-top: 16px;
+          font-size: 0.85rem;
+        }
+
+        .grid-story .story-cta {
+          margin-top: 0;
+          font-size: 0.85rem;
+          line-height: 1;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .story-stack {
@@ -662,7 +491,7 @@ export default function BlogPage() {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 18px;
-          margin-top: 28px;
+          margin-top: 8px;
         }
 
         .grid-story {
@@ -687,6 +516,7 @@ export default function BlogPage() {
           display: flex;
           flex-direction: column;
           min-height: 250px;
+          height: 250px;
           padding: 20px;
         }
 
@@ -696,6 +526,10 @@ export default function BlogPage() {
           font-size: 1.04rem;
           font-weight: 700;
           line-height: 1.4;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
         .grid-excerpt {
@@ -708,9 +542,18 @@ export default function BlogPage() {
         }
 
         .grid-footer {
+          display: flex !important;
+          justify-content: space-between;
           margin-top: auto;
           padding-top: 16px;
           border-top: 1px solid #f0ece6;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .grid-footer > span:first-child {
+          white-space: nowrap;
+          line-height: 1;
         }
 
         .grid-arrow {
@@ -918,6 +761,10 @@ export default function BlogPage() {
           .grid-copy,
           .blog-cta-panel {
             padding: 22px;
+          }
+
+          .grid-copy {
+            height: 250px;
           }
 
           .blog-top {

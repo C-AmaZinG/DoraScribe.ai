@@ -9,7 +9,7 @@ const features = [
     title: "Easy to Use",
     description: "Designed for a seamless experience with minimal learning curve",
     icon: <Sparkles size={16} color="white" />,
-    iconBg: "#E3A336", // Golden yellow
+    iconBg: "#00AAAA",
     type: "text"
   },
   {
@@ -113,7 +113,7 @@ export default function FeatureCards() {
 
       <style jsx>{`
         .feature-cards-section {
-          padding: 100px 24px 80px;
+          padding: 100px 24px 176px;
           background-color: #FFFFFF;
           position: relative;
         }

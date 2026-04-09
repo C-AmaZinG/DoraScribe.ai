@@ -8,60 +8,24 @@ import { useIsMobile } from "@/lib/hooks"
 const whyChooseSteps = [
   {
     index: "01",
-    badge: "Patient engagement",
-    title: "Engage Your Patients",
-    description:
-      "Eliminate note-taking distractions, allowing you to focus on your patients and foster meaningful connections.",
-    benefit: "More face time, stronger patient relationships",
-    image: "/assets/img_patient_engagement_people.png",
-  },
-  {
-    index: "02",
-    badge: "Clinical efficiency",
-    title: "Maximize Your Efficiency",
-    description:
-      "Instantly capture live conversations with your patient or dictate a summary of the interaction.",
-    benefit: "Save hours of documentation time every day",
-    image: "/assets/img_clinical_efficiency_people.png",
-  },
-  {
-    index: "03",
-    badge: "Accurate documentation",
-    title: "Enhance Your Precision",
-    description:
-      "AI-powered transcription ensures every detail is captured accurately, reducing errors and improving note quality.",
-    benefit: "Clinically accurate notes, every time",
-    image: "/assets/img_accurate_documentation_people.png",
-  },
-  {
-    index: "04",
-    badge: "Custom workflows",
-    title: "Adapt to Your Needs",
-    description:
-      "Customize templates and workflows to suit your specific practice, making documentation tailored and efficient.",
-    benefit: "Fits your practice, not the other way around",
-    image: "/assets/img_custom_workflows_people.png",
-  },
-  {
-    index: "05",
-    badge: "Privacy compliance",
-    title: "Privacy Compliance",
-    description:
-      "HIPAA, POPIA, PIPEDA, GDPR, SOC2 — We adhere to established healthcare privacy guidelines to ensure your data and your patients' information remain protected.",
-    benefit: "Your data is safe, always",
-    image: "/assets/layer_1.png",
-  },
-  {
-    index: "06",
     badge: "Ambient AI",
     title: "Smart Ambient AI Medical Tool",
     description:
-      "This is more than just a scribe — easy EMR integration, experience clinical freedom.",
+      "This is more than just a scribe. Enjoy easy EMR integration and experience clinical freedom.",
     benefit: "AI that works with you, not against you",
     image: "/assets/img_ambient_ai_people.png",
   },
   {
-    index: "07",
+    index: "02",
+    badge: "Privacy compliance",
+    title: "Privacy Compliance",
+    description:
+      "HIPAA, POPIA, PIPEDA, GDPR, and SOC2 compliance help ensure your data and your patients' information remain protected.",
+    benefit: "Your data is safe, always",
+    image: "/assets/layer_1.png",
+  },
+  {
+    index: "03",
     badge: "Cross-platform",
     title: "Work Across All Devices",
     description:
@@ -69,9 +33,17 @@ const whyChooseSteps = [
     benefit: "Seamless experience on every device",
     image: "/assets/img_cross_platform_people.png",
   },
+  {
+    index: "04",
+    badge: "EMR integration",
+    title: "Integrate with your EMR",
+    description:
+      "Connect Dorascribe to your existing workflow so completed notes are ready to move into your EMR quickly and with less manual work.",
+    benefit: "Fits smoothly into your current workflow",
+    image: "/assets/img_emr_integration.png",
+  },
 ]
 
-/* ── Badge icon (small square with rounded corners) ── */
 function BadgeIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "rgba(28,28,28,0.4)" }}>
@@ -81,7 +53,6 @@ function BadgeIcon() {
   )
 }
 
-/* ── Checkmark icon ── */
 function CheckIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "rgba(28,28,28,0.3)", flexShrink: 0 }}>
@@ -91,7 +62,6 @@ function CheckIcon() {
   )
 }
 
-/* ── FeatureCard with 3D Stack Effect ── */
 function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], index: number }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
@@ -126,7 +96,7 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
           opacity: 1,
           transformOrigin: "top center",
           background: "#F9F4F1",
-          boxShadow: '0 40px 100px rgba(0,0,0,0.06)',
+          boxShadow: "0 40px 100px rgba(0,0,0,0.06)",
           width: "100%",
           height: "100%",
           padding: isMobile ? "10px" : "12px",
@@ -137,7 +107,6 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
           overflow: "hidden",
         }}
       >
-        {/* ── Left: Text Content ── */}
         <div
           style={{
             width: isMobile ? "100%" : "48%",
@@ -155,7 +124,6 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%" }}>
-            {/* Top: Badge */}
             <div
               style={{
                 display: "flex",
@@ -182,7 +150,6 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
               </span>
             </div>
 
-            {/* Middle: Title + Description */}
             <div
               role="heading"
               aria-level={3}
@@ -195,6 +162,8 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
                 letterSpacing: "-0.04em",
                 maxWidth: "420px",
                 fontFamily: "'Playfair Display', Georgia, serif",
+                hyphens: "none",
+                wordBreak: "keep-all",
               }}
             >
               {step.title}
@@ -213,9 +182,46 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
             >
               {step.description}
             </p>
+
+            {step.title === "Work Across All Devices" && (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginTop: "24px",
+                }}
+              >
+                <a
+                  href="https://apps.apple.com/"
+                  aria-label="Download on the App Store"
+                  style={{ display: "inline-flex" }}
+                >
+                  <Image
+                    src="/assets/app-store.svg"
+                    alt="Download on the App Store"
+                    width={145}
+                    height={44}
+                    style={{ height: "44px", width: "auto" }}
+                  />
+                </a>
+                <a
+                  href="https://play.google.com/store"
+                  aria-label="Get it on Google Play"
+                  style={{ display: "inline-flex" }}
+                >
+                  <Image
+                    src="/assets/google-play.svg"
+                    alt="Get it on Google Play"
+                    width={145}
+                    height={44}
+                    style={{ height: "44px", width: "auto" }}
+                  />
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Bottom: Benefit line with checkmark */}
           {step.benefit && (
             <div
               style={{
@@ -237,7 +243,6 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
           )}
         </div>
 
-        {/* ── Right: Visual Panel ── */}
         <div
           style={{
             width: isMobile ? "100%" : "52%",
@@ -307,7 +312,6 @@ function FeatureCard({ step, index }: { step: typeof whyChooseSteps[number], ind
   )
 }
 
-/* ── Section ── */
 export default function WhyChoose() {
   return (
     <section
@@ -331,7 +335,6 @@ export default function WhyChoose() {
           flexDirection: "column",
         }}
       >
-        {/* Header */}
         <div
           style={{
             display: "flex",
@@ -343,7 +346,6 @@ export default function WhyChoose() {
             margin: "0 auto 112px",
           }}
         >
-
           <motion.div
             role="heading"
             aria-level={2}
@@ -379,7 +381,6 @@ export default function WhyChoose() {
           </motion.p>
         </div>
 
-        {/* Stacking Cards */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           {whyChooseSteps.map((step, idx) => (
             <FeatureCard key={idx} step={step} index={idx} />

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 import Logo from "@/components/ui/Logo";
+import { useLanguage } from "@/lib/language-context";
 
 const navLinks = [
   { name: "How it works", href: "#how-it-works" },
@@ -21,17 +22,117 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
+const MOBILE_BREAKPOINT = 1080;
+
+const DropdownLink = ({ name, href }: { name: string; href: string }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  return (
+    <Link
+      href={href}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        position: "relative",
+        textDecoration: "none",
+        fontFamily: "'Inter', sans-serif",
+        fontSize: "0.88rem",
+        fontWeight: 500,
+        color: isHovered ? "#00AAAA" : "#2c1810",
+        padding: "10px 12px",
+        borderRadius: "10px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        background: isHovered ? "rgba(0, 249, 249, 0.08)" : "transparent",
+        transition: "all 0.2s ease",
+        boxShadow: isHovered ? "0 8px 18px rgba(0, 249, 249, 0.08)" : "none"
+      }}
+    >
+      {name}
+    </Link>
+  );
+};
+
+const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; onClick: () => void }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        color: isHovered ? "#00AAAA" : "#FFFFFF",
+        textDecoration: "none",
+        fontSize: "16px",
+        fontWeight: 700,
+        display: "block",
+        padding: "8px 0",
+        transition: "color 0.2s ease",
+        textAlign: "left"
+      }}
+    >
+      {name}
+    </Link>
+  );
+};
+
 export default function Header() {
+  const { activeLanguage, setActiveLanguageByCode, languageOptions } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
+  const [isLoginHovered, setIsLoginHovered] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileViewport(window.innerWidth <= MOBILE_BREAKPOINT);
+      if (window.innerWidth > MOBILE_BREAKPOINT) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handlePointerDown = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".language-dropdown")) {
+        setIsLanguageOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, []);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileResourcesOpen(false);
+  };
 
   return (
     <header
@@ -50,7 +151,7 @@ export default function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         style={{
-          width: "100%",
+          width: isMobileViewport ? "calc(100% - 20px)" : "calc(100% - 32px)",
           maxWidth: "none",
           height: "64px",
           background: "#FEFEFE",
@@ -58,6 +159,9 @@ export default function Header() {
           WebkitBackdropFilter: "blur(16px)",
           borderRadius: "0",
           border: "1px solid rgba(0, 0, 0, 0.05)",
+          marginTop: "10px",
+          marginLeft: isMobileViewport ? "10px" : "16px",
+          marginRight: isMobileViewport ? "10px" : "16px",
           boxShadow: isScrolled
             ? "0 10px 30px -10px rgba(0,0,0,0.08)"
             : "0 4px 20px -5px rgba(0,0,0,0.03)",
@@ -66,14 +170,15 @@ export default function Header() {
         }}
       >
         <div
+          className="header-inner"
           style={{
             maxWidth: "1200px",
             width: "100%",
             margin: "0 auto",
             padding: "0 24px",
-            display: "flex",
+            display: "grid",
+            gridTemplateColumns: "auto 1fr auto",
             alignItems: "center",
-            justifyContent: "space-between",
             position: "relative",
             height: "100%",
           }}
@@ -81,17 +186,16 @@ export default function Header() {
           <Logo />
 
           <div
+            className="desktop-only desktop-nav"
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "32px",
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
+              justifyContent: "center",
+              gap: "20px",
+              minWidth: 0,
             }}
-            className="desktop-only"
           >
-            {navLinks.map((link) => (
+            {navLinks.map((link) =>
               link.children ? (
                 <div
                   key={link.name}
@@ -103,11 +207,10 @@ export default function Header() {
                     type="button"
                     className="nav-link nav-button"
                     style={{
-                      fontWeight: hoveredLink === link.name ? 500 : 400,
-                      color: hoveredLink === link.name ? "#2969B7" : "#000000",
+                      color: hoveredLink === link.name ? "#00AAAA" : "#000000",
                       borderBottom:
                         hoveredLink === link.name
-                          ? "2px solid #2969B7"
+                          ? "2px solid #00AAAA"
                           : "2px solid transparent",
                     }}
                   >
@@ -123,11 +226,9 @@ export default function Header() {
                     </span>
                   </button>
 
-                  <div className="dropdown-menu">
+                   <div className="dropdown-menu">
                     {link.children.map((child) => (
-                      <Link key={child.name} href={child.href} className="dropdown-link">
-                        {child.name}
-                      </Link>
+                      <DropdownLink key={child.name} name={child.name} href={child.href} />
                     ))}
                   </div>
                 </div>
@@ -140,57 +241,413 @@ export default function Header() {
                   className="nav-link"
                   style={{
                     fontWeight: hoveredLink === link.name ? 500 : 400,
-                    color: hoveredLink === link.name ? "#2969B7" : "#000000",
+                    color: hoveredLink === link.name ? "#00AAAA" : "#000000",
                     borderBottom:
                       hoveredLink === link.name
-                        ? "2px solid #2969B7"
+                        ? "2px solid #00AAAA"
                         : "2px solid transparent",
                   }}
                 >
                   {link.name}
                 </Link>
               )
-            ))}
+            )}
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <Link
-              href="https://app.dorascribe.ai/login"
-              style={{
-                textDecoration: "none",
-                display: "inline-block",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#2C1810",
-                padding: "8px 20px",
-                borderRadius: "10px",
-                background: "#F0EBE4",
-                transition: "background 0.2s ease, color 0.2s ease, transform 0.2s ease",
-              }}
-              className="desktop-only login-link"
+<div className="header-actions" style={{ display: "flex", alignItems: "center", gap: "12px", justifySelf: "end" }}>
+            <div
+              className="desktop-only language-dropdown"
+              data-no-translate="true"
+              onMouseEnter={() => setIsLanguageOpen(true)}
+              onMouseLeave={() => setIsLanguageOpen(false)}
             >
-              Log in
-            </Link>
+              <button
+                type="button"
+                className={`language-trigger ${isLanguageOpen ? "is-open" : ""}`}
+                aria-haspopup="menu"
+                aria-expanded={isLanguageOpen}
+                onClick={() => setIsLanguageOpen(true)}
+              >
+                                <span
+                  className="language-flag-mini"
+                  style={{
+                    backgroundImage: `url(https://flagcdn.com/w40/${activeLanguage.country}.png)`,
+                  }}
+                />
+                <span>{activeLanguage.code}</span>
+                                <span className="language-trigger-caret">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </span>
+              </button>
 
-            <MakroButton
-              text="Get started"
-              href="https://app.dorascribe.ai/signUp"
-              size="sm"
-              variant="secondary"
-            />
+              <AnimatePresence>
+                {isLanguageOpen && (
+                  <div className="language-menu" role="menu">
+                    <motion.div
+                      initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                      transition={{ duration: 0.12, ease: "easeOut" }}
+                      className="language-menu-inner"
+                    >
+                      <p className="language-menu-title">Select Language</p>
+                      {languageOptions.map((language) => (
+                        <button
+                          key={language.code}
+                          type="button"
+                          className={`language-option ${activeLanguage.code === language.code ? "is-active" : ""}`}
+                          onClick={() => {
+                            setActiveLanguageByCode(language.code);
+                            setIsLanguageOpen(false);
+                          }}
+                        >
+                                                    <span
+                            className="language-flag"
+                            aria-hidden="true"
+                            style={{
+                              backgroundImage: `url(https://flagcdn.com/w40/${language.country}.png)`,
+                            }}
+                          />
+                          <span className="language-option-label">{language.name} ({language.region})</span>
+                          {activeLanguage.code === language.code && (
+                            <span className="active-check">&#10003;</span>
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  </div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Desktop-only Login */}
+            {/* Swapped order: Get started first, then Login */}
+            <div className="desktop-only">
+              <MakroButton
+                text="Get started"
+                href="https://app.dorascribe.ai/signUp"
+                size="sm"
+              />
+            </div>
+
+            <div className="desktop-only">
+              <Link
+                href="https://app.dorascribe.ai/login"
+                onMouseEnter={() => setIsLoginHovered(true)}
+                onMouseLeave={() => setIsLoginHovered(false)}
+                style={{
+                  textDecoration: "none",
+                  display: "inline-block",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  color: "#000000",
+                  padding: "8px 20px",
+                  borderRadius: "10px",
+                  background: isLoginHovered ? "#d8f2f2" : "#EBF8F8",
+                  transition: "background 0.2s ease, transform 0.2s ease",
+                  transform: isLoginHovered ? "scale(1.02)" : "scale(1)",
+                }}
+                className="login-link"
+              >
+                Log in
+              </Link>
+            </div>
+
+            {isMobileViewport && (
+              <motion.button
+                type="button"
+                className="mobile-menu-button"
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "50%",
+                  background: "#EBF8F8",
+                  border: "none",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  padding: 0,
+                  position: "relative",
+                  zIndex: 1010,
+                  boxShadow: "0 4px 12px rgba(0, 170, 170, 0.08)",
+                  transition: "background-color 0.3s ease",
+                }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <motion.path
+                    animate={isMobileMenuOpen ? { d: "M6 18L18 6" } : { d: "M5 7H19" }}
+                    transition={{ duration: 0.3 }}
+                    stroke="#00AAAA"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <motion.path
+                    animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                    d="M5 12H15"
+                    stroke="#00AAAA"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <motion.path
+                    animate={isMobileMenuOpen ? { d: "M6 6L18 18" } : { d: "M4 17H20" }}
+                    transition={{ duration: 0.3 }}
+                    stroke="#00AAAA"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </motion.button>
+            )}
           </div>
         </div>
       </motion.nav>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "#0b1121",
+              zIndex: 15000,
+              display: "flex",
+              flexDirection: "column",
+              padding: "40px 24px",
+              overflowY: "auto",
+              boxSizing: "border-box",
+            }}
+            className="mobile-nav-overlay-v2"
+          >
+            {/* Design Version: 2.1 */}
+            {/* 1. Header with Close Button */}
+            <div className="mobile-nav-top">
+              <Logo />
+              <button 
+                onClick={closeMobileMenu} 
+                className="close-nav-btn"
+                aria-label="Close menu"
+                style={{
+                  display: "flex",
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "50%",
+                  background: "#EBF8F8",
+                  border: "none",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  padding: 0,
+                  boxShadow: "0 4px 12px rgba(0, 170, 170, 0.08)",
+                }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00AAAA" strokeWidth="3" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* 2. Primary Action Area (Login & CTA) */}
+            <div className="mobile-nav-center">
+              <div className="mobile-nav-scroll-area">
+                <div className="mobile-nav-list">                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    style={{ 
+                      display: "flex", 
+                      flexDirection: "row", 
+                      alignItems: "center", 
+                      gap: "16px",
+                      width: "100%",
+                      marginBottom: "20px"
+                    }}
+                  >
+                    {/* Swapped mobile order */}
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      style={{ flex: 1 }}
+                    >
+                      <Link 
+                        href="https://app.dorascribe.ai/signUp" 
+                        onClick={closeMobileMenu} 
+                        className="mobile-link-hover-teal"
+                        style={{ 
+                          backgroundColor: "#00AAAA", 
+                          color: "#FFFFFF", 
+                          textDecoration: "none", 
+                          height: "52px", 
+                          display: "flex", 
+                          alignItems: "center", 
+                          justifyContent: "center", 
+                          borderRadius: "12px",
+                          fontSize: "16px",
+                          fontWeight: 700,
+                          transition: "background-color 0.2s ease"
+                        }}
+                      >
+                        Get Started
+                      </Link>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.02, color: "#EBF8F8" }}
+                      whileTap={{ scale: 0.98 }}
+                      style={{ flex: 1, transition: "color 0.2s ease" }}
+                    >
+                      <Link 
+                        href="https://app.dorascribe.ai/login" 
+                        onClick={closeMobileMenu} 
+                        style={{ 
+                          textDecoration: "none", 
+                          fontSize: "16px", 
+                          fontWeight: 700, 
+                          textAlign: "center",
+                          height: "52px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          background: "#EBF8F8",
+                          color: "#000000", 
+                          borderRadius: "12px",
+                          border: "1px solid rgba(0, 170, 170, 0.2)",
+                        }}
+                      >
+                        Login
+                      </Link>
+                    </motion.div>
+                  </motion.div>
+
+                  <div className="nav-divider-slim" />
+
+                  {/* 3. Main Links Group */}
+                  {["How it works", "Why Dora", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
+                    const linkObj = navLinks.find(l => l.name === name);
+                    if (!linkObj) return null;
+
+                    const hasChildren = !!linkObj.children;
+
+                    if (hasChildren) {
+                      return (
+                        <motion.div
+                          key={name}
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: 0.3 + (i * 0.05) }}
+                          className="nav-item-wrap"
+                        >
+                          <button
+                            onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)}
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "#FFFFFF",
+                              fontSize: "16px",
+                              fontWeight: 700,
+                              width: "100%",
+                              textAlign: "left",
+                              padding: "12px 0",
+                              cursor: "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <span>{name}</span>
+                            <span style={{ 
+                              fontSize: "12px", 
+                              transform: isMobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)",
+                              transition: "transform 0.3s ease",
+                              color: "#00AAAA"
+                            }}>
+                              ▾
+                            </span>
+                          </button>
+                          
+                          <AnimatePresence>
+                            {isMobileResourcesOpen && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                style={{ overflow: "hidden", paddingLeft: "16px" }}
+                              >
+                                {linkObj.children?.map((child) => (
+                                  <MobileNavLink 
+                                    key={child.name} 
+                                    name={child.name} 
+                                    href={child.href} 
+                                    onClick={closeMobileMenu} 
+                                  />
+                                ))}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
+                      );
+                    }
+
+                    return (
+                      <motion.div
+                        key={name}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 + (i * 0.05) }}
+                        className="nav-item-wrap"
+                      >
+                        <MobileNavLink 
+                          name={name} 
+                          href={linkObj.href || "#"} 
+                          onClick={closeMobileMenu} 
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Footer with Socials */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="mobile-nav-footer"
+            >
+              <div className="social-tray">
+                <a href="#" className="tray-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              </div>
+              <p className="footer-copyright">© 2026 DoraScribe AI. All rights reserved.</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style jsx>{`
         .nav-link {
           position: relative;
           padding: 8px 16px;
           text-decoration: none;
-          font-family: 'Inter', sans-serif;
+          font-family: "Inter", sans-serif;
           font-size: 0.9rem;
-          border-radius: 999px;
+          white-space: nowrap;
+          line-height: 1.1;
           transition: color 0.2s ease, border-color 0.2s ease, font-weight 0.2s ease;
         }
 
@@ -201,18 +658,14 @@ export default function Header() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-        }
-
-        .nav-link:hover {
-          background: rgba(41, 105, 183, 0.08);
-        }
-
-        .nav-dropdown:hover .nav-button {
-          background: rgba(41, 105, 183, 0.08);
+          white-space: nowrap;
+          line-height: 1.1;
+          flex-shrink: 0;
         }
 
         .nav-dropdown {
           position: relative;
+          flex-shrink: 0;
         }
 
         .nav-caret {
@@ -248,15 +701,6 @@ export default function Header() {
           height: 20px;
         }
 
-        .dropdown-menu::before {
-          content: "";
-          position: absolute;
-          top: -20px;
-          left: 0;
-          right: 0;
-          height: 20px;
-        }
-
         .nav-dropdown:hover .dropdown-menu {
           opacity: 1;
           pointer-events: auto;
@@ -264,32 +708,450 @@ export default function Header() {
         }
 
         .dropdown-link {
+          position: relative;
           text-decoration: none;
-          font-family: 'Inter', sans-serif;
+          font-family: "Inter", sans-serif;
           font-size: 0.88rem;
           font-weight: 500;
-          color: #2C1810;
+          color: #2c1810;
           padding: 10px 12px;
           border-radius: 10px;
-          transition: background 0.2s ease, color 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid transparent;
+          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+            transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .dropdown-link:hover {
-          background: #F6F1EA;
-          color: #2969B7;
+        .dropdown-link::after {
+          content: "";
+          position: absolute;
+          left: 12px;
+          right: 12px;
+          bottom: 6px;
+          height: 2px;
+          border-radius: 999px;
+          background: #EBF8F8;
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 0.2s ease;
+        }
+
+        .dropdown-link:hover,
+        .dropdown-link:focus-visible {
+          background: rgba(0, 170, 170, 0.08);
+          border-color: rgba(0, 170, 170, 0.2);
+          color: #EBF8F8;
+          box-shadow: 0 8px 18px rgba(0, 170, 170, 0.08);
+        }
+
+        .dropdown-link:hover::after,
+        .dropdown-link:focus-visible::after {
+          transform: scaleX(1);
         }
 
         .login-link:hover {
-          background: #E6DFD6 !important;
+          background: #e6dfd6 !important;
           transform: scale(0.98);
         }
 
-        @media (max-width: 900px) {
+        .language-dropdown {
+          position: relative;
+        }
+
+        .language-trigger {
+          min-width: 84px;
+          min-height: 40px;
+          padding: 0 14px;
+          border-radius: 14px;
+          border: 1px solid #dbe7eb;
+          background: #ffffff;
+          color: #1f2937;
+          font-family: "Inter", sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .language-trigger:hover,
+        .language-trigger.is-open {
+          border-color: #00AAAA;
+          background: #ffffff;
+          box-shadow: 0 10px 25px -5px rgba(0, 170, 170, 0.12);
+        }
+
+        .language-flag-mini {
+          width: 18px;
+          height: 18px;
+          border-radius: 999px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+          flex-shrink: 0;
+        }
+
+        .language-trigger-caret {
+          font-size: 0.7rem;
+          opacity: 0.5;
+          transition: transform 0.3s ease;
+        }
+
+        .language-trigger.is-open .language-trigger-caret {
+          transform: rotate(180deg);
+        }
+
+        .language-menu {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 50%;
+          margin-left: -120px;
+          width: 240px;
+          z-index: 1000;
+          background: #ffffff;
+          border-radius: 20px;
+          box-shadow: 0 20px 48px -10px rgba(15, 23, 42, 0.18),
+            0 10px 20px -5px rgba(15, 23, 42, 0.08);
+        }
+
+        .language-menu-inner {
+          background: #ffffff;
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(15, 23, 42, 0.08);
+          border-radius: 20px;
+          padding: 8px;
+          box-shadow: 
+            0 20px 48px -10px rgba(15, 23, 42, 0.18),
+            0 10px 20px -5px rgba(15, 23, 42, 0.08);
+        }
+
+        .language-menu-title {
+          padding: 10px 14px 6px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #94a3b8;
+        }
+
+        .language-option {
+          width: 100%;
+          border: 0;
+          background: transparent;
+          border-radius: 12px;
+          padding: 10px 14px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-align: left;
+          cursor: pointer;
+          color: #475569;
+          font-family: "Inter", sans-serif;
+          font-size: 0.9rem;
+          font-weight: 500;
+          transition: all 0.2s ease;
+        }
+
+        .language-option:hover {
+          background: #f1f5f9;
+          color: #0f172a;
+        }
+
+        .language-option.is-active {
+          background: rgba(0, 170, 170, 0.06);
+          color: #00AAAA;
+          font-weight: 600;
+        }
+
+        .active-check {
+          margin-left: auto;
+          font-size: 0.8rem;
+          font-weight: 700;
+        }
+
+        .language-flag {
+          width: 20px;
+          height: 20px;
+          border-radius: 999px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+          flex-shrink: 0;
+        }
+
+        /* Mobile Language Styles */
+        .mobile-language-wrap {
+          margin-top: 24px;
+          padding-bottom: 20px;
+        }
+
+        .mobile-nav-kicker {
+          font-family: "Inter", sans-serif;
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: rgba(255, 255, 255, 0.4);
+          margin-bottom: 12px;
+        }
+
+        .mobile-language-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+        }
+
+        .mobile-lang-btn {
+          height: 44px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          color: #FFFFFF;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .mobile-lang-btn.is-active {
+          background: #00AAAA;
+          border-color: #00AAAA;
+          box-shadow: 0 4px 12px rgba(0, 170, 170, 0.3);
+        }
+
+        .mobile-menu-button {
+          display: none;
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: #ffffff;
+          border: 1px solid #EBF8F8;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 5px;
+          cursor: pointer;
+          position: relative;
+          z-index: 102;
+          box-shadow: 0 2px 8px rgba(0, 170, 170, 0.08);
+          transition: all 0.2s ease;
+        }
+
+        .mobile-menu-button:active {
+          transform: scale(0.95);
+          background: #f0fdfd;
+        }
+
+        .mobile-menu-line {
+          width: 20px;
+          height: 2px;
+          border-radius: 999px;
+          background: #EBF8F8 !important;
+          transform-origin: center;
+        }
+
+        .mobile-nav-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: #0b1121;
+          background-image: radial-gradient(circle at top right, rgba(0, 170, 170, 0.2), transparent 500px);
+          z-index: 15000;
+          display: flex;
+          flex-direction: column;
+          padding: 40px 24px;
+          overflow-y: auto;
+          box-sizing: border-box;
+        }
+
+        .mobile-nav-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 48px;
+          margin-bottom: 40px;
+        }
+
+        /* Ensure logo is white on dark */
+        .mobile-nav-top :global(.logo-img),
+        .mobile-nav-top :global(img) {
+          filter: brightness(0) invert(1);
+        }
+
+        .close-nav-btn {
+          background: #ffffff;
+          border: 1px solid #EBF8F8;
+          color: #EBF8F8;
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 12px rgba(0, 170, 170, 0.1);
+        }
+
+        .close-nav-btn:hover {
+          background: #f0fdfd;
+          transform: scale(0.95);
+        }
+
+        .mobile-nav-center {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .mobile-nav-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          padding-bottom: 40px;
+        }
+
+        .nav-item-wrap {
+          width: 100%;
+        }
+
+        .mobile-link-hero {
+          font-family: 'Inter', sans-serif;
+          font-size: 32px;
+          font-weight: 700;
+          color: white;
+          text-decoration: none;
+          letter-spacing: -0.02em;
+          padding: 8px 0;
+          display: block;
+          transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .mobile-link-hero.secondary {
+          font-size: 24px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-link-hero:hover {
+          color: #EBF8F8;
+          transform: translateX(10px);
+        }
+
+        .mobile-cta-btn-main {
+          margin-top: 20px;
+          background: #EBF8F8;
+          color: white;
+          font-family: 'Inter', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          text-decoration: none;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 16px;
+          box-shadow: 0 12px 30px rgba(0, 170, 170, 0.3);
+          transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .mobile-cta-btn-main:active {
+          transform: scale(0.98);
+        }
+
+        .nav-divider-slim {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          margin: 32px 0;
+          width: 60px;
+        }
+
+        .mobile-nav-footer {
+          padding-top: 32px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          margin-top: auto;
+        }
+
+        .social-tray {
+          display: flex;
+          gap: 20px;
+          margin-bottom: 16px;
+        }
+
+        .tray-icon {
+          color: rgba(255, 255, 255, 0.6);
+          transition: color 0.2s ease;
+        }
+
+        .tray-icon:hover {
+          color: #EBF8F8;
+        }
+
+        .footer-copyright {
+          font-family: 'Inter', sans-serif;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .desktop-nav {
+          flex-wrap: nowrap;
+          gap: clamp(8px, 1.2vw, 20px) !important;
+          min-width: 0;
+        }
+
+        @media (max-width: 1280px) {
+          .header-inner {
+            padding: 0 16px !important;
+          }
+
+          .nav-link {
+            padding: 8px 10px;
+            font-size: 0.85rem;
+          }
+        }
+
+        @media (max-width: 1160px) {
+          .desktop-nav {
+            gap: 12px !important;
+          }
+
+          .header-actions {
+            gap: 8px !important;
+          }
+        }
+
+        @media (max-width: 1080px) {
           .desktop-only {
             display: none !important;
           }
+
+          .mobile-menu-button {
+            display: inline-flex;
+          }
+        }
+        .mobile-link-hover-teal:hover {
+          color: #EBF8F8 !important;
+        }
+
+        .mobile-cta-btn-main:hover {
+          background-color: #008888 !important;
         }
       `}</style>
     </header>
   );
 }
+

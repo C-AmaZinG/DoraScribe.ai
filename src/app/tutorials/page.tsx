@@ -11,34 +11,34 @@ const tutorialCards = [
   {
     eyebrow: "How To Get Started",
     title: "Set up your Dorascribe account",
-    description:
-      "Set up your Dorascribe account and get familiar with the app.",
-    href: "https://app.dorascribe.ai/signUp",
-    cta: "Sign Up",
+    description: "Get your workspace ready and start transcribing in minutes.",
+    videoId: "R8Ytt90iFU8",
+    thumbnail: "/assets/img_ambient_ai_people.png",
+    duration: "1:45"
   },
   {
     eyebrow: "How to Transcribe",
-    title: "Turn patient conversations into medical notes",
-    description:
-      "Transcribe patient conversations into medical notes accurately and efficiently.",
-    href: "https://app.dorascribe.ai/signUp",
-    cta: "Start Now",
+    title: "Capture clinical notes effortlessly",
+    description: "Turn patient conversations into accurate medical notes instantly.",
+    videoId: "SfjUAceKG0o",
+    thumbnail: "/assets/img_accurate_documentation_people.png",
+    duration: "2:20"
   },
   {
-    eyebrow: "How to Create Custom Note Templates",
-    title: "Build templates around your workflow",
-    description:
-      "Learn how to create and use custom note templates in Dorascribe.",
-    href: "https://app.dorascribe.ai/signUp",
-    cta: "Get Started",
+    eyebrow: "Workflow Design",
+    title: "Creating Custom Note Templates",
+    description: "Build templates that perfectly align with your unique clinical workflow.",
+    videoId: "Xin6AIcSU9k",
+    thumbnail: "/assets/img_custom_workflows_people.png",
+    duration: "3:15"
   },
   {
-    eyebrow: "How to Transcribe on Mobile",
-    title: "Capture notes on the go",
-    description:
-      "Learn how to use Dorascribe on your phone or tablet for quick note-taking on the go.",
-    href: "https://app.dorascribe.ai/signUp",
-    cta: "Get Started",
+    eyebrow: "Mobile Experience",
+    title: "Notes on the go with your phone",
+    description: "Master the mobile app to capture documentation anytime, anywhere.",
+    videoId: "Xin6AIcSU9k", // Using same for placeholder if 4th link not provided
+    thumbnail: "/assets/img_cross_platform_people.png",
+    duration: "1:55"
   },
 ];
 
@@ -49,62 +49,15 @@ const highlights = [
   "Answers to common questions",
 ];
 
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 export default function TutorialsPage() {
   return (
     <div className="tutorials-page">
       <Header />
       <main className="tutorials-main">
-        <section className="tutorials-hero">
-          <div className="page-shell hero-grid">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-copy"
-            >
-              <span className="hero-pill">Dorascribe Tutorials</span>
-              <h1>Master AI-powered documentation with Dorascribe.</h1>
-              <p className="hero-lead">
-                Explore step-by-step tutorials designed to enhance your workflow.
-              </p>
-              <div className="hero-actions">
-                <MakroButton
-                  text="Start Free Trial"
-                  href="https://app.dorascribe.ai/signUp"
-                  size="sm"
-                  variant="secondary"
-                />
-                <Link href="/contact" className="ghost-action">
-                  Book a Demo
-                </Link>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-panel"
-            >
-              <div className="hero-panel-header">
-                <span>Resources</span>
-                <span>Guided learning</span>
-              </div>
-              <div className="highlight-list">
-                {highlights.map((item) => (
-                  <div key={item} className="highlight-item">
-                    <span className="highlight-dot" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="panel-note">
-                Learn the core Dorascribe workflows for getting started, recording
-                consultations, customizing templates, and working from mobile.
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
         <section className="tutorials-library">
           <div className="page-shell">
@@ -117,19 +70,34 @@ export default function TutorialsPage() {
               {tutorialCards.map((card, index) => (
                 <motion.article
                   key={card.eyebrow}
-                  className="tutorial-card"
+                  className="tutorial-card card-with-embed"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.45, delay: index * 0.06 }}
                 >
-                  <span className="card-index">0{index + 1}</span>
-                  <p className="card-eyebrow">{card.eyebrow}</p>
-                  <h3>{card.title}</h3>
-                  <p className="card-description">{card.description}</p>
-                  <Link href={card.href} className="card-link">
-                    {card.cta}
-                  </Link>
+                  <div className="card-video-mockup">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${card.videoId}`}
+                      title={card.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      style={{ borderRadius: "12px" }}
+                    ></iframe>
+                  </div>
+                  
+                  <div className="card-content">
+                    <div className="card-header">
+                      <span className="card-index">0{index + 1}</span>
+                      <p className="card-eyebrow">{card.eyebrow}</p>
+                    </div>
+                    <h3>{card.title}</h3>
+                    <p className="card-description">{card.description}</p>
+                  </div>
                 </motion.article>
               ))}
             </div>
@@ -179,7 +147,7 @@ export default function TutorialsPage() {
         }
 
         .tutorials-main {
-          padding-top: 88px;
+          padding-top: 124px;
         }
 
         .page-shell {
@@ -370,8 +338,8 @@ export default function TutorialsPage() {
         }
 
         .section-kicker {
-          background: #e8eef7;
-          color: #244f84;
+          background: #EBF8F8;
+          color: #00AAAA;
         }
 
         .section-heading h2,
@@ -382,44 +350,130 @@ export default function TutorialsPage() {
         .tutorial-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 18px;
+          gap: 60px;
         }
 
         .tutorial-card {
           position: relative;
-          padding: 28px;
-          border-radius: 28px;
-          background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(250, 250, 250, 0.88)),
-            #ffffff;
+          display: flex;
+          flex-direction: column;
+          border-radius: 16px;
+          background: #FFFFFF;
+          border: 1px solid rgba(22, 22, 22, 0.08);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
           overflow: hidden;
+          padding: 10px;
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .tutorial-card:hover {
+          box-shadow: 0 42px 80px rgba(14, 20, 28, 0.12);
+        }
+
+        .card-video-mockup {
+          position: relative;
+          aspect-ratio: 16/9;
+          overflow: hidden;
+          background: #0b1121;
+          border-radius: 12px;
+        }
+
+        .video-thumb {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.85;
+          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+        }
+
+        .tutorial-card:hover .video-thumb {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+
+        .video-overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 0, 0, 0.2);
+          transition: background 0.3s ease;
+        }
+
+        .tutorial-card:hover .video-overlay {
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        .play-btn {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: #ffffff;
+          color: #00AAAA;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          transform: scale(1);
+          transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
+        }
+
+        .tutorial-card:hover .play-btn {
+          transform: scale(1.15);
+          background: #00AAAA;
+          color: #ffffff;
+        }
+
+        .video-duration {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.75);
+          color: #ffffff;
+          padding: 4px 8px;
+          border-radius: 6px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.7rem;
+          font-weight: 700;
+          backdrop-filter: blur(4px);
+        }
+
+        .card-content {
+          padding: 24px 28px 32px;
+          background: #FFFFFF;
+          flex-grow: 1;
+        }
+
+        .card-header {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 18px;
         }
 
         .card-index {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: fit-content;
-          min-width: 42px;
-          height: 42px;
-          padding: 0 12px;
-          border-radius: 999px;
+          min-width: 32px;
+          height: 32px;
+          border-radius: 50%;
           background: #f1ede7;
           color: #2c1810;
           font-family: "Inter", sans-serif;
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 700;
-          letter-spacing: 0.08em;
         }
 
         .card-eyebrow {
-          margin: 18px 0 0;
+          margin: 0 !important;
           font-family: "Inter", sans-serif;
-          font-size: 0.84rem;
+          font-size: 0.8rem;
           font-weight: 700;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: #2969b7;
+          color: #00AAAA;
         }
 
         .tutorial-card h3 {
@@ -432,27 +486,14 @@ export default function TutorialsPage() {
         .tutorial-card h3 {
           font-size: 1.65rem;
           line-height: 1.1;
-          max-width: 14ch;
         }
 
         .card-description {
           margin: 14px 0 0;
           font-size: 1rem;
-          max-width: 34ch;
         }
 
-        .card-link {
-          margin-top: 28px;
-          width: fit-content;
-          color: #2969b7;
-          font-size: 0.95rem;
-          font-weight: 700;
-        }
 
-        .card-link:hover,
-        .cta-link:hover {
-          color: #ff8c42;
-        }
 
         .tutorials-cta {
           padding-bottom: 96px;
@@ -491,6 +532,59 @@ export default function TutorialsPage() {
 
         .cta-link:hover {
           border-color: rgba(255, 140, 66, 0.5);
+        }
+
+        /* Video Modal Styles */
+        .video-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(11, 17, 33, 0.85);
+          backdrop-filter: blur(12px);
+          z-index: 10000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+
+        .video-modal-content {
+          position: relative;
+          width: 100%;
+          max-width: 1000px;
+          aspect-ratio: 16/9;
+          background: #000;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        }
+
+        .iframe-wrapper {
+          width: 100%;
+          height: 100%;
+        }
+
+        .modal-close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+          background: #ffffff;
+          color: #0b1121;
+          transform: rotate(90deg);
         }
 
         @media (max-width: 960px) {

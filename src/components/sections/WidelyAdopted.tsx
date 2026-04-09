@@ -579,7 +579,7 @@ export default function WidelyAdopted() {
           height: 64px;
           border-radius: 50%;
           background: #330015;
-          color: #FBF582;
+          color: #00AAAA;
           display: inline-flex;
           align-items: center;
           justify-content: center;

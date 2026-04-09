@@ -9,7 +9,7 @@ interface MakroButtonProps {
   href: string;
   className?: string;
   variant?: "primary" | "secondary" | "outline" | "accent";
-  tone?: "default" | "gray";
+  tone?: "default" | "gray" | "accent" | "green";
   size?: "sm" | "md";
   iconPosition?: "left" | "right";
 }
@@ -29,25 +29,33 @@ const MakroButton = ({
     variant === "outline"
       ? {
           background: "transparent",
-          border: "#FBF582",
-          text: "#FBF582",
-          hoverBackground: "rgba(251, 245, 130, 0.12)",
-          hoverBorder: "#FBF582",
+          border: tone === "accent" ? "#EBF8F8" : "#00AAAA",
+          text: tone === "accent" ? "#EBF8F8" : "#00AAAA",
+          hoverBackground: tone === "accent" ? "rgba(235, 248, 248, 0.12)" : "rgba(0, 170, 170, 0.12)",
+          hoverBorder: tone === "accent" ? "#EBF8F8" : "#00AAAA",
         }
-      : tone === "gray"
+      : tone === "green"
         ? {
-            background: "#FBF582",
-            border: "#FBF582",
+            background: "#10B981",
+            border: "#10B981",
+            text: "#ffffff",
+            hoverBackground: "#059669",
+            hoverBorder: "#059669",
+          }
+        : tone === "accent"
+        ? {
+            background: "#EBF8F8",
+            border: "#EBF8F8",
             text: "#000000",
-            hoverBackground: "#EBE570",
-            hoverBorder: "#EBE570",
+            hoverBackground: "#d8f2f2",
+            hoverBorder: "#d8f2f2",
           }
         : {
-            background: "#FBF582",
-            border: "#FBF582",
-            text: "#000000",
-            hoverBackground: "#EBE570",
-            hoverBorder: "#EBE570",
+            background: "#00AAAA",
+            border: "#00AAAA",
+            text: "#ffffff",
+            hoverBackground: "#008888",
+            hoverBorder: "#008888",
           };
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

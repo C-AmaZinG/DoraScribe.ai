@@ -83,7 +83,7 @@ export default function OffTheChartsFeatures() {
             <p className="card-title">AI Commands & Chat</p>
             <p className="card-desc">
               Ask Vero to edit notes, recommend treatment plans, confirm
-              medication doses - quickly and effortlessly.
+              medication doses quickly and effortlessly.
             </p>
           </article>
 
@@ -536,4 +536,5 @@ export default function OffTheChartsFeatures() {
     </section>
   );
 }
+
 

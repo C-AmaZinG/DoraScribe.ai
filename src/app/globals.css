@@ -1286,7 +1286,7 @@ main > section:last-of-type {
 }
 
 .wc-card-hero {
-  background: #FBF582;
+  background: #00AAAA;
   border-radius: 12px;
   height: 100%;
   min-height: 400px;
@@ -1314,4 +1314,27 @@ main > section:last-of-type {
   .why-choose-redesign {
     padding: 80px 20px;
   }
+}
+
+/* Mobile Navigation Hover Effects */
+.mobile-nav-overlay a:hover,
+.mobile-nav-overlay-v2 a:hover,
+.mobile-link-hero:hover,
+.sub-link:hover,
+.mobile-nav-hero-link:hover {
+    color: #00AAAA !important;
+}
+
+.mobile-cta-btn-main:hover {
+    background-color: #008888 !important;
+    color: #ffffff !important;
+}
+
+.mobile-close-toggle:hover {
+    background: rgba(0, 170, 170, 0.2) !important;
+}
+
+.close-nav-btn:hover {
+    background: rgba(0, 170, 170, 0.2) !important;
+    color: #00AAAA !important;
 }

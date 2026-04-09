@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AppProviders } from "@/components/providers/AppProviders";
 
 export const metadata: Metadata = {
   title: "DoraScribe | AI Clinical Notes Assistant",
@@ -21,7 +22,9 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
-        <div id="root">{children}</div>
+        <AppProviders>
+          <div id="root">{children}</div>
+        </AppProviders>
       </body>
     </html>
   );
