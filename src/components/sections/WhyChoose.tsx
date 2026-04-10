@@ -106,7 +106,7 @@ export default function WhyChoose() {
             <p
               className="smart-ambient-description"
               style={{
-                fontSize: "18px",
+                fontSize: "16px",
                 fontFamily: "'Inter', sans-serif",
                 color: "rgba(255, 255, 255, 0.7)",
                 maxWidth: "460px",
@@ -117,6 +117,30 @@ export default function WhyChoose() {
             </p>
           </div>
 
+          {/* Image/Visual side — desktop only */}
+          <div
+            className="smart-ambient-image"
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              width: "60%",
+              height: "100%",
+              zIndex: 1,
+            }}
+          >
+            <Image
+              src="/assets/Smart Ambient AI Medical Tool.png"
+              alt="Medical AI Visual"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+                mixBlendMode: "color-dodge",
+              }}
+              priority
+            />
+          </div>
         </motion.div>
 
         {/* Grid Cards (Bottom) */}
@@ -166,7 +190,7 @@ export default function WhyChoose() {
             </h4>
             <p
               style={{
-                fontSize: "15px",
+                fontSize: "16px",
                 fontFamily: "'Inter', sans-serif",
                 color: "#666666",
                 lineHeight: 1.6,
@@ -214,7 +238,7 @@ export default function WhyChoose() {
             </h4>
             <p
               style={{
-                fontSize: "15px",
+                fontSize: "16px",
                 fontFamily: "'Inter', sans-serif",
                 color: "rgba(255, 255, 255, 0.7)",
                 lineHeight: 1.6,
@@ -262,7 +286,7 @@ export default function WhyChoose() {
             </h4>
             <p
               style={{
-                fontSize: "15px",
+                fontSize: "16px",
                 fontFamily: "'Inter', sans-serif",
                 color: "#666666",
                 lineHeight: 1.6,
@@ -284,6 +308,9 @@ export default function WhyChoose() {
           .smart-ambient-content {
             padding: 48px 40px !important;
             justify-content: flex-end !important;
+          }
+          .smart-ambient-image {
+            display: none !important;
           }
           .feature-grid {
             grid-template-columns: 1fr !important;
