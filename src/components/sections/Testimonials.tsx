@@ -4,7 +4,7 @@ import React from "react";
 
 const baseQuotes = [
   {
-    quote: "I finish clinic with charting already done, and that has changed my evenings completely. DoraScribe captures the details accurately without breaking my flow with patients.",
+    quote: "I finish clinic with charting already done, and that has changed my evenings completely. Dorascribe captures the details accurately without breaking my flow with patients.",
     name: "Lara M.",
     role: "Family Physician",
     initials: "LM",
@@ -18,7 +18,7 @@ const baseQuotes = [
     avatarColor: "#B8C7D9",
   },
   {
-    quote: "Our team adopted DoraScribe quickly because it fits naturally into the visit. Documentation feels lighter, and we can stay focused on delivering safe, attentive care.",
+    quote: "Our team adopted Dorascribe quickly because it fits naturally into the visit. Documentation feels lighter, and we can stay focused on delivering safe, attentive care.",
     name: "Chinelo A.",
     role: "Family Medicine Physician",
     initials: "CA",
@@ -32,7 +32,7 @@ const baseQuotes = [
     avatarColor: "#C7C2EA",
   },
   {
-    quote: "DoraScribe seamlessly integrates into our daily routine. The ease of use and accuracy empower our clinical team to maintain high patient care standards.",
+    quote: "Dorascribe seamlessly integrates into our daily routine. The ease of use and accuracy empower our clinical team to maintain high patient care standards.",
     name: "Samuel K.",
     role: "Neurologist",
     initials: "SK",
@@ -79,7 +79,7 @@ export default function Testimonials() {
         <div className="header-container">
           <h2 className="section-title">Don't just take our word for it.</h2>
           <p className="section-subtitle">
-            See how DoraScribe is transforming practices across various specialties.
+            See how Dorascribe is transforming practices across various specialties.
           </p>
         </div>
 

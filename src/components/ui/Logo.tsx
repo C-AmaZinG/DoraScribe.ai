@@ -13,7 +13,7 @@ const Logo = ({ color = "#000000", showText = true }: LogoProps) => {
     <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
       <img
         src="/assets/Dorascribe_logo_dark.png"
-        alt="DoraScribe"
+        alt="Dorascribe"
         style={{
           height: "22px",
           width: "auto",

@@ -11,7 +11,7 @@ const features = [
     id: 'scribe',
     title: 'Scribe',
     heading: 'Instant Clinical Documentation',
-    description: 'DoraScribe listens to your patient encounters and generates perfect, structured clinical notes in seconds. Spend more time with patients and less time charting.',
+    description: 'Dorascribe listens to your patient encounters and generates perfect, structured clinical notes in seconds. Spend more time with patients and less time charting.',
     icon: <Sparkles className="w-4 h-4" />,
     image: '/notes.png',
     bgColor: 'rgba(0, 170, 170, 0.03)',

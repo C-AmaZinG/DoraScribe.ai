@@ -99,7 +99,7 @@ export default function MockupSection() {
           }}>
             <Image
               src="/assets/Dora_scribe_landing_page.png"
-              alt="DoraScribe dashboard mockup"
+              alt="Dorascribe dashboard mockup"
               width={1470}
               height={827}
               style={{ width: '100%', height: 'auto', objectFit: 'cover', objectPosition: 'left center', display: 'block' }}

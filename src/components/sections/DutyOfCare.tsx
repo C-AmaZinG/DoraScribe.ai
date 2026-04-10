@@ -39,7 +39,7 @@ const complianceBadges = [
 const trustItems = [
   {
     title: "Validated in practice",
-    body: "We test and iterate our models in real-world scenarios to ensure DoraScribe remains accurate, reliable and clinically sound.",
+    body: "We test and iterate our models in real-world scenarios to ensure Dorascribe remains accurate, reliable and clinically sound.",
     icon: PracticeIcon,
   },
   {
