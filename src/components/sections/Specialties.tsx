@@ -3,18 +3,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const professionals = [
-  "Endocrinology", "Nephrology", "Urology", "Optometry", "Infectious Diseases", 
-  "Rheumatology", "Public Health", "Occupational Medicine", "Palliative Care",
-  "Preventive Medicine", "Sports Medicine", "Pain Management", "Physiotherapy",
-  "Dentistry", "Respiratory Therapy", "Clinical Psychology"
+const topSpecialties = [
+  "Endocrinology", "Nephrology", "Urology", "Optometry",
+  "Infectious Diseases", "Rheumatology", "Public Health", "Occupational Medicine",
+];
+
+const bottomSpecialties = [
+  "Palliative Care", "Preventive Medicine", "Sports Medicine", "Pain Management",
+  "Physiotherapy", "Dentistry", "Respiratory Therapy", "Clinical Psychology",
 ];
 
 export default function Specialties() {
-  const leftProfessionals = professionals.slice(0, 8);
-  const rightProfessionals = professionals.slice(8);
-  const loopingLeftProfessionals = [...leftProfessionals, ...leftProfessionals];
-  const loopingRightProfessionals = [...rightProfessionals, ...rightProfessionals];
+  // Triple the items so the loop is seamless even on wide / narrow screens
+  const loopingTop = [...topSpecialties, ...topSpecialties, ...topSpecialties];
+  const loopingBottom = [...bottomSpecialties, ...bottomSpecialties, ...bottomSpecialties];
 
   return (
     <section
@@ -31,18 +33,16 @@ export default function Specialties() {
           width: "100%",
           background: "#F8F7F5",
           borderRadius: "48px",
-          padding: "80px",
+          padding: "180px 80px",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
-          gap: "60px",
           position: "relative",
           overflow: "hidden",
         }}
         className="specialties-container"
       >
-        {/* Left Side Content */}
-        <div style={{ flex: "0 0 40%", position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: "760px", textAlign: "center", position: "relative", zIndex: 1 }}>
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -56,7 +56,7 @@ export default function Specialties() {
               marginBottom: "24px",
             }}
           >
-            Tailored Clinical Expertise for Every Specialty
+            One Platform, Every Specialty
           </motion.h2>
 
           <motion.p
@@ -69,42 +69,32 @@ export default function Specialties() {
               fontSize: "18px",
               color: "#666666",
               lineHeight: 1.5,
-              maxWidth: "320px",
+              maxWidth: "680px",
+              margin: "0 auto",
             }}
           >
-            create custom templates in seconds
+            Dorascribe offers specialty-specific templates with the ability to
+            generate custom clinical documentation across every specialty.
           </motion.p>
         </div>
 
-        {/* Right Side - Staggered Lists */}
-        <div
-          style={{
-            flex: "1",
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "16px",
-            alignItems: "start"
-          }}
-          className="specialties-grid"
-        >
-          <div className="specialties-scroll-shell">
-            <div className="specialties-scroll-track specialties-scroll-track--up">
-              {loopingLeftProfessionals.map((prof, i) => (
-                <div key={`${prof}-${i}-left`} className="specialty-pill">
-                  {prof}
-                </div>
-              ))}
-            </div>
+        <div className="specialties-scroll-shell specialties-scroll-shell--top" aria-hidden="true">
+          <div className="specialties-scroll-track specialties-scroll-track--left">
+            {loopingTop.map((prof, i) => (
+              <div key={`${prof}-${i}-top`} className="specialty-pill">
+                {prof}
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div className="specialties-scroll-shell">
-            <div className="specialties-scroll-track specialties-scroll-track--down">
-              {loopingRightProfessionals.map((prof, i) => (
-                <div key={`${prof}-${i}-right`} className="specialty-pill">
-                  {prof}
-                </div>
-              ))}
-            </div>
+        <div className="specialties-scroll-shell specialties-scroll-shell--bottom" aria-hidden="true">
+          <div className="specialties-scroll-track specialties-scroll-track--right">
+            {loopingBottom.map((prof, i) => (
+              <div key={`${prof}-${i}-bottom`} className="specialty-pill">
+                {prof}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -112,56 +102,60 @@ export default function Specialties() {
       <style jsx>{`
         @media (max-width: 1024px) {
           .specialties-container {
-            flex-direction: column !important;
-            padding: 60px 40px !important;
+            padding: 120px 32px !important;
             text-align: center;
-          }
-          .specialties-container > div:first-child {
-            flex: none !important;
-            width: 100% !important;
-          }
-          .specialties-container p {
-            margin: 0 auto 40px !important;
-          }
-          .specialties-grid {
-            width: 100% !important;
-            grid-template-columns: 1fr 1fr !important;
-            justify-items: stretch;
-          }
-          .specialties-grid > div {
-            align-items: stretch !important;
-            margin-top: 0 !important;
           }
         }
         @media (max-width: 640px) {
-          .specialties-grid {
-            grid-template-columns: 1fr !important;
+          .specialties-container {
+            padding: 110px 16px !important;
           }
-          .specialties-scroll-shell:nth-child(2) {
-            display: none;
+          .specialty-pill {
+            padding: 10px 16px !important;
+            font-size: 13px !important;
+          }
+          .specialties-scroll-shell--top {
+            top: 16px !important;
+          }
+          .specialties-scroll-shell--bottom {
+            bottom: 16px !important;
+          }
+          .specialties-scroll-track {
+            gap: 8px !important;
           }
         }
 
         .specialties-scroll-shell {
-          height: 460px;
+          position: absolute;
+          left: 0;
+          width: 100%;
           overflow: hidden;
-          mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
-          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+
+        .specialties-scroll-shell--top {
+          top: 22px;
+        }
+
+        .specialties-scroll-shell--bottom {
+          bottom: 22px;
         }
 
         .specialties-scroll-track {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           gap: 12px;
-          animation: specialties-scroll-up 32s linear infinite;
+          width: max-content;
+          animation: specialties-scroll-left 34s linear infinite;
           will-change: transform;
         }
 
-        .specialties-scroll-track--down {
-          animation-name: specialties-scroll-down;
+        .specialties-scroll-track--right {
+          animation-name: specialties-scroll-right;
         }
 
-        .specialties-grid:hover .specialties-scroll-track {
+        .specialties-container:hover .specialties-scroll-track {
           animation-play-state: paused;
         }
 
@@ -179,7 +173,7 @@ export default function Specialties() {
           justify-content: space-between;
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
-          width: 100%;
+          white-space: nowrap;
           opacity: 0.66;
         }
 
@@ -189,14 +183,14 @@ export default function Specialties() {
           border-color: rgba(0,170,170,0.25);
         }
 
-        @keyframes specialties-scroll-up {
-          from { transform: translateY(0); }
-          to { transform: translateY(-50%); }
+        @keyframes specialties-scroll-left {
+          from { transform: translateX(0); }
+          to { transform: translateX(-33.333%); }
         }
 
-        @keyframes specialties-scroll-down {
-          from { transform: translateY(-50%); }
-          to { transform: translateY(0); }
+        @keyframes specialties-scroll-right {
+          from { transform: translateX(-33.333%); }
+          to { transform: translateX(0); }
         }
       `}</style>
     </section>

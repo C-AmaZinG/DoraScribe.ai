@@ -9,6 +9,7 @@ import HowItWorks from '@/components/sections/HowItWorks';
 import WhyChoose from '@/components/sections/WhyChoose';
 import Pricing from '@/components/sections/Pricing';
 import Specialties from '@/components/sections/Specialties';
+import BottomCTA from '@/components/sections/BottomCTA';
 
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
@@ -49,6 +50,7 @@ export default function Page() {
         <Pricing />
 
         <Testimonials />
+        <BottomCTA />
         <FAQ />
       </main>
       <Footer />
