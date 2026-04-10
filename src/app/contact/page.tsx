@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import AnimatedBackground from "@/components/AnimatedBackground";
 
 type SubmitStatus = "idle" | "sending" | "sent" | "error";
 
@@ -73,55 +72,16 @@ export default function ContactPage() {
         <section className="contact-section">
           <div className="contact-shell">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-              className="contact-kicker-wrap"
-            >
-              <div className="contact-kicker">
-                <span className="contact-kicker-dot" />
-                Contact Us
-              </div>
-            </motion.div>
-
-            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="contact-card"
             >
-              <div className="contact-visual-panel">
-                <AnimatedBackground
-                  orbColors={[
-                    "rgba(251, 26, 14, 0.32)",
-                    "rgba(255, 255, 255, 0.08)",
-                    "rgba(41, 105, 183, 0.16)",
-                    "rgba(251, 26, 14, 0.14)",
-                  ]}
-                />
-                <div className="contact-visual-overlay" />
-
-                <div className="contact-visual-content">
-                  <div>
-                    <p className="contact-panel-label">DoraScribe</p>
-                    <h1 className="contact-title">
-                      Tell us how we can help your team move faster.
-                    </h1>
-                    <p className="contact-subtitle">
-                      Whether you are exploring DoraScribe for a clinic, a growing
-                      practice, or a large organization, we are here to help you find
-                      the right next step.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               <div className="contact-form-panel">
                 <div className="contact-form-intro">
                   <p className="contact-form-kicker">Start the conversation</p>
-                  <h2>Contact the DoraScribe team</h2>
+                  <h2>Contact the Dorascribe team</h2>
                   <p>
                     Send us a message and we will get back to you as soon as we can.
                   </p>
@@ -161,7 +121,7 @@ export default function ContactPage() {
                       rows={7}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your team, your workflow, or what you want to achieve with DoraScribe."
+                      placeholder="Tell us about your team, your workflow, or what you want to achieve with Dorascribe."
                       required
                     />
                   </label>
@@ -174,7 +134,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                     />
                     <span>
-                      Keep me updated with DoraScribe product news, tutorials, and
+                      Keep me updated with Dorascribe product news, tutorials, and
                       helpful workflow tips.
                     </span>
                   </label>
@@ -230,102 +190,14 @@ export default function ContactPage() {
           margin: 0 auto;
         }
 
-        .contact-kicker-wrap {
-          margin-bottom: 22px;
-        }
-
-        .contact-kicker {
-          width: fit-content;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px 14px;
-          border-radius: 12px;
-          border: 1px solid rgba(0, 0, 0, 0.06);
-          background: #ffffff;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-          font-family: "Inter", sans-serif;
-          font-size: 0.92rem;
-          font-weight: 600;
-          color: #1c1c1c;
-        }
-
-        .contact-kicker-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 999px;
-          background: #fb1a0e;
-        }
-
         .contact-card {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          min-height: 640px;
+          display: block;
+          min-height: auto;
           overflow: hidden;
           border-radius: 32px;
           border: 1px solid rgba(0, 0, 0, 0.05);
           background: #ffffff;
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-        }
-
-        .contact-visual-panel {
-          position: relative;
-          overflow: hidden;
-          background: #1a1a1a;
-          min-height: 350px;
-        }
-
-        .contact-visual-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.22) 0%,
-            rgba(0, 0, 0, 0.38) 52%,
-            rgba(0, 0, 0, 0.76) 100%
-          );
-          pointer-events: none;
-        }
-
-        .contact-visual-content {
-          position: relative;
-          z-index: 1;
-          height: 100%;
-          padding: 42px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 28px;
-        }
-
-        .contact-panel-label {
-          margin: 0;
-          font-family: "Inter", sans-serif;
-          font-size: 0.86rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.76);
-        }
-
-        .contact-title {
-          margin: 16px 0 0;
-          max-width: 12ch;
-          font-family: "Playfair Display", Georgia, serif;
-          font-size: clamp(2.4rem, 4.2vw, 4.2rem);
-          font-weight: 400;
-          line-height: 0.98;
-          letter-spacing: -0.04em;
-          color: #ffffff;
-        }
-
-        .contact-subtitle {
-          margin: 18px 0 0;
-          max-width: 46ch;
-          font-family: "Inter", sans-serif;
-          font-size: 1rem;
-          line-height: 1.75;
-          color: rgba(255, 255, 255, 0.72);
         }
 
         .contact-form-panel {
@@ -442,10 +314,10 @@ export default function ContactPage() {
 
         .contact-submit {
           min-height: 52px;
-          border: 1px solid #fbf582;
+          border: 1px solid #00AAAA;
           border-radius: 16px;
-          background: #fbf582;
-          color: #171717;
+          background: #00AAAA;
+          color: #ffffff;
           font-family: "Inter", sans-serif;
           font-size: 0.96rem;
           font-weight: 700;
@@ -455,7 +327,7 @@ export default function ContactPage() {
 
         .contact-submit:hover:not(:disabled) {
           transform: translateY(-1px);
-          box-shadow: 0 14px 28px rgba(251, 245, 130, 0.32);
+          box-shadow: 0 14px 28px rgba(0, 170, 170, 0.32);
         }
 
         .contact-submit:disabled {
@@ -478,12 +350,6 @@ export default function ContactPage() {
           color: #b91c1c;
         }
 
-        @media (max-width: 1080px) {
-          .contact-card {
-            grid-template-columns: 1fr;
-          }
-        }
-
         @media (max-width: 760px) {
           .contact-main {
             padding-top: 100px;
@@ -497,7 +363,6 @@ export default function ContactPage() {
             border-radius: 24px;
           }
 
-          .contact-visual-content,
           .contact-form-panel {
             padding: 24px;
           }

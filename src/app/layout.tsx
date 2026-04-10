@@ -3,7 +3,7 @@ import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
 
 export const metadata: Metadata = {
-  title: "DoraScribe | AI Clinical Notes Assistant",
+  title: "Dorascribe | AI Clinical Notes Assistant",
   description: "AI Clinical Notes Assistant",
 };
 

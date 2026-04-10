@@ -2,263 +2,166 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Stethoscope, Baby, Brain, Microscope, Building2, Activity, FileText, BrainCircuit, Settings } from 'lucide-react';
 
 const professionals = [
-  "Internal Medicine",
-  "Family Medicine",
-  "Emergency Medicine",
-  "Pediatrics",
-  "General Surgery",
-  "Obstetrics & Gynecology",
-  "Cardiology",
-  "Psychiatry",
-  "Neurology",
-  "Orthopedics",
-  "Dermatology",
-  "Radiology",
-  "Anesthesiology",
-  "Oncology",
-  "Gastroenterology",
-  "Pulmonology",
-  "Endocrinology",
-  "Nephrology",
-  "Urology",
-  "Ophthalmology",
-  "Optometry",
-  "ENT",
-  "Infectious Diseases",
-  "Hematology",
-  "Rheumatology",
-  "Allergy & Immunology",
-  "Public Health",
-  "Preventive Medicine",
-  "Occupational Medicine",
-  "Sports Medicine",
-  "Palliative Care",
-  "Pain Management",
-  "Rehabilitation Medicine",
-  "Physiotherapy",
-  "Pathology",
-  "Dentistry",
-  "Nursing",
-  "Respiratory Therapy",
-  "Dietitians",
-  "Clinical Psychology",
-  "Social Work",
-  "Chiropractic",
+  "Endocrinology", "Nephrology", "Urology", "Optometry", "Infectious Diseases", 
+  "Rheumatology", "Public Health", "Occupational Medicine", "Palliative Care",
+  "Preventive Medicine", "Sports Medicine", "Pain Management", "Physiotherapy",
+  "Dentistry", "Respiratory Therapy", "Clinical Psychology"
 ];
-
-const icons = [Stethoscope, Baby, Brain, Microscope, Building2, Activity];
-const templateFeatures = [
-  {
-    icon: FileText,
-    title: "Custom templates in seconds",
-    description:
-      "Paste or upload any document and Scope will create a matching template instantly.",
-  },
-  {
-    icon: BrainCircuit,
-    title: "Learns your style",
-    description:
-      "Scope adapts to your edits and feedback, getting better with every note.",
-  },
-  {
-    icon: Settings,
-    title: "Template editor",
-    description:
-      "Complete control over formatting, style, and verbosity.",
-  },
-];
-const leftProfessionals = professionals.filter((_, index) => index % 2 === 0);
-const rightProfessionals = professionals.filter((_, index) => index % 2 !== 0);
-const loopingLeftProfessionals = [...leftProfessionals, ...leftProfessionals];
-const loopingRightProfessionals = [...rightProfessionals, ...rightProfessionals];
 
 export default function Specialties() {
+  const leftProfessionals = professionals.slice(0, 8);
+  const rightProfessionals = professionals.slice(8);
+  const loopingLeftProfessionals = [...leftProfessionals, ...leftProfessionals];
+  const loopingRightProfessionals = [...rightProfessionals, ...rightProfessionals];
+
   return (
     <section
       style={{
         padding: "100px 24px",
-        background: "#FDFCFA",
+        background: "#FFFFFF",
         display: "flex",
         justifyContent: "center",
       }}
     >
-      <div className="specialty-stack">
+      <div
+        style={{
+          maxWidth: "1200px",
+          width: "100%",
+          background: "#F8F7F5",
+          borderRadius: "48px",
+          padding: "80px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "60px",
+          position: "relative",
+          overflow: "hidden",
+        }}
+        className="specialties-container"
+      >
+        {/* Left Side Content */}
+        <div style={{ flex: "0 0 40%", position: "relative", zIndex: 1 }}>
+          <motion.h2
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(32px, 4vw, 48px)",
+              fontWeight: 400,
+              color: "#000000",
+              lineHeight: 1.1,
+              marginBottom: "24px",
+            }}
+          >
+            Tailored Clinical Expertise for Every Specialty
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "18px",
+              color: "#666666",
+              lineHeight: 1.5,
+              maxWidth: "320px",
+            }}
+          >
+            create custom templates in seconds
+          </motion.p>
+        </div>
+
+        {/* Right Side - Staggered Lists */}
         <div
           style={{
-            maxWidth: "1200px",
-            width: "100%",
-            background: "#F9F4F1",
-            borderRadius: "32px",
-            padding: "80px 60px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "40px",
-            flexWrap: "wrap",
-            position: "relative",
-            overflow: "hidden",
+            flex: "1",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "16px",
+            alignItems: "start"
           }}
+          className="specialties-grid"
         >
-          {/* Left Side Content */}
-          <div style={{ flex: 1, minWidth: "320px", position: "relative", zIndex: 1 }}>
-            <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "clamp(2.5rem, 4vw, 3.2rem)",
-                fontWeight: 700,
-                color: "#000000",
-                lineHeight: 1.1,
-                marginBottom: "20px",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Tailored Clinical
-              <br />
-              Expertise for Every
-              <br />
-              Specialty
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "1.25rem",
-                color: "#8E8E8E",
-                lineHeight: 1.5,
-                marginBottom: "60px",
-                maxWidth: "420px",
-              }}
-            >
-              create custom templates in seconds
-            </motion.p>
+          <div className="specialties-scroll-shell">
+            <div className="specialties-scroll-track specialties-scroll-track--up">
+              {loopingLeftProfessionals.map((prof, i) => (
+                <div key={`${prof}-${i}-left`} className="specialty-pill">
+                  {prof}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Right Side Dual Infinite Tickers */}
-          <div className="specialty-scroll-grid">
-            <div className="specialty-scroll-shell">
-              <div className="specialty-scroll-track specialty-scroll-track--up">
-                {loopingLeftProfessionals.map((professional, i) => {
-                  const Icon = icons[i % icons.length];
-                  const highlight = i % leftProfessionals.length === 0;
-
-                  return (
-                    <div key={`left-${professional}-${i}`} className="specialty-pill">
-                      <span className="specialty-pill__label">{professional}</span>
-                      
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="specialty-scroll-shell">
-              <div className="specialty-scroll-track specialty-scroll-track--down">
-                {loopingRightProfessionals.map((professional, i) => {
-                  const Icon = icons[(i + 2) % icons.length];
-                  const highlight = i % rightProfessionals.length === 0;
-
-                  return (
-                    <div key={`right-${professional}-${i}`} className="specialty-pill">
-                      <span className="specialty-pill__label">{professional}</span>
-                      
-                    </div>
-                  );
-                })}
-              </div>
+          <div className="specialties-scroll-shell">
+            <div className="specialties-scroll-track specialties-scroll-track--down">
+              {loopingRightProfessionals.map((prof, i) => (
+                <div key={`${prof}-${i}-right`} className="specialty-pill">
+                  {prof}
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
-        </div>
+      </div>
 
       <style jsx>{`
-        .specialty-stack {
-          max-width: 1200px;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
+        @media (max-width: 1024px) {
+          .specialties-container {
+            flex-direction: column !important;
+            padding: 60px 40px !important;
+            text-align: center;
+          }
+          .specialties-container > div:first-child {
+            flex: none !important;
+            width: 100% !important;
+          }
+          .specialties-container p {
+            margin: 0 auto 40px !important;
+          }
+          .specialties-grid {
+            width: 100% !important;
+            grid-template-columns: 1fr 1fr !important;
+            justify-items: stretch;
+          }
+          .specialties-grid > div {
+            align-items: stretch !important;
+            margin-top: 0 !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .specialties-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .specialties-scroll-shell:nth-child(2) {
+            display: none;
+          }
         }
 
-        .specialty-notes-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 30px;
-          padding: 0;
-        }
-
-        .specialty-note {
-          background: #F9F4F1;
-          padding: 32px;
-          border-radius: 16px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-          display: flex;
-          flex-direction: column;
-        }
-
-        .specialty-note h3 {
-          margin: 0;
-          font-family: "Monument Grotesk", sans-serif;
-          font-size: 20px;
-          font-weight: 600;
-          line-height: 1.15;
-          color: #000000;
-        }
-
-        .specialty-note p {
-          margin: 12px 0 0;
-          font-family: "Inter", sans-serif;
-          font-size: 0.95rem;
-          line-height: 1.5;
-          color: rgba(0, 0, 0, 0.7);
-          max-width: 100%;
-        }
-
-        .feature-icon-box {
-          margin-bottom: 24px;
-          color: #000000;
-        }
-
-        .specialty-scroll-grid {
-          flex: 1;
-          min-width: 320px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .specialty-scroll-shell {
-          height: 500px;
+        .specialties-scroll-shell {
+          height: 460px;
           overflow: hidden;
           mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
           -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
         }
 
-        .specialty-scroll-track {
+        .specialties-scroll-track {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          animation: specialty-scroll-up 42s linear infinite;
+          animation: specialties-scroll-up 32s linear infinite;
           will-change: transform;
         }
 
-        .specialty-scroll-track--down {
-          animation-name: specialty-scroll-down;
+        .specialties-scroll-track--down {
+          animation-name: specialties-scroll-down;
         }
 
-        .specialty-scroll-grid:hover .specialty-scroll-track {
+        .specialties-grid:hover .specialties-scroll-track {
           animation-play-state: paused;
         }
 
@@ -268,8 +171,8 @@ export default function Specialties() {
           border: 1px solid rgba(0,170,170,0.12);
           background: rgba(255,255,255,0.6);
           color: #000000;
-          font-family: "'Inter', sans-serif";
-          font-size: 1.1rem;
+          font-family: 'Playfair Display', serif;
+          font-size: 16px;
           font-weight: 500;
           display: flex;
           align-items: center;
@@ -286,75 +189,16 @@ export default function Specialties() {
           border-color: rgba(0,170,170,0.25);
         }
 
-        .specialty-pill__label {
-          display: block;
-          padding-right: 16px;
-          line-height: 1.3;
-        }
-
-        .specialty-pill__icon {
-          color: rgba(0,170,170,0.6);
-          flex-shrink: 0;
-        }
-
-        .specialty-pill__icon.is-highlight {
-          color: #000000;
-        }
-
-        @keyframes specialty-scroll-up {
+        @keyframes specialties-scroll-up {
           from { transform: translateY(0); }
           to { transform: translateY(-50%); }
         }
 
-        @keyframes specialty-scroll-down {
+        @keyframes specialties-scroll-down {
           from { transform: translateY(-50%); }
           to { transform: translateY(0); }
-        }
-
-        @media (max-width: 900px) {
-          .specialty-notes-grid {
-            gap: 20px;
-            padding: 0;
-          }
-
-          .specialty-scroll-grid {
-            gap: 10px;
-          }
-
-          .specialty-scroll-shell {
-            height: 420px;
-          }
-
-          .specialty-pill {
-            justify-content: center;
-            text-align: center;
-            padding: 16px 18px;
-          }
-
-          .specialty-pill__label {
-            padding-right: 0;
-          }
-        }
-
-        @media (max-width: 700px) {
-          .specialty-notes-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .specialty-note h3 {
-            font-size: 20px;
-          }
-
-          .specialty-note p {
-            font-size: 1rem;
-          }
-
-          .specialty-scroll-grid {
-            grid-template-columns: 1fr;
-          }
         }
       `}</style>
     </section>
   );
 }
-

@@ -35,7 +35,7 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
         position: "relative",
         textDecoration: "none",
         fontFamily: "'Inter', sans-serif",
-        fontSize: "0.88rem",
+        fontSize: "14px",
         fontWeight: 500,
         color: isHovered ? "#00AAAA" : "#2c1810",
         padding: "10px 12px",
@@ -64,7 +64,7 @@ const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; on
       style={{
         color: isHovered ? "#00AAAA" : "#FFFFFF",
         textDecoration: "none",
-        fontSize: "16px",
+        fontSize: "14px",
         fontWeight: 700,
         display: "block",
         padding: "8px 0",
@@ -207,6 +207,7 @@ export default function Header() {
                     type="button"
                     className="nav-link nav-button"
                     style={{
+                      fontSize: "14px",
                       color: hoveredLink === link.name ? "#00AAAA" : "#000000",
                       borderBottom:
                         hoveredLink === link.name
@@ -240,6 +241,7 @@ export default function Header() {
                   onMouseLeave={() => setHoveredLink(null)}
                   className="nav-link"
                   style={{
+                    fontSize: "14px",
                     fontWeight: hoveredLink === link.name ? 500 : 400,
                     color: hoveredLink === link.name ? "#00AAAA" : "#000000",
                     borderBottom:
@@ -371,6 +373,7 @@ export default function Header() {
                   borderRadius: "50%",
                   background: "#EBF8F8",
                   border: "none",
+                  display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   cursor: "pointer",
@@ -381,7 +384,14 @@ export default function Header() {
                   transition: "background-color 0.3s ease",
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ display: "block" }}
+                >
                   <motion.path
                     animate={isMobileMenuOpen ? { d: "M6 18L18 6" } : { d: "M5 7H19" }}
                     transition={{ duration: 0.3 }}
@@ -391,13 +401,13 @@ export default function Header() {
                   />
                   <motion.path
                     animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                    d="M5 12H15"
+                    d="M5 12H19"
                     stroke="#00AAAA"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                   />
                   <motion.path
-                    animate={isMobileMenuOpen ? { d: "M6 6L18 18" } : { d: "M4 17H20" }}
+                    animate={isMobileMenuOpen ? { d: "M6 6L18 18" } : { d: "M5 17H19" }}
                     transition={{ duration: 0.3 }}
                     stroke="#00AAAA"
                     strokeWidth="2.5"
@@ -496,7 +506,7 @@ export default function Header() {
                           alignItems: "center", 
                           justifyContent: "center", 
                           borderRadius: "12px",
-                          fontSize: "16px",
+                          fontSize: "14px",
                           fontWeight: 700,
                           transition: "background-color 0.2s ease"
                         }}
@@ -515,7 +525,7 @@ export default function Header() {
                         onClick={closeMobileMenu} 
                         style={{ 
                           textDecoration: "none", 
-                          fontSize: "16px", 
+                          fontSize: "14px", 
                           fontWeight: 700, 
                           textAlign: "center",
                           height: "52px",
@@ -557,7 +567,7 @@ export default function Header() {
                               background: "none",
                               border: "none",
                               color: "#FFFFFF",
-                              fontSize: "16px",
+                              fontSize: "14px",
                               fontWeight: 700,
                               width: "100%",
                               textAlign: "left",
@@ -633,7 +643,7 @@ export default function Header() {
               <div className="social-tray">
                 <a href="#" className="tray-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
               </div>
-              <p className="footer-copyright">© 2026 DoraScribe AI. All rights reserved.</p>
+              <p className="footer-copyright">© 2026 Dorascribe AI. All rights reserved.</p>
             </motion.div>
           </motion.div>
         )}
@@ -645,7 +655,7 @@ export default function Header() {
           padding: 8px 16px;
           text-decoration: none;
           font-family: "Inter", sans-serif;
-          font-size: 0.9rem;
+          font-size: 14px !important;
           white-space: nowrap;
           line-height: 1.1;
           transition: color 0.2s ease, border-color 0.2s ease, font-weight 0.2s ease;
@@ -711,7 +721,7 @@ export default function Header() {
           position: relative;
           text-decoration: none;
           font-family: "Inter", sans-serif;
-          font-size: 0.88rem;
+          font-size: 14px !important;
           font-weight: 500;
           color: #2c1810;
           padding: 10px 12px;
@@ -1120,7 +1130,7 @@ export default function Header() {
 
           .nav-link {
             padding: 8px 10px;
-            font-size: 0.85rem;
+            font-size: 14px !important;
           }
         }
 
@@ -1149,6 +1159,11 @@ export default function Header() {
 
         .mobile-cta-btn-main:hover {
           background-color: #008888 !important;
+        }
+
+        .mobile-nav-list a,
+        .mobile-nav-list button {
+          font-size: 14px !important;
         }
       `}</style>
     </header>

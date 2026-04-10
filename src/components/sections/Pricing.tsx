@@ -1,7 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import MakroButton from "@/components/ui/MakroButton";
+
+type ApiPlan = {
+  id: number;
+  name: string;
+  periodicity: number;
+  periodicity_type: string;
+  price: number;
+  description: string;
+  currency: string;
+  excerpt?: string;
+  benefits: string[];
+};
 
 type Plan = {
   name: string;
@@ -10,7 +22,10 @@ type Plan = {
   features: string[];
 };
 
-const plans: Plan[] = [
+type BillingCycle = "month" | "year";
+
+const fallbackPlansByCycle: Record<BillingCycle, Plan[]> = {
+  month: [
   {
     name: "Free Trial",
     description: "No credit card needed",
@@ -23,7 +38,7 @@ const plans: Plan[] = [
   },
   {
     name: "Essential",
-    description: "$399 billed annually",
+    description: "per user / billed monthly",
     priceLabel: "$39/month",
     features: [
       "150 Transcripts/Month",
@@ -35,7 +50,7 @@ const plans: Plan[] = [
   },
   {
     name: "Professional",
-    description: "$599 billed annually",
+    description: "per user / billed monthly",
     priceLabel: "$59/month",
     features: [
       "300 Transcripts/Month",
@@ -47,7 +62,7 @@ const plans: Plan[] = [
   },
   {
     name: "Premium",
-    description: "$899 billed annually",
+    description: "per user / billed monthly",
     priceLabel: "$89/month",
     features: [
       "Unlimited Transcripts",
@@ -58,9 +73,133 @@ const plans: Plan[] = [
       "Prescription Generation",
     ],
   },
-];
+  ],
+  year: [
+    {
+      name: "Free Trial",
+      description: "No credit card needed",
+      priceLabel: "FREE",
+      features: [
+        "20 Transcripts/Month",
+        "Standard Email Support",
+        "Default Note Templates",
+      ],
+    },
+    {
+      name: "Essential",
+      description: "per user / billed yearly",
+      priceLabel: "$399/year",
+      features: [
+        "150 Transcripts/Month",
+        "Priority Email Support",
+        "Custom Note Templates",
+        "Unlimited Ask Dora Feature",
+        "Prescription Generation",
+      ],
+    },
+    {
+      name: "Professional",
+      description: "per user / billed yearly",
+      priceLabel: "$599/year",
+      features: [
+        "300 Transcripts/Month",
+        "Priority Phone & Email Support",
+        "Custom Note Templates",
+        "Unlimited Ask Dora Feature",
+        "Prescription Generation",
+      ],
+    },
+    {
+      name: "Premium",
+      description: "per user / billed yearly",
+      priceLabel: "$899/year",
+      features: [
+        "Unlimited Transcripts",
+        "Priority Phone & Email Support",
+        "1:1 Onboarding Support",
+        "Custom Note Templates",
+        "Unlimited Ask Dora Feature",
+        "Prescription Generation",
+      ],
+    },
+  ],
+};
+
+const cardOrder = ["Free", "Essential", "Professional", "Premium"];
+
+function toDisplayPlan(plan: ApiPlan): Plan {
+  const isFree = plan.price === 0 || plan.name.toLowerCase() === "free";
+  const normalizedName = isFree ? "Free Trial" : plan.name;
+  const periodType = String(plan.periodicity_type || "").toLowerCase();
+  const suffix = periodType === "month" ? "/month" : periodType === "year" ? "/year" : "";
+
+  return {
+    name: normalizedName,
+    description: plan.excerpt || plan.description || "",
+    priceLabel: isFree ? "FREE" : `$${plan.price}${suffix}`,
+    features: Array.isArray(plan.benefits) ? plan.benefits : [],
+  };
+}
+
+function mapApiToCards(apiPlans: ApiPlan[], cycle: BillingCycle): Plan[] {
+  const byName = new Map<string, ApiPlan[]>();
+
+  apiPlans.forEach((plan) => {
+    const key = plan.name.toLowerCase();
+    byName.set(key, [...(byName.get(key) || []), plan]);
+  });
+
+  return cardOrder
+    .map((name) => {
+      const items = byName.get(name.toLowerCase()) || [];
+      if (!items.length) return null;
+
+      const selected = name.toLowerCase() === "free"
+        ? items[0]
+        : items.find((item) => String(item.periodicity_type).toLowerCase() === cycle)
+          || items.find((item) => String(item.periodicity_type).toLowerCase() === "month")
+          || items[0];
+      return toDisplayPlan(selected);
+    })
+    .filter((item): item is Plan => Boolean(item));
+}
 
 export default function Pricing() {
+  const [apiPlans, setApiPlans] = useState<ApiPlan[] | null>(null);
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("month");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadPlans = async () => {
+      try {
+        const response = await fetch("/api/plans", { method: "GET" });
+        if (!response.ok) {
+          return;
+        }
+
+        const payload = await response.json();
+        if (isMounted && Array.isArray(payload?.data)) {
+          setApiPlans(payload.data as ApiPlan[]);
+        }
+      } catch {
+        // Keep fallback plans on error.
+      }
+    };
+
+    loadPlans();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const plans = useMemo(() => {
+    if (!apiPlans) return fallbackPlansByCycle[billingCycle];
+    const mapped = mapApiToCards(apiPlans, billingCycle);
+    return mapped.length ? mapped : fallbackPlansByCycle[billingCycle];
+  }, [apiPlans, billingCycle]);
+
   return (
     <section id="pricing" className="pricing-clone">
       <div className="pricing-wrap">
@@ -72,6 +211,27 @@ export default function Pricing() {
           <p className="pricing-subtitle">
             Enhance your medical scribing experience at a price that fits your budget.
           </p>
+
+          <div className="billing-toggle" role="tablist" aria-label="Billing cycle">
+            <button
+              type="button"
+              className={`billing-btn ${billingCycle === "month" ? "is-active" : ""}`}
+              onClick={() => setBillingCycle("month")}
+              role="tab"
+              aria-selected={billingCycle === "month"}
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              className={`billing-btn ${billingCycle === "year" ? "is-active" : ""}`}
+              onClick={() => setBillingCycle("year")}
+              role="tab"
+              aria-selected={billingCycle === "year"}
+            >
+              Yearly
+            </button>
+          </div>
         </div>
 
         <div className="pricing-board">
@@ -95,7 +255,7 @@ export default function Pricing() {
                 />
 
                 <ul className="feature-list">
-                  {plan.features.map((feature, idx) => {
+                  {plan.features.map((feature) => {
                     return (
                       <li key={feature} className="feature-row">
                         <span className="feature-icon check">
@@ -173,6 +333,36 @@ export default function Pricing() {
           line-height: 1.5;
           color: rgba(54, 56, 71, 0.7);
           text-wrap: pretty;
+        }
+
+        .billing-toggle {
+          margin: 18px auto 0;
+          width: fit-content;
+          display: inline-flex;
+          background: #eef2f7;
+          border-radius: 999px;
+          padding: 4px;
+          border: 1px solid #d8e0ec;
+          gap: 4px;
+        }
+
+        .billing-btn {
+          border: 0;
+          background: transparent;
+          border-radius: 999px;
+          padding: 8px 14px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #5f6b7d;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .billing-btn.is-active {
+          background: #ffffff;
+          color: #121827;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
         }
 
         .pricing-board {

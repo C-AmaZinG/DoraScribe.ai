@@ -8,77 +8,77 @@ const features = [
   {
     title: "Easy to Use",
     description: "Designed for a seamless experience with minimal learning curve",
-    icon: <Sparkles size={16} color="white" />,
+    icon: <Sparkles size={24} color="#00AAAA" />,
     iconBg: "#00AAAA",
     type: "text"
   },
   {
     title: "Clean Interface",
     description: "Simple, uncluttered layout that keeps the focus on your workflow",
-    icon: <Monitor size={16} color="white" />,
+    icon: <Monitor size={24} color="#4B6B7A" />,
     iconBg: "#4B6B7A", // Slate blue
     type: "text"
   },
   {
     title: "Accurate notes",
     description: "Capture every clinical detail with clarity and precision",
-    icon: <CheckCircle size={16} color="white" />,
+    icon: <CheckCircle size={24} color="#6E5B87" />,
     iconBg: "#6E5B87", // Soft purple
     type: "text"
   },
   {
     title: "Supports Multiple Languages",
     description: "Transcribe patient conversations across multiple languages with confidence.",
-    icon: <Languages size={16} color="white" />,
+    icon: <Languages size={24} color="#2F6F8F" />,
     iconBg: "#2F6F8F", // Deep blue
     type: "text"
   },
   {
     title: "Patient Handouts",
     description: "Generate clear, professional handouts directly from your notes",
-    icon: <ClipboardSignature size={16} color="white" />,
+    icon: <ClipboardSignature size={24} color="#3D8268" />,
     iconBg: "#3D8268", // Teal/Green
     type: "text"
   },
   {
     title: "Smart Editing",
     description: "Multiple ways to add more information to your note after creating it.",
-    icon: <PenTool size={16} color="white" />,
+    icon: <PenTool size={24} color="#C05A5A" />,
     iconBg: "#C05A5A", // Soft red
     type: "text"
   },
   {
     title: "Referral Letter",
     description: "Let Dorascribe draft your referral letters for you",
-    icon: <Send size={16} color="white" />,
+    icon: <Send size={24} color="#2A6E91" />,
     iconBg: "#2A6E91", // Cerulean
     type: "text"
   },
   {
     title: "Smart Prescription generation",
     description: "Create prescriptions seamlessly from your documentation, saving time while ensuring accuracy.",
-    icon: <Pill size={16} color="white" />,
+    icon: <Pill size={24} color="#7B8E42" />,
     iconBg: "#7B8E42", // Olive green
     type: "text"
   },
   {
     title: "Custom Templates",
     description: "Access your custom templates and have the ability to create your preferred note template",
-    icon: <FileEdit size={16} color="white" />,
+    icon: <FileEdit size={24} color="#8F674A" />,
     iconBg: "#8F674A", // Earthy brown
     type: "text"
   },
   {
     title: "Dora Evidence",
     description: "Built-in clinical decision support tool designed to deliver evidence answers in seconds.",
-    icon: <Library size={16} color="white" />,
+    icon: <Library size={24} color="#114B69" />,
     iconBg: "#114B69", // Dark blue
     type: "text"
   },
   {
     title: "Smart Form Completion",
     description: "Dorascribe can help automatically complete your medical forms.",
-    icon: <FileCheck2 size={16} color="white" />,
+    icon: <FileCheck2 size={24} color="#50304C" />,
     iconBg: "#50304C", // Deep magenta
     type: "text"
   }
@@ -92,7 +92,7 @@ export default function FeatureCards() {
           <div className="fc-track">
             {[...features, ...features].map((feature, idx) => (
               <div key={idx} className="fc-card">
-                <div className="fc-icon-wrap" style={{ backgroundColor: feature.iconBg }}>
+                <div className="fc-icon-only">
                   {feature.icon}
                 </div>
                 <h3 className="fc-title">{feature.title}</h3>
@@ -161,7 +161,7 @@ export default function FeatureCards() {
           gap: 20px;
           padding: 0 10px;
           min-width: max-content;
-          animation: fc-scroll 80s linear infinite; /* Slowed down significantly for more cards */
+          animation: fc-scroll 50s linear infinite; /* Optimized speed for a more dynamic feel */
         }
 
         .fc-track:hover {
@@ -189,22 +189,17 @@ export default function FeatureCards() {
           flex-shrink: 0;
         }
 
-        .fc-icon-wrap {
-          width: 36px;
-          height: 36px;
-          min-width: 36px;
-          min-height: 36px;
-          border-radius: 8px;
+
+        .fc-icon-only {
+          margin-bottom: 20px;
           display: flex;
           align-items: center;
-          justify-content: center;
-          margin-bottom: 24px;
-          flex-shrink: 0;
-          background: rgba(255, 255, 255, 0.4);
-          border: 1.5px solid rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+          justify-content: flex-start;
           transition: transform 0.3s ease;
+        }
+
+        .fc-card:hover .fc-icon-only {
+          transform: translateY(-2px);
         }
 
         .fc-title {

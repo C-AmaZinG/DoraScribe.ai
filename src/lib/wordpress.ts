@@ -78,7 +78,7 @@ export function getFeaturedImage(post: WPPost): string | null {
 }
 
 export function getAuthorName(post: WPPost): string {
-  return post._embedded?.author?.[0]?.name || 'DoraScribe Team';
+  return post._embedded?.author?.[0]?.name || 'Dorascribe Team';
 }
 
 export function getCategories(post: WPPost): Array<{ name: string; slug: string }> {

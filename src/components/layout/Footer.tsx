@@ -97,9 +97,9 @@ export default function Footer() {
               { title: 'Useful Links', links: [{l:'Blog & News', h:'/blog'}, {l:'Trust Center', h:'#'}] }
             ].map((col) => (
               <div key={col.title}>
-                <h4 style={{ 
+                <h4 className="footer-menu-title" style={{ 
                   fontFamily: "'Playfair Display', serif", 
-                  fontSize: '0.85rem', 
+                  fontSize: '14px', 
                   fontWeight: 400, 
                   textTransform: 'uppercase', 
                   letterSpacing: '0.05em',
@@ -118,11 +118,11 @@ export default function Footer() {
                             style={{ 
                               textDecoration: 'none', 
                               color: '#64748b', 
-                              fontSize: '0.95rem',
+                              fontSize: '14px',
                               fontFamily: "'Inter', sans-serif",
                               transition: 'color 0.3s ease'
                             }}
-                            className="footer-link-hover"
+                            className="footer-link-hover footer-menu-link"
                           >
                             {link.l}
                           </Link>
@@ -137,11 +137,11 @@ export default function Footer() {
                           style={{ 
                             textDecoration: 'none', 
                             color: '#64748b', 
-                            fontSize: '0.95rem',
+                            fontSize: '14px',
                             fontFamily: "'Inter', sans-serif",
                             transition: 'color 0.3s ease'
                           }}
-                          className="footer-link-hover"
+                          className="footer-link-hover footer-menu-link"
                         >
                           {link.l}
                         </a>
@@ -220,6 +220,14 @@ export default function Footer() {
         </div>
       </div>
       <style jsx>{`
+        .footer-menu-title {
+          font-size: 14px !important;
+        }
+
+        .footer-menu-link {
+          font-size: 14px !important;
+        }
+
         .footer-link-hover:hover {
           color: #FF6F00 !important;
         }
