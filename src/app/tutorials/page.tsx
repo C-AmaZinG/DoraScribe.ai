@@ -339,7 +339,7 @@ export default function TutorialsPage() {
 
         .section-kicker {
           background: #EBF8F8;
-          color: #00AAAA;
+          color: #FF7429;
         }
 
         .section-heading h2,
@@ -410,7 +410,7 @@ export default function TutorialsPage() {
           height: 60px;
           border-radius: 50%;
           background: #ffffff;
-          color: #00AAAA;
+          color: #FF7429;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -421,7 +421,7 @@ export default function TutorialsPage() {
 
         .tutorial-card:hover .play-btn {
           transform: scale(1.15);
-          background: #00AAAA;
+          background: #FF7429;
           color: #ffffff;
         }
 
@@ -473,7 +473,7 @@ export default function TutorialsPage() {
           font-weight: 700;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: #00AAAA;
+          color: #FF7429;
         }
 
         .tutorial-card h3 {

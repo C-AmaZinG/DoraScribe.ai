@@ -29,10 +29,10 @@ const MakroButton = ({
     variant === "outline"
       ? {
           background: "transparent",
-          border: tone === "accent" ? "#EBF8F8" : "#00AAAA",
-          text: tone === "accent" ? "#EBF8F8" : "#00AAAA",
+          border: tone === "accent" ? "#EBF8F8" : "#FF7429",
+          text: tone === "accent" ? "#EBF8F8" : "#FF7429",
           hoverBackground: tone === "accent" ? "rgba(235, 248, 248, 0.12)" : "rgba(0, 170, 170, 0.12)",
-          hoverBorder: tone === "accent" ? "#EBF8F8" : "#00AAAA",
+          hoverBorder: tone === "accent" ? "#EBF8F8" : "#FF7429",
         }
       : tone === "green"
         ? {
@@ -51,8 +51,8 @@ const MakroButton = ({
             hoverBorder: "#d8f2f2",
           }
         : {
-            background: "#00AAAA",
-            border: "#00AAAA",
+            background: "#FF7429",
+            border: "#FF7429",
             text: "#ffffff",
             hoverBackground: "#008888",
             hoverBorder: "#008888",

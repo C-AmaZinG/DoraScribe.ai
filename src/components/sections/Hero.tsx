@@ -252,8 +252,8 @@ export default function Hero() {
           font-size: 0.9rem;
           font-weight: 600;
           color: #ffffff;
-          background: #00AAAA;
-          border: 1px solid #00AAAA;
+          background: #FF7429;
+          border: 1px solid #FF7429;
           box-shadow: none;
           transition: background-color 0.2s ease;
         }

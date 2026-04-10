@@ -315,7 +315,7 @@ export default function Pricing() {
 
         .pricing-title mark {
           display: inline-block;
-          background: #00AAAA;
+          background: #FF7429;
           border-radius: 14px;
           padding: 0 16px 5px;
         }
@@ -487,7 +487,7 @@ export default function Pricing() {
         }
 
         .pricing-card.is-premium .feature-icon.check {
-          color: #00AAAA;
+          color: #FF7429;
         }
 
         @media (max-width: 1200px) {

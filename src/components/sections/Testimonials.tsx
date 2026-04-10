@@ -36,7 +36,7 @@ const baseQuotes = [
     name: "Samuel K.",
     role: "Neurologist",
     initials: "SK",
-    avatarColor: "#00AAAA",
+    avatarColor: "#FF7429",
   },
   {
     quote: "A game changer for patient engagement. I can actually look at my patients instead of my screen. The emotional connection I've reclaimed is invaluable.",
