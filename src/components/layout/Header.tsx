@@ -8,10 +8,10 @@ import Logo from "@/components/ui/Logo";
 import { useLanguage } from "@/lib/language-context";
 
 const navLinks = [
-  { name: "How it works", href: "#how-it-works" },
-  { name: "Why Dora", href: "#why-choose" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "FAQ", href: "#faq" },
+  { name: "How it works", href: "/#how-it-works" },
+  { name: "Why Dora", href: "/#why-choose" },
+  { name: "Pricing", href: "/#pricing" },
+  { name: "FAQ", href: "/#faq" },
   {
     name: "Resources",
     children: [

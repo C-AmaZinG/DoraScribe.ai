@@ -197,7 +197,7 @@ export default function BlogPage() {
 
         .blog-head {
           width: 100%;
-          margin-bottom: 16px;
+          margin-bottom: 0;
         }
 
         .blog-kicker,
@@ -491,7 +491,7 @@ export default function BlogPage() {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 18px;
-          margin-top: 8px;
+          margin-top: -30px;
         }
 
         .grid-story {
@@ -618,6 +618,7 @@ export default function BlogPage() {
           display: flex;
           flex-direction: column;
           gap: 28px;
+          margin-top: -30px;
         }
 
         .tab-skeleton {
