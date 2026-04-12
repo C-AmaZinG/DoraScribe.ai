@@ -44,11 +44,11 @@ const MakroButton = ({
           }
         : tone === "accent"
         ? {
-            background: "#EBF8F8",
-            border: "#EBF8F8",
-            text: "#0B1D33",
-            hoverBackground: "#d8f2f2",
-            hoverBorder: "#d8f2f2",
+            background: "#0B1D33",
+            border: "#0B1D33",
+            text: "#ffffff",
+            hoverBackground: "#152C4A",
+            hoverBorder: "#152C4A",
           }
         : {
             background: "var(--brand-primary)",
