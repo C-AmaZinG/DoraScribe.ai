@@ -46,7 +46,7 @@ const MakroButton = ({
         ? {
             background: "#EBF8F8",
             border: "#EBF8F8",
-            text: "#000000",
+            text: "#0B1D33",
             hoverBackground: "#d8f2f2",
             hoverBorder: "#d8f2f2",
           }

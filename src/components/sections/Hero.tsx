@@ -273,7 +273,7 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #000000;
+          color: #0B1D33;
           background: #EBF8F8;
           border: 1px solid #EBF8F8;
           box-shadow: none;
