@@ -139,21 +139,41 @@ export default function FAQ() {
                     setActiveCategory(category);
                     setOpenIndex(0);
                   }}
+                  style={{ position: "relative", zIndex: 1, backgroundColor: "transparent" }}
                 >
-                  {category}
+                  <span style={{ position: "relative", zIndex: 2 }}>{category}</span>
+                  {activeCategory === category && (
+                    <motion.div
+                      layoutId="faq-active-highlight"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        backgroundColor: "#fff",
+                        borderTopLeftRadius: idx === 0 ? 16 : 4,
+                        borderBottomLeftRadius: idx === categories.length - 1 ? 16 : 4,
+                        borderTopRightRadius: 4,
+                        borderBottomRightRadius: 4,
+                        zIndex: 0,
+                      }}
+                      className="faq-active-bg"
+                    />
+                  )}
                 </button>
               ))}
             </aside>
           </div>
 
-          <div className="faq-main">
-            <AnimatePresence mode="wait">
+          <motion.div layout transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} className="faq-main">
+            <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={activeCategory}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
+                layout
+                initial={{ opacity: 0, x: 10, filter: "blur(4px)" }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, x: -10, filter: "blur(4px)" }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="faq-list"
               >
                 {items.map((item, idx) => {
@@ -189,7 +209,7 @@ export default function FAQ() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="faq-contact">
+            <motion.div layout transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} className="faq-contact">
               <div className="faq-contact-copy">
                 <span className="faq-contact-chip">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -207,8 +227,8 @@ export default function FAQ() {
 
                 <MakroButton text="Contact us" href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
@@ -337,7 +357,6 @@ export default function FAQ() {
         }
 
         .faq-cat.is-active {
-          background: #fff;
           color: var(--text-main);
         }
 
@@ -503,8 +522,8 @@ export default function FAQ() {
 
           .faq-cat,
           .faq-cat.is-first,
-          .faq-cat.is-last {
-            border-radius: 10px;
+          .faq-active-bg {
+            border-radius: 10px !important;
           }
 
           .faq-main {
