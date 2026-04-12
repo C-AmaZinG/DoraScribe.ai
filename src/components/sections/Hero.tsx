@@ -64,7 +64,7 @@ export default function Hero() {
       <style jsx>{`
         .hero-playground-clone {
           position: relative;
-          background: #ffffff;
+          background: var(--hero-bg, #ffffff);
           padding: 148px 24px 0px;
           overflow: hidden;
           
@@ -132,7 +132,7 @@ export default function Hero() {
           width: 100%;
           max-width: 900px;
           font-family: "Inter", sans-serif;
-          color: #000000;
+          color: var(--hero-text, #000000);
           letter-spacing: -0.04em;
           font-size: clamp(2.15rem, 6vw, 4.15rem);
           line-height: 0.98;
@@ -149,7 +149,7 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: clamp(0.95rem, 1.9vw, 1.08rem);
           line-height: 1.6;
-          color: #374151;
+          color: var(--hero-subtitle-text, #374151);
           text-align: center;
         }
 
@@ -273,15 +273,15 @@ export default function Hero() {
           font-family: "Inter", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #ffffff;
-          background: #0B1D33;
-          border: 1px solid #0B1D33;
+          color: var(--hero-secondary-cta-text, #ffffff);
+          background: var(--hero-secondary-cta-bg, #0B1D33);
+          border: 1px solid var(--hero-secondary-cta-bg, #0B1D33);
           box-shadow: none;
           transition: background-color 0.2s ease, transform 0.2s ease;
         }
         .hero-secondary-cta:hover {
-          background: #152C4A;
-          border-color: #152C4A;
+          background: var(--hero-secondary-cta-hover, #152C4A);
+          border-color: var(--hero-secondary-cta-hover, #152C4A);
           transform: scale(0.98);
         }
 

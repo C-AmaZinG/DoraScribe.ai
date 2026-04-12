@@ -67,11 +67,42 @@
 }
 
 /* Variant A Specific Component Overrides */
-.theme-variant-a .zd-hero-gradient {
-    background: #FFE343;
+.theme-variant-a .hero-playground-clone {
+    --hero-bg: #FFE343;
+    --hero-text: #000000;
 }
-.theme-variant-a .zd-hero-gradient::after {
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
+
+/* Variant B Theme Configuration */
+.theme-variant-b {
+    --brand-primary: #FFE343;
+    --brand-primary-text: #000000;
+    --brand-primary-hover: #DFBC16;
+    --secondary: #FFE343;
+    --makro-accent: #FFE343;
+    --color-secondary: #FFE343;
+    --color-accent: #FFE343;
+    
+    /* Specific overrides */
+    --how-it-works-orange: #FFE343;
+    --how-it-works-orange-glow: rgba(255, 227, 67, 0.2);
+    --how-it-works-orange-shadow: rgba(255, 227, 67, 0.4);
+    --hamburger-icon-color: #0B1D33;
+    --btn-icon-filter: brightness(0);
+}
+
+.theme-variant-b .hero-playground-clone {
+    --hero-bg: #0B1D33;
+    --hero-text: #ffffff;
+    --hero-subtitle-text: rgba(255, 255, 255, 0.8);
+    --hero-secondary-cta-bg: #EBF8F8;
+    --hero-secondary-cta-text: #0B1D33;
+    --hero-secondary-cta-hover: #d8f2f2;
+}
+
+.theme-variant-b {
+    --makro-accent-bg: #EBF8F8;
+    --makro-accent-text: #0B1D33;
+    --makro-accent-hover: #d8f2f2;
 }
 
 @theme {
