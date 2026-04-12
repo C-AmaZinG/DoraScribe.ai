@@ -8,8 +8,8 @@ const features = [
   {
     title: "Easy to Use",
     description: "Designed for a seamless experience with minimal learning curve",
-    icon: <Sparkles size={24} color="#FF7429" />,
-    iconBg: "#FF7429",
+    icon: <Sparkles size={24} color="var(--brand-primary)" />,
+    iconBg: "var(--brand-primary)",
     type: "text"
   },
   {

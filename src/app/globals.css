@@ -28,6 +28,9 @@
 }
 
 :root {
+    --brand-primary: #FF7429;
+    --brand-primary-text: #ffffff;
+    --brand-primary-hover: #CC5200;
     --primary: #000000;
     --primary-dark: #0B1D33;
     --secondary: #FF6F00; /* Vibrant Orange */
@@ -44,6 +47,31 @@
     /* Typography */
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Monument Grotesk', sans-serif;
+}
+
+.theme-variant-a {
+    --brand-primary: #FFE343;
+    --brand-primary-text: #000000;
+    --brand-primary-hover: #DFBC16;
+    --secondary: #FFE343;
+    --makro-accent: #FFE343;
+    --color-secondary: #FFE343;
+    --color-accent: #FFE343;
+    
+    /* Specific overrides */
+    --how-it-works-orange: #FFE343;
+    --how-it-works-orange-glow: rgba(255, 227, 67, 0.2);
+    --how-it-works-orange-shadow: rgba(255, 227, 67, 0.4);
+    --hamburger-icon-color: #0B1D33;
+    --btn-icon-filter: brightness(0);
+}
+
+/* Variant A Specific Component Overrides */
+.theme-variant-a .zd-hero-gradient {
+    background: #FFE343;
+}
+.theme-variant-a .zd-hero-gradient::after {
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
 }
 
 @theme {
@@ -1296,7 +1324,7 @@ main > section:last-of-type {
 }
 
 .wc-card-hero {
-  background: #FF7429;
+  background: var(--brand-primary);
   border-radius: 12px;
   height: 100%;
   min-height: 400px;
@@ -1332,12 +1360,12 @@ main > section:last-of-type {
 .mobile-link-hero:hover,
 .sub-link:hover,
 .mobile-nav-hero-link:hover {
-    color: #FF7429 !important;
+    color: var(--brand-primary) !important;
 }
 
 .mobile-cta-btn-main:hover {
-    background-color: #008888 !important;
-    color: #ffffff !important;
+    background-color: var(--brand-primary-hover) !important;
+    color: var(--brand-primary-text) !important;
 }
 
 .mobile-close-toggle:hover {
@@ -1346,5 +1374,5 @@ main > section:last-of-type {
 
 .close-nav-btn:hover {
     background: rgba(0, 170, 170, 0.2) !important;
-    color: #FF7429 !important;
+    color: var(--brand-primary) !important;
 }

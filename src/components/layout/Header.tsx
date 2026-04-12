@@ -8,7 +8,7 @@ import Logo from "@/components/ui/Logo";
 import { useLanguage } from "@/lib/language-context";
 
 const navLinks = [
-  { name: "How it works", href: "/#how-it-works" },
+  { name: "How to Use", href: "/#how-it-works" },
   { name: "Why Dora", href: "/#why-choose" },
   { name: "Pricing", href: "/#pricing" },
   { name: "FAQ", href: "/#faq" },
@@ -37,7 +37,7 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
         fontFamily: "'Inter', sans-serif",
         fontSize: "14px",
         fontWeight: 500,
-        color: isHovered ? "#FF7429" : "#2c1810",
+        color: isHovered ? "var(--brand-primary)" : "#2c1810",
         padding: "10px 12px",
         borderRadius: "10px",
         display: "flex",
@@ -62,9 +62,9 @@ const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; on
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
-        color: isHovered ? "#FF7429" : "#FFFFFF",
+        color: isHovered ? "var(--brand-primary)" : "#FFFFFF",
         textDecoration: "none",
-        fontSize: "14px",
+        fontSize: "13px",
         fontWeight: 700,
         display: "block",
         padding: "8px 0",
@@ -208,10 +208,10 @@ export default function Header() {
                     className="nav-link nav-button"
                     style={{
                       fontSize: "14px",
-                      color: hoveredLink === link.name ? "#FF7429" : "#000000",
+                      color: hoveredLink === link.name ? "var(--brand-primary)" : "#000000",
                       borderBottom:
                         hoveredLink === link.name
-                          ? "2px solid #FF7429"
+                          ? "2px solid var(--brand-primary)"
                           : "2px solid transparent",
                     }}
                   >
@@ -243,10 +243,10 @@ export default function Header() {
                   style={{
                     fontSize: "14px",
                     fontWeight: hoveredLink === link.name ? 500 : 400,
-                    color: hoveredLink === link.name ? "#FF7429" : "#000000",
+                    color: hoveredLink === link.name ? "var(--brand-primary)" : "#000000",
                     borderBottom:
                       hoveredLink === link.name
-                        ? "2px solid #FF7429"
+                        ? "2px solid var(--brand-primary)"
                         : "2px solid transparent",
                   }}
                 >
@@ -395,21 +395,21 @@ export default function Header() {
                   <motion.path
                     animate={isMobileMenuOpen ? { d: "M6 18L18 6" } : { d: "M5 7H19" }}
                     transition={{ duration: 0.3 }}
-                    stroke="#FF7429"
+                    stroke="var(--hamburger-icon-color, var(--brand-primary))"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                   />
                   <motion.path
                     animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
                     d="M5 12H19"
-                    stroke="#FF7429"
+                    stroke="var(--hamburger-icon-color, var(--brand-primary))"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                   />
                   <motion.path
                     animate={isMobileMenuOpen ? { d: "M6 6L18 18" } : { d: "M5 17H19" }}
                     transition={{ duration: 0.3 }}
-                    stroke="#FF7429"
+                    stroke="var(--hamburger-icon-color, var(--brand-primary))"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                   />
@@ -432,12 +432,16 @@ export default function Header() {
               top: 0,
               left: 0,
               width: "100vw",
-              height: "100vh",
+              height: "auto",
+              maxHeight: "85vh",
+              borderBottomLeftRadius: "24px",
+              borderBottomRightRadius: "24px",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
               backgroundColor: "#0b1121",
               zIndex: 15000,
               display: "flex",
               flexDirection: "column",
-              padding: "40px 24px",
+              padding: "20px 24px 30px",
               overflowY: "auto",
               boxSizing: "border-box",
             }}
@@ -465,7 +469,7 @@ export default function Header() {
                   boxShadow: "0 4px 12px rgba(0, 170, 170, 0.08)",
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF7429" strokeWidth="3" strokeLinecap="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--hamburger-icon-color, var(--brand-primary))" strokeWidth="3" strokeLinecap="round">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
@@ -498,15 +502,15 @@ export default function Header() {
                         onClick={closeMobileMenu} 
                         className="mobile-link-hover-teal"
                         style={{ 
-                          backgroundColor: "#FF7429", 
-                          color: "#FFFFFF", 
+                          backgroundColor: "var(--brand-primary)", 
+                          color: "var(--brand-primary-text)", 
                           textDecoration: "none", 
                           height: "52px", 
                           display: "flex", 
                           alignItems: "center", 
                           justifyContent: "center", 
                           borderRadius: "12px",
-                          fontSize: "14px",
+                          fontSize: "13px",
                           fontWeight: 700,
                           transition: "background-color 0.2s ease"
                         }}
@@ -525,7 +529,7 @@ export default function Header() {
                         onClick={closeMobileMenu} 
                         style={{ 
                           textDecoration: "none", 
-                          fontSize: "14px", 
+                          fontSize: "13px", 
                           fontWeight: 700, 
                           textAlign: "center",
                           height: "52px",
@@ -546,7 +550,7 @@ export default function Header() {
                   <div className="nav-divider-slim" />
 
                   {/* 3. Main Links Group */}
-                  {["How it works", "Why Dora", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
+                  {["How to Use", "Why Dora", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
                     const linkObj = navLinks.find(l => l.name === name);
                     if (!linkObj) return null;
 
@@ -567,7 +571,7 @@ export default function Header() {
                               background: "none",
                               border: "none",
                               color: "#FFFFFF",
-                              fontSize: "14px",
+                              fontSize: "13px",
                               fontWeight: 700,
                               width: "100%",
                               textAlign: "left",
@@ -583,7 +587,7 @@ export default function Header() {
                               fontSize: "12px", 
                               transform: isMobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)",
                               transition: "transform 0.3s ease",
-                              color: "#FF7429"
+                              color: "var(--brand-primary)"
                             }}>
                               ▾
                             </span>
@@ -791,7 +795,7 @@ export default function Header() {
 
         .language-trigger:hover,
         .language-trigger.is-open {
-          border-color: #FF7429;
+          border-color: var(--brand-primary);
           background: #ffffff;
           box-shadow: 0 10px 25px -5px rgba(0, 170, 170, 0.12);
         }
@@ -876,7 +880,7 @@ export default function Header() {
 
         .language-option.is-active {
           background: rgba(0, 170, 170, 0.06);
-          color: #FF7429;
+          color: var(--brand-primary);
           font-weight: 600;
         }
 
@@ -937,8 +941,8 @@ export default function Header() {
         }
 
         .mobile-lang-btn.is-active {
-          background: #FF7429;
-          border-color: #FF7429;
+          background: var(--brand-primary);
+          border-color: var(--brand-primary);
           box-shadow: 0 4px 12px rgba(0, 170, 170, 0.3);
         }
 
@@ -994,7 +998,7 @@ export default function Header() {
           align-items: center;
           justify-content: space-between;
           height: 48px;
-          margin-bottom: 40px;
+          margin-bottom: 24px;
         }
 
         /* Ensure logo is white on dark */
@@ -1158,12 +1162,12 @@ export default function Header() {
         }
 
         .mobile-cta-btn-main:hover {
-          background-color: #008888 !important;
+          background-color: var(--brand-primary-hover) !important;
         }
 
         .mobile-nav-list a,
         .mobile-nav-list button {
-          font-size: 14px !important;
+          font-size: 13px !important;
         }
       `}</style>
     </header>

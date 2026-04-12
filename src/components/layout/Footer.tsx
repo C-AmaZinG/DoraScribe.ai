@@ -92,7 +92,7 @@ export default function Footer() {
             </div>
 
             {[
-              { title: 'Resources', links: [{l:'Pricing Plans', h:'/#pricing'}, {l:'Tutorials', h:'#'}] },
+              { title: 'Resources', links: [{l:'How to Use', h:'/#how-it-works'}, {l:'Pricing Plans', h:'/#pricing'}, {l:'Tutorials', h:'#'}] },
               { title: 'Quick Links', links: [{l:'Support', h:'/contact'}, {l:'Dashboard', h:'https://app.dorascribe.ai/login'}] },
               { title: 'Useful Links', links: [{l:'Blog & News', h:'/blog'}, {l:'Trust Center', h:'#'}] }
             ].map((col) => (
@@ -229,7 +229,7 @@ export default function Footer() {
         }
 
         .footer-link-hover:hover {
-          color: #FF6F00 !important;
+          color: var(--secondary, #FF6F00) !important;
         }
       `}</style>
     </footer>

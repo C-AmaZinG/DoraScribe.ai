@@ -314,9 +314,9 @@ export default function ContactPage() {
 
         .contact-submit {
           min-height: 52px;
-          border: 1px solid #FF7429;
+          border: 1px solid var(--brand-primary);
           border-radius: 16px;
-          background: #FF7429;
+          background: var(--brand-primary);
           color: #ffffff;
           font-family: "Inter", sans-serif;
           font-size: 0.96rem;

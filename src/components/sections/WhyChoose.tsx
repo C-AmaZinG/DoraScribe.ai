@@ -101,7 +101,7 @@ export default function WhyChoose() {
                 maxWidth: "500px",
               }}
             >
-              Smart Ambient AI Medical Tool
+              Smart Ambient Clinical Platform
             </h3>
             <p
               className="smart-ambient-description"
@@ -113,7 +113,9 @@ export default function WhyChoose() {
                 lineHeight: 1.6,
               }}
             >
-              This is more than just a scribe. Enjoy easy EMR integration and experience clinical freedom.
+              More than an AI scribe.<br />
+              From real-time documentation to clinical decision support, prescriptions, and smart form completion.<br /><br />
+              Built to streamline every step of care
             </p>
           </div>
 

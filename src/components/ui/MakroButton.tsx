@@ -29,10 +29,10 @@ const MakroButton = ({
     variant === "outline"
       ? {
           background: "transparent",
-          border: tone === "accent" ? "#EBF8F8" : "#FF7429",
-          text: tone === "accent" ? "#EBF8F8" : "#FF7429",
+          border: tone === "accent" ? "#EBF8F8" : "var(--brand-primary)",
+          text: tone === "accent" ? "#EBF8F8" : "var(--brand-primary)",
           hoverBackground: tone === "accent" ? "rgba(235, 248, 248, 0.12)" : "rgba(0, 170, 170, 0.12)",
-          hoverBorder: tone === "accent" ? "#EBF8F8" : "#FF7429",
+          hoverBorder: tone === "accent" ? "#EBF8F8" : "var(--brand-primary)",
         }
       : tone === "green"
         ? {
@@ -51,11 +51,11 @@ const MakroButton = ({
             hoverBorder: "#d8f2f2",
           }
         : {
-            background: "#FF7429",
-            border: "#FF7429",
-            text: "#ffffff",
-            hoverBackground: "#008888",
-            hoverBorder: "#008888",
+            background: "var(--brand-primary)",
+            border: "var(--brand-primary)",
+            text: "var(--brand-primary-text)",
+            hoverBackground: "var(--brand-primary-hover)",
+            hoverBorder: "var(--brand-primary-hover)",
           };
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

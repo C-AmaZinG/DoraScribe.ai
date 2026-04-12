@@ -152,7 +152,7 @@ export default function FeatureCarousel() {
                       fontFamily: "'Inter', sans-serif"
                     }}
                   >
-                    {isActive && <span style={{ color: '#FF6F00' }}>{feature.icon}</span>}
+                    {isActive && <span style={{ color: 'var(--secondary, #FF6F00)' }}>{feature.icon}</span>}
                     {feature.title}
                   </button>
                 );
