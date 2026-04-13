@@ -103,7 +103,7 @@ export default function Hero() {
           content: "";
           position: absolute;
           top: -100%; left: -100%; width: 300%; height: 300%;
-          background: conic-gradient(from 0deg, transparent 60%, #0B1D33 100%, transparent);
+          background: conic-gradient(from 0deg, transparent 60%, var(--hero-badge-spin-color, #0B1D33) 100%, transparent);
           animation: badge-spin 2.5s linear infinite;
           z-index: 0;
         }
@@ -113,8 +113,8 @@ export default function Hero() {
           display: block;
           padding: 8px 14px;
           border-radius: 999px;
-          background: #ffffff;
-          color: #000000;
+          background: var(--hero-badge-bg, #ffffff);
+          color: var(--hero-badge-text, #000000);
           font-family: inherit;
           font-size: 0.75rem;
           font-weight: 500;

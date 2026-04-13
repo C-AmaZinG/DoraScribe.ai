@@ -70,7 +70,11 @@
     --how-it-works-orange-shadow: rgba(255, 116, 41, 0.4);
     --hamburger-icon-color: #0B1D33;
     --btn-icon-filter: brightness(0) invert(1);
-    --fc-card-hover-bg: #00aaaa;
+    --fc-card-bg: #00aaaa;
+    --fc-card-title: #ffffff;
+    --fc-card-text: #ffffff;
+    --fc-card-icon: #ffffff;
+    --fc-card-hover-bg: #009090;
     --fc-card-hover-title: #ffffff;
     --fc-card-hover-text: #ffffff;
     --fc-card-hover-icon: #ffffff;
@@ -92,20 +96,30 @@
 
 /* Variant B Theme Configuration */
 .theme-variant-b {
-    --brand-primary: #FF7429;
-    --brand-primary-text: #ffffff;
-    --brand-primary-hover: #CC5200;
-    --secondary: #FF7429;
-    --makro-accent: #FF7429;
-    --color-secondary: #FF7429;
-    --color-accent: #FF7429;
+    --brand-primary: #FFE343;
+    --brand-primary-text: #000000;
+    --brand-primary-hover: #EBD13D;
+    --secondary: #FFE343;
+    --makro-accent: #FFE343;
+    --color-secondary: #FFE343;
+    --color-accent: #FFE343;
     
     /* Specific overrides */
-    --how-it-works-orange: #FF7429;
-    --how-it-works-orange-glow: rgba(255, 116, 41, 0.2);
-    --how-it-works-orange-shadow: rgba(255, 116, 41, 0.4);
+    --how-it-works-orange: #FFE343;
+    --how-it-works-orange-glow: rgba(255, 227, 67, 0.2);
+    --how-it-works-orange-shadow: rgba(255, 227, 67, 0.4);
     --hamburger-icon-color: #0B1D33;
-    --btn-icon-filter: brightness(0) invert(1);
+    --btn-icon-filter: brightness(0);
+    
+    --pd-step-line-bg: #00aaaa;
+    
+    /* Hero Badge specific for Variant B */
+    --hero-badge-bg: transparent;
+    --hero-badge-text: #ffffff;
+    --hero-badge-spin-color: #FFE343;
+
+    /* System-wide Peach -> Light Yellow override for Variant B */
+    --peach-bg-override: #FEFCE8;
 }
 
 .theme-variant-b .hero-playground-clone {
@@ -116,6 +130,9 @@
     --hero-secondary-cta-bg: #EBF8F8;
     --hero-secondary-cta-text: #0B1D33;
     --hero-secondary-cta-hover: #d8f2f2;
+    --hero-badge-bg: #0B1D33; /* Matches background to create stroke effect */
+    --hero-badge-text: #ffffff;
+    --hero-badge-spin-color: #FFE343;
 }
 
 .theme-variant-b .feature-cards-section,
@@ -126,17 +143,58 @@
 }
 
 .theme-variant-b {
-    --makro-accent-bg: #EBF8F8;
-    --makro-accent-text: #0B1D33;
-    --makro-accent-hover: #d8f2f2;
-    --fc-card-hover-bg: #00aaaa;
-    --fc-card-hover-title: #ffffff;
-    --fc-card-hover-text: #ffffff;
-    --fc-card-hover-icon: #ffffff;
-    --pd-step-bg: #00aaaa;
-    --pd-step-dot-bg: #00aaaa;
-    --pd-step-dot-shadow: rgba(0, 170, 170, 0.2);
-    --pd-step-line-bg: #00aaaa;
+    --brand-primary: #FFE343;
+    --brand-primary-text: #000000;
+    --brand-primary-hover: #EBD13D;
+    --secondary: #FFE343;
+    --makro-accent: #FFE343;
+    --color-secondary: #FFE343;
+    --color-accent: #FFE343;
+    --pd-step-bg: #FFE343;
+    --pd-step-dot-bg: #FFE343;
+    --pd-step-dot-shadow: rgba(255, 227, 67, 0.4);
+    --pd-step-line-bg: #FFE343;
+    --peach-bg-override: #FEFCE8;
+}
+
+/* Blanket Background Overrides for Variant B */
+.theme-variant-b .hero-template-box,
+.theme-variant-b .wc-card,
+.theme-variant-b .burnout-visual,
+.theme-variant-b .mic-shell,
+.theme-variant-b .faq-cats,
+.theme-variant-b .faq-main,
+.theme-variant-b .faq-list,
+.theme-variant-b .blog-item-wrap,
+.theme-variant-b .faq-cat.is-active,
+.theme-variant-b .feature-visual,
+.theme-variant-b .v-device,
+.theme-variant-b .v-note-card,
+.theme-variant-b .v-monitor,
+.theme-variant-b .v-bubble {
+    background-color: var(--peach-bg-override) !important;
+}
+
+/* Specific inner element overrides for FAQ gradients and borders */
+.theme-variant-b .faq-cats::before,
+.theme-variant-b .faq-cats::after {
+    background: radial-gradient(circle at 0 0, transparent 0 68%, var(--peach-bg-override) 69% 100%) !important;
+}
+
+.theme-variant-b .feature-visual,
+.theme-variant-b .v-device,
+.theme-variant-b .v-note-card,
+.theme-variant-b .v-monitor,
+.theme-variant-b .v-bubble {
+    border-color: rgba(255, 227, 67, 0.2) !important;
+}
+
+.theme-variant-b .feature-visual,
+.theme-variant-b .v-device,
+.theme-variant-b .v-note-card,
+.theme-variant-b .v-monitor,
+.theme-variant-b .v-bubble {
+    border-color: rgba(255, 227, 67, 0.2) !important;
 }
 
 @theme {

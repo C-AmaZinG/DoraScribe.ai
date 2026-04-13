@@ -177,7 +177,7 @@ export default function FeatureCards() {
         }
 
         .fc-card {
-          background: #F8F7F6;
+          background: var(--fc-card-bg, #F8F7F6);
           border-radius: 4px;
           padding: 30px;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
@@ -214,6 +214,11 @@ export default function FeatureCards() {
           transition: transform 0.3s ease;
         }
 
+        .fc-icon-only :global(svg) {
+          color: var(--fc-card-icon, currentColor) !important;
+          stroke: var(--fc-card-icon, currentColor) !important;
+        }
+
         .fc-card:hover .fc-icon-only {
           transform: translateY(-2px);
         }
@@ -222,7 +227,7 @@ export default function FeatureCards() {
           font-family: 'Monument Grotesk', sans-serif;
           font-size: 16px;
           font-weight: 500;
-          color: #000000;
+          color: var(--fc-card-title, #000000);
           margin: 0 0 16px 0;
           letter-spacing: -0.01em;
         }
@@ -231,7 +236,7 @@ export default function FeatureCards() {
           font-family: 'Monument Grotesk', sans-serif;
           font-size: 14px;
           line-height: 1.5;
-          color: #555555;
+          color: var(--fc-card-text, #555555);
           margin: 0;
         }
 

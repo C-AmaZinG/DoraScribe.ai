@@ -9,8 +9,8 @@ import type { WPPost } from '@/lib/wordpress';
 const categoryColors: Record<string, string> = {
   "Uncategorized": "#000000",
   "Media": "#000000",
-  "Newsletter": "#FF6F00",
-  "Guide": "#FF6F00",
+  "Newsletter": "var(--secondary, #FF6F00)",
+  "Guide": "var(--secondary, #FF6F00)",
   "Webinar": "#7c3aed",
   "News": "#16a34a",
 };
