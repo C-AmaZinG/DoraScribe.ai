@@ -55,8 +55,8 @@ function Card1Illustration() {
     width: isActive(step) ? 14 : 10,
     height: isActive(step) ? 14 : 10,
     borderRadius: "50%",
-    background: isActive(step) ? "var(--how-it-works-orange, #ff7429)" : "#ccc",
-    boxShadow: isActive(step) ? "0 0 0 3px var(--how-it-works-orange-glow, rgba(255,116,41,0.2))" : "none",
+    background: isActive(step) ? (step === 2 ? "var(--pd-step-dot-bg, var(--how-it-works-orange, #ff7429))" : "var(--how-it-works-orange, #ff7429)") : "#ccc",
+    boxShadow: isActive(step) ? `0 0 0 3px ${step === 2 ? "var(--pd-step-dot-shadow, var(--how-it-works-orange-glow, rgba(255,116,41,0.2)))" : "var(--how-it-works-orange-glow, rgba(255,116,41,0.2))"}` : "none",
     transition: "all 0.4s ease",
     transitionDelay: (isActive(step) && step > 1) ? "0.4s" : "0s", 
   });
@@ -69,7 +69,7 @@ function Card1Illustration() {
 
   const lineFillStyle = (step: number) => ({
     width: "100%",
-    background: "var(--how-it-works-orange, #ff7429)",
+    background: step === 2 ? "var(--pd-step-line-bg, var(--how-it-works-orange, #ff7429))" : "var(--how-it-works-orange, #ff7429)",
     height: isActive(step) ? "100%" : "0%",
     transition: "height 0.4s ease-in-out",
   });
@@ -105,7 +105,11 @@ function Card1Illustration() {
         </div>
 
         {/* Button 2 */}
-        <div style={btnStyle(2, 68)}>
+        <div style={{
+          ...btnStyle(2, 68),
+          background: isActive(2) ? "var(--pd-step-bg, var(--how-it-works-orange, #ff7429))" : "#fff",
+          borderColor: isActive(2) ? "var(--pd-step-bg, var(--how-it-works-orange, #ff7429))" : "#e8e8e8"
+        }}>
           <span style={textStyle(2)}>Patient Details</span>
           <span style={{
             fontSize: 9, fontFamily: "'DM Sans', sans-serif", fontWeight: 500,

@@ -47,50 +47,69 @@
     /* Typography */
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Monument Grotesk', sans-serif;
+    --makro-accent-bg: #EBF8F8;
+    --makro-accent-text: #0B1D33;
+    --makro-accent-hover: #d8f2f2;
+    --hero-secondary-cta-bg: #EBF8F8;
+    --hero-secondary-cta-text: #0B1D33;
+    --hero-secondary-cta-hover: #d8f2f2;
 }
 
 .theme-variant-a {
-    --brand-primary: #FFE343;
-    --brand-primary-text: #000000;
-    --brand-primary-hover: #DFBC16;
-    --secondary: #FFE343;
-    --makro-accent: #FFE343;
-    --color-secondary: #FFE343;
-    --color-accent: #FFE343;
+    --brand-primary: #FF7429;
+    --brand-primary-text: #ffffff;
+    --brand-primary-hover: #CC5200;
+    --secondary: #FF7429;
+    --makro-accent: #FF7429;
+    --color-secondary: #FF7429;
+    --color-accent: #FF7429;
     
     /* Specific overrides */
-    --how-it-works-orange: #FFE343;
-    --how-it-works-orange-glow: rgba(255, 227, 67, 0.2);
-    --how-it-works-orange-shadow: rgba(255, 227, 67, 0.4);
+    --how-it-works-orange: #FF7429;
+    --how-it-works-orange-glow: rgba(255, 116, 41, 0.2);
+    --how-it-works-orange-shadow: rgba(255, 116, 41, 0.4);
     --hamburger-icon-color: #0B1D33;
-    --btn-icon-filter: brightness(0);
+    --btn-icon-filter: brightness(0) invert(1);
+    --fc-card-hover-bg: #00aaaa;
+    --fc-card-hover-title: #ffffff;
+    --fc-card-hover-text: #ffffff;
+    --fc-card-hover-icon: #ffffff;
+    --pd-step-bg: #00aaaa;
+    --pd-step-dot-bg: #00aaaa;
+    --pd-step-dot-shadow: rgba(0, 170, 170, 0.2);
+    --pd-step-line-bg: #00aaaa;
 }
 
 /* Variant A Specific Component Overrides */
 .theme-variant-a .hero-playground-clone {
-    --hero-bg: #FFE343;
+    --hero-bg: #ffffff;
     --hero-text: #000000;
+}
+
+.theme-variant-a .feature-cards-section {
+    --feature-section-bg: #ffffff;
 }
 
 /* Variant B Theme Configuration */
 .theme-variant-b {
-    --brand-primary: #FFE343;
-    --brand-primary-text: #000000;
-    --brand-primary-hover: #DFBC16;
-    --secondary: #FFE343;
-    --makro-accent: #FFE343;
-    --color-secondary: #FFE343;
-    --color-accent: #FFE343;
+    --brand-primary: #FF7429;
+    --brand-primary-text: #ffffff;
+    --brand-primary-hover: #CC5200;
+    --secondary: #FF7429;
+    --makro-accent: #FF7429;
+    --color-secondary: #FF7429;
+    --color-accent: #FF7429;
     
     /* Specific overrides */
-    --how-it-works-orange: #FFE343;
-    --how-it-works-orange-glow: rgba(255, 227, 67, 0.2);
-    --how-it-works-orange-shadow: rgba(255, 227, 67, 0.4);
+    --how-it-works-orange: #FF7429;
+    --how-it-works-orange-glow: rgba(255, 116, 41, 0.2);
+    --how-it-works-orange-shadow: rgba(255, 116, 41, 0.4);
     --hamburger-icon-color: #0B1D33;
-    --btn-icon-filter: brightness(0);
+    --btn-icon-filter: brightness(0) invert(1);
 }
 
 .theme-variant-b .hero-playground-clone {
+    background: #0B1D33 !important;
     --hero-bg: #0B1D33;
     --hero-text: #ffffff;
     --hero-subtitle-text: rgba(255, 255, 255, 0.8);
@@ -99,10 +118,25 @@
     --hero-secondary-cta-hover: #d8f2f2;
 }
 
+.theme-variant-b .feature-cards-section,
+.theme-variant-b #why-choose {
+    --feature-section-bg: #0B1D33;
+    --feature-section-text: #ffffff;
+    --feature-section-subtitle: rgba(255, 255, 255, 0.7);
+}
+
 .theme-variant-b {
     --makro-accent-bg: #EBF8F8;
     --makro-accent-text: #0B1D33;
     --makro-accent-hover: #d8f2f2;
+    --fc-card-hover-bg: #00aaaa;
+    --fc-card-hover-title: #ffffff;
+    --fc-card-hover-text: #ffffff;
+    --fc-card-hover-icon: #ffffff;
+    --pd-step-bg: #00aaaa;
+    --pd-step-dot-bg: #00aaaa;
+    --pd-step-dot-shadow: rgba(0, 170, 170, 0.2);
+    --pd-step-line-bg: #00aaaa;
 }
 
 @theme {

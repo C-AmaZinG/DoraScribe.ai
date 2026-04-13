@@ -8,8 +8,7 @@ const features = [
   {
     title: "Easy to Use",
     description: "Designed for a seamless experience with minimal learning curve",
-    icon: <Sparkles size={24} color="var(--brand-primary)" />,
-    iconBg: "var(--brand-primary)",
+    icon: <Sparkles size={24} color="var(--brand-primary)" />,    iconBg: "var(--brand-primary)",
     type: "text"
   },
   {
@@ -114,7 +113,7 @@ export default function FeatureCards() {
       <style jsx>{`
         .feature-cards-section {
           padding: 100px 24px 176px;
-          background-color: #FFFFFF;
+          background-color: var(--feature-section-bg, #FFFFFF);
           position: relative;
         }
 
@@ -142,12 +141,12 @@ export default function FeatureCards() {
 
         .fc-container::before {
           left: 0;
-          background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+          background: linear-gradient(to right, var(--feature-section-bg, #FFFFFF) 0%, transparent 100%);
         }
 
         .fc-container::after {
           right: 0;
-          background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+          background: linear-gradient(to left, var(--feature-section-bg, #FFFFFF) 0%, transparent 100%);
         }
 
         .fc-marquee {
@@ -187,6 +186,23 @@ export default function FeatureCards() {
           height: 260px;
           width: 300px;
           flex-shrink: 0;
+          transition: all 0.3s ease;
+        }
+
+        .fc-card:hover {
+          background: var(--fc-card-hover-bg, #F0F0F0);
+        }
+
+        .fc-card:hover .fc-title {
+          color: var(--fc-card-hover-title, #000000);
+        }
+
+        .fc-card:hover .fc-text {
+          color: var(--fc-card-hover-text, #555555);
+        }
+
+        .fc-card:hover .fc-icon-only :global(svg) {
+          color: var(--fc-card-hover-icon, inherit) !important;
         }
 
 

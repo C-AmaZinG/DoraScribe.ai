@@ -9,7 +9,7 @@ export default function WhyChoose() {
     <section
       id="why-choose"
       style={{
-        background: "#FFFFFF",
+        background: "var(--feature-section-bg, #FFFFFF)",
         paddingTop: "120px",
         paddingBottom: "120px",
         width: "100%",
@@ -51,7 +51,7 @@ export default function WhyChoose() {
             style={{
               fontSize: "18px",
               fontFamily: "'Inter', sans-serif",
-              color: "#555555",
+              color: "var(--feature-section-subtitle, #555555)",
               maxWidth: "600px",
               lineHeight: 1.5,
             }}
