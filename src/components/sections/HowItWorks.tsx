@@ -39,7 +39,7 @@ function Card1Illustration() {
   });
 
   const textStyle = (step: number) => ({
-    color: isActive(step) ? "var(--brand-primary-text, #fff)" : "#bbb",
+    color: isActive(step) ? "var(--pd-step-text, #fff)" : "#bbb",
     fontFamily: "'DM Sans', sans-serif",
     fontWeight: isActive(step) ? 500 : 400,
     fontSize: 14,
@@ -113,7 +113,7 @@ function Card1Illustration() {
           <span style={textStyle(2)}>Patient Details</span>
           <span style={{
             fontSize: 9, fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
-            color: isActive(2) ? "var(--brand-primary-text, #fff)" : "#158384",
+            color: isActive(2) ? "var(--pd-step-text, #fff)" : "#158384",
             background: isActive(2) ? "rgba(255,255,255,0.2)" : "rgba(21,131,132,0.08)",
             border: isActive(2) ? "1px solid rgba(255,255,255,0.4)" : "1px solid rgba(21,131,132,0.2)",
             borderRadius: 3, padding: "1px 5px", whiteSpace: "nowrap",

@@ -37,15 +37,15 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
         fontFamily: "'Inter', sans-serif",
         fontSize: "14px",
         fontWeight: 500,
-        color: isHovered ? "var(--brand-primary)" : "#2c1810",
+        color: isHovered ? "#00aaaa" : "#2c1810",
         padding: "10px 12px",
         borderRadius: "10px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        background: isHovered ? "rgba(0, 249, 249, 0.08)" : "transparent",
+        background: isHovered ? "rgba(61, 129, 131, 0.08)" : "transparent",
         transition: "all 0.2s ease",
-        boxShadow: isHovered ? "0 8px 18px rgba(0, 249, 249, 0.08)" : "none"
+        boxShadow: isHovered ? "0 8px 18px rgba(61, 129, 131, 0.08)" : "none"
       }}
     >
       {name}
@@ -62,7 +62,7 @@ const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; on
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
-        color: isHovered ? "var(--brand-primary)" : "#FFFFFF",
+        color: isHovered ? "#00aaaa" : "#FFFFFF",
         textDecoration: "none",
         fontSize: "13px",
         fontWeight: 700,
@@ -208,10 +208,10 @@ export default function Header() {
                     className="nav-link nav-button"
                     style={{
                       fontSize: "14px",
-                      color: hoveredLink === link.name ? "var(--brand-primary)" : "#000000",
+                      color: hoveredLink === link.name ? "#3d8183" : "#000000",
                       borderBottom:
                         hoveredLink === link.name
-                          ? "2px solid var(--brand-primary)"
+                          ? "2px solid #3d8183"
                           : "2px solid transparent",
                     }}
                   >
@@ -243,10 +243,10 @@ export default function Header() {
                   style={{
                     fontSize: "14px",
                     fontWeight: hoveredLink === link.name ? 500 : 400,
-                    color: hoveredLink === link.name ? "var(--brand-primary)" : "#000000",
+                    color: hoveredLink === link.name ? "#3d8183" : "#000000",
                     borderBottom:
                       hoveredLink === link.name
-                        ? "2px solid var(--brand-primary)"
+                        ? "2px solid #3d8183"
                         : "2px solid transparent",
                   }}
                 >
@@ -345,11 +345,11 @@ export default function Header() {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "0.9rem",
                   fontWeight: 500,
-                  color: "#000000",
+                  color: isLoginHovered ? "#ffffff" : "#000000",
                   padding: "8px 20px",
                   borderRadius: "10px",
-                  background: isLoginHovered ? "#d8f2f2" : "#EBF8F8",
-                  transition: "background 0.2s ease, transform 0.2s ease",
+                  background: isLoginHovered ? "#2d6163" : "#EBF8F8",
+                  transition: "background 0.2s ease, transform 0.2s ease, color 0.2s ease",
                   transform: isLoginHovered ? "scale(1.02)" : "scale(1)",
                 }}
                 className="login-link"
@@ -380,7 +380,7 @@ export default function Header() {
                   padding: 0,
                   position: "relative",
                   zIndex: 1010,
-                  boxShadow: "0 4px 12px rgba(0, 170, 170, 0.08)",
+                  boxShadow: "0 4px 12px rgba(61, 129, 131, 0.08)",
                   transition: "background-color 0.3s ease",
                 }}
               >
@@ -466,7 +466,7 @@ export default function Header() {
                   justifyContent: "center",
                   cursor: "pointer",
                   padding: 0,
-                  boxShadow: "0 4px 12px rgba(0, 170, 170, 0.08)",
+                  boxShadow: "0 4px 12px rgba(61, 129, 131, 0.08)",
                 }}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--hamburger-icon-color, var(--brand-primary))" strokeWidth="3" strokeLinecap="round">
@@ -539,7 +539,7 @@ export default function Header() {
                           background: "#EBF8F8",
                           color: "#000000", 
                           borderRadius: "12px",
-                          border: "1px solid rgba(0, 170, 170, 0.2)",
+                          border: "1px solid rgba(61, 129, 131, 0.2)",
                         }}
                       >
                         Login
@@ -754,10 +754,10 @@ export default function Header() {
 
         .dropdown-link:hover,
         .dropdown-link:focus-visible {
-          background: rgba(0, 170, 170, 0.08);
-          border-color: rgba(0, 170, 170, 0.2);
+          background: rgba(61, 129, 131, 0.08);
+          border-color: rgba(61, 129, 131, 0.2);
           color: #EBF8F8;
-          box-shadow: 0 8px 18px rgba(0, 170, 170, 0.08);
+          box-shadow: 0 8px 18px rgba(61, 129, 131, 0.08);
         }
 
         .dropdown-link:hover::after,
@@ -766,7 +766,8 @@ export default function Header() {
         }
 
         .login-link:hover {
-          background: #e6dfd6 !important;
+          background: #2d6163 !important;
+          color: #ffffff !important;
           transform: scale(0.98);
         }
 
@@ -797,7 +798,7 @@ export default function Header() {
         .language-trigger.is-open {
           border-color: var(--brand-primary);
           background: #ffffff;
-          box-shadow: 0 10px 25px -5px rgba(0, 170, 170, 0.12);
+          box-shadow: 0 10px 25px -5px rgba(61, 129, 131, 0.12);
         }
 
         .language-flag-mini {
@@ -879,8 +880,8 @@ export default function Header() {
         }
 
         .language-option.is-active {
-          background: rgba(0, 170, 170, 0.06);
-          color: var(--brand-primary);
+          background: rgba(61, 129, 131, 0.06);
+          color: #3d8183 !important;
           font-weight: 600;
         }
 
@@ -941,9 +942,9 @@ export default function Header() {
         }
 
         .mobile-lang-btn.is-active {
-          background: var(--brand-primary);
-          border-color: var(--brand-primary);
-          box-shadow: 0 4px 12px rgba(0, 170, 170, 0.3);
+          background: #3d8183 !important;
+          border-color: #3d8183 !important;
+          box-shadow: 0 4px 12px rgba(61, 129, 131, 0.3);
         }
 
         .mobile-menu-button {
@@ -960,7 +961,7 @@ export default function Header() {
           cursor: pointer;
           position: relative;
           z-index: 102;
-          box-shadow: 0 2px 8px rgba(0, 170, 170, 0.08);
+          box-shadow: 0 2px 8px rgba(61, 129, 131, 0.08);
           transition: all 0.2s ease;
         }
 
@@ -984,7 +985,7 @@ export default function Header() {
           width: 100vw;
           height: 100vh;
           background: #0b1121;
-          background-image: radial-gradient(circle at top right, rgba(0, 170, 170, 0.2), transparent 500px);
+          background-image: radial-gradient(circle at top right, rgba(61, 129, 131, 0.2), transparent 500px);
           z-index: 15000;
           display: flex;
           flex-direction: column;
@@ -1019,7 +1020,7 @@ export default function Header() {
           justify-content: center;
           cursor: pointer;
           transition: all 0.2s ease;
-          box-shadow: 0 4px 12px rgba(0, 170, 170, 0.1);
+          box-shadow: 0 4px 12px rgba(61, 129, 131, 0.1);
         }
 
         .close-nav-btn:hover {
@@ -1079,7 +1080,7 @@ export default function Header() {
           align-items: center;
           justify-content: center;
           border-radius: 16px;
-          box-shadow: 0 12px 30px rgba(0, 170, 170, 0.3);
+          box-shadow: 0 12px 30px rgba(61, 129, 131, 0.3);
           transition: transform 0.2s ease, background 0.2s ease;
         }
 
