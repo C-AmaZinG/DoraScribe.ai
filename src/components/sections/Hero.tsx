@@ -29,7 +29,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <h1 className="hero-title">Ambient AI Medical Scribe</h1>
+          <h1 className="hero-title">AI Medical Scribe for Clinical Documentation</h1>
 
           <p className="hero-subtitle">
             Capture Conversations. Generates Notes. Streamline Clinical Workflows.
