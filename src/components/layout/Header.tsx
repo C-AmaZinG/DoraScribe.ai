@@ -345,10 +345,10 @@ export default function Header() {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "0.9rem",
                   fontWeight: 500,
-                  color: isLoginHovered ? "#ffffff" : "#000000",
+                  color: "#000000",
                   padding: "8px 20px",
                   borderRadius: "10px",
-                  background: isLoginHovered ? "#2d6163" : "#EBF8F8",
+                  background: isLoginHovered ? "#d8f2f2" : "#EBF8F8",
                   transition: "background 0.2s ease, transform 0.2s ease, color 0.2s ease",
                   transform: isLoginHovered ? "scale(1.02)" : "scale(1)",
                 }}
@@ -519,32 +519,35 @@ export default function Header() {
                       </Link>
                     </motion.div>
 
-                    <motion.div
-                      whileHover={{ scale: 1.02, color: "#EBF8F8" }}
-                      whileTap={{ scale: 0.98 }}
-                      style={{ flex: 1, transition: "color 0.2s ease" }}
-                    >
-                      <Link 
-                        href="https://app.dorascribe.ai/login" 
-                        onClick={closeMobileMenu} 
-                        style={{ 
-                          textDecoration: "none", 
-                          fontSize: "13px", 
-                          fontWeight: 700, 
-                          textAlign: "center",
-                          height: "52px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          background: "#EBF8F8",
-                          color: "#000000", 
-                          borderRadius: "12px",
-                          border: "1px solid rgba(61, 129, 131, 0.2)",
-                        }}
-                      >
-                        Login
-                      </Link>
-                    </motion.div>
+                     <motion.div
+                       whileHover={{ scale: 1.02 }}
+                       whileTap={{ scale: 0.98 }}
+                       style={{ flex: 1, transition: "transform 0.2s ease" }}
+                     >
+                       <Link 
+                         href="https://app.dorascribe.ai/login" 
+                         onClick={closeMobileMenu} 
+                         style={{ 
+                           textDecoration: "none", 
+                           fontSize: "13px", 
+                           fontWeight: 700, 
+                           textAlign: "center",
+                           height: "52px",
+                           display: "flex",
+                           alignItems: "center",
+                           justifyContent: "center",
+                           background: "#EBF8F8",
+                           color: "#000000", 
+                           borderRadius: "12px",
+                           border: "1px solid rgba(61, 129, 131, 0.2)",
+                           transition: "background-color 0.2s ease"
+                         }}
+                         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#d8f2f2"}
+                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#EBF8F8"}
+                       >
+                         Login
+                       </Link>
+                     </motion.div>
                   </motion.div>
 
                   <div className="nav-divider-slim" />
