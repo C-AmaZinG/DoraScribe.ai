@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og-image.png",
-        width: 1528,
+        width: 2588,
+        height: 1620,
         alt: "Dorascribe – Ambient AI Medical Scribe",
       },
     ],
