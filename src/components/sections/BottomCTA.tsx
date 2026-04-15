@@ -26,7 +26,7 @@ export default function BottomCTA() {
           {/* Left Background Pattern */}
           <div style={{ position: "absolute", top: "50%", left: 0, transform: "translateY(-50%)", width: "18%", height: "72%", zIndex: 0, pointerEvents: "none" }}>
             <Image
-              src="/assets/left-pattern.svg"
+              src="/assets/dorascribe-cta-left-pattern.svg"
               alt="Left decorative pattern"
               fill
               style={{ objectFit: "contain", objectPosition: "left center" }}
@@ -37,7 +37,7 @@ export default function BottomCTA() {
           {/* Right Background Pattern */}
           <div style={{ position: "absolute", top: "50%", right: 0, transform: "translateY(-50%)", width: "18%", height: "72%", zIndex: 0, pointerEvents: "none" }}>
             <Image
-              src="/assets/right-pattern.svg"
+              src="/assets/dorascribe-cta-right-pattern.svg"
               alt="Right decorative pattern"
               fill
               style={{ objectFit: "contain", objectPosition: "right center" }}

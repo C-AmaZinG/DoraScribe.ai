@@ -98,8 +98,8 @@ export default function MockupSection() {
             boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
           }}>
             <Image
-              src="/assets/Dora_scribe_landing_page.png"
-              alt="Dorascribe dashboard mockup"
+              src="/assets/dorascribe-app-dashboard-mockup.png"
+              alt="Dorascribe app dashboard mockup – AI medical scribe clinical notes interface on iPad and desktop"
               width={1470}
               height={827}
               style={{ width: '100%', height: 'auto', objectFit: 'cover', objectPosition: 'left center', display: 'block' }}

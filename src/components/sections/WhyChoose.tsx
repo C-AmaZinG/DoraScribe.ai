@@ -132,8 +132,8 @@ export default function WhyChoose() {
             }}
           >
             <Image
-              src="/assets/Smart Ambient AI Medical Tool.png"
-              alt="Medical AI Visual"
+              src="/assets/dorascribe-smart-ambient-ai-hero.png"
+              alt="Dorascribe Smart Ambient AI Clinical Platform – AI-powered real-time medical documentation"
               fill
               style={{
                 objectFit: "cover",
@@ -173,8 +173,8 @@ export default function WhyChoose() {
           >
             <div style={{ position: "absolute", top: "40px", right: "40px" }}>
               <Image 
-                src="/assets/Privacy Compliance icon.svg" 
-                alt="Privacy" 
+                src="/assets/dorascribe-privacy-compliance-icon.svg" 
+                alt="HIPAA, GDPR, and SOC2 privacy compliance badge" 
                 width={32} 
                 height={32} 
               />
@@ -221,8 +221,8 @@ export default function WhyChoose() {
           >
             <div style={{ position: "absolute", top: "40px", right: "40px" }}>
               <Image 
-                src="/assets/Work Across All Devices icon.svg" 
-                alt="Cross Platform" 
+                src="/assets/dorascribe-cross-platform-icon.svg" 
+                alt="Dorascribe works across desktop, tablet, and mobile devices" 
                 width={32} 
                 height={32} 
               />
@@ -269,8 +269,8 @@ export default function WhyChoose() {
           >
             <div style={{ position: "absolute", top: "40px", right: "40px" }}>
               <Image 
-                src="/assets/Integrate with your EMR icon.svg" 
-                alt="EMR" 
+                src="/assets/dorascribe-emr-integration-icon.svg" 
+                alt="Dorascribe EMR and EHR integration icon" 
                 width={32} 
                 height={32} 
               />

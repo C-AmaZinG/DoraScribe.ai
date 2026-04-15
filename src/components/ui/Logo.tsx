@@ -12,8 +12,8 @@ const Logo = ({ color = "#000000", showText = true }: LogoProps) => {
   return (
     <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
       <img
-        src="/assets/Dorascribe_logo_dark.png"
-        alt="Dorascribe"
+        src="/assets/dorascribe-logo-dark.png"
+        alt="Dorascribe – AI Medical Scribe logo"
         style={{
           height: "22px",
           width: "auto",

@@ -8,13 +8,13 @@ import { motion } from "framer-motion"
 /* ─────────────────────────────────────────────
    Local public/assets icons
 ───────────────────────────────────────────── */
-const iconMic        = "/assets/Mic_white.svg"   // white – for orange button in Card 3
-const iconMicGray    = "/assets/mic.svg"          // gray  – for step buttons in Card 1
-const iconCopy       = "/assets/Copy icon.svg"
-const iconDownload   = "/assets/Download Icon.svg"
-const iconEdit       = "/assets/Edit Icon.svg"
-const iconGenerate   = "/assets/Generate Note.svg"
-const iconTemplate   = "/assets/Template icon.svg"
+const iconMic        = "/assets/dorascribe-mic-white-icon.svg"     // white – for orange button in Card 3
+const iconMicGray    = "/assets/mic.svg"                             // gray  – for step buttons in Card 1
+const iconCopy       = "/assets/dorascribe-copy-icon.svg"
+const iconDownload   = "/assets/dorascribe-download-icon.svg"
+const iconEdit       = "/assets/dorascribe-edit-icon.svg"
+const iconGenerate   = "/assets/dorascribe-generate-note-icon.svg"
+const iconTemplate   = "/assets/dorascribe-template-icon.svg"
 
 function Card1Illustration() {
   const [activeStep, setActiveStep] = React.useState(1);
@@ -80,7 +80,7 @@ function Card1Illustration() {
       position: "relative", overflow: "hidden",
       display: "flex", alignItems: "center", justifyContent: "center",
     }}>
-      <img src="/assets/card1_bg.png" alt="" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
+      <img src="/assets/dorascribe-record-card-bg.png" alt="Decorative background for ambient recording step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 242, height: 260 }}>
         {/* Dots */}
         <div style={dotStyle(1, 15)} />
@@ -172,7 +172,7 @@ function Card2Illustration() {
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <img src="/assets/card2_bg.png" alt="" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.13, pointerEvents: "none" }} />
+      <img src="/assets/dorascribe-review-card-bg.png" alt="Decorative background for note review step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.13, pointerEvents: "none" }} />
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -267,7 +267,7 @@ function Card3Illustration() {
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <img src="/assets/card3_bg.png" alt="" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
+      <img src="/assets/dorascribe-export-card-bg.png" alt="Decorative background for export and download step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 240, height: 110 }}>
         {items.map(item => {
           const pos = getPosition(item.id);

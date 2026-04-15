@@ -4,7 +4,27 @@ import { AppProviders } from "@/components/providers/AppProviders";
 
 export const metadata: Metadata = {
   title: "Dorascribe | AI Clinical Notes Assistant",
-  description: "AI Clinical Notes Assistant",
+  description: "Ambient AI Medical Scribe",
+  openGraph: {
+    title: "Dorascribe | AI Clinical Notes Assistant",
+    description: "Ambient AI Medical Scribe",
+    url: "https://dora-scribe-ai.vercel.app",
+    siteName: "Dorascribe",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1528,
+        alt: "Dorascribe – Ambient AI Medical Scribe",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dorascribe | AI Clinical Notes Assistant",
+    description: "Ambient AI Medical Scribe",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

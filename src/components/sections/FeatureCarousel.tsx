@@ -13,7 +13,8 @@ const features = [
     heading: 'Instant Clinical Documentation',
     description: 'Dorascribe listens to your patient encounters and generates perfect, structured clinical notes in seconds. Spend more time with patients and less time charting.',
     icon: <Sparkles className="w-4 h-4" />,
-    image: '/notes.png',
+    image: '/dorascribe-clinical-notes-scribe.png',
+    alt: 'Dorascribe AI Scribe – automated clinical note generation interface',
     bgColor: 'rgba(0, 170, 170, 0.03)',
     cta: 'Explore Scribe',
   },
@@ -23,7 +24,8 @@ const features = [
     heading: 'Get Answers, Keep Moving',
     description: 'Ask real clinical questions and get clear, evidence-based answers instantly. Dora Evidence brings trusted guidelines and peer-reviewed research directly into your workflow.',
     icon: <Brain className="w-4 h-4" />,
-    image: '/dashboard.png',
+    image: '/dorascribe-evidence-dashboard.png',
+    alt: 'Dorascribe Evidence dashboard – evidence-based clinical decision support tool',
     bgColor: 'rgba(212, 255, 89, 0.08)',
     cta: 'Explore Evidence',
   },
@@ -33,7 +35,8 @@ const features = [
     heading: 'Seamless Patient Communication',
     description: 'Automate follow-up messages, referrals, and patient education. Keep your patients informed and engaged without adding to your administrative burden.',
     icon: <MessageSquare className="w-4 h-4" />,
-    image: '/mobile.png',
+    image: '/dorascribe-mobile-comms.png',
+    alt: 'Dorascribe Comms – mobile patient messaging and communication automation',
     bgColor: 'rgba(0, 170, 170, 0.03)',
     cta: 'Explore Comms',
   },
@@ -107,7 +110,7 @@ export default function FeatureCarousel() {
               >
                 <Image
                   src={activeTab.image}
-                  alt={activeTab.title}
+                  alt={activeTab.alt}
                   fill
                   sizes="1000px"
                   style={{ objectFit: 'cover' }}

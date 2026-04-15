@@ -13,7 +13,7 @@ const tutorialCards = [
     title: "Set up your Dorascribe account",
     description: "Get your workspace ready and start transcribing in minutes.",
     videoId: "R8Ytt90iFU8",
-    thumbnail: "/assets/img_ambient_ai_people.png",
+    thumbnail: "/assets/dorascribe-ambient-ai-tutorial-thumbnail.png",
     duration: "1:45"
   },
   {
@@ -21,7 +21,7 @@ const tutorialCards = [
     title: "Capture clinical notes effortlessly",
     description: "Turn patient conversations into accurate medical notes instantly.",
     videoId: "SfjUAceKG0o",
-    thumbnail: "/assets/img_accurate_documentation_people.png",
+    thumbnail: "/assets/dorascribe-accurate-documentation-tutorial-thumbnail.png",
     duration: "2:20"
   },
   {
@@ -29,7 +29,7 @@ const tutorialCards = [
     title: "Creating Custom Note Templates",
     description: "Build templates that perfectly align with your unique clinical workflow.",
     videoId: "Xin6AIcSU9k",
-    thumbnail: "/assets/img_custom_workflows_people.png",
+    thumbnail: "/assets/dorascribe-custom-workflows-tutorial-thumbnail.png",
     duration: "3:15"
   },
   {
@@ -37,7 +37,7 @@ const tutorialCards = [
     title: "Notes on the go with your phone",
     description: "Master the mobile app to capture documentation anytime, anywhere.",
     videoId: "Xin6AIcSU9k", // Using same for placeholder if 4th link not provided
-    thumbnail: "/assets/img_cross_platform_people.png",
+    thumbnail: "/assets/dorascribe-cross-platform-tutorial-thumbnail.png",
     duration: "1:55"
   },
 ];
