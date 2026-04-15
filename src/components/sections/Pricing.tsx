@@ -137,7 +137,7 @@ function toDisplayPlan(plan: ApiPlan): Plan {
     name: normalizedName,
     description: plan.excerpt || plan.description || "",
     priceLabel: isFree ? "FREE" : `$${plan.price}${suffix}`,
-    features: Array.isArray(plan.benefits) ? plan.benefits : [],
+    features: Array.isArray(plan.benefits) ? plan.benefits.map(f => f.replace(/Ask Dora/gi, "Dora Evidence")) : [],
   };
 }
 
