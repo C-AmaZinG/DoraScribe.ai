@@ -214,7 +214,7 @@ export default function ContactPage() {
 
         .contact-form-kicker {
           margin: 0 0 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.12em;
@@ -224,7 +224,7 @@ export default function ContactPage() {
 
         .contact-form-intro h2 {
           margin: 0;
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-size: clamp(2rem, 3.2vw, 3rem);
           font-weight: 400;
           line-height: 1.02;
@@ -235,7 +235,7 @@ export default function ContactPage() {
         .contact-form-intro p {
           margin: 14px 0 0;
           max-width: 42ch;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           line-height: 1.7;
           color: #6b7280;
@@ -260,7 +260,7 @@ export default function ContactPage() {
         }
 
         .contact-field span {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.88rem;
           font-weight: 600;
           color: #171717;
@@ -273,7 +273,7 @@ export default function ContactPage() {
           border-radius: 18px;
           background: #ffffff;
           padding: 16px 18px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.96rem;
           color: #171717;
           outline: none;
@@ -297,7 +297,7 @@ export default function ContactPage() {
           align-items: flex-start;
           gap: 12px;
           margin-top: 2px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.92rem;
           line-height: 1.6;
           color: #4b5563;
@@ -318,7 +318,7 @@ export default function ContactPage() {
           border-radius: 16px;
           background: var(--brand-primary);
           color: #ffffff;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.96rem;
           font-weight: 700;
           cursor: pointer;
@@ -337,7 +337,7 @@ export default function ContactPage() {
 
         .contact-status {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.92rem;
           line-height: 1.5;
         }

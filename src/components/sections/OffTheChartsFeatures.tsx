@@ -203,7 +203,7 @@ export default function OffTheChartsFeatures() {
 
         .off-title {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2rem, 4.2vw, 3.15rem);
           font-weight: 600;
           line-height: 1.08;
@@ -213,7 +213,7 @@ export default function OffTheChartsFeatures() {
 
         .off-subtitle {
           margin: 12px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.08rem;
           color: #67717f;
           line-height: 1.45;
@@ -245,7 +245,7 @@ export default function OffTheChartsFeatures() {
 
         .card-title {
           margin: 14px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.95rem;
           font-weight: 600;
           letter-spacing: -0.03em;
@@ -255,7 +255,7 @@ export default function OffTheChartsFeatures() {
 
         .card-desc {
           margin: 8px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.04rem;
           line-height: 1.45;
           color: #8c9096;
@@ -273,7 +273,7 @@ export default function OffTheChartsFeatures() {
           color: #4b5563;
           gap: 4px;
           text-align: center;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
         }
 
         .upload-icon {
@@ -317,7 +317,7 @@ export default function OffTheChartsFeatures() {
 
         .prompt-text {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.92rem;
           color: #1f2937;
           font-weight: 500;
@@ -362,7 +362,7 @@ export default function OffTheChartsFeatures() {
           padding: 10px;
           border: 1px solid rgba(17, 24, 39, 0.08);
           overflow: hidden;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
         }
 
         .template-mini small {
@@ -373,7 +373,7 @@ export default function OffTheChartsFeatures() {
 
         .template-mini .mini-title {
           margin: 0 0 5px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
           color: #2e3743;
@@ -415,7 +415,7 @@ export default function OffTheChartsFeatures() {
           display: flex;
           align-items: flex-start;
           gap: 8px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.84rem;
           line-height: 1.36;
           color: #505866;
@@ -447,7 +447,7 @@ export default function OffTheChartsFeatures() {
 
         .language-cloud span {
           position: absolute;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.66rem;
           letter-spacing: 0.03em;
           color: #2f3339;

@@ -270,7 +270,7 @@ export default function FAQ() {
         .faq-subtitle {
           margin: 14px auto 0;
           max-width: 560px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           line-height: 1.55;
           color: var(--text-muted);
@@ -336,7 +336,7 @@ export default function FAQ() {
           width: 100%;
           padding: 24px;
           cursor: pointer;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           color: #8E8E8E;
           transition: background-color 0.2s ease, color 0.2s ease;
@@ -408,7 +408,7 @@ export default function FAQ() {
         }
 
         .faq-q span:first-child {
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 24px;
           font-weight: 400;
           line-height: 1.35;
@@ -433,7 +433,7 @@ export default function FAQ() {
         }
 
         .faq-a {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           line-height: 1.55;
           color: #8E8E8E;
@@ -463,7 +463,7 @@ export default function FAQ() {
           border-radius: 999px;
           background: #ebeff5;
           color: var(--text-main);
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.75rem;
           font-weight: 500;
         }
@@ -484,7 +484,7 @@ export default function FAQ() {
           margin-top: 10px;
           margin-bottom: 44px;
           max-width: 640px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.92rem;
           line-height: 1.55;
           color: var(--text-muted);

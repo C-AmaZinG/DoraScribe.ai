@@ -124,7 +124,7 @@ export default function StepTwoSection() {
           padding: 8px 14px;
           background: #F9F4F1;
           color: #1a2340;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.93rem;
           font-weight: 600;
           letter-spacing: 0.01em;
@@ -132,7 +132,7 @@ export default function StepTwoSection() {
 
         .step-two-left :global(h2) {
           margin-top: 18px;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2.4rem, 5vw, 4rem);
           line-height: 0.96;
           letter-spacing: -0.04em;
@@ -142,7 +142,7 @@ export default function StepTwoSection() {
 
         .step-two-left p {
           margin-top: 20px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.02rem;
           line-height: 1.55;
           color: #271623;
@@ -229,7 +229,7 @@ export default function StepTwoSection() {
 
         .note-card h4 {
           margin: 0 0 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 2rem;
           font-weight: 600;
           color: #23111d;
@@ -287,7 +287,7 @@ export default function StepTwoSection() {
           margin-bottom: 7px;
           border-bottom: 2px solid rgba(73, 21, 43, 0.15);
           color: #22121d;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.03rem;
           line-height: 1.2;
           transition: color 0.25s ease, border-color 0.25s ease;

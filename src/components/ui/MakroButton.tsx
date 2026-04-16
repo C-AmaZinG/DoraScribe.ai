@@ -80,7 +80,7 @@ const MakroButton = ({
         minHeight: 0,
         padding: isSm ? "9px 16px" : "10px 20px",
         borderRadius: "10px",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'DM Sans', sans-serif",
         fontSize: isSm ? "0.85rem" : "0.9rem",
         fontWeight: 600,
         lineHeight: 1.2,

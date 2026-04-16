@@ -14,6 +14,7 @@ const bottomSpecialties = [
 ];
 
 export default function Specialties() {
+  const [isPaused, setIsPaused] = React.useState(false);
   // Triple the items so the loop is seamless even on wide / narrow screens
   const loopingTop = [...topSpecialties, ...topSpecialties, ...topSpecialties];
   const loopingBottom = [...bottomSpecialties, ...bottomSpecialties, ...bottomSpecialties];
@@ -41,6 +42,10 @@ export default function Specialties() {
           overflow: "hidden",
         }}
         className="specialties-container"
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
         <div style={{ maxWidth: "760px", textAlign: "center", position: "relative", zIndex: 1 }}>
           <motion.h2
@@ -48,7 +53,7 @@ export default function Specialties() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(32px, 4vw, 48px)",
               fontWeight: 400,
               color: "#000000",
@@ -65,7 +70,7 @@ export default function Specialties() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "18px",
               color: "#666666",
               lineHeight: 1.5,
@@ -79,7 +84,7 @@ export default function Specialties() {
         </div>
 
         <div className="specialties-scroll-shell specialties-scroll-shell--top" aria-hidden="true">
-          <div className="specialties-scroll-track specialties-scroll-track--left">
+          <div className={`specialties-scroll-track specialties-scroll-track--left ${isPaused ? 'is-paused' : ''}`}>
             {loopingTop.map((prof, i) => (
               <div key={`${prof}-${i}-top`} className="specialty-pill">
                 {prof}
@@ -89,7 +94,7 @@ export default function Specialties() {
         </div>
 
         <div className="specialties-scroll-shell specialties-scroll-shell--bottom" aria-hidden="true">
-          <div className="specialties-scroll-track specialties-scroll-track--right">
+          <div className={`specialties-scroll-track specialties-scroll-track--right ${isPaused ? 'is-paused' : ''}`}>
             {loopingBottom.map((prof, i) => (
               <div key={`${prof}-${i}-bottom`} className="specialty-pill">
                 {prof}
@@ -155,7 +160,8 @@ export default function Specialties() {
           animation-name: specialties-scroll-right;
         }
 
-        .specialties-container:hover .specialties-scroll-track {
+        .specialties-container:hover .specialties-scroll-track,
+        .specialties-scroll-track.is-paused {
           animation-play-state: paused;
         }
 
@@ -165,7 +171,7 @@ export default function Specialties() {
           border: 1px solid rgba(0,170,170,0.12);
           background: rgba(255,255,255,0.6);
           color: #000000;
-          font-family: 'Playfair Display', serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           font-weight: 500;
           display: flex;

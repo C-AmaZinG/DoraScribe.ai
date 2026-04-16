@@ -131,7 +131,7 @@ export default function Hero() {
           margin: 0;
           width: 100%;
           max-width: 900px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           color: var(--hero-text, #000000);
           letter-spacing: -0.04em;
           font-size: clamp(2.15rem, 6vw, 4.15rem);
@@ -146,7 +146,7 @@ export default function Hero() {
         .hero-subtitle {
           margin: 20px auto 0;
           max-width: 670px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(0.95rem, 1.9vw, 1.08rem);
           line-height: 1.6;
           color: var(--hero-subtitle-text, #374151);
@@ -166,7 +166,7 @@ export default function Hero() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.06em;
@@ -212,7 +212,7 @@ export default function Hero() {
           display: flex;
           align-items: center;
           gap: 8px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
         }
 
         .template-icon {
@@ -233,7 +233,7 @@ export default function Hero() {
 
         .template-title {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.06em;
@@ -248,7 +248,7 @@ export default function Hero() {
           min-height: 0;
           padding: 10px 20px;
           border-radius: 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
           color: var(--brand-primary-text);
@@ -270,7 +270,7 @@ export default function Hero() {
           min-height: 0;
           padding: 10px 20px;
           border-radius: 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
           color: var(--hero-secondary-cta-text, #ffffff);
@@ -319,7 +319,7 @@ export default function Hero() {
           height: 30px;
           padding: 0 11px;
           border-radius: 999px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           color: #6b7280;
           background: transparent;

@@ -408,9 +408,9 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
 
   return (
     <>
-      <section className="pt-14 pb-8">
+      <section className="pt-2 pb-8 border-t border-[#f0efeb]">
         <h2
-          className="text-[28px] sm:text-[32px] font-bold text-[#1a1a1a] tracking-[-0.02em] mb-8"
+          className="text-[28px] sm:text-[32px] font-bold text-[#1a1a1a] tracking-[-0.02em] mb-1"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           Related Articles
@@ -450,16 +450,29 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
                           year: "numeric",
                         })}
                       </time>
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <span style={{ opacity: 0.3 }}>•</span>
+                        <span>{minutes} min read</span>
+                      </div>
                     </div>
 
                     <h3
                       className="grid-title"
                       dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                     />
-                    <p className="grid-excerpt">{stripHtml(post.excerpt.rendered)}</p>
+                    <p className="grid-excerpt">
+                      {stripHtml(post.excerpt.rendered)
+                        .replace(/[A-Za-z]+\s[A-Za-z]+\sLast updated:.*?(?=[\.!?]|$)/i, '')
+                        .replace(/Medical disclaimer:.*?(?=[\.!?]|$)/i, '')
+                        .replace(/Why trust this article:.*?(?=[\.!?]|$)/i, '')
+                        .replace(/Medically reviewed by:.*?(?=[\.!?]|$)/i, '')
+                        .replace(/Written by.*?(?=[\.!?]|$)/i, '')
+                        .replace(/Read more.*?(?=[\.!?]|$)/i, '')
+                        .replace(/^[\s\.\,]+/, '')
+                        .trim()}
+                    </p>
 
                     <div className="grid-footer">
-                      <span>{minutes} min read</span>
                       <span className="story-cta">
                         Read article
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -495,9 +508,13 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
           box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
         }
         .grid-link {
+          display: flex !important;
+          flex-direction: column;
+          height: 100%;
           color: inherit;
           text-decoration: none;
         }
+
         .grid-image-wrap {
           height: 210px;
           overflow: hidden;
@@ -517,19 +534,21 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
           display: flex;
           flex-direction: column;
           min-height: 250px;
-          height: 250px;
+          height: auto;
           padding: 20px;
         }
         .grid-meta {
           display: flex;
-          justify-content: flex-start;
-          font-family: "Inter", sans-serif;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 12px;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.8rem;
           color: #9ca3af;
         }
         .grid-title {
           margin-top: 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.04rem;
           font-weight: 700;
           line-height: 1.4;
@@ -541,7 +560,7 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
         }
         .grid-excerpt {
           margin-top: 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           line-height: 1.7;
           color: #6b7280;
@@ -556,9 +575,10 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
           border-top: 1px solid #f0ece6;
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-end;
           gap: 10px;
-          font-family: "Inter", sans-serif;
+          padding-bottom: 4px;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.8rem;
           color: #9ca3af;
         }
@@ -574,7 +594,7 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
           white-space: nowrap;
           flex-shrink: 0;
           color: #171717;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.85rem;
           font-weight: 700;
           transition: color 0.3s ease;
@@ -661,10 +681,11 @@ export default function BlogPostPage() {
   }
 
   const featuredImage = getFeaturedImage(post) || undefined;
-  const sanitizedContent = sanitizeArticleContent(post.content.rendered);
-  const date = new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  const isoDate = new Date(post.date).toISOString();
-  const title = post.title.rendered.replace(/<[^>]+>/g, "");
+  const contentHtml = post.content?.rendered || "";
+  const sanitizedContent = sanitizeArticleContent(contentHtml);
+  const date = post.date ? new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Recent";
+  const isoDate = post.date ? new Date(post.date).toISOString() : new Date().toISOString();
+  const title = (post.title?.rendered || "Dorascribe Article").replace(/<[^>]+>/g, "");
   return (
     <div className="min-h-screen bg-[#FAFAF8] flex flex-col font-sans">
       <Header />
@@ -747,7 +768,7 @@ export default function BlogPostPage() {
                 <div className="wp-content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
               </motion.article>
 
-              <div className="pb-20">
+              <div className="pb-4">
                 <div className="xl:hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6 border-t border-b border-[#e8e5e0]">
                   <span className="text-[13px] font-semibold text-[#999] uppercase tracking-[0.1em]">Share this article</span>
                   <InlineShareBar title={post.title.rendered} />

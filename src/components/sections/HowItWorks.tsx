@@ -362,7 +362,7 @@ export default function HowItWorks() {
         width: "100%",
       }}>
         <h2 style={{
-          fontFamily: "'Playfair Display', Georgia, serif",
+          fontFamily: "'DM Sans', Georgia, sans-serif",
           fontWeight: 600,
           fontSize: isMobile ? "32px" : "40px",
           lineHeight: "50px",
@@ -412,7 +412,7 @@ export default function HowItWorks() {
             {/* Text */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <h3 style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
+                fontFamily: "'DM Sans', Georgia, sans-serif",
                 fontWeight: 600,
                 fontSize: 24,
                 lineHeight: 1.2,

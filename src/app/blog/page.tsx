@@ -122,6 +122,10 @@ export default function BlogPage() {
                             <div className="grid-copy">
                               <div className="grid-meta">
                                 <time>{formatDate(post.date)}</time>
+                                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                  <span style={{ opacity: 0.3 }}>•</span>
+                                  <span>{minutes} min read</span>
+                                </div>
                               </div>
 
                               <h3
@@ -129,11 +133,18 @@ export default function BlogPage() {
                                 dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                               />
                               <p className="grid-excerpt">
-                                {stripHtml(post.excerpt.rendered)}
+                                {stripHtml(post.excerpt.rendered)
+                                  .replace(/[A-Za-z]+\s[A-Za-z]+\sLast updated:.*?(?=[\.!?]|$)/i, '')
+                                  .replace(/Medical disclaimer:.*?(?=[\.!?]|$)/i, '')
+                                  .replace(/Why trust this article:.*?(?=[\.!?]|$)/i, '')
+                                  .replace(/Medically reviewed by:.*?(?=[\.!?]|$)/i, '')
+                                  .replace(/Written by.*?(?=[\.!?]|$)/i, '')
+                                  .replace(/Read more.*?(?=[\.!?]|$)/i, '')
+                                  .replace(/^[\s\.\,]+/, '')
+                                  .trim()}
                               </p>
 
                               <div className="grid-footer">
-                                <span>{minutes} min read</span>
                                 <span className="story-cta">
                                   Read article
                                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -203,7 +214,7 @@ export default function BlogPage() {
         .blog-kicker,
         .cta-kicker {
           margin: 0 0 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -217,7 +228,7 @@ export default function BlogPage() {
         .blog-head h1,
         .blog-cta-copy h2 {
           margin: 0;
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-weight: 400;
           line-height: 1.02;
           letter-spacing: -0.04em;
@@ -232,7 +243,7 @@ export default function BlogPage() {
         .blog-cta-copy p {
           margin: 18px 0 0;
           max-width: 100%;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.04rem;
           line-height: 1.7;
           color: #6b7280;
@@ -256,7 +267,7 @@ export default function BlogPage() {
           background: #ffffff;
           color: #4b5563;
           padding: 0 16px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.88rem;
           font-weight: 600;
           cursor: pointer;
@@ -330,7 +341,7 @@ export default function BlogPage() {
           justify-content: center;
           background: linear-gradient(135deg, #0b1d33, #2969b7);
           color: #ffffff;
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-size: 2.2rem;
         }
 
@@ -345,7 +356,7 @@ export default function BlogPage() {
           border-radius: 999px;
           background: rgba(41, 105, 183, 0.08);
           color: #2969b7;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.72rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -359,7 +370,7 @@ export default function BlogPage() {
           align-items: center;
           justify-content: space-between;
           gap: 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.8rem;
           color: #9ca3af;
         }
@@ -378,7 +389,7 @@ export default function BlogPage() {
 
         .featured-title {
           margin-top: 18px;
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-size: clamp(2rem, 3vw, 2.8rem);
           font-weight: 400;
           line-height: 1.08;
@@ -389,7 +400,7 @@ export default function BlogPage() {
         .stack-excerpt,
         .grid-excerpt,
         .blog-empty p {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           line-height: 1.7;
           color: #6b7280;
         }
@@ -405,7 +416,7 @@ export default function BlogPage() {
           align-items: center;
           gap: 10px;
           color: #171717;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 700;
           position: relative;
@@ -472,7 +483,7 @@ export default function BlogPage() {
 
         .stack-title {
           margin-top: 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.08rem;
           font-weight: 700;
           line-height: 1.35;
@@ -495,9 +506,19 @@ export default function BlogPage() {
         }
 
         .grid-story {
+          display: flex;
+          flex-direction: column;
           border-radius: 18px;
           overflow: hidden;
           transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        .grid-link {
+          display: flex !important;
+          flex-direction: column;
+          height: 100%;
+          color: inherit;
+          text-decoration: none;
         }
 
         .grid-story:hover {
@@ -515,30 +536,43 @@ export default function BlogPage() {
         .grid-copy {
           display: flex;
           flex-direction: column;
-          min-height: 250px;
-          height: 250px;
-          padding: 20px;
+          min-height: 280px;
+          height: auto;
+          padding: 24px;
         }
 
         .grid-title {
           margin-top: 14px;
-          font-family: "Inter", sans-serif;
-          font-size: 1.04rem;
+          font-family: "DM Sans", sans-serif;
+          font-size: 1.15rem;
           font-weight: 700;
-          line-height: 1.4;
+          line-height: 1.5;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
+          margin-bottom: 12px;
+        }
+
+        .grid-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 12px;
+          font-family: "DM Sans", sans-serif;
+          font-size: 0.82rem;
+          color: #94a3b8;
         }
 
         .grid-excerpt {
-          margin-top: 10px;
-          font-size: 0.9rem;
+          margin-top: 4px;
+          font-size: 0.95rem;
+          line-height: 1.7;
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
           overflow: hidden;
+          color: #64748b;
         }
 
         .grid-footer {
@@ -547,8 +581,9 @@ export default function BlogPage() {
           margin-top: auto;
           padding-top: 16px;
           border-top: 1px solid #f0ece6;
-          align-items: center;
+          align-items: flex-end;
           gap: 10px;
+          padding-bottom: 4px;
         }
 
         .grid-footer > span:first-child {
@@ -582,7 +617,7 @@ export default function BlogPage() {
           border-radius: 999px;
           background: #171717;
           color: #ffffff;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.92rem;
           font-weight: 600;
           cursor: pointer;
@@ -604,7 +639,7 @@ export default function BlogPage() {
         }
 
         .blog-empty h2 {
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-size: 2rem;
           font-weight: 400;
         }
@@ -711,7 +746,7 @@ export default function BlogPage() {
           border: 1px solid rgba(255, 255, 255, 0.18);
           color: #ffffff;
           text-decoration: none;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 600;
           transition: border-color 0.2s ease, background 0.2s ease;
@@ -765,7 +800,8 @@ export default function BlogPage() {
           }
 
           .grid-copy {
-            height: 250px;
+            min-height: 250px;
+            height: auto;
           }
 
           .blog-top {

@@ -34,7 +34,7 @@ export default function MockupSection() {
         >
           <h2
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: 'clamp(2.5rem, 4vw, 3.8rem)',
               fontWeight: 400,
               color: 'var(--text-main)',
@@ -46,7 +46,7 @@ export default function MockupSection() {
           </h2>
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: '1.2rem',
               color: 'var(--text-muted)',
               maxWidth: '500px',
@@ -64,7 +64,7 @@ export default function MockupSection() {
           <div
             style={{
               marginTop: '32px',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: '1rem',
               fontWeight: 500,
               color: 'var(--text-main)',

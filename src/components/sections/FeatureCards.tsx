@@ -84,11 +84,20 @@ const features = [
 ];
 
 export default function FeatureCards() {
+  const [isPaused, setIsPaused] = React.useState(false);
+
   return (
     <section className="feature-cards-section">
       <div className="fc-container">
         <div className="fc-marquee">
-          <div className="fc-track">
+          <div 
+            className={`fc-track ${isPaused ? 'is-paused' : ''}`}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            onMouseDown={() => setIsPaused(true)}
+            onMouseUp={() => setIsPaused(false)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {[...features, ...features].map((feature, idx) => (
               <div key={idx} className="fc-card">
                 <div className="fc-icon-only">
@@ -160,10 +169,11 @@ export default function FeatureCards() {
           gap: 20px;
           padding: 0 10px;
           min-width: max-content;
-          animation: fc-scroll 50s linear infinite; /* Optimized speed for a more dynamic feel */
+          animation: fc-scroll 50s linear infinite;
         }
 
-        .fc-track:hover {
+        .fc-track:hover,
+        .fc-track.is-paused {
           animation-play-state: paused;
         }
 
@@ -224,7 +234,7 @@ export default function FeatureCards() {
         }
 
         .fc-title {
-          font-family: 'Monument Grotesk', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           font-weight: 500;
           color: var(--fc-card-title, #000000);
@@ -233,7 +243,7 @@ export default function FeatureCards() {
         }
 
         .fc-text {
-          font-family: 'Monument Grotesk', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           line-height: 1.5;
           color: var(--fc-card-text, #555555);

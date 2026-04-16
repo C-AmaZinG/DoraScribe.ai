@@ -34,7 +34,7 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
       style={{
         position: "relative",
         textDecoration: "none",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'DM Sans', sans-serif",
         fontSize: "14px",
         fontWeight: 500,
         color: isHovered ? "#00aaaa" : "#2c1810",
@@ -342,7 +342,7 @@ export default function Header() {
                 style={{
                   textDecoration: "none",
                   display: "inline-block",
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.9rem",
                   fontWeight: 500,
                   color: "#000000",
@@ -586,12 +586,15 @@ export default function Header() {
                             }}
                           >
                             <span>{name}</span>
-                            <span style={{ 
-                              fontSize: "12px", 
-                              transform: isMobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)",
-                              transition: "transform 0.3s ease",
-                              color: "var(--brand-primary)"
-                            }}>
+                            <span 
+                              className="nav-caret"
+                              style={{ 
+                                fontSize: "12px", 
+                                transform: isMobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)",
+                                transition: "transform 0.3s ease",
+                                color: "var(--brand-primary)"
+                              }}
+                            >
                               ▾
                             </span>
                           </button>
@@ -647,8 +650,19 @@ export default function Header() {
               transition={{ delay: 0.7 }}
               className="mobile-nav-footer"
             >
-              <div className="social-tray">
-                <a href="#" className="tray-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              <div className="social-tray" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '20px' }}>
+                <a href="https://www.linkedin.com/company/dorascribe-inc/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://www.facebook.com/dorascribemedicalai" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://x.com/DorascribeInc" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@DorascribeTeam" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+                </a>
               </div>
               <p className="footer-copyright">© 2026 Dorascribe AI. All rights reserved.</p>
             </motion.div>
@@ -661,7 +675,7 @@ export default function Header() {
           position: relative;
           padding: 8px 16px;
           text-decoration: none;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 14px !important;
           white-space: nowrap;
           line-height: 1.1;
@@ -727,7 +741,7 @@ export default function Header() {
         .dropdown-link {
           position: relative;
           text-decoration: none;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 14px !important;
           font-weight: 500;
           color: #2c1810;
@@ -786,7 +800,7 @@ export default function Header() {
           border: 1px solid #dbe7eb;
           background: #ffffff;
           color: #1f2937;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           display: inline-flex;
@@ -851,7 +865,7 @@ export default function Header() {
 
         .language-menu-title {
           padding: 10px 14px 6px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.72rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -871,7 +885,7 @@ export default function Header() {
           text-align: left;
           cursor: pointer;
           color: #475569;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 500;
           transition: all 0.2s ease;
@@ -912,7 +926,7 @@ export default function Header() {
         }
 
         .mobile-nav-kicker {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.72rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -937,7 +951,7 @@ export default function Header() {
           align-items: center;
           justify-content: center;
           gap: 6px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           cursor: pointer;
@@ -1049,7 +1063,7 @@ export default function Header() {
         }
 
         .mobile-link-hero {
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 32px;
           font-weight: 700;
           color: white;
@@ -1074,7 +1088,7 @@ export default function Header() {
           margin-top: 20px;
           background: #EBF8F8;
           color: white;
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 20px;
           font-weight: 700;
           text-decoration: none;
@@ -1120,7 +1134,7 @@ export default function Header() {
         }
 
         .footer-copyright {
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 13px;
           color: rgba(255, 255, 255, 0.4);
         }

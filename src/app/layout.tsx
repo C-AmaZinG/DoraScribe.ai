@@ -39,7 +39,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Sans:wght@400&display=swap"
           rel="stylesheet"
         />
         <Script id="hotjar-tracking" strategy="afterInteractive">

@@ -80,7 +80,7 @@ export default function DiscoverAmbientAI() {
 
         .discover-heading h2 {
           margin: 0;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2.4rem, 4vw, 3.5rem) !important;
           line-height: 1.03;
           letter-spacing: -0.02em;
@@ -89,7 +89,7 @@ export default function DiscoverAmbientAI() {
 
         .discover-heading > p {
           margin: 14px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.03rem;
           color: #2a2830;
           line-height: 1.55;
@@ -126,7 +126,7 @@ export default function DiscoverAmbientAI() {
 
         .discover-copy h3 {
           margin: 0 0 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2rem, 3.2vw, 2.8rem) !important;
           line-height: 1.02;
           font-weight: 500 !important;
@@ -136,7 +136,7 @@ export default function DiscoverAmbientAI() {
 
         .discover-copy p {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(1.05rem, 1.4vw, 1.2rem);
           color: #1f2430;
           line-height: 1.45;
