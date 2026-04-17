@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { config } from "@/lib/config";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(config.siteUrl),
   title: "Dorascribe | AI Clinical Notes Assistant",
   description: "Ambient AI Medical Scribe",
   openGraph: {
     title: "Dorascribe | AI Clinical Notes Assistant",
     description: "Ambient AI Medical Scribe",
-    url: "https://dora-scribe-ai.vercel.app",
+    url: config.siteUrl,
     siteName: "Dorascribe",
     images: [
       {

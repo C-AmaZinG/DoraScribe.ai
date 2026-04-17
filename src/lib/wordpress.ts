@@ -1,3 +1,5 @@
+import type { YoastHeadJson } from './yoast';
+
 export interface WPPost {
   id: number;
   slug: string;
@@ -6,6 +8,7 @@ export interface WPPost {
   content: { rendered: string };
   date: string;
   modified: string;
+  yoast_head_json?: YoastHeadJson;
   _embedded?: {
     'wp:featuredmedia'?: Array<{
       source_url: string;
@@ -95,4 +98,18 @@ export function formatDate(dateStr: string): string {
 
 export function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').trim();
+}
+
+export async function getAllSlugs(): Promise<string[]> {
+  try {
+    const res = await fetch(
+      `${API_URL}/posts?per_page=100&_fields=slug`,
+      { next: { revalidate: 3600 } }
+    );
+    if (!res.ok) return [];
+    const posts: { slug: string }[] = await res.json();
+    return posts.map((p) => p.slug);
+  } catch {
+    return [];
+  }
 }
