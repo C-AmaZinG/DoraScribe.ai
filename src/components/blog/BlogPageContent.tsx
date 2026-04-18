@@ -98,7 +98,7 @@ export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, t
 
                           <div className="grid-copy">
                             <div className="grid-meta">
-                              <time>{formatDate(post.date)}</time>
+                              <time>{formatDate(post.date, locale)}</time>
                             </div>
 
                             <h3

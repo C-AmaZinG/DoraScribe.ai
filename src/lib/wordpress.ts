@@ -94,8 +94,12 @@ export function getCategories(post: WPPost): Array<{ name: string; slug: string 
   return post._embedded?.['wp:term']?.[0] || [];
 }
 
-export function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
+const DATE_LOCALE_MAP: Record<string, string> = {
+  en: 'en-US', fr: 'fr-FR', es: 'es-ES', pt: 'pt-PT', de: 'de-DE',
+};
+
+export function formatDate(dateStr: string, locale: string = 'en'): string {
+  return new Date(dateStr).toLocaleDateString(DATE_LOCALE_MAP[locale] || 'en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'

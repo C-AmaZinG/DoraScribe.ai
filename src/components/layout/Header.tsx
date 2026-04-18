@@ -96,6 +96,13 @@ export default function Header() {
   const [isLoginHovered, setIsLoginHovered] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
+  // Catalog so the build-time scanner picks up strings referenced via variable
+  void [
+    t("How to Use"), t("Why Dora"), t("Pricing"), t("FAQ"),
+    t("Resources"), t("Contact"), t("Blog"), t("Tutorials"),
+    t("Select Language"), t("Get started"), t("Log in"),
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
