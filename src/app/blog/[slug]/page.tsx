@@ -12,8 +12,8 @@ import {
   sanitizeArticleContent,
 } from "@/lib/wordpress";
 import type { WPPost } from "@/lib/wordpress";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import { BlogPostContent } from "@/components/blog/BlogPostContent";
 import { config } from "@/lib/config";
 
