@@ -8,6 +8,11 @@ import Footer from "@/components/layout/Footer";
 import type { WPPost } from "@/lib/wordpress";
 import { getFeaturedImage } from "@/lib/wordpress";
 import { Mail, Link as LinkIcon, Check, MoreHorizontal, MoreVertical, Sparkles, List } from "lucide-react";
+import {
+  SiClaude, SiOpenai, SiPerplexity, SiGooglegemini,
+  SiX, SiFacebook, SiReddit, SiThreads, SiWhatsapp,
+} from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa6";
 import { useTranslations } from "@/lib/translations/translations-context";
 
 // ── Helpers ──────────────────────────────────────────────────
@@ -69,103 +74,43 @@ interface ShareItem {
   getUrl: (url: string, title: string) => string;
 }
 
-const ClaudeIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M4.7 16.5 9.1 14l.07-.21-.07-.11H8.89l-.7-.05-2.37-.07-2.05-.08-2-.11L1.27 13.2 1 12.57l.27-.16h.86l1.9.13 2.84.2 2.06.12 3.05.32h.48l.07-.2-.17-.12-.13-.12-2.94-2-3.18-2.1L5 7.9l-.8-.55L3.79 7l-.15-.56c.21-.23.42-.54.66-.73.4-.3 1.01-.33 1.68.01l1.44.72 3.62 1.8L11 8.5l.1-.06v-.1l-.14-.22-1.17-2.1-1.25-2.15-.56-.89-.15-.53c-.05-.22-.09-.4-.09-.62L8.5.6l.75-.24 1.83.67.44.1.43.35.65.15.93.75.92 1.02 1.22 2.12.29.57.07.37-.13.1.1-.43-.1.07-.15-.37-.13-.25.24-.52.24-.39-.14-.32-.2-1.26-.48-.76-.3-.22.07-.08.29.44 2.12.54 2.54.21 1.27-.01.36.44.04 1.15.29 1.26.53.57.3.27.13.21-.17.5-.17.32-.25.18v-.13l-.4.58-.14.66-.35.3-.44-.06-1.08-.25-.62-.42-.67-.58-.29-.45-.18-.12-.32.06-.02.07.1.5v.57l-.35.79-.37.23-.47-.1-.4-.3-.57-.8-.15-.82v-.7l-.11-.14-.45.02-1.5.4-.74.15-.92.08-.62-.08-.37-.4.1-.55.34-.26.57-.1 1.8-.33.96-.06v-.13l-.04-.1-.75-.62-1.64-1.1-1.54-1.2-.47-.43-.16-.32v-.38Z" />
-  </svg>
-);
-
-const PerplexityIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3v18M4 8l16 8M4 16l16-8" />
-  </svg>
-);
-
-const GeminiIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0c0 6.6-5.4 12-12 12 6.6 0 12 5.4 12 12 0-6.6 5.4-12 12-12-6.6 0-12-5.4-12-12Z" />
-  </svg>
-);
-
-const ChatGPTIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22.28 9.82a5.9 5.9 0 0 0-.5-4.85 6 6 0 0 0-6.47-2.88A6 6 0 0 0 5 4.48a5.9 5.9 0 0 0-4 2.88 6 6 0 0 0 .75 7.04 5.9 5.9 0 0 0 .5 4.85 6 6 0 0 0 6.47 2.88 5.98 5.98 0 0 0 4.5 2.03 6 6 0 0 0 5.8-4.34 5.9 5.9 0 0 0 4-2.88 6 6 0 0 0-.74-7.04zM13.27 21.68a4.47 4.47 0 0 1-2.87-1.04l.14-.08 4.78-2.76a.79.79 0 0 0 .4-.68v-6.74l2.01 1.17a.08.08 0 0 1 .04.06v5.58a4.5 4.5 0 0 1-4.5 4.49zM3.61 17.55a4.47 4.47 0 0 1-.54-3.01l.14.08 4.79 2.76a.79.79 0 0 0 .78 0l5.84-3.37v2.33a.08.08 0 0 1-.03.06L9.74 19.2a4.5 4.5 0 0 1-6.13-1.65zM2.36 7.86a4.47 4.47 0 0 1 2.35-1.97v5.68a.78.78 0 0 0 .39.68l5.81 3.36-2.02 1.16a.08.08 0 0 1-.07 0L4 14.01a4.5 4.5 0 0 1-1.65-6.14zm16.58 3.85-5.84-3.38L15.11 7.2a.08.08 0 0 1 .07 0l4.83 2.79a4.5 4.5 0 0 1-.68 8.11v-5.67a.79.79 0 0 0-.4-.68zm2-3.02-.14-.09-4.78-2.78a.79.79 0 0 0-.79 0L9.4 9.18V6.85a.08.08 0 0 1 .03-.06l4.83-2.78a4.5 4.5 0 0 1 6.68 4.65zM8.3 12.85l-2.02-1.16a.08.08 0 0 1-.04-.06V6.06a4.5 4.5 0 0 1 7.37-3.45l-.14.08L8.7 5.45a.79.79 0 0 0-.4.68zm1.1-2.36L12 9l2.6 1.5v3L12 15l-2.6-1.5z" />
-  </svg>
-);
-
-const XIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-
-const LinkedInIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
-  </svg>
-);
-
-const FacebookIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z" />
-  </svg>
-);
-
-const RedditIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 6.63 5.37 12 12 12s12-5.37 12-12c0-6.63-5.37-12-12-12zm6.34 13.12a4.05 4.05 0 0 1 .08.78c0 3.96-4.6 7.17-10.28 7.17-5.68 0-10.28-3.21-10.28-7.17 0-.27.03-.53.08-.78a2.28 2.28 0 1 1 3.08-3.3 12.58 12.58 0 0 1 6.84-2.17l1.3-6.12a.39.39 0 0 1 .46-.3l4.25.9a1.6 1.6 0 1 1-.17.84L10 2.55l-1.15 5.45a12.6 12.6 0 0 1 6.73 2.18 2.28 2.28 0 1 1 2.76 2.94zM8.03 13.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zm8 0a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zm-.51 4.2a.38.38 0 0 0-.54 0 4.66 4.66 0 0 1-3 .86 4.66 4.66 0 0 1-3-.86.38.38 0 1 0-.53.54c.93.93 2.33 1.08 3.53 1.08s2.6-.15 3.53-1.08a.38.38 0 0 0 0-.54z" />
-  </svg>
-);
-
-const ThreadsIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12.19 0c-6.9 0-11.72 4.65-11.94 11.66C.04 18.48 4.7 23.8 12.2 23.8c6.87 0 11.6-4.73 11.6-11.6C23.8 5.8 19.4 0 12.19 0zm.09 5.28c3.04 0 5.13 1.38 6.05 4 .22.62-.06 1.1-.7 1.25-.53.13-1-.15-1.22-.72-.56-1.5-1.87-2.28-4.13-2.28-2.38 0-3.8 1.1-3.8 2.75 0 1.04.87 1.76 3.87 2.22 3.13.47 6.4 1.4 6.4 4.75 0 3.06-2.5 5.12-6.47 5.12-3.97 0-6.38-2.22-7.22-4.72-.2-.6.13-1.1.75-1.22.56-.13 1.03.22 1.22.8.56 1.72 2.16 3.13 5.25 3.13 2.63 0 4.25-1.13 4.25-2.97 0-1.5-1.56-2.2-4.66-2.66-2.93-.44-5.6-1.47-5.6-4.28 0-2.97 2.56-5.17 6.01-5.17z" />
-  </svg>
-);
-
-const WhatsAppIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.174.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-  </svg>
-);
-
 const AI_PLATFORMS: ShareItem[] = [
-  { id: "claude", label: "Claude", icon: <ClaudeIcon />, getUrl: (url, title) => `https://claude.ai/new?q=${encodeURIComponent(`Summarize this medical article: ${title}\n${url}`)}` },
-  { id: "chatgpt", label: "ChatGPT", icon: <ChatGPTIcon />, getUrl: (url, title) => `https://chatgpt.com/?q=${encodeURIComponent(`Summarize this medical article: ${title}\n${url}`)}` },
-  { id: "perplexity", label: "Perplexity", icon: <PerplexityIcon />, getUrl: (url, title) => `https://www.perplexity.ai/search?q=${encodeURIComponent(`Summarize this medical article: ${title} ${url}`)}` },
-  { id: "gemini", label: "Gemini", icon: <GeminiIcon />, getUrl: (url, title) => `https://gemini.google.com/app?q=${encodeURIComponent(`Summarize this medical article: ${title}\n${url}`)}` },
+  { id: "claude", label: "Claude", icon: <SiClaude size={15} />, getUrl: (url, title) => `https://claude.ai/new?q=${encodeURIComponent(`Summarize this medical article: ${title}\n${url}`)}` },
+  { id: "chatgpt", label: "ChatGPT", icon: <SiOpenai size={15} />, getUrl: (url, title) => `https://chatgpt.com/?q=${encodeURIComponent(`Summarize this medical article: ${title}\n${url}`)}` },
+  { id: "perplexity", label: "Perplexity", icon: <SiPerplexity size={15} />, getUrl: (url, title) => `https://www.perplexity.ai/search?q=${encodeURIComponent(`Summarize this medical article: ${title} ${url}`)}` },
+  { id: "gemini", label: "Gemini", icon: <SiGooglegemini size={15} />, getUrl: (url, title) => `https://gemini.google.com/app?q=${encodeURIComponent(`Summarize this medical article: ${title}\n${url}`)}` },
 ];
 
 const SOCIAL_PLATFORMS: ShareItem[] = [
-  { id: "x", label: "X", icon: <XIcon />, getUrl: (url, title) => `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}` },
-  { id: "linkedin", label: "LinkedIn", icon: <LinkedInIcon />, getUrl: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
-  { id: "facebook", label: "Facebook", icon: <FacebookIcon />, getUrl: (url) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` },
-  { id: "reddit", label: "Reddit", icon: <RedditIcon />, getUrl: (url, title) => `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}` },
-  { id: "threads", label: "Threads", icon: <ThreadsIcon />, getUrl: (url, title) => `https://www.threads.net/intent/post?text=${encodeURIComponent(`${title}\n${url}`)}` },
-  { id: "whatsapp", label: "WhatsApp", icon: <WhatsAppIcon />, getUrl: (url, title) => `https://wa.me/?text=${encodeURIComponent(`${title}\n${url}`)}` },
-  { id: "email", label: "Email", icon: <Mail size={16} />, getUrl: (url, title) => `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this article: ${url}`)}` },
+  { id: "x", label: "X", icon: <SiX size={13} />, getUrl: (url, title) => `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}` },
+  { id: "linkedin", label: "LinkedIn", icon: <FaLinkedinIn size={14} />, getUrl: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+  { id: "facebook", label: "Facebook", icon: <SiFacebook size={15} />, getUrl: (url) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` },
+  { id: "reddit", label: "Reddit", icon: <SiReddit size={15} />, getUrl: (url, title) => `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}` },
+  { id: "threads", label: "Threads", icon: <SiThreads size={14} />, getUrl: (url, title) => `https://www.threads.net/intent/post?text=${encodeURIComponent(`${title}\n${url}`)}` },
+  { id: "whatsapp", label: "WhatsApp", icon: <SiWhatsapp size={15} />, getUrl: (url, title) => `https://wa.me/?text=${encodeURIComponent(`${title}\n${url}`)}` },
+  { id: "email", label: "Email", icon: <Mail size={15} />, getUrl: (url, title) => `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this article: ${url}`)}` },
 ];
 
 // ── Share dropdown menu content ──────────────────────────────
 function ShareOverflowMenu({ onShare, overflowAI, overflowSocial }: { onShare: (item: ShareItem) => void; overflowAI: ShareItem[]; overflowSocial: ShareItem[] }) {
   const t = useTranslations();
   return (
-    <div className="py-2">
-      <div className="px-4 py-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#bbb]">
+    <div className="py-3">
+      <div className="px-5 pt-2 pb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#999]">
         <Sparkles size={12} />
         {t("Discuss with AI")}
       </div>
       {overflowAI.map((item) => (
-        <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
-          <span className="flex-shrink-0 w-5 flex items-center justify-center text-[#888]">{item.icon}</span>
+        <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-4 px-5 py-3 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
+          <span className="flex-shrink-0 w-5 flex items-center justify-center text-[#666]">{item.icon}</span>
           {item.label}
         </button>
       ))}
-      <div className="h-px bg-[#f0efeb] mx-4 my-2" />
-      <div className="px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#bbb]">{t("Share on Social")}</div>
+      <div className="h-px bg-[#f0efeb] mx-5 my-3" />
+      <div className="px-5 pt-2 pb-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#999]">{t("Share on Social")}</div>
       {overflowSocial.map((item) => (
-        <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
-          <span className="flex-shrink-0 w-5 flex items-center justify-center text-[#888]">{item.icon}</span>
+        <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-4 px-5 py-3 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
+          <span className="flex-shrink-0 w-5 flex items-center justify-center text-[#666]">{item.icon}</span>
           {item.label}
         </button>
       ))}
@@ -398,7 +343,7 @@ function TableOfContents({ html }: { html: string }) {
       className="mb-10 rounded-2xl border border-[#e8e5e0] bg-white overflow-hidden"
       aria-label={t("Table of contents")}
     >
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-6 py-4 hover:bg-[#fafaf8] transition-colors">
+      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-7 py-5 hover:bg-[#fafaf8] transition-colors">
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 rounded-lg bg-[#3d8183]/[0.08] flex items-center justify-center text-[#3d8183]"><List size={15} /></div>
           <span className="text-[13px] font-semibold text-[#1a1a1a] tracking-[-0.01em]">{t("In this article")}</span>
@@ -409,14 +354,14 @@ function TableOfContents({ html }: { html: string }) {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden">
-            <div className="px-7 pb-6 pt-3">
-              <div className="border-l-2 border-[#f0efeb] pl-0 flex flex-col gap-0.5">
+            <div className="px-7 pb-7 pt-4">
+              <div className="border-l-2 border-[#f0efeb] pl-0 flex flex-col gap-1">
                 {headings.map((heading) => (
                   <a
                     key={heading.id}
                     href={`#${heading.id}`}
                     onClick={(e) => { e.preventDefault(); const el = document.getElementById(heading.id); if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: "smooth" }); } }}
-                    className={`block transition-all duration-200 py-2.5 pr-3 border-l-2 -ml-[2px] leading-snug ${activeId === heading.id ? "border-[#3d8183] text-[#1a1a1a] font-medium" : "border-transparent text-[#777] hover:text-[#1a1a1a] hover:border-[#ddd]"} ${heading.level === 3 ? "pl-8 text-[13px]" : "pl-5 text-[13.5px]"}`}
+                    className={`block transition-all duration-200 py-3 pr-4 border-l-2 -ml-[2px] leading-relaxed ${activeId === heading.id ? "border-[#3d8183] text-[#1a1a1a] font-medium" : "border-transparent text-[#777] hover:text-[#1a1a1a] hover:border-[#ddd]"} ${heading.level === 3 ? "pl-9 text-[13px]" : "pl-6 text-[13.5px]"}`}
                   >
                     {heading.text}
                   </a>
