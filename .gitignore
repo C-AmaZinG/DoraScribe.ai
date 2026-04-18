@@ -35,3 +35,6 @@ integrated_footer.html
 *.sln
 *.sw?
 .vercel
+
+# Translation cache — forces re-translation on every build
+src/lib/translations/generated/_checksum.json
