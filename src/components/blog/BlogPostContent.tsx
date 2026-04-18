@@ -95,22 +95,51 @@ const SOCIAL_PLATFORMS: ShareItem[] = [
 function ShareOverflowMenu({ onShare, overflowAI, overflowSocial }: { onShare: (item: ShareItem) => void; overflowAI: ShareItem[]; overflowSocial: ShareItem[] }) {
   const t = useTranslations();
   return (
-    <div className="py-3">
-      <div className="px-5 pt-2 pb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#999]">
+    <div style={{ padding: "10px 0" }}>
+      <div
+        className="flex items-center uppercase text-[#999]"
+        style={{
+          padding: "10px 20px 8px",
+          gap: "8px",
+          fontSize: "10px",
+          fontWeight: 600,
+          letterSpacing: "0.14em",
+        }}
+      >
         <Sparkles size={12} />
         {t("Discuss with AI")}
       </div>
       {overflowAI.map((item) => (
-        <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-4 px-5 py-3 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
-          <span className="flex-shrink-0 w-5 flex items-center justify-center text-[#666]">{item.icon}</span>
+        <button
+          key={item.id}
+          onClick={() => onShare(item)}
+          className="w-full flex items-center text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors"
+          style={{ padding: "12px 20px", gap: "14px", fontSize: "13px", fontWeight: 500 }}
+        >
+          <span className="flex-shrink-0 flex items-center justify-center text-[#666]" style={{ width: "20px" }}>{item.icon}</span>
           {item.label}
         </button>
       ))}
-      <div className="h-px bg-[#f0efeb] mx-5 my-3" />
-      <div className="px-5 pt-2 pb-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#999]">{t("Share on Social")}</div>
+      <div className="bg-[#f0efeb]" style={{ height: "1px", margin: "10px 20px" }} />
+      <div
+        className="uppercase text-[#999]"
+        style={{
+          padding: "8px 20px",
+          fontSize: "10px",
+          fontWeight: 600,
+          letterSpacing: "0.14em",
+        }}
+      >
+        {t("Share on Social")}
+      </div>
       {overflowSocial.map((item) => (
-        <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-4 px-5 py-3 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
-          <span className="flex-shrink-0 w-5 flex items-center justify-center text-[#666]">{item.icon}</span>
+        <button
+          key={item.id}
+          onClick={() => onShare(item)}
+          className="w-full flex items-center text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors"
+          style={{ padding: "12px 20px", gap: "14px", fontSize: "13px", fontWeight: 500 }}
+        >
+          <span className="flex-shrink-0 flex items-center justify-center text-[#666]" style={{ width: "20px" }}>{item.icon}</span>
           {item.label}
         </button>
       ))}
@@ -343,7 +372,11 @@ function TableOfContents({ html }: { html: string }) {
       className="mb-10 rounded-2xl border border-[#e8e5e0] bg-white overflow-hidden"
       aria-label={t("Table of contents")}
     >
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-7 py-5 hover:bg-[#fafaf8] transition-colors">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between hover:bg-[#fafaf8] transition-colors"
+        style={{ padding: "20px 28px" }}
+      >
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 rounded-lg bg-[#3d8183]/[0.08] flex items-center justify-center text-[#3d8183]"><List size={15} /></div>
           <span className="text-[13px] font-semibold text-[#1a1a1a] tracking-[-0.01em]">{t("In this article")}</span>
@@ -354,14 +387,19 @@ function TableOfContents({ html }: { html: string }) {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden">
-            <div className="px-7 pb-7 pt-4">
-              <div className="border-l-2 border-[#f0efeb] pl-0 flex flex-col gap-1">
+            <div style={{ padding: "16px 28px 28px" }}>
+              <div className="border-l-2 border-[#f0efeb]" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 {headings.map((heading) => (
                   <a
                     key={heading.id}
                     href={`#${heading.id}`}
                     onClick={(e) => { e.preventDefault(); const el = document.getElementById(heading.id); if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: "smooth" }); } }}
-                    className={`block transition-all duration-200 py-3 pr-4 border-l-2 -ml-[2px] leading-relaxed ${activeId === heading.id ? "border-[#3d8183] text-[#1a1a1a] font-medium" : "border-transparent text-[#777] hover:text-[#1a1a1a] hover:border-[#ddd]"} ${heading.level === 3 ? "pl-9 text-[13px]" : "pl-6 text-[13.5px]"}`}
+                    className={`block transition-all duration-200 border-l-2 leading-relaxed ${activeId === heading.id ? "border-[#3d8183] text-[#1a1a1a] font-medium" : "border-transparent text-[#777] hover:text-[#1a1a1a] hover:border-[#ddd]"}`}
+                    style={{
+                      padding: heading.level === 3 ? "12px 16px 12px 36px" : "12px 16px 12px 24px",
+                      fontSize: heading.level === 3 ? "13px" : "13.5px",
+                      marginLeft: "-2px",
+                    }}
                   >
                     {heading.text}
                   </a>
