@@ -89,14 +89,14 @@ export default function FeatureCards() {
   return (
     <section className="feature-cards-section">
       <div className="fc-container">
-        <div className="fc-marquee">
+        <div 
+          className="fc-marquee"
+          onPointerDown={() => setIsPaused(true)}
+          onPointerUp={() => setIsPaused(false)}
+          onPointerLeave={() => setIsPaused(false)}
+        >
           <div 
             className={`fc-track ${isPaused ? 'is-paused' : ''}`}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
-            onMouseDown={() => setIsPaused(true)}
-            onMouseUp={() => setIsPaused(false)}
-            onMouseLeave={() => setIsPaused(false)}
           >
             {[...features, ...features].map((feature, idx) => (
               <div key={idx} className="fc-card">
@@ -172,7 +172,7 @@ export default function FeatureCards() {
           animation: fc-scroll 50s linear infinite;
         }
 
-        .fc-track:hover,
+        .fc-marquee:hover .fc-track,
         .fc-track.is-paused {
           animation-play-state: paused;
         }

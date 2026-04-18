@@ -34,18 +34,26 @@ const languageCodes = [
 
 export default function OffTheChartsFeatures() {
   const [promptIndex, setPromptIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setPromptIndex((prev) => (prev + 1) % commandPrompts.length);
     }, 3200);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section className="off-charts-section">
-      <div className="off-charts-shell">
+      <div 
+        className="off-charts-shell"
+        onPointerDown={() => setIsPaused(true)}
+        onPointerUp={() => setIsPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div className="off-heading">
           <p className="off-title">Features that are off the charts</p>
           <p className="off-subtitle">

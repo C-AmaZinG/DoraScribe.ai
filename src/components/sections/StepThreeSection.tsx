@@ -8,14 +8,16 @@ const quickActions = ["Draft note", "Smart coding", "Next patient"];
 
 export default function StepThreeSection() {
   const [activeAction, setActiveAction] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setActiveAction((prev) => (prev + 1) % quickActions.length);
     }, 2200);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section className="step-three-section">
@@ -41,6 +43,10 @@ export default function StepThreeSection() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          onPointerDown={() => setIsPaused(true)}
+          onPointerUp={() => setIsPaused(false)}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           <div className="visual-top">
             <div className="icon-zone">

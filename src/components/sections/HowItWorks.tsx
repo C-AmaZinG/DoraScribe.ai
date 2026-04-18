@@ -18,13 +18,15 @@ const iconTemplate   = "/assets/dorascribe-template-icon.svg"
 
 function Card1Illustration() {
   const [activeStep, setActiveStep] = React.useState(1);
+  const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
+    if (isPaused) return;
     const int = setInterval(() => {
       setActiveStep(s => s >= 4 ? 1 : s + 1);
     }, 2800); 
     return () => clearInterval(int);
-  }, []);
+  }, [isPaused]);
 
   const isActive = (step: number) => activeStep >= step;
 
@@ -75,11 +77,16 @@ function Card1Illustration() {
   });
 
   return (
-    <div style={{
-      background: "#f8f7f5", borderRadius: 8, width: "100%", height: 360,
-      position: "relative", overflow: "hidden",
-      display: "flex", alignItems: "center", justifyContent: "center",
-    }}>
+    <div 
+      onPointerDown={() => setIsPaused(true)}
+      onPointerUp={() => setIsPaused(false)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      style={{
+        background: "#f8f7f5", borderRadius: 8, width: "100%", height: 360,
+        position: "relative", overflow: "hidden",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}>
       <img src="/assets/dorascribe-record-card-bg.png" alt="Decorative background for ambient recording step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 242, height: 260 }}>
         {/* Dots */}
@@ -236,13 +243,15 @@ function Card2Illustration() {
 ───────────────────────────────────────────── */
 function Card3Illustration() {
   const [activeIndex, setActiveIndex] = React.useState(1);
+  const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
+    if (isPaused) return;
     const int = setInterval(() => {
       setActiveIndex(i => (i + 1) % 3);
     }, 2800); 
     return () => clearInterval(int);
-  }, []);
+  }, [isPaused]);
 
   const items = [
     { id: 0, icon: iconGenerate, baseScale: 22, activeScale: 28 },
@@ -256,17 +265,22 @@ function Card3Illustration() {
   };
 
   return (
-    <div style={{
-      background: "#f8f7f5",
-      borderRadius: 8,
-      width: "100%",
-      height: 360,
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}>
+    <div 
+      onPointerDown={() => setIsPaused(true)}
+      onPointerUp={() => setIsPaused(false)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      style={{
+        background: "#f8f7f5",
+        borderRadius: 8,
+        width: "100%",
+        height: 360,
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
       <img src="/assets/dorascribe-export-card-bg.png" alt="Decorative background for export and download step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 240, height: 110 }}>
         {items.map(item => {

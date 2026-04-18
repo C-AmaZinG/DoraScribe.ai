@@ -17,13 +17,15 @@ const complianceStandards = ["HIPAA", "PIPEDA", "GDPR", "POPIA"];
 
 export default function EaseOfUseFeatures() {
   const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % workflowSteps.length);
     }, 1800);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const tileMotion = {
     whileHover: { y: -4, transition: { duration: 0.22 } },
@@ -32,7 +34,13 @@ export default function EaseOfUseFeatures() {
 
   return (
     <section className="ease-section">
-      <div className="ease-shell">
+      <div 
+        className="ease-shell"
+        onPointerDown={() => setIsPaused(true)}
+        onPointerUp={() => setIsPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div className="ease-grid">
           <motion.article
             className="ease-card card-easy"
