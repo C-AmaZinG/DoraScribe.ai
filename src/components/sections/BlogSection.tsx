@@ -62,7 +62,7 @@ export default function BlogSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: 'clamp(2rem, 4.5vw, 2.8rem)',
               fontWeight: 400,
               color: '#000000',
@@ -154,7 +154,7 @@ export default function BlogSection() {
           ) : posts.length === 0 ? (
             // Empty state
             <div style={{ textAlign: 'center', padding: '60px 24px', width: '100%' }}>
-              <p style={{ fontFamily: "'Inter', sans-serif", color: '#64748b', fontSize: '1rem' }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#64748b', fontSize: '1rem' }}>
                 Blog posts coming soon. Check back for insights on clinical AI.
               </p>
             </div>
@@ -207,7 +207,7 @@ export default function BlogSection() {
                           justifyContent: 'center',
                           background: 'linear-gradient(135deg, #000000, #1e3a5f)',
                           color: '#fff',
-                          fontFamily: "'Playfair Display', serif",
+                          fontFamily: "'DM Sans', sans-serif",
                           fontSize: '2rem'
                         }}>dora</div>
                       )}
@@ -216,30 +216,52 @@ export default function BlogSection() {
                     {/* Content */}
                     <div style={{ padding: '30px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                       <div style={{
-                        display: 'inline-block',
-                        padding: '4px 12px',
-                        border: `1px solid ${catColor}`,
-                        borderRadius: '6px',
-                        fontSize: '0.7rem',
-                        fontWeight: 600,
-                        fontFamily: "'Inter', sans-serif",
-                        color: catColor,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                         marginBottom: '14px',
-                        width: 'fit-content'
-                      }}>{catName}</div>
+                        width: '100%'
+                      }}>
+                        <div style={{
+                          padding: '4px 12px',
+                          border: `1px solid ${catColor}`,
+                          borderRadius: '6px',
+                          fontSize: '0.7rem',
+                          fontWeight: 600,
+                          fontFamily: "'DM Sans', sans-serif",
+                          color: catColor,
+                          width: 'fit-content'
+                        }}>{catName}</div>
+                        <div style={{
+                          display: 'flex',
+                          gap: '8px',
+                          alignItems: 'center',
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontSize: '0.75rem',
+                          color: '#94a3b8'
+                        }}>
+                          <span>{new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+                          <span style={{ opacity: 0.3 }}>•</span>
+                          <span>{Math.max(1, Math.round(post.content.rendered.replace(/<[^>]+>/g, "").trim().split(/\s+/).length / 230))} min read</span>
+                        </div>
+                      </div>
 
                       <h3 style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '1.05rem',
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: '1.2rem',
                         fontWeight: 600,
                         color: '#000000',
-                        lineHeight: 1.3,
-                        marginBottom: '10px'
+                        lineHeight: 1.4,
+                        marginBottom: '12px',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden'
                       }} dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
 
                       <p style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '0.85rem',
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: '0.95rem',
                         color: '#64748b',
                         lineHeight: 1.6,
                         marginBottom: '20px',
@@ -247,13 +269,29 @@ export default function BlogSection() {
                         WebkitLineClamp: 3,
                         WebkitBoxOrient: 'vertical',
                         overflow: 'hidden'
-                      }} dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+                      }}>
+                        {post.excerpt.rendered.replace(/<[^>]+>/g, "")
+                          .replace(/Written by.*?(?=[\.!?]|$)/i, '')
+                          .replace(/Updated on.*?(?=[\.!?]|$)/i, '')
+                          .replace(/Read more.*?(?=[\.!?]|$)/i, '')
+                          .trim()}
+                      </p>
 
-                      <div className="story-cta">
-                        Read article
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
+                      <div style={{
+                        marginTop: 'auto',
+                        paddingTop: '16px',
+                        borderTop: '1px solid #f1f5f9',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        paddingBottom: '4px'
+                      }}>
+                        <div className="story-cta" style={{ margin: 0, padding: 0 }}>
+                          Read article
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -276,7 +314,7 @@ export default function BlogSection() {
               color: '#fff',
               borderRadius: '100px',
               textDecoration: 'none',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: '0.9rem',
               fontWeight: 500,
               transition: 'all 0.3s ease'
@@ -305,18 +343,16 @@ export default function BlogSection() {
           transform: scale(1.05);
         }
         .story-cta {
-          margin-top: auto;
           display: inline-flex;
           align-items: center;
           gap: 8px;
           color: #000000;
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           position: relative;
           width: fit-content;
           transition: color 0.3s ease;
-          padding-top: 12px;
         }
         .story-cta::after {
           content: '';

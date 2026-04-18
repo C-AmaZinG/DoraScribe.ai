@@ -189,7 +189,7 @@ export default function TutorialsPage() {
           width: fit-content;
           border-radius: 999px;
           padding: 8px 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.06em;
@@ -205,7 +205,7 @@ export default function TutorialsPage() {
         .section-heading h2,
         .cta-panel h2 {
           margin: 18px 0 0;
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           color: #161616;
           letter-spacing: -0.04em;
           line-height: 0.95;
@@ -220,7 +220,7 @@ export default function TutorialsPage() {
         .cta-panel p,
         .card-description,
         .panel-note {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           color: rgba(22, 22, 22, 0.68);
           line-height: 1.7;
         }
@@ -242,7 +242,7 @@ export default function TutorialsPage() {
         .ghost-action,
         .card-link,
         .cta-link {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           text-decoration: none;
           transition: all 0.2s ease;
         }
@@ -285,7 +285,7 @@ export default function TutorialsPage() {
           display: flex;
           justify-content: space-between;
           gap: 12px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.06em;
@@ -307,7 +307,7 @@ export default function TutorialsPage() {
           border-radius: 18px;
           background: rgba(255, 255, 255, 0.78);
           border: 1px solid rgba(41, 105, 183, 0.08);
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-weight: 600;
           color: #1e2c3d;
         }
@@ -339,7 +339,7 @@ export default function TutorialsPage() {
 
         .section-kicker {
           background: #EBF8F8;
-          color: var(--brand-primary);
+          color: #000000;
         }
 
         .section-heading h2,
@@ -410,7 +410,7 @@ export default function TutorialsPage() {
           height: 60px;
           border-radius: 50%;
           background: #ffffff;
-          color: var(--brand-primary);
+          color: #000000;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -433,7 +433,7 @@ export default function TutorialsPage() {
           color: #ffffff;
           padding: 4px 8px;
           border-radius: 6px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.7rem;
           font-weight: 700;
           backdrop-filter: blur(4px);
@@ -461,36 +461,38 @@ export default function TutorialsPage() {
           border-radius: 50%;
           background: #f1ede7;
           color: #2c1810;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.75rem;
           font-weight: 700;
         }
 
         .card-eyebrow {
           margin: 0 !important;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.8rem;
           font-weight: 700;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: var(--brand-primary);
+          color: #000000;
         }
 
         .tutorial-card h3 {
           margin: 14px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           color: #161616;
           letter-spacing: -0.03em;
         }
 
         .tutorial-card h3 {
           font-size: 1.65rem;
-          line-height: 1.1;
+          line-height: 1.3;
         }
 
         .card-description {
           margin: 14px 0 0;
           font-size: 1rem;
+          line-height: 1.6;
+          color: #4b5563;
         }
 
 

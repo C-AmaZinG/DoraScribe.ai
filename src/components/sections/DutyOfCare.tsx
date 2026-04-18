@@ -117,7 +117,7 @@ export default function DutyOfCare() {
 
         .duty-copy h2 {
           margin: 0;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2.3rem, 5vw, 4.4rem);
           line-height: 0.94;
           letter-spacing: -0.03em;
@@ -127,7 +127,7 @@ export default function DutyOfCare() {
 
         .duty-copy p {
           margin: 16px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.06rem;
           line-height: 1.5;
           color: #000000;
@@ -153,7 +153,7 @@ export default function DutyOfCare() {
           padding: 8px 10px;
           text-transform: uppercase;
           letter-spacing: 0.03em;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.68rem;
           font-weight: 700;
           color: #000000;
@@ -202,7 +202,7 @@ export default function DutyOfCare() {
 
         .duty-card h3 {
           margin: 16px 0 10px;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.9rem;
           line-height: 1.05;
           letter-spacing: -0.02em;
@@ -211,7 +211,7 @@ export default function DutyOfCare() {
 
         .duty-card p {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           line-height: 1.5;
           color: #000000;

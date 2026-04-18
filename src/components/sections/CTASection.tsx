@@ -107,7 +107,7 @@ export default function CTASection() {
         .cta-content :global(h2) {
           margin: 0;
           color: #f7fff8;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2rem, 4.2vw, 3.3rem);
           line-height: 1.06;
           letter-spacing: -0.015em;
@@ -125,7 +125,7 @@ export default function CTASection() {
           color: #2c2a12;
           border: 1px solid rgba(87, 85, 33, 0.32);
           text-decoration: none;
-          font-family: "DM Sans", "Inter", sans-serif;
+          font-family: "DM Sans", "DM Sans", sans-serif;
           font-size: 0.67rem;
           font-weight: 700;
           letter-spacing: 0.045em;

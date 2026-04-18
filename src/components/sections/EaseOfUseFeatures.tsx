@@ -17,13 +17,15 @@ const complianceStandards = ["HIPAA", "PIPEDA", "GDPR", "POPIA"];
 
 export default function EaseOfUseFeatures() {
   const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % workflowSteps.length);
     }, 1800);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const tileMotion = {
     whileHover: { y: -4, transition: { duration: 0.22 } },
@@ -32,7 +34,13 @@ export default function EaseOfUseFeatures() {
 
   return (
     <section className="ease-section">
-      <div className="ease-shell">
+      <div 
+        className="ease-shell"
+        onPointerDown={() => setIsPaused(true)}
+        onPointerUp={() => setIsPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div className="ease-grid">
           <motion.article
             className="ease-card card-easy"
@@ -226,7 +234,7 @@ export default function EaseOfUseFeatures() {
 
         .ease-title {
           margin: 14px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(1.5rem, 2vw, 1.95rem);
           font-weight: 600;
           letter-spacing: -0.03em;
@@ -236,7 +244,7 @@ export default function EaseOfUseFeatures() {
 
         .ease-desc {
           margin: 12px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.02rem;
           line-height: 1.45;
           color: #8c9096;
@@ -263,7 +271,7 @@ export default function EaseOfUseFeatures() {
           border-radius: 999px;
           background: #f8fafc;
           color: #4b5563;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 500;
           padding: 7px 11px;
@@ -356,7 +364,7 @@ export default function EaseOfUseFeatures() {
           background: #f8fafc;
           border-radius: 999px;
           padding: 3px 8px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.66rem;
           font-weight: 600;
           color: #4a5563;
@@ -385,7 +393,7 @@ export default function EaseOfUseFeatures() {
           border: 1px solid #d7dce2;
           border-radius: 999px;
           padding: 5px 9px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.74rem;
           font-weight: 600;
           color: #364253;
@@ -434,7 +442,7 @@ export default function EaseOfUseFeatures() {
           display: grid;
           place-items: center;
           gap: 1px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.56rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -461,7 +469,7 @@ export default function EaseOfUseFeatures() {
         }
 
         .handout-top .left span {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 600;
         }

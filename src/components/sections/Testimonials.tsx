@@ -218,7 +218,7 @@ export default function Testimonials() {
         }
 
         .section-title {
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-size: clamp(36px, 5vw, 56px);
           font-weight: 500;
           color: #1c1c1c;
@@ -227,7 +227,7 @@ export default function Testimonials() {
         }
 
         .section-subtitle {
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: clamp(17px, 2vw, 20px);
           color: rgba(28, 28, 28, 0.5);
           font-weight: 300;
@@ -306,7 +306,7 @@ export default function Testimonials() {
 
         .quote {
           margin: 0 0 32px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           line-height: 1.6;
           color: #2d2d2d;
@@ -326,7 +326,7 @@ export default function Testimonials() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 700;
           color: #000000;
@@ -334,7 +334,7 @@ export default function Testimonials() {
 
         .name {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           font-weight: 600;
           color: #1c1c1c;
@@ -342,7 +342,7 @@ export default function Testimonials() {
 
         .role {
           margin: 4px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           letter-spacing: 0.02em;
           font-size: 0.85rem;
           color: rgba(28, 28, 28, 0.5);

@@ -34,7 +34,7 @@ export default function WhyChoose() {
             transition={{ duration: 0.6 }}
             style={{
               fontSize: "clamp(32px, 5vw, 48px)",
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontWeight: 400,
               color: "#000000",
               marginBottom: "16px",
@@ -50,7 +50,7 @@ export default function WhyChoose() {
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
               fontSize: "18px",
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               color: "var(--feature-section-subtitle, #555555)",
               maxWidth: "600px",
               lineHeight: 1.5,
@@ -94,7 +94,7 @@ export default function WhyChoose() {
               className="smart-ambient-title"
               style={{
                 fontSize: "28px",
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "#FFFFFF",
                 marginBottom: "24px",
                 lineHeight: 1.1,
@@ -107,7 +107,7 @@ export default function WhyChoose() {
               className="smart-ambient-description"
               style={{
                 fontSize: "16px",
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "rgba(255, 255, 255, 0.7)",
                 maxWidth: "460px",
                 lineHeight: 1.6,
@@ -182,7 +182,7 @@ export default function WhyChoose() {
             <h4
               style={{
                 fontSize: "28px",
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "#000000",
                 marginBottom: "20px",
                 lineHeight: 1.2,
@@ -193,7 +193,7 @@ export default function WhyChoose() {
             <p
               style={{
                 fontSize: "16px",
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "#666666",
                 lineHeight: 1.6,
               }}
@@ -230,7 +230,7 @@ export default function WhyChoose() {
             <h4
               style={{
                 fontSize: "28px",
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "#FFFFFF",
                 marginBottom: "20px",
                 lineHeight: 1.2,
@@ -241,7 +241,7 @@ export default function WhyChoose() {
             <p
               style={{
                 fontSize: "16px",
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "rgba(255, 255, 255, 0.7)",
                 lineHeight: 1.6,
               }}
@@ -278,7 +278,7 @@ export default function WhyChoose() {
             <h4
               style={{
                 fontSize: "28px",
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "#000000",
                 marginBottom: "20px",
                 lineHeight: 1.2,
@@ -289,7 +289,7 @@ export default function WhyChoose() {
             <p
               style={{
                 fontSize: "16px",
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 color: "#666666",
                 lineHeight: 1.6,
               }}

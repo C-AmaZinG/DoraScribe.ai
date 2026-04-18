@@ -62,7 +62,7 @@ export default function BottomCTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(2rem, 4vw, 3.5rem)",
                 fontWeight: 500,
                 color: "#FFFFFF",
@@ -81,7 +81,7 @@ export default function BottomCTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.16 }}
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(1rem, 1.6vw, 1.18rem)",
                 color: "rgba(255,255,255,0.9)",
                 lineHeight: 1.5,
