@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { LocaleProvider } from "@/lib/locale-context";
+import { TranslationsProvider } from "@/lib/translations/translations-context";
+import { translateUiStrings } from "@/lib/translations/translate-ui";
 import { config } from "@/lib/config";
+import type { Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
@@ -31,13 +36,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "en") as Locale;
+  const translations = await translateUiStrings(locale);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link
@@ -58,9 +67,13 @@ export default function RootLayout({
         </Script>
       </head>
       <body suppressHydrationWarning>
-        <AppProviders>
-          <div id="root">{children}</div>
-        </AppProviders>
+        <LocaleProvider locale={locale}>
+          <TranslationsProvider translations={translations}>
+            <AppProviders>
+              <div id="root">{children}</div>
+            </AppProviders>
+          </TranslationsProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

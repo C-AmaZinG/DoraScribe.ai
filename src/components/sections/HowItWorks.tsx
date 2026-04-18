@@ -4,6 +4,7 @@ import React from "react"
 import { useIsMobile } from "@/lib/hooks"
 import MakroButton from "@/components/ui/MakroButton"
 import { motion } from "framer-motion"
+import { useTranslations } from "@/lib/translations/translations-context"
 
 /* ─────────────────────────────────────────────
    Local public/assets icons
@@ -17,6 +18,7 @@ const iconGenerate   = "/assets/dorascribe-generate-note-icon.svg"
 const iconTemplate   = "/assets/dorascribe-template-icon.svg"
 
 function Card1Illustration() {
+  const t = useTranslations();
   const [activeStep, setActiveStep] = React.useState(1);
   const [isPaused, setIsPaused] = React.useState(false);
 
@@ -108,7 +110,7 @@ function Card1Illustration() {
 
         {/* Button 1 */}
         <div style={btnStyle(1, 0)}>
-          <span style={textStyle(1)}>+ Start Consult</span>
+          <span style={textStyle(1)}>{t("+ Start Consult")}</span>
         </div>
 
         {/* Button 2 */}
@@ -117,7 +119,7 @@ function Card1Illustration() {
           background: isActive(2) ? "var(--pd-step-bg, var(--how-it-works-orange, #ff7429))" : "#fff",
           borderColor: isActive(2) ? "var(--pd-step-bg, var(--how-it-works-orange, #ff7429))" : "#e8e8e8"
         }}>
-          <span style={textStyle(2)}>Patient Details</span>
+          <span style={textStyle(2)}>{t("Patient Details")}</span>
           <span style={{
             fontSize: 9, fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
             color: isActive(2) ? "var(--pd-step-text, #fff)" : "#158384",
@@ -126,7 +128,7 @@ function Card1Illustration() {
             borderRadius: 3, padding: "1px 5px", whiteSpace: "nowrap",
             transition: "all 0.4s ease",
             transitionDelay: isActive(2) ? "0.4s" : "0s",
-          }}>Optional</span>
+          }}>{t("Optional")}</span>
         </div>
 
         {/* Button 3 */}
@@ -137,7 +139,7 @@ function Card1Illustration() {
             transition: "filter 0.4s ease",
             transitionDelay: isActive(3) ? "0.4s" : "0s",
           }} />
-          <span style={textStyle(3)}>Start Recording</span>
+          <span style={textStyle(3)}>{t("Start Recording")}</span>
         </div>
 
         {/* Button 4 */}
@@ -148,7 +150,7 @@ function Card1Illustration() {
             transition: "filter 0.4s ease",
             transitionDelay: isActive(4) ? "0.4s" : "0s",
           }} />
-          <span style={textStyle(4)}>Generate Note</span>
+          <span style={textStyle(4)}>{t("Generate Note")}</span>
         </div>
       </div>
     </div>
@@ -159,6 +161,7 @@ function Card1Illustration() {
    Card 2 illustration – "Notes Ready"
 ───────────────────────────────────────────── */
 function Card2Illustration() {
+  const t = useTranslations();
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: (custom: number) => ({
@@ -205,7 +208,7 @@ function Card2Illustration() {
             background: "#fff", border: "1px solid #d1d5db", borderRadius: 6,
             padding: "8px 12px", display: "flex", alignItems: "center", gap: 6,
           }}>
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#0a0a0a", whiteSpace: "nowrap" }}>SOAP Note - Standard</span>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#0a0a0a", whiteSpace: "nowrap" }}>{t("SOAP Note - Standard")}</span>
           </motion.div>
         </div>
 
@@ -351,6 +354,7 @@ const cards = [
    Main section
 ───────────────────────────────────────────── */
 export default function HowItWorks() {
+  const t = useTranslations();
   const isMobile = useIsMobile()
 
   return (
@@ -384,7 +388,7 @@ export default function HowItWorks() {
           margin: "0 0 16px",
           letterSpacing: "-0.01em",
         }}>
-          How to use
+          {t("How to use")}
         </h2>
         <p style={{
           fontFamily: "'DM Sans', sans-serif",
@@ -395,7 +399,7 @@ export default function HowItWorks() {
           maxWidth: 680,
           margin: "0 auto",
         }}>
-          From recording to ready-to-file notes, Dorascribe handles every step automatically so you can stay focused on your patient.
+          {t("From recording to ready-to-file notes, Dorascribe handles every step automatically so you can stay focused on your patient.")}
         </p>
       </div>
 
@@ -433,7 +437,7 @@ export default function HowItWorks() {
                 color: "#0a0a0a",
                 margin: 0,
               }}>
-                {card.title}
+                {t(card.title)}
               </h3>
               <p style={{
                 fontFamily: "'DM Sans', sans-serif",
@@ -443,7 +447,7 @@ export default function HowItWorks() {
                 color: "#4D4D4D",
                 margin: 0,
               }}>
-                {card.desc}
+                {t(card.desc)}
               </p>
             </div>
 
@@ -457,7 +461,7 @@ export default function HowItWorks() {
       <div style={{ width: isMobile ? "calc(100% - 40px)" : "auto", maxWidth: isMobile ? "300px" : "none" }}>
         <MakroButton
           href="https://app.dorascribe.ai/signUp"
-          text="Start a free trial"
+          text={t("Start a free trial")}
           className="how-it-works-cta"
         />
       </div>

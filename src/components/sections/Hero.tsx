@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { BookOpen, FileText, Languages, Mic, Sparkles } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const productPills = [
   "Dictation",
@@ -14,6 +15,7 @@ const productPills = [
 ];
 
 export default function Hero() {
+  const t = useTranslations();
   return (
     <section className="hero-playground-clone">
       <div className="hero-shell">
@@ -25,14 +27,14 @@ export default function Hero() {
         >
           <div className="hero-badge-wrap">
             <p className="hero-badge">
-              Designed by Healthcare Professionals
+              {t("Designed by Healthcare Professionals")}
             </p>
           </div>
 
-          <h1 className="hero-title">AI Medical Scribe for Clinical Documentation</h1>
+          <h1 className="hero-title">{t("AI Medical Scribe for Clinical Documentation")}</h1>
 
           <p className="hero-subtitle">
-            Capture Conversations. Generates Notes. Streamline Clinical Workflows.
+            {t("Capture Conversations. Generates Notes. Streamline Clinical Workflows.")}
           </p>
 
           
@@ -45,7 +47,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="hero-main-cta"
               >
-                Start a free trial
+                {t("Start a free trial")}
               </a>
               <a
                 href="https://dorascribe.ai/book-demo/"
@@ -53,7 +55,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="hero-secondary-cta"
               >
-                Book a demo
+                {t("Book a demo")}
               </a>
             </div>
           </div>

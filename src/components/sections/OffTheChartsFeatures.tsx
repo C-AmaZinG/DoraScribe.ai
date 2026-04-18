@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ChevronRight, Languages, Plus, Upload } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const commandPrompts = [
   "Summarize the treatment plan",
@@ -33,6 +34,7 @@ const languageCodes = [
 ];
 
 export default function OffTheChartsFeatures() {
+  const t = useTranslations();
   const [promptIndex, setPromptIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -55,9 +57,9 @@ export default function OffTheChartsFeatures() {
         onMouseLeave={() => setIsPaused(false)}
       >
         <div className="off-heading">
-          <p className="off-title">Features that are off the charts</p>
+          <p className="off-title">{t("Features that are off the charts")}</p>
           <p className="off-subtitle">
-            Powerful tools to streamline your workflow and save time.
+            {t("Powerful tools to streamline your workflow and save time.")}
           </p>
         </div>
 
@@ -67,13 +69,12 @@ export default function OffTheChartsFeatures() {
               <div className="upload-icon">
                 <Upload size={18} strokeWidth={1.9} />
               </div>
-              <p>Drag and drop files</p>
-              <span>Upload pdf, docs, etc...</span>
+              <p>{t("Drag and drop files")}</p>
+              <span>{t("Upload pdf, docs, etc...")}</span>
             </div>
-            <p className="card-title">Create from uploads</p>
+            <p className="card-title">{t("Create from uploads")}</p>
             <p className="card-desc">
-              Upload files and create anything from admission notes to discharge
-              summaries.
+              {t("Upload files and create anything from admission notes to discharge summaries.")}
             </p>
           </article>
 
@@ -84,46 +85,44 @@ export default function OffTheChartsFeatures() {
               </div>
               <p className="prompt-text">{commandPrompts[promptIndex]}</p>
               <div className="prompt-keys">
-                <span>Ctrl</span>
-                <span>Enter</span>
+                <span>{t("Ctrl")}</span>
+                <span>{t("Enter")}</span>
               </div>
             </div>
-            <p className="card-title">AI Commands & Chat</p>
+            <p className="card-title">{t("AI Commands & Chat")}</p>
             <p className="card-desc">
-              Ask Vero to edit notes, recommend treatment plans, confirm
-              medication doses quickly and effortlessly.
+              {t("Ask Vero to edit notes, recommend treatment plans, confirm medication doses quickly and effortlessly.")}
             </p>
           </article>
 
           <article className="off-card span-2">
             <div className="template-strip">
               <div className="template-mini lilac">
-                <small>Referral Letter</small>
+                <small>{t("Referral Letter")}</small>
               </div>
               <div className="template-mini sand">
-                <p className="mini-title">Patient Care Plan</p>
-                <small>Patient Instructions</small>
+                <p className="mini-title">{t("Patient Care Plan")}</p>
+                <small>{t("Patient Instructions")}</small>
                 <ul>
-                  <li>Diagnosis: Acute Bronchitis</li>
-                  <li>Medications: Ventolin 2 puffs PRN</li>
-                  <li>Seek care if: short of breath</li>
-                  <li>Follow-up: 1 week</li>
+                  <li>{t("Diagnosis: Acute Bronchitis")}</li>
+                  <li>{t("Medications: Ventolin 2 puffs PRN")}</li>
+                  <li>{t("Seek care if: short of breath")}</li>
+                  <li>{t("Follow-up: 1 week")}</li>
                 </ul>
               </div>
               <div className="template-mini mint">
-                <p className="mini-title">Work Note</p>
+                <p className="mini-title">{t("Work Note")}</p>
                 <ul>
-                  <li>Patient seen today</li>
-                  <li>Restrictions: Limited lifting</li>
-                  <li>Duration: 5 days</li>
-                  <li>Return to work: Modified duty</li>
+                  <li>{t("Patient seen today")}</li>
+                  <li>{t("Restrictions: Limited lifting")}</li>
+                  <li>{t("Duration: 5 days")}</li>
+                  <li>{t("Return to work: Modified duty")}</li>
                 </ul>
               </div>
             </div>
-            <p className="card-title">Custom templates</p>
+            <p className="card-title">{t("Custom templates")}</p>
             <p className="card-desc">
-              Use pre-built Vero templates, those shared by the community, or
-              build your own.
+              {t("Use pre-built Vero templates, those shared by the community, or build your own.")}
             </p>
           </article>
 
@@ -136,10 +135,9 @@ export default function OffTheChartsFeatures() {
                 </div>
               ))}
             </div>
-            <p className="card-title">Vero Insights for Feedback</p>
+            <p className="card-title">{t("Vero Insights for Feedback")}</p>
             <p className="card-desc">
-              Get real-time, AI-driven feedback to improve note quality and
-              documentation.
+              {t("Get real-time, AI-driven feedback to improve note quality and documentation.")}
             </p>
           </article>
 
@@ -160,10 +158,9 @@ export default function OffTheChartsFeatures() {
                 ))}
               </div>
             </div>
-            <p className="card-title">Multilingual Support</p>
+            <p className="card-title">{t("Multilingual Support")}</p>
             <p className="card-desc">
-              Transcribe and translate patient encounters from over 50 different
-              languages.
+              {t("Transcribe and translate patient encounters from over 50 different languages.")}
             </p>
           </article>
 
@@ -184,10 +181,9 @@ export default function OffTheChartsFeatures() {
                 />
               </svg>
             </div>
-            <p className="card-title">Learns Your Unique Documentation Style</p>
+            <p className="card-title">{t("Learns Your Unique Documentation Style")}</p>
             <p className="card-desc">
-              The AI scribe adapts to your unique phrasing, so notes always sound
-              like you.
+              {t("The AI scribe adapts to your unique phrasing, so notes always sound like you.")}
             </p>
           </article>
         </div>

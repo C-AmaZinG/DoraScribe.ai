@@ -3,10 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const quickActions = ["Subjective", "Objective", "Assessment"];
 
 export default function StepTwoSection() {
+  const t = useTranslations();
   const [activeAction, setActiveAction] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -29,11 +31,10 @@ export default function StepTwoSection() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="step-two-chip">Step 2</span>
-          <h2>Document</h2>
+          <span className="step-two-chip">{t("Step 2")}</span>
+          <h2>{t("Document")}</h2>
           <p>
-            Get a detailed summary of the encounter as a SOAP note that is ready
-            to copy and paste into your patient's EMR.
+            {t("Get a detailed summary of the encounter as a SOAP note that is ready to copy and paste into your patient's EMR.")}
           </p>
         </motion.div>
 
@@ -71,7 +72,7 @@ export default function StepTwoSection() {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <h4>SOAP Note</h4>
+              <h4>{t("SOAP Note")}</h4>
               <div className="line w-100" />
               <div className="line w-88" />
               <div className="line w-92" />

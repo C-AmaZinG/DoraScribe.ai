@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 import { AnimatePresence, motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 
@@ -107,6 +108,7 @@ function PlusIcon({ open }: { open: boolean }) {
 }
 
 export default function FAQ() {
+  const t = useTranslations();
   const [activeCategory, setActiveCategory] = useState<Category>("General");
   const [openIndex, setOpenIndex] = useState(0);
 
@@ -117,11 +119,11 @@ export default function FAQ() {
       <div className="faq-wrap">
         <div className="faq-head">
           <p className="faq-title">
-            We have the <mark>answers</mark>
+            {t("We have the")} <mark>{t("answers")}</mark>
           </p>
 
           <p className="faq-subtitle">
-            Have questions about Dorascribe? Our FAQ provides the information you need to maximize your medical documentation efficiency.
+            {t("Have questions about Dorascribe? Our FAQ provides the information you need to maximize your medical documentation efficiency.")}
           </p>
         </div>
 
@@ -141,7 +143,7 @@ export default function FAQ() {
                   }}
                   style={{ position: "relative", zIndex: 1, backgroundColor: "transparent" }}
                 >
-                  <span style={{ position: "relative", zIndex: 2 }}>{category}</span>
+                  <span style={{ position: "relative", zIndex: 2 }}>{t(category)}</span>
                   {activeCategory === category && (
                     <motion.div
                       layoutId="faq-active-highlight"
@@ -185,7 +187,7 @@ export default function FAQ() {
                         className="faq-q"
                         onClick={() => setOpenIndex(isOpen ? -1 : idx)}
                       >
-                        <span>{item.q}</span>
+                        <span>{t(item.q)}</span>
                         <PlusIcon open={isOpen} />
                       </button>
 
@@ -198,7 +200,7 @@ export default function FAQ() {
                             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                           >
                             <div className="faq-a-wrap">
-                              <p className="faq-a">{item.a}</p>
+                              <p className="faq-a">{t(item.a)}</p>
                             </div>
                           </motion.div>
                         )}
@@ -215,17 +217,16 @@ export default function FAQ() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
-                  Let's connect
+                  {t("Let's connect")}
                 </span>
 
-                <p className="faq-contact-title">Still have questions? We're here to help.</p>
+                <p className="faq-contact-title">{t("Still have questions? We're here to help.")}</p>
 
                 <p className="faq-contact-text">
-                  If you have unique practice setups, EMR integrations, or require
-                  custom workflows, our team can tailor Dorascribe to your needs.
+                  {t("If you have unique practice setups, EMR integrations, or require custom workflows, our team can tailor Dorascribe to your needs.")}
                 </p>
 
-                <MakroButton text="Contact us" href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
+                <MakroButton text={t("Contact us")} href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
               </div>
             </motion.div>
           </motion.div>

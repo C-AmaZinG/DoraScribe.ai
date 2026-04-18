@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "@/lib/translations/translations-context";
 import {
   BadgeCheck,
   FileText,
@@ -16,6 +17,7 @@ const supportedLanguages = ["EN", "FR", "ES", "DE", "PT", "AR", "ZH", "HI"];
 const complianceStandards = ["HIPAA", "PIPEDA", "GDPR", "POPIA"];
 
 export default function EaseOfUseFeatures() {
+  const t = useTranslations();
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -59,9 +61,9 @@ export default function EaseOfUseFeatures() {
                 </button>
               ))}
             </div>
-            <p className="ease-title">Easy to Use</p>
+            <p className="ease-title">{t("Easy to Use")}</p>
             <p className="ease-desc">
-              Designed for a seamless experience with minimal learning curve.
+              {t("Designed for a seamless experience with minimal learning curve.")}
             </p>
           </motion.article>
 
@@ -79,9 +81,9 @@ export default function EaseOfUseFeatures() {
                 transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
-            <p className="ease-title">Clean Interface</p>
+            <p className="ease-title">{t("Clean Interface")}</p>
             <p className="ease-desc">
-              Simple, uncluttered layout that keeps the focus on your workflow.
+              {t("Simple, uncluttered layout that keeps the focus on your workflow.")}
             </p>
           </motion.article>
 
@@ -103,9 +105,9 @@ export default function EaseOfUseFeatures() {
                 ))}
               </div>
             </div>
-            <p className="ease-title">Accurate notes</p>
+            <p className="ease-title">{t("Accurate notes")}</p>
             <p className="ease-desc">
-              Capture every clinical detail with clarity and precision.
+              {t("Capture every clinical detail with clarity and precision.")}
             </p>
           </motion.article>
 
@@ -125,8 +127,8 @@ export default function EaseOfUseFeatures() {
                 </span>
               ))}
             </div>
-            <p className="ease-title">Privacy compliant</p>
-            <p className="ease-desc">HIPAA, PIPEDA, GDPR, POPIA</p>
+            <p className="ease-title">{t("Privacy compliant")}</p>
+            <p className="ease-desc">{t("HIPAA, PIPEDA, GDPR, POPIA")}</p>
           </motion.article>
 
           <motion.article
@@ -141,12 +143,12 @@ export default function EaseOfUseFeatures() {
               />
               <div className="soc2-core">
                 <BadgeCheck size={18} strokeWidth={2.2} />
-                <span>SOC2</span>
+                <span>{t("SOC2")}</span>
               </div>
             </div>
-            <p className="ease-title">SOC2</p>
+            <p className="ease-title">{t("SOC2")}</p>
             <p className="ease-desc">
-              Enterprise-grade security and audit-ready controls.
+              {t("Enterprise-grade security and audit-ready controls.")}
             </p>
           </motion.article>
 
@@ -158,7 +160,7 @@ export default function EaseOfUseFeatures() {
               <div className="handout-top">
                 <div className="left">
                   <FileText size={16} strokeWidth={2.1} />
-                  <span>Patient handout preview</span>
+                  <span>{t("Patient handout preview")}</span>
                 </div>
                 <div className="right">
                   <Sparkles size={14} strokeWidth={2.2} />
@@ -172,9 +174,9 @@ export default function EaseOfUseFeatures() {
                 <div className="line w-95" />
               </div>
             </div>
-            <p className="ease-title">Patient Handouts</p>
+            <p className="ease-title">{t("Patient Handouts")}</p>
             <p className="ease-desc">
-              Generate clear, professional handouts directly from your notes.
+              {t("Generate clear, professional handouts directly from your notes.")}
             </p>
           </motion.article>
         </div>

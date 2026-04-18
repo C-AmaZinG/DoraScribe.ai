@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const baseQuotes = [
   {
@@ -73,13 +74,14 @@ const col2Items = [baseQuotes[3], baseQuotes[4], baseQuotes[5]];
 const col3Items = [baseQuotes[6], baseQuotes[7], baseQuotes[8]];
 
 export default function Testimonials() {
+  const t = useTranslations();
   return (
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-shell">
         <div className="header-container">
-          <h2 className="section-title">Don't just take our word for it.</h2>
+          <h2 className="section-title">{t("Don't just take our word for it.")}</h2>
           <p className="section-subtitle">
-            See how Dorascribe is transforming practices across various specialties.
+            {t("See how Dorascribe is transforming practices across various specialties.")}
           </p>
         </div>
 
@@ -89,14 +91,14 @@ export default function Testimonials() {
             <div className="marquee-inner">
               {col1Items.map((card, idx) => (
                 <article key={`c1-a-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -105,14 +107,14 @@ export default function Testimonials() {
             <div className="marquee-inner" aria-hidden="true">
               {col1Items.map((card, idx) => (
                 <article key={`c1-b-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -125,14 +127,14 @@ export default function Testimonials() {
             <div className="marquee-inner">
               {col2Items.map((card, idx) => (
                 <article key={`c2-a-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -141,14 +143,14 @@ export default function Testimonials() {
             <div className="marquee-inner" aria-hidden="true">
               {col2Items.map((card, idx) => (
                 <article key={`c2-b-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -161,14 +163,14 @@ export default function Testimonials() {
             <div className="marquee-inner">
               {col3Items.map((card, idx) => (
                 <article key={`c3-a-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -177,14 +179,14 @@ export default function Testimonials() {
             <div className="marquee-inner" aria-hidden="true">
               {col3Items.map((card, idx) => (
                 <article key={`c3-b-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>

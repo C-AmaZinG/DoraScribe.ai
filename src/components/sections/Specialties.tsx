@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const topSpecialties = [
   "Endocrinology", "Nephrology", "Urology", "Optometry",
@@ -14,6 +15,7 @@ const bottomSpecialties = [
 ];
 
 export default function Specialties() {
+  const t = useTranslations();
   const [isPaused, setIsPaused] = React.useState(false);
   // Triple the items so the loop is seamless even on wide / narrow screens
   const loopingTop = [...topSpecialties, ...topSpecialties, ...topSpecialties];
@@ -61,7 +63,7 @@ export default function Specialties() {
               marginBottom: "24px",
             }}
           >
-            One Platform, Every Specialty
+            {t("One Platform, Every Specialty")}
           </motion.h2>
 
           <motion.p
@@ -78,8 +80,7 @@ export default function Specialties() {
               margin: "0 auto",
             }}
           >
-            Dorascribe offers specialty-specific templates with the ability to
-            generate custom clinical documentation across every specialty.
+            {t("Dorascribe offers specialty-specific templates with the ability to generate custom clinical documentation across every specialty.")}
           </motion.p>
         </div>
 
@@ -87,7 +88,7 @@ export default function Specialties() {
           <div className={`specialties-scroll-track specialties-scroll-track--left ${isPaused ? 'is-paused' : ''}`}>
             {loopingTop.map((prof, i) => (
               <div key={`${prof}-${i}-top`} className="specialty-pill">
-                {prof}
+                {t(prof)}
               </div>
             ))}
           </div>
@@ -97,7 +98,7 @@ export default function Specialties() {
           <div className={`specialties-scroll-track specialties-scroll-track--right ${isPaused ? 'is-paused' : ''}`}>
             {loopingBottom.map((prof, i) => (
               <div key={`${prof}-${i}-bottom`} className="specialty-pill">
-                {prof}
+                {t(prof)}
               </div>
             ))}
           </div>

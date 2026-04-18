@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import MakroButton from "@/components/ui/MakroButton";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 type ApiPlan = {
   id: number;
@@ -165,6 +166,7 @@ function mapApiToCards(apiPlans: ApiPlan[], cycle: BillingCycle): Plan[] {
 }
 
 export default function Pricing() {
+  const t = useTranslations();
   const [apiPlans, setApiPlans] = useState<ApiPlan[] | null>(null);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("month");
 
@@ -205,11 +207,11 @@ export default function Pricing() {
       <div className="pricing-wrap">
         <div className="pricing-top">
           <p className="pricing-title">
-            Find the right package
+            {t("Find the right package")}
           </p>
 
           <p className="pricing-subtitle">
-            Enhance your medical scribing experience at a price that fits your budget.
+            {t("Enhance your medical scribing experience at a price that fits your budget.")}
           </p>
 
           <div className="billing-toggle" role="tablist" aria-label="Billing cycle">
@@ -220,7 +222,7 @@ export default function Pricing() {
               role="tab"
               aria-selected={billingCycle === "month"}
             >
-              Monthly
+              {t("Monthly")}
             </button>
             <button
               type="button"
@@ -229,7 +231,7 @@ export default function Pricing() {
               role="tab"
               aria-selected={billingCycle === "year"}
             >
-              Yearly
+              {t("Yearly")}
             </button>
           </div>
         </div>
@@ -248,7 +250,7 @@ export default function Pricing() {
                 </div>
 
                 <MakroButton
-                  text="Get Started"
+                  text={t("Get Started")}
                   href="https://app.dorascribe.ai/signUp"
                   className="plan-default-btn"
                   tone={plan.name === "Free Trial" ? "gray" : "default"}

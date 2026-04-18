@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Monitor, CheckCircle, ClipboardSignature, PenTool, Send, Pill, FileEdit, Library, FileCheck2, Languages, ChevronRight } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const features = [
   {
@@ -84,6 +85,7 @@ const features = [
 ];
 
 export default function FeatureCards() {
+  const t = useTranslations();
   const [isPaused, setIsPaused] = React.useState(false);
 
   return (
@@ -103,13 +105,13 @@ export default function FeatureCards() {
                 <div className="fc-icon-only">
                   {feature.icon}
                 </div>
-                <h3 className="fc-title">{feature.title}</h3>
-                
+                <h3 className="fc-title">{t(feature.title)}</h3>
+
                 {feature.type === "text" ? (
-                  <p className="fc-text">{feature.description}</p>
+                  <p className="fc-text">{t(feature.description)}</p>
                 ) : (
                   <div className="fc-search-bar">
-                    <span>{feature.description}</span>
+                    <span>{t(feature.description)}</span>
                     <ChevronRight size={14} className="fc-chevron" />
                   </div>
                 )}

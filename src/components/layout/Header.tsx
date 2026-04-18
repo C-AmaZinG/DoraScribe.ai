@@ -2,10 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 import Logo from "@/components/ui/Logo";
-import { useLanguage } from "@/lib/language-context";
+import { useLocale } from "@/lib/locale-context";
+import { useTranslations } from "@/lib/translations/translations-context";
+import { locales, localePath, stripLocaleFromPath, localeMap } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
 const navLinks = [
   { name: "How to Use", href: "/#how-it-works" },
@@ -26,6 +30,7 @@ const MOBILE_BREAKPOINT = 1080;
 
 const DropdownLink = ({ name, href }: { name: string; href: string }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   return (
     <Link
       href={href}
@@ -48,13 +53,14 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
         boxShadow: isHovered ? "0 8px 18px rgba(61, 129, 131, 0.08)" : "none"
       }}
     >
-      {name}
+      {t(name)}
     </Link>
   );
 };
 
 const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; onClick: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   return (
     <Link
       href={href}
@@ -72,13 +78,16 @@ const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; on
         textAlign: "left"
       }}
     >
-      {name}
+      {t(name)}
     </Link>
   );
 };
 
 export default function Header() {
-  const { activeLanguage, setActiveLanguageByCode, languageOptions } = useLanguage();
+  const currentLocale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
@@ -132,6 +141,12 @@ export default function Header() {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsMobileResourcesOpen(false);
+  };
+
+  const switchLocale = (locale: Locale) => {
+    document.cookie = `NEXT_LOCALE=${locale};path=/;max-age=${365 * 24 * 60 * 60}`;
+    router.push(localePath(stripLocaleFromPath(pathname), locale));
+    setIsLanguageOpen(false);
   };
 
   return (
@@ -215,7 +230,7 @@ export default function Header() {
                           : "2px solid transparent",
                     }}
                   >
-                    {link.name}
+                    {t(link.name)}
                     <span
                       className="nav-caret"
                       style={{
@@ -250,7 +265,7 @@ export default function Header() {
                         : "2px solid transparent",
                   }}
                 >
-                  {link.name}
+                  {t(link.name)}
                 </Link>
               )
             )}
@@ -273,10 +288,10 @@ export default function Header() {
                                 <span
                   className="language-flag-mini"
                   style={{
-                    backgroundImage: `url(https://flagcdn.com/w40/${activeLanguage.country}.png)`,
+                    backgroundImage: `url(https://flagcdn.com/w40/${localeMap[currentLocale].flag}.png)`,
                   }}
                 />
-                <span>{activeLanguage.code}</span>
+                <span>{localeMap[currentLocale].label}</span>
                                 <span className="language-trigger-caret">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 9l6 6 6-6" />
@@ -294,26 +309,23 @@ export default function Header() {
                       transition={{ duration: 0.12, ease: "easeOut" }}
                       className="language-menu-inner"
                     >
-                      <p className="language-menu-title">Select Language</p>
-                      {languageOptions.map((language) => (
+                      <p className="language-menu-title">{t("Select Language")}</p>
+                      {locales.map((locale) => (
                         <button
-                          key={language.code}
+                          key={locale}
                           type="button"
-                          className={`language-option ${activeLanguage.code === language.code ? "is-active" : ""}`}
-                          onClick={() => {
-                            setActiveLanguageByCode(language.code);
-                            setIsLanguageOpen(false);
-                          }}
+                          className={`language-option ${currentLocale === locale ? "is-active" : ""}`}
+                          onClick={() => switchLocale(locale)}
                         >
-                                                    <span
+                          <span
                             className="language-flag"
                             aria-hidden="true"
                             style={{
-                              backgroundImage: `url(https://flagcdn.com/w40/${language.country}.png)`,
+                              backgroundImage: `url(https://flagcdn.com/w40/${localeMap[locale].flag}.png)`,
                             }}
                           />
-                          <span className="language-option-label">{language.name} ({language.region})</span>
-                          {activeLanguage.code === language.code && (
+                          <span className="language-option-label">{localeMap[locale].name}</span>
+                          {currentLocale === locale && (
                             <span className="active-check">&#10003;</span>
                           )}
                         </button>
@@ -328,7 +340,7 @@ export default function Header() {
             {/* Swapped order: Get started first, then Login */}
             <div className="desktop-only">
               <MakroButton
-                text="Get started"
+                text={t("Get started")}
                 href="https://app.dorascribe.ai/signUp"
                 size="sm"
               />
@@ -354,7 +366,7 @@ export default function Header() {
                 }}
                 className="login-link"
               >
-                Log in
+                {t("Log in")}
               </Link>
             </div>
 
@@ -585,8 +597,8 @@ export default function Header() {
                               justifyContent: "space-between",
                             }}
                           >
-                            <span>{name}</span>
-                            <span 
+                            <span>{t(name)}</span>
+                            <span
                               className="nav-caret"
                               style={{ 
                                 fontSize: "12px", 

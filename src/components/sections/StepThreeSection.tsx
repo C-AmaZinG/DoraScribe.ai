@@ -3,10 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Clock3 } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const quickActions = ["Draft note", "Smart coding", "Next patient"];
 
 export default function StepThreeSection() {
+  const t = useTranslations();
   const [activeAction, setActiveAction] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -29,11 +31,10 @@ export default function StepThreeSection() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="step-three-chip">Step 3</span>
-          <h2>Save Time</h2>
+          <span className="step-three-chip">{t("Step 3")}</span>
+          <h2>{t("Save Time")}</h2>
           <p>
-            Easily generate new patient records, allowing you to efficiently move
-            on to your next patient without delay.
+            {t("Easily generate new patient records, allowing you to efficiently move on to your next patient without delay.")}
           </p>
         </motion.div>
 
@@ -71,7 +72,7 @@ export default function StepThreeSection() {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <h4>Patient Queue</h4>
+              <h4>{t("Patient Queue")}</h4>
               <div className="line w-100" />
               <div className="line w-88" />
               <div className="line w-92" />

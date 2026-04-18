@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 function PracticeIcon({ className }: { className?: string }) {
   return (
@@ -55,20 +56,20 @@ const trustItems = [
 ];
 
 export default function DutyOfCare() {
+  const t = useTranslations();
   return (
     <section className="duty-section">
       <div className="duty-shell">
         <div className="duty-top">
           <div className="duty-copy">
-            <h2>Your duty of care, built in</h2>
+            <h2>{t("Your duty of care, built in")}</h2>
             <p>
-              We hold ourselves to the highest standard there is: the one you set when you care for
-              patients.
+              {t("We hold ourselves to the highest standard there is: the one you set when you care for patients.")}
             </p>
             <div className="badge-grid">
               {complianceBadges.map((badge) => (
                 <span key={badge} className="badge-pill">
-                  {badge}
+                  {t(badge)}
                 </span>
               ))}
             </div>
@@ -84,8 +85,8 @@ export default function DutyOfCare() {
                 <div className="card-icon">
                   <Icon className="icon-svg" />
                 </div>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
+                <h3>{t(item.title)}</h3>
+                <p>{t(item.body)}</p>
               </article>
             );
           })}

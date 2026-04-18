@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { fetchPosts, getFeaturedImage, formatDate, stripHtml } from "@/lib/wordpress";
 import type { WPPost } from "@/lib/wordpress";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 function getReadTime(content: string) {
   const words = stripHtml(content).split(/\s+/).filter(Boolean).length;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, totalPosts: initialTotalPosts }: Props) {
+  const t = useTranslations();
   const [posts, setPosts] = useState<WPPost[]>(initialPosts);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(initialTotalPages);
@@ -49,17 +51,16 @@ export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, t
         <section className="blog-top">
           <div className="blog-shell">
             <div className="blog-head">
-              <h1>Clinical AI insights for modern healthcare teams.</h1>
+              <h1>{t("Clinical AI insights for modern healthcare teams.")}</h1>
               <p className="blog-subtitle">
-                Explore practical guidance, product updates, and real-world workflows to
-                help clinicians reduce admin burden and document with confidence.
+                {t("Explore practical guidance, product updates, and real-world workflows to help clinicians reduce admin burden and document with confidence.")}
               </p>
             </div>
 
             {posts.length === 0 ? (
               <div className="blog-empty">
-                <h2>No stories yet</h2>
-                <p>Check back soon for articles, guides, and new clinical AI updates.</p>
+                <h2>{t("No stories yet")}</h2>
+                <p>{t("Check back soon for articles, guides, and new clinical AI updates.")}</p>
               </div>
             ) : (
               <>
@@ -106,9 +107,9 @@ export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, t
                             </p>
 
                             <div className="grid-footer">
-                              <span>{minutes} min read</span>
+                              <span>{minutes} {t("min read")}</span>
                               <span className="story-cta">
-                                Read article
+                                {t("Read article")}
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                   <path d="M5 12h14M12 5l7 7-7 7" />
                                 </svg>
@@ -129,10 +130,10 @@ export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, t
                       disabled={loadingMore}
                       className="load-more-button"
                     >
-                      {loadingMore ? "Loading..." : "Load more"}
+                      {loadingMore ? t("Loading...") : t("Load more")}
                     </button>
                     <p className="load-more-meta">
-                      Showing {posts.length} of {totalPosts} stories
+                      {t("Showing")} {posts.length} {t("of")} {totalPosts} {t("stories")}
                     </p>
                   </div>
                 )}

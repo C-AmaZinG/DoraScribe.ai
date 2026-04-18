@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useTranslations } from "@/lib/translations/translations-context";
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { fetchPosts, getFeaturedImage, getCategories, formatDate, stripHtml } from '@/lib/wordpress';
@@ -16,6 +17,7 @@ const categoryColors: Record<string, string> = {
 };
 
 export default function BlogSection() {
+  const t = useTranslations();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -70,7 +72,7 @@ export default function BlogSection() {
               maxWidth: '600px'
             }}
           >
-            Everything you need to lead the way in clinical AI
+            {t("Everything you need to lead the way in clinical AI")}
           </motion.h2>
 
           <div style={{ display: 'flex', gap: '8px', flexShrink: 0, marginTop: '8px' }}>
@@ -155,7 +157,7 @@ export default function BlogSection() {
             // Empty state
             <div style={{ textAlign: 'center', padding: '60px 24px', width: '100%' }}>
               <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#64748b', fontSize: '1rem' }}>
-                Blog posts coming soon. Check back for insights on clinical AI.
+                {t("Blog posts coming soon. Check back for insights on clinical AI.")}
               </p>
             </div>
           ) : (
@@ -209,7 +211,7 @@ export default function BlogSection() {
                           color: '#fff',
                           fontFamily: "'DM Sans', sans-serif",
                           fontSize: '2rem'
-                        }}>dora</div>
+                        }}>{t("dora")}</div>
                       )}
                     </div>
 
@@ -242,7 +244,7 @@ export default function BlogSection() {
                         }}>
                           <span>{new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
                           <span style={{ opacity: 0.3 }}>•</span>
-                          <span>{Math.max(1, Math.round(post.content.rendered.replace(/<[^>]+>/g, "").trim().split(/\s+/).length / 230))} min read</span>
+                          <span>{Math.max(1, Math.round(post.content.rendered.replace(/<[^>]+>/g, "").trim().split(/\s+/).length / 230))} {t("min read")}</span>
                         </div>
                       </div>
 
@@ -287,7 +289,7 @@ export default function BlogSection() {
                         paddingBottom: '4px'
                       }}>
                         <div className="story-cta" style={{ margin: 0, padding: 0 }}>
-                          Read article
+                          {t("Read article")}
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                           </svg>
@@ -319,7 +321,7 @@ export default function BlogSection() {
               fontWeight: 500,
               transition: 'all 0.3s ease'
             }}>
-              See all articles
+              {t("See all articles")}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>

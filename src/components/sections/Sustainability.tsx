@@ -3,10 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Mic } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const quickActions = ["Referral letter", "Prescription", "Assessment"];
 
 export default function Sustainability() {
+  const t = useTranslations();
   const [activeAction, setActiveAction] = useState(0);
 
   useEffect(() => {
@@ -27,11 +29,10 @@ export default function Sustainability() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="burnout-chip">Step 1</span>
-          <h2>Record</h2>
+          <span className="burnout-chip">{t("Step 1")}</span>
+          <h2>{t("Record")}</h2>
           <p>
-            Instantly capture live conversations with your patient or dictate a
-            summary of the interaction.
+            {t("Instantly capture live conversations with your patient or dictate a summary of the interaction.")}
           </p>
         </motion.div>
 
@@ -65,7 +66,7 @@ export default function Sustainability() {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <h4>Note</h4>
+              <h4>{t("Note")}</h4>
               <div className="line w-100" />
               <div className="line w-88" />
               <div className="line w-92" />

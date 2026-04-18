@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FAQ from "@/components/sections/FAQ";
 import MakroButton from "@/components/ui/MakroButton";
+import { AnimatePresence } from "framer-motion";
 
 const tutorialCards = [
   {
@@ -13,7 +14,6 @@ const tutorialCards = [
     title: "Set up your Dorascribe account",
     description: "Get your workspace ready and start transcribing in minutes.",
     videoId: "R8Ytt90iFU8",
-    thumbnail: "/assets/dorascribe-ambient-ai-tutorial-thumbnail.png",
     duration: "1:45"
   },
   {
@@ -21,7 +21,6 @@ const tutorialCards = [
     title: "Capture clinical notes effortlessly",
     description: "Turn patient conversations into accurate medical notes instantly.",
     videoId: "SfjUAceKG0o",
-    thumbnail: "/assets/dorascribe-accurate-documentation-tutorial-thumbnail.png",
     duration: "2:20"
   },
   {
@@ -29,36 +28,22 @@ const tutorialCards = [
     title: "Creating Custom Note Templates",
     description: "Build templates that perfectly align with your unique clinical workflow.",
     videoId: "Xin6AIcSU9k",
-    thumbnail: "/assets/dorascribe-custom-workflows-tutorial-thumbnail.png",
     duration: "3:15"
   },
   {
     eyebrow: "Mobile Experience",
     title: "Notes on the go with your phone",
     description: "Master the mobile app to capture documentation anytime, anywhere.",
-    videoId: "Xin6AIcSU9k", // Using same for placeholder if 4th link not provided
-    thumbnail: "/assets/dorascribe-cross-platform-tutorial-thumbnail.png",
+    videoId: "Xin6AIcSU9k",
     duration: "1:55"
   },
 ];
-
-const highlights = [
-  "Step-by-step onboarding",
-  "Mobile and desktop workflows",
-  "Template setup guidance",
-  "Answers to common questions",
-];
-
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
 
 export default function TutorialsPage() {
   return (
     <div className="tutorials-page">
       <Header />
       <main className="tutorials-main">
-
-
         <section className="tutorials-library">
           <div className="page-shell">
             <div className="section-heading">
@@ -89,7 +74,7 @@ export default function TutorialsPage() {
                       style={{ borderRadius: "12px" }}
                     ></iframe>
                   </div>
-                  
+
                   <div className="card-content">
                     <div className="card-header">
                       <span className="card-index">0{index + 1}</span>
@@ -156,177 +141,6 @@ export default function TutorialsPage() {
           padding: 0 24px;
         }
 
-        .tutorials-hero {
-          padding: 54px 0 56px;
-        }
-
-        .hero-grid {
-          display: grid;
-          grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-          gap: 28px;
-          align-items: stretch;
-        }
-
-        .hero-copy,
-        .hero-panel,
-        .tutorial-card,
-        .cta-panel {
-          border: 1px solid rgba(19, 26, 35, 0.08);
-          box-shadow: 0 24px 60px rgba(14, 20, 28, 0.06);
-        }
-
-        .hero-copy {
-          background: rgba(255, 255, 255, 0.72);
-          border-radius: 36px;
-          padding: 42px;
-          backdrop-filter: blur(10px);
-        }
-
-        .hero-pill,
-        .section-kicker {
-          display: inline-flex;
-          align-items: center;
-          width: fit-content;
-          border-radius: 999px;
-          padding: 8px 14px;
-          font-family: "DM Sans", sans-serif;
-          font-size: 0.78rem;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-
-        .hero-pill {
-          background: #f0ebe4;
-          color: #2c1810;
-        }
-
-        .hero-copy h1,
-        .section-heading h2,
-        .cta-panel h2 {
-          margin: 18px 0 0;
-          font-family: "DM Sans", Georgia, sans-serif;
-          color: #161616;
-          letter-spacing: -0.04em;
-          line-height: 0.95;
-        }
-
-        .hero-copy h1 {
-          font-size: clamp(3.2rem, 7vw, 5.8rem);
-          max-width: 10ch;
-        }
-
-        .hero-lead,
-        .cta-panel p,
-        .card-description,
-        .panel-note {
-          font-family: "DM Sans", sans-serif;
-          color: rgba(22, 22, 22, 0.68);
-          line-height: 1.7;
-        }
-
-        .hero-lead {
-          font-size: 1.08rem;
-          max-width: 44ch;
-          margin: 20px 0 0;
-        }
-
-        .hero-actions,
-        .cta-actions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-          margin-top: 28px;
-        }
-
-        .ghost-action,
-        .card-link,
-        .cta-link {
-          font-family: "DM Sans", sans-serif;
-          text-decoration: none;
-          transition: all 0.2s ease;
-        }
-
-        .ghost-action,
-        .cta-link {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 44px;
-          padding: 0 18px;
-          border-radius: 999px;
-          font-weight: 600;
-        }
-
-        .ghost-action {
-          border: 1px solid rgba(19, 26, 35, 0.12);
-          color: #1e2c3d;
-          background: rgba(255, 255, 255, 0.7);
-        }
-
-        .ghost-action:hover {
-          border-color: rgba(41, 105, 183, 0.34);
-          color: #2969b7;
-        }
-
-        .hero-panel {
-          border-radius: 36px;
-          padding: 28px;
-          background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(239, 244, 250, 0.88)),
-            #ffffff;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          min-height: 100%;
-        }
-
-        .hero-panel-header {
-          display: flex;
-          justify-content: space-between;
-          gap: 12px;
-          font-family: "DM Sans", sans-serif;
-          font-size: 0.78rem;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: rgba(30, 44, 61, 0.62);
-        }
-
-        .highlight-list {
-          display: grid;
-          gap: 12px;
-          margin: 28px 0;
-        }
-
-        .highlight-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 14px 16px;
-          border-radius: 18px;
-          background: rgba(255, 255, 255, 0.78);
-          border: 1px solid rgba(41, 105, 183, 0.08);
-          font-family: "DM Sans", sans-serif;
-          font-weight: 600;
-          color: #1e2c3d;
-        }
-
-        .highlight-dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 999px;
-          background: linear-gradient(180deg, #ff8c42, #2969b7);
-          flex-shrink: 0;
-        }
-
-        .panel-note {
-          margin: 0;
-          padding-top: 20px;
-          border-top: 1px solid rgba(19, 26, 35, 0.08);
-          font-size: 0.98rem;
-        }
-
         .tutorials-library,
         .tutorials-cta {
           padding: 34px 0 72px;
@@ -338,12 +152,27 @@ export default function TutorialsPage() {
         }
 
         .section-kicker {
+          display: inline-flex;
+          align-items: center;
+          width: fit-content;
+          border-radius: 999px;
+          padding: 8px 14px;
+          font-family: "DM Sans", sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
           background: #EBF8F8;
           color: #000000;
         }
 
         .section-heading h2,
         .cta-panel h2 {
+          margin: 18px 0 0;
+          font-family: "DM Sans", Georgia, sans-serif;
+          color: #161616;
+          letter-spacing: -0.04em;
+          line-height: 0.95;
           font-size: clamp(2.4rem, 5vw, 4rem);
         }
 
@@ -376,67 +205,6 @@ export default function TutorialsPage() {
           overflow: hidden;
           background: #0b1121;
           border-radius: 12px;
-        }
-
-        .video-thumb {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          opacity: 0.85;
-          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
-        }
-
-        .tutorial-card:hover .video-thumb {
-          transform: scale(1.08);
-          opacity: 1;
-        }
-
-        .video-overlay {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(0, 0, 0, 0.2);
-          transition: background 0.3s ease;
-        }
-
-        .tutorial-card:hover .video-overlay {
-          background: rgba(0, 0, 0, 0.1);
-        }
-
-        .play-btn {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          background: #ffffff;
-          color: #000000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-          transform: scale(1);
-          transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
-        }
-
-        .tutorial-card:hover .play-btn {
-          transform: scale(1.15);
-          background: var(--brand-primary);
-          color: #ffffff;
-        }
-
-        .video-duration {
-          position: absolute;
-          bottom: 12px;
-          right: 12px;
-          background: rgba(0, 0, 0, 0.75);
-          color: #ffffff;
-          padding: 4px 8px;
-          border-radius: 6px;
-          font-family: "DM Sans", sans-serif;
-          font-size: 0.7rem;
-          font-weight: 700;
-          backdrop-filter: blur(4px);
         }
 
         .card-content {
@@ -481,9 +249,6 @@ export default function TutorialsPage() {
           font-family: "DM Sans", sans-serif;
           color: #161616;
           letter-spacing: -0.03em;
-        }
-
-        .tutorial-card h3 {
           font-size: 1.65rem;
           line-height: 1.3;
         }
@@ -493,9 +258,8 @@ export default function TutorialsPage() {
           font-size: 1rem;
           line-height: 1.6;
           color: #4b5563;
+          font-family: "DM Sans", sans-serif;
         }
-
-
 
         .tutorials-cta {
           padding-bottom: 96px;
@@ -508,6 +272,8 @@ export default function TutorialsPage() {
             linear-gradient(135deg, rgba(21, 34, 48, 0.96), rgba(33, 70, 114, 0.92)),
             #16212e;
           color: #ffffff;
+          border: 1px solid rgba(19, 26, 35, 0.08);
+          box-shadow: 0 24px 60px rgba(14, 20, 28, 0.06);
         }
 
         .kicker-light {
@@ -524,73 +290,38 @@ export default function TutorialsPage() {
           max-width: 46ch;
           opacity: 0.82;
           margin: 18px 0 0;
+          font-family: "DM Sans", sans-serif;
+          line-height: 1.7;
+        }
+
+        .cta-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 28px;
         }
 
         .cta-link {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 44px;
+          padding: 0 18px;
+          border-radius: 999px;
+          font-family: "DM Sans", sans-serif;
+          font-weight: 600;
+          text-decoration: none;
           background: rgba(255, 255, 255, 0.1);
           color: #ffffff;
           border: 1px solid rgba(255, 255, 255, 0.16);
+          transition: all 0.2s ease;
         }
 
         .cta-link:hover {
           border-color: rgba(255, 140, 66, 0.5);
         }
 
-        /* Video Modal Styles */
-        .video-modal-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(11, 17, 33, 0.85);
-          backdrop-filter: blur(12px);
-          z-index: 10000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-        }
-
-        .video-modal-content {
-          position: relative;
-          width: 100%;
-          max-width: 1000px;
-          aspect-ratio: 16/9;
-          background: #000;
-          border-radius: 24px;
-          overflow: hidden;
-          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-        }
-
-        .iframe-wrapper {
-          width: 100%;
-          height: 100%;
-        }
-
-        .modal-close {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.15);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          z-index: 10;
-          transition: all 0.2s ease;
-        }
-
-        .modal-close:hover {
-          background: #ffffff;
-          color: #0b1121;
-          transform: rotate(90deg);
-        }
-
         @media (max-width: 960px) {
-          .hero-grid,
           .tutorial-grid {
             grid-template-columns: 1fr;
           }
@@ -605,20 +336,9 @@ export default function TutorialsPage() {
             padding-top: 80px;
           }
 
-          .tutorials-hero {
-            padding-top: 34px;
-          }
-
-          .hero-copy,
-          .hero-panel,
-          .tutorial-card,
           .cta-panel {
             padding: 22px;
             border-radius: 24px;
-          }
-
-          .hero-copy h1 {
-            max-width: 11ch;
           }
         }
       `}</style>

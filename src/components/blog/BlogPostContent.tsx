@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer";
 import type { WPPost } from "@/lib/wordpress";
 import { getFeaturedImage } from "@/lib/wordpress";
 import { Mail, Link as LinkIcon, Check, MoreHorizontal, MoreVertical, Sparkles, List } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 // ── Helpers ──────────────────────────────────────────────────
 function ReadingTime({ content }: { content: string }) {
@@ -121,11 +122,12 @@ const SOCIAL_PLATFORMS: ShareItem[] = [
 
 // ── Share dropdown menu content ──────────────────────────────
 function ShareOverflowMenu({ onShare, overflowAI, overflowSocial }: { onShare: (item: ShareItem) => void; overflowAI: ShareItem[]; overflowSocial: ShareItem[] }) {
+  const t = useTranslations();
   return (
     <>
       <div className="px-3.5 py-1.5 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#bbb]">
         <Sparkles size={12} />
-        Discuss with AI
+        {t("Discuss with AI")}
       </div>
       {overflowAI.map((item) => (
         <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-3 px-3.5 py-2.5 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
@@ -134,7 +136,7 @@ function ShareOverflowMenu({ onShare, overflowAI, overflowSocial }: { onShare: (
         </button>
       ))}
       <div className="h-px bg-[#f0efeb] mx-3 my-1" />
-      <div className="px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#bbb]">Share on Social</div>
+      <div className="px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#bbb]">{t("Share on Social")}</div>
       {overflowSocial.map((item) => (
         <button key={item.id} onClick={() => onShare(item)} className="w-full flex items-center gap-3 px-3.5 py-2.5 text-[13px] font-medium text-[#555] hover:text-[#1a1a1a] hover:bg-[#fafaf8] transition-colors">
           <span className="flex-shrink-0 text-[#888]">{item.icon}</span>
@@ -147,6 +149,7 @@ function ShareOverflowMenu({ onShare, overflowAI, overflowSocial }: { onShare: (
 
 // ── Floating share sidebar (desktop only) ────────────────────
 function FloatingShareSidebar({ title }: { title: string }) {
+  const t = useTranslations();
   const [showMore, setShowMore] = useState(false);
   const [copied, setCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -178,7 +181,7 @@ function FloatingShareSidebar({ title }: { title: string }) {
   return (
     <aside className="hidden xl:block absolute top-0 left-[14px] bottom-0 z-40 mb-[5ch]" ref={menuRef}>
       <div className="sticky top-[200px] flex flex-col items-center gap-2.5">
-        <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#bbb] mb-0.5">Share</span>
+        <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#bbb] mb-0.5">{t("Share")}</span>
 
         <button
           onClick={handleCopyLink}
@@ -234,6 +237,7 @@ function FloatingShareSidebar({ title }: { title: string }) {
 
 // ── Inline share bar (mobile / footer) ───────────────────────
 function InlineShareBar({ title }: { title: string }) {
+  const t = useTranslations();
   const [showMore, setShowMore] = useState(false);
   const [copied, setCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -311,6 +315,7 @@ function InlineShareBar({ title }: { title: string }) {
 interface TocItem { id: string; text: string; level: number; }
 
 function TableOfContents({ html }: { html: string }) {
+  const t = useTranslations();
   const [activeId, setActiveId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -370,8 +375,8 @@ function TableOfContents({ html }: { html: string }) {
       <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-6 py-4 hover:bg-[#fafaf8] transition-colors">
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 rounded-lg bg-[#FB1A0E]/[0.08] flex items-center justify-center text-[#FB1A0E]"><List size={15} /></div>
-          <span className="text-[13px] font-semibold text-[#1a1a1a] tracking-[-0.01em]">In this article</span>
-          <span className="text-[11px] text-[#bbb] font-medium">{headings.length} sections</span>
+          <span className="text-[13px] font-semibold text-[#1a1a1a] tracking-[-0.01em]">{t("In this article")}</span>
+          <span className="text-[11px] text-[#bbb] font-medium">{headings.length} {t("sections")}</span>
         </div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}><path d="M6 9l6 6 6-6" /></svg>
       </button>
@@ -401,6 +406,7 @@ function TableOfContents({ html }: { html: string }) {
 
 // ── Related articles ─────────────────────────────────────────
 function RelatedArticles({ posts }: { posts: WPPost[] }) {
+  const t = useTranslations();
   if (posts.length === 0) return null;
 
   return (
@@ -410,7 +416,7 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
           className="text-[28px] sm:text-[32px] font-bold text-[#1a1a1a] tracking-[-0.02em] mb-8"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          Related Articles
+          {t("Related Articles")}
         </h2>
         <section className="stories-grid">
           {posts.map((post, index) => {
@@ -456,9 +462,9 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
                     <p className="grid-excerpt">{stripHtml(post.excerpt.rendered)}</p>
 
                     <div className="grid-footer">
-                      <span>{minutes} min read</span>
+                      <span>{minutes} {t("min read")}</span>
                       <span className="story-cta">
-                        Read article
+                        {t("Read article")}
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
@@ -617,6 +623,7 @@ interface BlogPostContentProps {
 }
 
 export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
+  const t = useTranslations();
   const featuredImage = getFeaturedImage(post) || undefined;
   const sanitizedContent = sanitizeArticleContent(post.content.rendered);
   const date = new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
@@ -637,9 +644,9 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
         >
           <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 24px" }}>
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[12px] text-[#aaa] font-medium mb-8 tracking-[0.06em] uppercase">
-              <Link href="/" className="hover:text-[#FB1A0E] transition-colors">Home</Link>
+              <Link href="/" className="hover:text-[#FB1A0E] transition-colors">{t("Home")}</Link>
               <svg width="10" height="10" viewBox="0 0 20 20" fill="none" className="text-[#ddd]"><path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <Link href="/blog" className="hover:text-[#FB1A0E] transition-colors">Blog</Link>
+              <Link href="/blog" className="hover:text-[#FB1A0E] transition-colors">{t("Blog")}</Link>
               <svg width="10" height="10" viewBox="0 0 20 20" fill="none" className="text-[#ddd]"><path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <span className="text-[#777] truncate max-w-[200px]">{title}</span>
             </nav>
@@ -707,13 +714,13 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
 
             <div className="pb-20">
               <div className="xl:hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6 border-t border-b border-[#e8e5e0]">
-                <span className="text-[13px] font-semibold text-[#999] uppercase tracking-[0.1em]">Share this article</span>
+                <span className="text-[13px] font-semibold text-[#999] uppercase tracking-[0.1em]">{t("Share this article")}</span>
                 <InlineShareBar title={post.title.rendered} />
               </div>
               <div className="mt-10 xl:mt-0">
                 <Link href="/blog" className="inline-flex items-center gap-2.5 text-[#FB1A0E] font-semibold text-[14px] hover:gap-3.5 transition-all group">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="group-hover:-translate-x-1 transition-transform"><path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  Back to all articles
+                  {t("Back to all articles")}
                 </Link>
               </div>
             </div>

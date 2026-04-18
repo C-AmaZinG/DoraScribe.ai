@@ -3,8 +3,10 @@
 import React from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { useTranslations } from "@/lib/translations/translations-context"
 
 export default function WhyChoose() {
+  const t = useTranslations();
   return (
     <section
       id="why-choose"
@@ -41,7 +43,7 @@ export default function WhyChoose() {
               lineHeight: 1.2,
             }}
           >
-            Why Choose Dorascribe?
+            {t("Why Choose Dorascribe?")}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -56,7 +58,7 @@ export default function WhyChoose() {
               lineHeight: 1.5,
             }}
           >
-            Streamline your workflow and enhance patient interactions with these benefits
+            {t("Streamline your workflow and enhance patient interactions with these benefits")}
           </motion.p>
         </div>
 
@@ -101,7 +103,7 @@ export default function WhyChoose() {
                 maxWidth: "500px",
               }}
             >
-              Smart Ambient Clinical Platform
+              {t("Smart Ambient Clinical Platform")}
             </h3>
             <p
               className="smart-ambient-description"
@@ -113,9 +115,9 @@ export default function WhyChoose() {
                 lineHeight: 1.6,
               }}
             >
-              More than an AI scribe.<br />
-              From real-time documentation to clinical decision support, prescriptions, and smart form completion.<br /><br />
-              Built to streamline every step of care
+              {t("More than an AI scribe.")}<br />
+              {t("From real-time documentation to clinical decision support, prescriptions, and smart form completion.")}<br /><br />
+              {t("Built to streamline every step of care")}
             </p>
           </div>
 
@@ -188,7 +190,7 @@ export default function WhyChoose() {
                 lineHeight: 1.2,
               }}
             >
-              Privacy Compliance
+              {t("Privacy Compliance")}
             </h4>
             <p
               style={{
@@ -198,7 +200,7 @@ export default function WhyChoose() {
                 lineHeight: 1.6,
               }}
             >
-              HIPAA, POPIA, PIPEDA, GDPR, and SOC2 compliance help ensure your data and your patients' information remain protected.
+              {t("HIPAA, POPIA, PIPEDA, GDPR, and SOC2 compliance help ensure your data and your patients' information remain protected.")}
             </p>
           </motion.div>
 
@@ -236,7 +238,7 @@ export default function WhyChoose() {
                 lineHeight: 1.2,
               }}
             >
-              Work Across All Devices
+              {t("Work Across All Devices")}
             </h4>
             <p
               style={{
@@ -246,7 +248,7 @@ export default function WhyChoose() {
                 lineHeight: 1.6,
               }}
             >
-              Access Dorascribe anytime, anywhere, on desktop, tablet, or mobile. Available on the App Store and Google Play.
+              {t("Access Dorascribe anytime, anywhere, on desktop, tablet, or mobile. Available on the App Store and Google Play.")}
             </p>
           </motion.div>
 
@@ -284,7 +286,7 @@ export default function WhyChoose() {
                 lineHeight: 1.2,
               }}
             >
-              Integrate with your EMR
+              {t("Integrate with your EMR")}
             </h4>
             <p
               style={{
@@ -294,7 +296,7 @@ export default function WhyChoose() {
                 lineHeight: 1.6,
               }}
             >
-              Connect Dorascribe to your existing workflow so completed notes are ready to move into your EMR quickly and with less manual work.
+              {t("Connect Dorascribe to your existing workflow so completed notes are ready to move into your EMR quickly and with less manual work.")}
             </p>
           </motion.div>
         </div>

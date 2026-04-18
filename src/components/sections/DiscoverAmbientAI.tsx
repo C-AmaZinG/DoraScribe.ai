@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const featureRows = [
   {
@@ -31,13 +32,14 @@ const featureRows = [
 ];
 
 export default function DiscoverAmbientAI() {
+  const t = useTranslations();
   return (
     <section className="discover-section">
       <div className="discover-shell">
         <div className="discover-heading">
-          <h2>Why Choose Dorascribe?</h2>
+          <h2>{t("Why Choose Dorascribe?")}</h2>
           <p>
-            Streamline your workflow and enhance patient interactions with these benefits.
+            {t("Streamline your workflow and enhance patient interactions with these benefits.")}
           </p>
         </div>
 
@@ -47,15 +49,15 @@ export default function DiscoverAmbientAI() {
               <div className="discover-media">
                 <Image
                   src={row.image}
-                  alt={row.title}
+                  alt={t(row.title)}
                   fill
                   sizes="(max-width: 900px) 100vw, 50vw"
                   style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="discover-copy">
-                <h3>{row.title}</h3>
-                <p>{row.description}</p>
+                <h3>{t(row.title)}</h3>
+                <p>{t(row.description)}</p>
               </div>
             </article>
           ))}

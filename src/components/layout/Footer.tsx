@@ -5,93 +5,96 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '@/components/ui/Logo';
 import MakroButton from '@/components/ui/MakroButton';
+import { useTranslations } from "@/lib/translations/translations-context";
 
 export default function Footer() {
+  const t = useTranslations();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const footerLinks = [
     {
-      title: 'RESOURCES',
+      title: t('RESOURCES'),
       links: [
-        { l: 'How to Use', h: '/tutorials' },
-        { l: 'Pricing Plans', h: '/pricing' },
-        { l: 'Tutorials', h: '/tutorials' },
+        { l: t('How to Use'), h: '/tutorials' },
+        { l: t('Pricing Plans'), h: '/pricing' },
+        { l: t('Tutorials'), h: '/tutorials' },
       ],
     },
     {
-      title: 'QUICK LINKS',
+      title: t('QUICK LINKS'),
       links: [
-        { l: 'Support', h: '/contact' },
-        { l: 'Dashboard', h: 'https://app.dorascribe.ai' },
+        { l: t('Support'), h: '/contact' },
+        { l: t('Dashboard'), h: 'https://app.dorascribe.ai' },
       ],
     },
     {
-      title: 'USEFUL LINKS',
+      title: t('USEFUL LINKS'),
       links: [
-        { l: 'Blog & News', h: '/blog' },
-        { l: 'Trust Center', h: '/trust-center' },
+        { l: t('Blog & News'), h: '/blog' },
+        { l: t('Trust Center'), h: '/trust-center' },
       ],
     },
   ];
 
   return (
-    <footer style={{ 
-      background: '#ffffff', 
-      padding: '100px 24px 40px', 
+    <footer style={{
+      background: '#ffffff',
+      padding: '100px 24px 40px',
       borderTop: '1px solid rgba(0,0,0,0.06)',
       position: 'relative',
       overflow: 'hidden'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
+
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
           gap: '80px',
           marginBottom: '100px'
         }}>
-          
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
             alignItems: 'flex-start',
             gap: '40px',
             flexWrap: 'wrap'
           }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '700px' }}>
-              <h2 style={{ 
-                fontFamily: "'DM Sans', sans-serif", 
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)', 
-                fontWeight: 400, 
+              <h2 style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 400,
                 color: '#000000',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
                 margin: 0
               }}>
-                Advancing clinical documentation with AI.
+                {t("Advancing clinical documentation with AI.")}
               </h2>
               <p style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '1.2rem',
                 color: '#64748b'
-              }}>Advance your clinical workflow with Dorascribe.</p>
+              }}>{t("Advance your clinical workflow with Dorascribe.")}</p>
             </div>
-            
-            <MakroButton text="Start a free trial" href="https://app.dorascribe.ai/signUp" />
+
+            <MakroButton text={t("Start a free trial")} href="https://app.dorascribe.ai/signUp" />
           </div>
 
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '60px',
             alignItems: 'flex-start'
           }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <Logo />
               <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '240px', fontFamily: "'DM Sans', sans-serif" }}>
-                Designed and developed by clinical professionals.<br />
+                {t("Designed and developed by clinical professionals.")}<br />
                 <a href="mailto:help@dorascribe.com" style={{ color: '#000000', textDecoration: 'none', fontWeight: 600 }}>help@dorascribe.com</a>
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
@@ -116,18 +119,18 @@ export default function Footer() {
               </div>
             </div>
 
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(2, 1fr)', 
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
               gap: '50px 80px',
             }}>
               {footerLinks.map((col) => (
                 <div key={col.title}>
-                  <h4 className="footer-menu-title" style={{ 
-                    fontFamily: "'DM Sans', sans-serif", 
-                    fontSize: '14px', 
-                    fontWeight: 600, 
-                    textTransform: 'uppercase', 
+                  <h4 className="footer-menu-title" style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
                     letterSpacing: '0.05em',
                     color: '#000000',
                     marginBottom: '24px'
@@ -141,9 +144,9 @@ export default function Footer() {
                           <li key={link.l}>
                             <Link
                               href={link.h}
-                              style={{ 
-                                textDecoration: 'none', 
-                                color: '#64748b', 
+                              style={{
+                                textDecoration: 'none',
+                                color: '#64748b',
                                 fontSize: '14px',
                                 fontFamily: "'DM Sans', sans-serif",
                                 transition: 'color 0.3s ease'
@@ -160,9 +163,9 @@ export default function Footer() {
                         <li key={link.l}>
                           <a
                             href={link.h}
-                            style={{ 
-                              textDecoration: 'none', 
-                              color: '#64748b', 
+                            style={{
+                              textDecoration: 'none',
+                              color: '#64748b',
                               fontSize: '14px',
                               fontFamily: "'DM Sans', sans-serif",
                               transition: 'color 0.3s ease'
@@ -181,7 +184,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ 
+        <div style={{
           marginTop: '60px',
           paddingTop: '60px',
           borderTop: '1px solid rgba(0,0,0,0.06)',
@@ -206,21 +209,21 @@ export default function Footer() {
            </h1>
         </div>
 
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
           alignItems: 'center',
           marginTop: '40px',
           flexWrap: 'wrap',
           gap: '20px'
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <p style={{ 
+            <p style={{
                fontFamily: "'DM Sans', sans-serif",
                fontSize: '0.9rem',
                color: '#64748b'
             }}>
-              © 2026 Dorascribe. All Rights Reserved.
+              {t("© 2026 Dorascribe. All Rights Reserved.")}
             </p>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginTop: '4px' }}>
               <a href="https://www.linkedin.com/company/dorascribe-inc/posts/?feedView=all" target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#0077b5'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748b'}>
@@ -237,14 +240,14 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          
+
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <div style={{ display: 'flex', gap: '12px' }}>
-              <a href="#" style={{ color: '#64748b', fontSize: '0.85rem', textDecoration: 'none' }}>Privacy Policy</a>
+              <a href="#" style={{ color: '#64748b', fontSize: '0.85rem', textDecoration: 'none' }}>{t("Privacy Policy")}</a>
               <span style={{ color: '#64748b', opacity: 0.3 }}>|</span>
-              <a href="#" style={{ color: '#64748b', fontSize: '0.85rem', textDecoration: 'none' }}>Terms & Conditions</a>
+              <a href="#" style={{ color: '#64748b', fontSize: '0.85rem', textDecoration: 'none' }}>{t("Terms & Conditions")}</a>
             </div>
-            <button 
+            <button
               onClick={scrollToTop}
               style={{
                 background: 'none',
@@ -257,7 +260,7 @@ export default function Footer() {
                 textDecoration: 'underline'
               }}
             >
-              Scroll to top
+              {t("Scroll to top")}
             </button>
           </div>
         </div>

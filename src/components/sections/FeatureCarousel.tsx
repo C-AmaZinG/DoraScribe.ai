@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Brain, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import MakroButton from '@/components/ui/MakroButton';
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const features = [
   {
@@ -43,6 +44,7 @@ const features = [
 ];
 
 export default function FeatureCarousel() {
+  const t = useTranslations();
   const [activeTab, setActiveTab] = useState(features[0]);
 
   return (
@@ -57,7 +59,7 @@ export default function FeatureCarousel() {
             lineHeight: 1.1,
             marginBottom: '24px'
           }}>
-            Advanced medical <br /> intelligence.
+            {t("Advanced medical")} <br /> {t("intelligence.")}
           </h2>
         </div>
 
@@ -156,7 +158,7 @@ export default function FeatureCarousel() {
                     }}
                   >
                     {isActive && <span style={{ color: 'var(--secondary, #FF6F00)' }}>{feature.icon}</span>}
-                    {feature.title}
+                    {t(feature.title)}
                   </button>
                 );
               })}
@@ -178,9 +180,9 @@ export default function FeatureCarousel() {
                   lineHeight: 1.6,
                   marginBottom: '40px' 
                 }}>
-                  {activeTab.description}
+                  {t(activeTab.description)}
                 </p>
-                <MakroButton text={activeTab.cta} href="#" variant="primary" />
+                <MakroButton text={t(activeTab.cta)} href="#" variant="primary" />
               </motion.div>
             </AnimatePresence>
           </div>

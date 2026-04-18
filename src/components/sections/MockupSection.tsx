@@ -4,8 +4,10 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import MakroButton from '@/components/ui/MakroButton';
+import { useTranslations } from "@/lib/translations/translations-context";
 
 export default function MockupSection() {
+  const t = useTranslations();
   return (
     <section
       style={{
@@ -42,7 +44,7 @@ export default function MockupSection() {
               lineHeight: 1.15,
             }}
           >
-            Experience clinical freedom.
+            {t("Experience clinical freedom.")}
           </h2>
           <p
             style={{
@@ -54,11 +56,11 @@ export default function MockupSection() {
               lineHeight: 1.5,
             }}
           >
-            Dorascribe runs seamlessly on iPad and iPhone, capturing every nuance of your patient encounters.
+            {t("Dorascribe runs seamlessly on iPad and iPhone, capturing every nuance of your patient encounters.")}
           </p>
 
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
-            <MakroButton href="https://app.dorascribe.ai/signUp" text="Start a free trial" />
+            <MakroButton href="https://app.dorascribe.ai/signUp" text={t("Start a free trial")} />
           </div>
 
           <div
@@ -71,7 +73,7 @@ export default function MockupSection() {
               opacity: 0.85,
             }}
           >
-            Trusted by healthcare professionals
+            {t("Trusted by healthcare professionals")}
           </div>
         </motion.div>
 

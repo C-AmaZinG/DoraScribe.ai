@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const featureCards = [
   { title: "Globally certified", key: "certified" },
@@ -15,6 +16,7 @@ const featureCards = [
 ];
 
 function Visual({ cardKey, animateRight }: { cardKey: string; animateRight: boolean }) {
+  const t = useTranslations();
   if (cardKey === "certified") {
     return (
       <div className="v-cert-grid">
@@ -30,18 +32,18 @@ function Visual({ cardKey, animateRight }: { cardKey: string; animateRight: bool
   if (cardKey === "answers") {
     return (
       <div className="v-chat">
-        <div className="v-bubble top-left">Referral letter</div>
-        <div className="v-bubble top-right">Patient explainer</div>
+        <div className="v-bubble top-left">{t("Referral letter")}</div>
+        <div className="v-bubble top-right">{t("Patient explainer")}</div>
         <motion.div
           className="v-chat-input"
           animate={{ boxShadow: ["0 0 0 rgba(63,7,34,0)", "0 0 0 6px rgba(63,7,34,0.08)", "0 0 0 rgba(63,7,34,0)"] }}
           transition={{ duration: 2.1, repeat: Infinity, ease: "easeInOut" }}
         >
-          <span>Ask Dora to do anything...</span>
+          <span>{t("Ask Dora to do anything...")}</span>
           <button type="button">↑</button>
         </motion.div>
-        <div className="v-bubble bottom-left">SOAP</div>
-        <div className="v-bubble bottom-right">Assessments</div>
+        <div className="v-bubble bottom-left">{t("SOAP")}</div>
+        <div className="v-bubble bottom-right">{t("Assessments")}</div>
       </div>
     );
   }
@@ -92,14 +94,14 @@ function Visual({ cardKey, animateRight }: { cardKey: string; animateRight: bool
     return (
       <div className="v-languages">
         <div className="v-lang-row">
-          <span className="v-lang-pill">110+ languages</span>
+          <span className="v-lang-pill">{t("110+ languages")}</span>
           <span className="v-lang-plus">+</span>
           <span className="v-lang-emoji">🇨🇳</span>
           <span className="v-lang-emoji">🇫🇷</span>
           <span className="v-lang-emoji">🇩🇪</span>
         </div>
         <div className="v-note-card">
-          <p>Note</p>
+          <p>{t("Note")}</p>
           <div />
           <div />
           <div />
@@ -127,7 +129,7 @@ function Visual({ cardKey, animateRight }: { cardKey: string; animateRight: bool
           animate={animateRight ? { x: [0, 8, 0] } : undefined}
           transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
         >
-          Team settings
+          {t("Team settings")}
         </motion.div>
         <div className="v-admin-card v-admin-main" />
         <div className="v-admin-card v-admin-sub" />
@@ -152,6 +154,7 @@ function Visual({ cardKey, animateRight }: { cardKey: string; animateRight: bool
 }
 
 export default function WidelyAdopted() {
+  const t = useTranslations();
   return (
     <section className="features-grid-section">
       <div className="features-grid-shell">
@@ -178,7 +181,7 @@ export default function WidelyAdopted() {
               >
                 <Visual cardKey={card.key} animateRight={isRightSection} />
               </motion.div>
-              <h3>{card.title}</h3>
+              <h3>{t(card.title)}</h3>
             </motion.article>
           );
         })}
