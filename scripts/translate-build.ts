@@ -1,9 +1,12 @@
 import fs from "fs"
 import path from "path"
-import { createHash } from "crypto"
 
 const LOCALES = ["fr", "es", "pt", "de"]
 const OUTPUT_DIR = path.join(process.cwd(), "src", "lib", "translations", "generated")
+const BATCH_SIZE = 50
+const BATCH_CONCURRENCY = 4
+const REQUEST_TIMEOUT_MS = 20000
+const MAX_RETRIES = 2
 
 const DEEPL_LANG_MAP: Record<string, string> = {
   en: "EN", fr: "FR", es: "ES", pt: "PT-PT", de: "DE",
@@ -53,23 +56,16 @@ function getDeepLUrl(): string {
     : "https://api.deepl.com/v2/translate"
 }
 
-async function translateBatch(texts: string[], targetLang: string): Promise<string[]> {
-  const apiKey = process.env.DEEPL_API_KEY
-  if (!apiKey) {
-    console.error("⚠ DEEPL_API_KEY not set — skipping translations")
-    return texts
-  }
+async function translateChunk(chunk: string[], targetLang: string, apiKey: string, attempt = 0): Promise<string[]> {
+  const params = new URLSearchParams()
+  for (const text of chunk) params.append("text", text)
+  params.append("source_lang", "EN")
+  params.append("target_lang", DEEPL_LANG_MAP[targetLang] || targetLang.toUpperCase())
 
-  const results: string[] = []
-  for (let i = 0; i < texts.length; i += 50) {
-    const chunk = texts.slice(i, i + 50)
-    const params = new URLSearchParams()
-    for (const text of chunk) {
-      params.append("text", text)
-    }
-    params.append("source_lang", "EN")
-    params.append("target_lang", DEEPL_LANG_MAP[targetLang] || targetLang.toUpperCase())
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
+  try {
     const res = await fetch(getDeepLUrl(), {
       method: "POST",
       headers: {
@@ -77,25 +73,88 @@ async function translateBatch(texts: string[], targetLang: string): Promise<stri
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: params.toString(),
+      signal: controller.signal,
     })
 
     if (!res.ok) {
       const error = await res.text()
-      console.error(`DeepL API error for ${targetLang}: ${res.status}`, error)
-      results.push(...chunk)
-      continue
+      if ((res.status === 429 || res.status >= 500) && attempt < MAX_RETRIES) {
+        await new Promise((r) => setTimeout(r, 500 * (attempt + 1)))
+        return translateChunk(chunk, targetLang, apiKey, attempt + 1)
+      }
+      console.error(`  ✗ DeepL ${res.status} (${targetLang}):`, error.slice(0, 200))
+      return chunk
     }
 
-    const data = await res.json()
-    results.push(...data.translations.map((t: { text: string }) => t.text))
-    process.stdout.write(`  ${targetLang}: ${Math.min(i + 50, texts.length)}/${texts.length} strings\r`)
+    const data = (await res.json()) as { translations: Array<{ text: string }> }
+    return data.translations.map((t) => t.text)
+  } catch (err) {
+    if (attempt < MAX_RETRIES) {
+      await new Promise((r) => setTimeout(r, 500 * (attempt + 1)))
+      return translateChunk(chunk, targetLang, apiKey, attempt + 1)
+    }
+    console.error(`  ✗ ${targetLang} chunk failed:`, (err as Error).message)
+    return chunk
+  } finally {
+    clearTimeout(timer)
   }
-  console.log(`  ${targetLang}: ${texts.length}/${texts.length} strings ✓`)
-  return results
 }
 
-function stringsChecksum(strings: string[]): string {
-  return createHash("md5").update(strings.join("\0")).digest("hex")
+async function translateBatch(texts: string[], targetLang: string, apiKey: string): Promise<string[]> {
+  const chunks: string[][] = []
+  for (let i = 0; i < texts.length; i += BATCH_SIZE) chunks.push(texts.slice(i, i + BATCH_SIZE))
+
+  const results: string[][] = new Array(chunks.length)
+  let nextChunk = 0
+  async function worker() {
+    while (true) {
+      const i = nextChunk++
+      if (i >= chunks.length) return
+      results[i] = await translateChunk(chunks[i], targetLang, apiKey)
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(BATCH_CONCURRENCY, chunks.length) }, () => worker()))
+  return results.flat()
+}
+
+function loadDict(locale: string): Record<string, string> {
+  const file = path.join(OUTPUT_DIR, `${locale}.json`)
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf-8"))
+  } catch {
+    return {}
+  }
+}
+
+async function translateLocale(locale: string, strings: string[], apiKey: string): Promise<void> {
+  const existing = loadDict(locale)
+  const missing = strings.filter((s) => !(s in existing))
+
+  let updated: Record<string, string>
+  if (missing.length === 0) {
+    // Prune obsolete keys only
+    updated = {}
+    for (const s of strings) if (s in existing) updated[s] = existing[s]
+    if (Object.keys(updated).length === Object.keys(existing).length) {
+      console.log(`  ${locale}: cached (${Object.keys(existing).length} strings)`)
+      return
+    }
+  } else {
+    console.log(`  ${locale}: translating ${missing.length} new / ${strings.length} total`)
+    const translated = await translateBatch(missing, locale, apiKey)
+    updated = {}
+    for (const s of strings) {
+      if (s in existing) updated[s] = existing[s]
+      else {
+        const i = missing.indexOf(s)
+        if (i >= 0 && translated[i]) updated[s] = translated[i]
+      }
+    }
+  }
+
+  const outFile = path.join(OUTPUT_DIR, `${locale}.json`)
+  fs.writeFileSync(outFile, JSON.stringify(updated, null, 2), "utf-8")
+  console.log(`  ${locale}: ✓ ${Object.keys(updated).length} strings written`)
 }
 
 async function main() {
@@ -118,57 +177,20 @@ async function main() {
 
   const strings = extractStrings()
   console.log(`  Found ${strings.length} translatable strings\n`)
-
-  if (strings.length === 0) {
-    console.log("  No strings to translate.\n")
-    return
-  }
+  if (strings.length === 0) return
 
   fs.mkdirSync(OUTPUT_DIR, { recursive: true })
 
-  const checksumFile = path.join(OUTPUT_DIR, "_checksum.json")
-  const currentChecksum = stringsChecksum(strings)
-  let previousChecksum = ""
-  let existingLocales: string[] = []
-  try {
-    const prev = JSON.parse(fs.readFileSync(checksumFile, "utf-8"))
-    previousChecksum = prev.checksum || ""
-    existingLocales = prev.locales || []
-  } catch {
-    // no previous checksum
-  }
-
-  const allLocalesExist = LOCALES.every(
-    (loc) => existingLocales.includes(loc) && fs.existsSync(path.join(OUTPUT_DIR, `${loc}.json`))
-  )
-
-  if (currentChecksum === previousChecksum && allLocalesExist) {
-    console.log("  ✓ Strings unchanged — using cached translations\n")
+  const apiKey = process.env.DEEPL_API_KEY
+  if (!apiKey) {
+    console.warn("  ⚠ DEEPL_API_KEY not set — skipping translations (existing dicts preserved)\n")
     return
   }
 
-  for (const locale of LOCALES) {
-    const translated = await translateBatch(strings, locale)
-
-    const dict: Record<string, string> = {}
-    for (let i = 0; i < strings.length; i++) {
-      if (translated[i] && translated[i] !== strings[i]) {
-        dict[strings[i]] = translated[i]
-      }
-    }
-
-    const outFile = path.join(OUTPUT_DIR, `${locale}.json`)
-    fs.writeFileSync(outFile, JSON.stringify(dict, null, 2), "utf-8")
-    console.log(`  → ${outFile} (${Object.keys(dict).length} translations)`)
-  }
-
-  fs.writeFileSync(
-    checksumFile,
-    JSON.stringify({ checksum: currentChecksum, locales: LOCALES, updatedAt: new Date().toISOString() }, null, 2),
-    "utf-8"
-  )
-
-  console.log("\n✅ Build-time translations complete!\n")
+  const started = Date.now()
+  await Promise.all(LOCALES.map((loc) => translateLocale(loc, strings, apiKey)))
+  const elapsed = ((Date.now() - started) / 1000).toFixed(1)
+  console.log(`\n✅ Build-time translations complete in ${elapsed}s\n`)
 }
 
 main().catch((err) => {
