@@ -55,7 +55,7 @@ function ScrollProgressBar() {
       style={{
         scaleX,
         top: navHeight,
-        background: "linear-gradient(90deg, #FB1A0E 0%, #FF6B4A 50%, #FB1A0E 100%)",
+        background: "linear-gradient(90deg, #3d8183 0%, #6fb8ba 50%, #3d8183 100%)",
       }}
     />
   );
@@ -374,7 +374,7 @@ function TableOfContents({ html }: { html: string }) {
     >
       <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-6 py-4 hover:bg-[#fafaf8] transition-colors">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-lg bg-[#FB1A0E]/[0.08] flex items-center justify-center text-[#FB1A0E]"><List size={15} /></div>
+          <div className="w-7 h-7 rounded-lg bg-[#3d8183]/[0.08] flex items-center justify-center text-[#3d8183]"><List size={15} /></div>
           <span className="text-[13px] font-semibold text-[#1a1a1a] tracking-[-0.01em]">{t("In this article")}</span>
           <span className="text-[11px] text-[#bbb] font-medium">{headings.length} {t("sections")}</span>
         </div>
@@ -390,7 +390,7 @@ function TableOfContents({ html }: { html: string }) {
                     key={heading.id}
                     href={`#${heading.id}`}
                     onClick={(e) => { e.preventDefault(); const el = document.getElementById(heading.id); if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: "smooth" }); } }}
-                    className={`block transition-all duration-200 py-1.5 border-l-2 -ml-[2px] ${activeId === heading.id ? "border-[#FB1A0E] text-[#1a1a1a] font-medium" : "border-transparent text-[#777] hover:text-[#1a1a1a] hover:border-[#ddd]"} ${heading.level === 3 ? "pl-7 text-[13px]" : "pl-4 text-[13.5px]"}`}
+                    className={`block transition-all duration-200 py-1.5 border-l-2 -ml-[2px] ${activeId === heading.id ? "border-[#3d8183] text-[#1a1a1a] font-medium" : "border-transparent text-[#777] hover:text-[#1a1a1a] hover:border-[#ddd]"} ${heading.level === 3 ? "pl-7 text-[13px]" : "pl-4 text-[13.5px]"}`}
                   >
                     {heading.text}
                   </a>
@@ -595,11 +595,11 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
           transition: color 0.3s ease, border-color 0.3s ease;
         }
         .grid-story:hover .story-cta {
-          color: #2969b7;
+          color: #3d8183;
         }
         .grid-story:hover .story-cta svg {
-          color: #2969b7;
-          border-color: #2969b7;
+          color: #3d8183;
+          border-color: #3d8183;
         }
         @media (max-width: 1040px) {
           .stories-grid {
@@ -644,9 +644,9 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
         >
           <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 24px" }}>
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[12px] text-[#aaa] font-medium mb-8 tracking-[0.06em] uppercase">
-              <Link href="/" className="hover:text-[#FB1A0E] transition-colors">{t("Home")}</Link>
+              <Link href="/" className="hover:text-[#3d8183] transition-colors">{t("Home")}</Link>
               <svg width="10" height="10" viewBox="0 0 20 20" fill="none" className="text-[#ddd]"><path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <Link href="/blog" className="hover:text-[#FB1A0E] transition-colors">{t("Blog")}</Link>
+              <Link href="/blog" className="hover:text-[#3d8183] transition-colors">{t("Blog")}</Link>
               <svg width="10" height="10" viewBox="0 0 20 20" fill="none" className="text-[#ddd]"><path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <span className="text-[#777] truncate max-w-[200px]">{title}</span>
             </nav>
@@ -699,12 +699,12 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
                 .wp-content-wrapper p { font-family: var(--font-body); font-size: 1.05rem; line-height: 1.8; color: #374151; margin-bottom: 1.5em; }
                 .wp-content-wrapper h2 { font-size: 1.75rem; font-weight: 700; color: #1a1a1a; margin-top: 2em; margin-bottom: 0.75em; letter-spacing: -0.02em; font-family: var(--font-heading); }
                 .wp-content-wrapper h3 { font-size: 1.35rem; font-weight: 600; color: #1a1a1a; margin-top: 1.5em; margin-bottom: 0.75em; font-family: var(--font-heading); }
-                .wp-content-wrapper a { color: #FB1A0E; text-decoration: underline; text-underline-offset: 4px; border-radius: 2px; transition: opacity 0.2s; }
+                .wp-content-wrapper a { color: #3d8183; text-decoration: underline; text-underline-offset: 4px; border-radius: 2px; transition: opacity 0.2s; }
                 .wp-content-wrapper a:hover { opacity: 0.8; }
                 .wp-content-wrapper ul { list-style-type: disc; margin-bottom: 1.5em; padding-left: 1.5em; color: #374151; }
                 .wp-content-wrapper ol { list-style-type: decimal; margin-bottom: 1.5em; padding-left: 1.5em; color: #374151; }
                 .wp-content-wrapper li { margin-bottom: 0.5em; line-height: 1.7; }
-                .wp-content-wrapper blockquote { border-left: 4px solid #FB1A0E; padding-left: 1.5em; margin-left: 0; margin-right: 0; font-style: italic; color: #555; background: #f8fcfb; padding: 1.25em; border-radius: 0 8px 8px 0; }
+                .wp-content-wrapper blockquote { border-left: 4px solid #3d8183; padding-left: 1.5em; margin-left: 0; margin-right: 0; font-style: italic; color: #555; background: #f8fcfb; padding: 1.25em; border-radius: 0 8px 8px 0; }
                 .wp-content-wrapper img { width: 100%; height: auto; border-radius: 12px; margin: 2em 0; }
                 .wp-content-wrapper .wp-block-image { margin: 2em 0; }
                 .wp-content-wrapper .wp-block-image figcaption { text-align: center; font-size: 0.85rem; color: #888; margin-top: 0.75em; }
@@ -718,7 +718,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
                 <InlineShareBar title={post.title.rendered} />
               </div>
               <div className="mt-10 xl:mt-0">
-                <Link href="/blog" className="inline-flex items-center gap-2.5 text-[#FB1A0E] font-semibold text-[14px] hover:gap-3.5 transition-all group">
+                <Link href="/blog" className="inline-flex items-center gap-2.5 text-[#3d8183] font-semibold text-[14px] hover:gap-3.5 transition-all group">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="group-hover:-translate-x-1 transition-transform"><path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   {t("Back to all articles")}
                 </Link>

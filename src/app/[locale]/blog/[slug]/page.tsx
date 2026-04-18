@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { fetchPostBySlug, fetchPosts, getAllSlugs } from "@/lib/wordpress";
-import { yoastToMetadata } from "@/lib/yoast";
+import { fetchPostBySlug, fetchPosts, getAllSlugs, getFeaturedImage } from "@/lib/wordpress";
+import { yoastToMetadata, getYoastJsonLd } from "@/lib/yoast";
 import { translateBatch, translateMetadata } from "@/lib/translation";
 import { BlogPostContent } from "@/components/blog/BlogPostContent";
 import { locales, buildAlternates, defaultLocale } from "@/lib/i18n";
@@ -75,18 +75,105 @@ export default async function BlogPostPage({
 
   let post = postData;
   if (locale !== defaultLocale) {
-    const [translatedContent] = await translateBatch(
-      [post.content.rendered],
+    const [translatedTitle, translatedExcerpt, translatedContent] = await translateBatch(
+      [post.title.rendered, post.excerpt.rendered, post.content.rendered],
       locale,
       "en",
       { html: true }
     );
-    post = { ...post, content: { rendered: translatedContent } };
+    post = {
+      ...post,
+      title: { rendered: translatedTitle },
+      excerpt: { rendered: translatedExcerpt },
+      content: { rendered: translatedContent },
+    };
   }
 
-  const relatedPosts = relatedData.posts
+  const relatedRaw = relatedData.posts
     .filter((p) => p.slug !== slug)
     .slice(0, 3);
 
-  return <BlogPostContent post={post} relatedPosts={relatedPosts} />;
+  let relatedPosts = relatedRaw;
+  if (locale !== defaultLocale && relatedRaw.length > 0) {
+    const texts = relatedRaw.flatMap((p) => [p.title.rendered, p.excerpt.rendered]);
+    const translated = await translateBatch(texts, locale, "en", { html: true });
+    relatedPosts = relatedRaw.map((p, i) => ({
+      ...p,
+      title: { rendered: translated[i * 2] },
+      excerpt: { rendered: translated[i * 2 + 1] },
+    }));
+  }
+
+  const yoastJsonLd = postData.yoast_head_json
+    ? getYoastJsonLd(postData.yoast_head_json)
+    : null;
+
+  const fallbackJsonLd = !yoastJsonLd
+    ? buildFallbackJsonLd(postData, slug, locale)
+    : null;
+
+  const jsonLd = yoastJsonLd || fallbackJsonLd;
+
+  return (
+    <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      <BlogPostContent post={post} relatedPosts={relatedPosts} />
+    </>
+  );
+}
+
+function buildFallbackJsonLd(
+  post: Awaited<ReturnType<typeof fetchPostBySlug>>,
+  slug: string,
+  locale: Locale
+): Record<string, unknown> | null {
+  if (!post) return null;
+  const url = `${config.siteUrl}${locale === defaultLocale ? "" : `/${locale}`}/blog/${slug}`;
+  const title = post.title.rendered.replace(/<[^>]+>/g, "");
+  const description = post.excerpt.rendered.replace(/<[^>]+>/g, "").trim().slice(0, 160);
+  const image = getFeaturedImage(post) || `${config.siteUrl}/og-image.png`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: title,
+        description,
+        image,
+        datePublished: post.date,
+        dateModified: post.modified || post.date,
+        author: { "@type": "Organization", name: "Dorascribe" },
+        publisher: {
+          "@type": "Organization",
+          name: "Dorascribe",
+          logo: { "@type": "ImageObject", url: `${config.siteUrl}/favicon.png` },
+        },
+        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        url,
+        inLanguage: locale,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: config.siteUrl },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${config.siteUrl}/blog` },
+          { "@type": "ListItem", position: 3, name: title, item: url },
+        ],
+      },
+      {
+        "@type": "MedicalWebPage",
+        url,
+        name: title,
+        description,
+        inLanguage: locale,
+        audience: { "@type": "MedicalAudience", audienceType: "Clinician" },
+      },
+    ],
+  };
 }

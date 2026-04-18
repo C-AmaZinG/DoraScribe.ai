@@ -145,7 +145,7 @@ export default function Header() {
 
   const switchLocale = (locale: Locale) => {
     document.cookie = `NEXT_LOCALE=${locale};path=/;max-age=${365 * 24 * 60 * 60}`;
-    router.push(localePath(stripLocaleFromPath(pathname), locale));
+    window.location.href = localePath(stripLocaleFromPath(pathname), locale);
     setIsLanguageOpen(false);
   };
 

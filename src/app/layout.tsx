@@ -6,6 +6,7 @@ import { AppProviders } from "@/components/providers/AppProviders";
 import { LocaleProvider } from "@/lib/locale-context";
 import { TranslationsProvider } from "@/lib/translations/translations-context";
 import { translateUiStrings } from "@/lib/translations/translate-ui";
+import LoadingBar from "@/components/ui/LoadingBar";
 import { config } from "@/lib/config";
 import type { Locale } from "@/lib/i18n";
 
@@ -69,6 +70,7 @@ export default async function RootLayout({
       <body suppressHydrationWarning>
         <LocaleProvider locale={locale}>
           <TranslationsProvider translations={translations}>
+            <LoadingBar />
             <AppProviders>
               <div id="root">{children}</div>
             </AppProviders>
