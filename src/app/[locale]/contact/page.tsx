@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 type SubmitStatus = "idle" | "sending" | "sent" | "error";
 
 export default function ContactPage() {
+  const t = useTranslations();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -80,48 +82,48 @@ export default function ContactPage() {
             >
               <div className="contact-form-panel">
                 <div className="contact-form-intro">
-                  <p className="contact-form-kicker">Start the conversation</p>
-                  <h2>Contact the Dorascribe team</h2>
+                  <p className="contact-form-kicker">{t("Start the conversation")}</p>
+                  <h2>{t("Contact the Dorascribe team")}</h2>
                   <p>
-                    Send us a message and we will get back to you as soon as we can.
+                    {t("Send us a message and we will get back to you as soon as we can.")}
                   </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="contact-form">
                   <div className="contact-field-grid">
                     <label className="contact-field">
-                      <span>Name</span>
+                      <span>{t("Name")}</span>
                       <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="Your full name"
+                        placeholder={t("Your full name")}
                         required
                       />
                     </label>
 
                     <label className="contact-field">
-                      <span>Email</span>
+                      <span>{t("Email")}</span>
                       <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="you@company.com"
+                        placeholder={t("you@company.com")}
                         required
                       />
                     </label>
                   </div>
 
                   <label className="contact-field">
-                    <span>Message</span>
+                    <span>{t("Message")}</span>
                     <textarea
                       name="message"
                       rows={7}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your team, your workflow, or what you want to achieve with Dorascribe."
+                      placeholder={t("Tell us about your team, your workflow, or what you want to achieve with Dorascribe.")}
                       required
                     />
                   </label>
@@ -134,8 +136,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                     />
                     <span>
-                      Keep me updated with Dorascribe product news, tutorials, and
-                      helpful workflow tips.
+                      {t("Keep me updated with Dorascribe product news, tutorials, and helpful workflow tips.")}
                     </span>
                   </label>
 
@@ -144,18 +145,18 @@ export default function ContactPage() {
                     className="contact-submit"
                     disabled={status === "sending"}
                   >
-                    {status === "sending" ? "Sending..." : "Send message"}
+                    {status === "sending" ? t("Sending...") : t("Send message")}
                   </button>
 
                   {status === "sent" && (
                     <p className="contact-status success">
-                      Your message has been sent. We will be in touch shortly.
+                      {t("Your message has been sent. We will be in touch shortly.")}
                     </p>
                   )}
 
                   {status === "error" && (
                     <p className="contact-status error">
-                      Something went wrong. Please try again in a moment.
+                      {t("Something went wrong. Please try again in a moment.")}
                     </p>
                   )}
                 </form>

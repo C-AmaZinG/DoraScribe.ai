@@ -7,39 +7,42 @@ import Footer from "@/components/layout/Footer";
 import FAQ from "@/components/sections/FAQ";
 import MakroButton from "@/components/ui/MakroButton";
 import { AnimatePresence } from "framer-motion";
-
-const tutorialCards = [
-  {
-    eyebrow: "How To Get Started",
-    title: "Set up your Dorascribe account",
-    description: "Get your workspace ready and start transcribing in minutes.",
-    videoId: "R8Ytt90iFU8",
-    duration: "1:45"
-  },
-  {
-    eyebrow: "How to Transcribe",
-    title: "Capture clinical notes effortlessly",
-    description: "Turn patient conversations into accurate medical notes instantly.",
-    videoId: "SfjUAceKG0o",
-    duration: "2:20"
-  },
-  {
-    eyebrow: "Workflow Design",
-    title: "Creating Custom Note Templates",
-    description: "Build templates that perfectly align with your unique clinical workflow.",
-    videoId: "Xin6AIcSU9k",
-    duration: "3:15"
-  },
-  {
-    eyebrow: "Mobile Experience",
-    title: "Notes on the go with your phone",
-    description: "Master the mobile app to capture documentation anytime, anywhere.",
-    videoId: "Xin6AIcSU9k",
-    duration: "1:55"
-  },
-];
+import { useTranslations } from "@/lib/translations/translations-context";
 
 export default function TutorialsPage() {
+  const t = useTranslations();
+
+  const tutorialCards = [
+    {
+      eyebrow: t("How To Get Started"),
+      title: t("Set up your Dorascribe account"),
+      description: t("Get your workspace ready and start transcribing in minutes."),
+      videoId: "R8Ytt90iFU8",
+      duration: "1:45"
+    },
+    {
+      eyebrow: t("How to Transcribe"),
+      title: t("Capture clinical notes effortlessly"),
+      description: t("Turn patient conversations into accurate medical notes instantly."),
+      videoId: "SfjUAceKG0o",
+      duration: "2:20"
+    },
+    {
+      eyebrow: t("Workflow Design"),
+      title: t("Creating Custom Note Templates"),
+      description: t("Build templates that perfectly align with your unique clinical workflow."),
+      videoId: "Xin6AIcSU9k",
+      duration: "3:15"
+    },
+    {
+      eyebrow: t("Mobile Experience"),
+      title: t("Notes on the go with your phone"),
+      description: t("Master the mobile app to capture documentation anytime, anywhere."),
+      videoId: "Xin6AIcSU9k",
+      duration: "1:55"
+    },
+  ];
+
   return (
     <div className="tutorials-page">
       <Header />
@@ -47,8 +50,8 @@ export default function TutorialsPage() {
         <section className="tutorials-library">
           <div className="page-shell">
             <div className="section-heading">
-              <span className="section-kicker">Tutorial Library</span>
-              <h2>Everything the old tutorials page offered, rebuilt for the new experience.</h2>
+              <span className="section-kicker">{t("Tutorial Library")}</span>
+              <h2>{t("Everything the old tutorials page offered, rebuilt for the new experience.")}</h2>
             </div>
 
             <div className="tutorial-grid">
@@ -100,21 +103,20 @@ export default function TutorialsPage() {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="section-kicker kicker-light">Get Started</span>
-              <h2>Do less admin, provide more care.</h2>
+              <span className="section-kicker kicker-light">{t("Get Started")}</span>
+              <h2>{t("Do less admin, provide more care.")}</h2>
               <p>
-                Convert clinical consultations into notes quickly and easily.
-                Book a live demo and explore the features that set Dorascribe apart.
+                {t("Convert clinical consultations into notes quickly and easily. Book a live demo and explore the features that set Dorascribe apart.")}
               </p>
               <div className="cta-actions">
                 <MakroButton
-                  text="Start Free Trial"
+                  text={t("Start Free Trial")}
                   href="https://app.dorascribe.ai/signUp"
                   size="sm"
                   variant="secondary"
                 />
                 <Link href="/contact" className="cta-link">
-                  Book a Demo
+                  {t("Book a Demo")}
                 </Link>
               </div>
             </motion.div>

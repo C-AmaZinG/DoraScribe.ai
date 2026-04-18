@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { fetchPosts, getFeaturedImage, formatDate, stripHtml } from "@/lib/wordpress";
+import { getFeaturedImage, formatDate, stripHtml } from "@/lib/wordpress";
 import type { WPPost } from "@/lib/wordpress";
 import { useTranslations } from "@/lib/translations/translations-context";
 
@@ -22,9 +22,10 @@ interface Props {
   initialPosts: WPPost[];
   totalPages: number;
   totalPosts: number;
+  locale: string;
 }
 
-export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, totalPosts: initialTotalPosts }: Props) {
+export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, totalPosts: initialTotalPosts, locale }: Props) {
   const t = useTranslations();
   const [posts, setPosts] = useState<WPPost[]>(initialPosts);
   const [page, setPage] = useState(1);
@@ -36,13 +37,15 @@ export function BlogPageContent({ initialPosts, totalPages: initialTotalPages, t
     if (page >= totalPages) return;
     const nextPage = page + 1;
     setLoadingMore(true);
-    const data = await fetchPosts(nextPage, 9);
-    setPosts((prev) => [...prev, ...data.posts]);
-    setTotalPages(data.totalPages);
-    setTotalPosts(data.totalPosts);
+    const res = await fetch(`/api/blog?page=${nextPage}&per_page=9&locale=${locale}`);
+    const json = await res.json();
+    const newPosts: WPPost[] = Array.isArray(json.data) ? json.data : [];
+    setPosts((prev) => [...prev, ...newPosts]);
+    setTotalPages(json.totalPages ?? totalPages);
+    setTotalPosts(json.totalPosts ?? totalPosts);
     setPage(nextPage);
     setLoadingMore(false);
-  }, [page, totalPages]);
+  }, [page, totalPages, totalPosts, locale]);
 
   return (
     <div className="blog-page">

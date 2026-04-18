@@ -170,6 +170,22 @@ export default function Pricing() {
   const [apiPlans, setApiPlans] = useState<ApiPlan[] | null>(null);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("month");
 
+  // Catalog so the build-time extractor registers plan strings sourced from the fallback
+  // object and the WP Plans API. These calls are thrown away; the extractor only cares
+  // that the literals appear inside t("...").
+  void [
+    t("Free Trial"), t("Essential"), t("Professional"), t("Premium"),
+    t("No credit card needed"),
+    t("per user / billed monthly"), t("per user / billed yearly"),
+    t("FREE"),
+    t("$39/month"), t("$59/month"), t("$89/month"),
+    t("$399/year"), t("$599/year"), t("$899/year"),
+    t("20 Transcripts/Month"), t("150 Transcripts/Month"), t("300 Transcripts/Month"), t("Unlimited Transcripts"),
+    t("Standard Email Support"), t("Priority Email Support"), t("Priority Phone & Email Support"),
+    t("Default Note Templates"), t("Custom Note Templates"),
+    t("Unlimited Dora Evidence Feature"), t("Prescription Generation"), t("1:1 Onboarding Support"),
+  ];
+
   useEffect(() => {
     let isMounted = true;
 
@@ -244,9 +260,9 @@ export default function Pricing() {
                 className={`pricing-card ${plan.name === "Premium" ? "is-premium" : ""}`}
               >
                 <div className="plan-copy">
-                  <p className="plan-name">{plan.name}</p>
-                  <p className="plan-description">{plan.description}</p>
-                  <p className="plan-price">{plan.priceLabel}</p>
+                  <p className="plan-name">{t(plan.name)}</p>
+                  <p className="plan-description">{t(plan.description)}</p>
+                  <p className="plan-price">{t(plan.priceLabel)}</p>
                 </div>
 
                 <MakroButton
@@ -275,7 +291,7 @@ export default function Pricing() {
                             <path d="M20 6L9 17l-5-5" />
                           </svg>
                         </span>
-                        <span>{feature}</span>
+                        <span>{t(feature)}</span>
                       </li>
                     );
                   })}

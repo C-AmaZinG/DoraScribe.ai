@@ -11,11 +11,11 @@ import { Mail, Link as LinkIcon, Check, MoreHorizontal, MoreVertical, Sparkles, 
 import { useTranslations } from "@/lib/translations/translations-context";
 
 // ── Helpers ──────────────────────────────────────────────────
-function ReadingTime({ content }: { content: string }) {
+function ReadingTime({ content, label }: { content: string; label: string }) {
   const text = content.replace(/<[^>]+>/g, "");
   const words = text.trim().split(/\s+/).length;
   const minutes = Math.max(1, Math.round(words / 230));
-  return <span>{minutes} min read</span>;
+  return <span>{minutes} {label}</span>;
 }
 
 function stripHtml(html: string) {
@@ -190,7 +190,7 @@ function FloatingShareSidebar({ title }: { title: string }) {
               ? "border-emerald-300 bg-emerald-50 text-emerald-600"
               : "border-[#e5e5e0] hover:border-[#ccc] text-[#888] hover:text-[#555] hover:bg-[#f8f8f5]"
           }`}
-          title={copied ? "Copied!" : "Copy link"}
+          title={copied ? t("Copied!") : t("Copy link")}
         >
           {copied ? <Check size={16} /> : <LinkIcon size={16} />}
         </button>
@@ -212,7 +212,7 @@ function FloatingShareSidebar({ title }: { title: string }) {
             className={`inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
               showMore ? "border-[#ccc] bg-[#f5f5f2] text-[#555]" : "border-[#e5e5e0] hover:border-[#ccc] text-[#888] hover:text-[#555] hover:bg-[#f8f8f5]"
             }`}
-            title="More sharing options"
+            title={t("More sharing options")}
           >
             <MoreVertical size={16} />
           </button>
@@ -273,7 +273,7 @@ function InlineShareBar({ title }: { title: string }) {
         className={`inline-flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-200 ${
           copied ? "border-emerald-300 bg-emerald-50 text-emerald-600" : "border-[#e5e5e0] hover:border-[#ccc] text-[#888] hover:text-[#555]"
         }`}
-        title={copied ? "Copied!" : "Copy link"}
+        title={copied ? t("Copied!") : t("Copy link")}
       >
         {copied ? <Check size={15} /> : <LinkIcon size={15} />}
       </button>
@@ -289,7 +289,7 @@ function InlineShareBar({ title }: { title: string }) {
         className={`inline-flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-200 ${
           showMore ? "border-[#ccc] bg-[#f5f5f2] text-[#555]" : "border-[#e5e5e0] hover:border-[#ccc] text-[#888] hover:text-[#555]"
         }`}
-        title="More sharing options"
+        title={t("More sharing options")}
       >
         <MoreHorizontal size={16} />
       </button>
@@ -370,7 +370,7 @@ function TableOfContents({ html }: { html: string }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.3 }}
       className="mb-10 rounded-2xl border border-[#e8e5e0] bg-white overflow-hidden"
-      aria-label="Table of contents"
+      aria-label={t("Table of contents")}
     >
       <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-6 py-4 hover:bg-[#fafaf8] transition-colors">
         <div className="flex items-center gap-3">
@@ -665,7 +665,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
 
                 <div className="flex items-center gap-3 text-[13px] text-[#999] font-medium pt-5 border-t border-[#eee]">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#ccc]"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-                  <ReadingTime content={sanitizedContent} />
+                  <ReadingTime content={sanitizedContent} label={t("min read")} />
                 </div>
               </div>
 
