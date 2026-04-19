@@ -75,6 +75,25 @@ const col3Items = [baseQuotes[6], baseQuotes[7], baseQuotes[8]];
 
 export default function Testimonials() {
   const t = useTranslations();
+
+  // Catalog so the build-time scanner picks up testimonial quotes, names, roles
+  void [
+    t("I finish clinic with charting already done, and that has changed my evenings completely. Dorascribe captures the details accurately without breaking my flow with patients."),
+    t("The note quality is consistently strong, even on complex follow-ups. I spend less time correcting documentation and more time discussing treatment decisions with patients."),
+    t("Our team adopted Dorascribe quickly because it fits naturally into the visit. Documentation feels lighter, and we can stay focused on delivering safe, attentive care."),
+    t("What I value most is how reliable the summaries are after emotionally demanding sessions. It helps me preserve energy for patients instead of spending it all on admin work."),
+    t("Dorascribe seamlessly integrates into our daily routine. The ease of use and accuracy empower our clinical team to maintain high patient care standards."),
+    t("A game changer for patient engagement. I can actually look at my patients instead of my screen. The emotional connection I've reclaimed is invaluable."),
+    t("The immediate return on investment was obvious. Time saved on charting translates directly to more patients seen and fewer late nights."),
+    t("It captures the nuances of psychiatric evaluation perfectly. I never worry about a missed detail when reviewing past sessions."),
+    t("I've tried other scribes, but this is the most intuitive. It understands medical jargon out of the box and requires almost no edits."),
+    t("Lara M."), t("Nora I."), t("Chinelo A."), t("Ruth E."), t("Samuel K."),
+    t("Alice R."), t("David H."), t("Rachel T."), t("James F."),
+    t("Family Physician"), t("Internal Medicine Physician"), t("Family Medicine Physician"),
+    t("Clinical Psychologist"), t("Neurologist"), t("Pediatrician"),
+    t("Orthopedic Surgeon"), t("Psychiatrist"), t("Dermatologist"),
+  ];
+
   return (
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-shell">

@@ -57,6 +57,18 @@ const trustItems = [
 
 export default function DutyOfCare() {
   const t = useTranslations();
+
+  // Catalog so the build-time scanner picks up badge + trust item strings
+  void [
+    t("HIPAA COMPLIANT"), t("PIPEDA COMPLIANT"), t("POPIA COMPLIANT"),
+    t("Validated in practice"),
+    t("We test and iterate our models in real-world scenarios to ensure Dorascribe remains accurate, reliable and clinically sound."),
+    t("Deep clinical review"),
+    t("Our medical team reviews and refines outputs, adding the reliability automation alone cannot provide."),
+    t("Privacy, without shortcuts"),
+    t("Our systems are built to the highest global standards, keeping every patient record secure, private, and protected."),
+  ];
+
   return (
     <section className="duty-section">
       <div className="duty-shell">

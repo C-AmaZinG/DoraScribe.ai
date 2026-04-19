@@ -17,6 +17,14 @@ const bottomSpecialties = [
 export default function Specialties() {
   const t = useTranslations();
   const [isPaused, setIsPaused] = React.useState(false);
+
+  // Catalog so the build-time scanner picks up the specialty names
+  void [
+    t("Endocrinology"), t("Nephrology"), t("Urology"), t("Optometry"),
+    t("Infectious Diseases"), t("Rheumatology"), t("Public Health"), t("Occupational Medicine"),
+    t("Palliative Care"), t("Preventive Medicine"), t("Sports Medicine"), t("Pain Management"),
+    t("Physiotherapy"), t("Dentistry"), t("Respiratory Therapy"), t("Clinical Psychology"),
+  ];
   // Triple the items so the loop is seamless even on wide / narrow screens
   const loopingTop = [...topSpecialties, ...topSpecialties, ...topSpecialties];
   const loopingBottom = [...bottomSpecialties, ...bottomSpecialties, ...bottomSpecialties];

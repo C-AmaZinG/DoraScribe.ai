@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import type { WPPost } from "@/lib/wordpress";
-import { getFeaturedImage } from "@/lib/wordpress";
+import { getFeaturedImage, formatDate } from "@/lib/wordpress";
 import { Mail, Link as LinkIcon, Check, MoreHorizontal, MoreVertical, Sparkles, List } from "lucide-react";
 import {
   SiClaude, SiOpenai, SiPerplexity, SiGooglegemini,
@@ -414,7 +414,7 @@ function TableOfContents({ html }: { html: string }) {
 }
 
 // ── Related articles ─────────────────────────────────────────
-function RelatedArticles({ posts }: { posts: WPPost[] }) {
+function RelatedArticles({ posts, locale }: { posts: WPPost[]; locale: string }) {
   const t = useTranslations();
   if (posts.length === 0) return null;
 
@@ -455,13 +455,7 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
 
                   <div className="grid-copy">
                     <div className="grid-meta">
-                      <time>
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </time>
+                      <time>{formatDate(post.date, locale)}</time>
                     </div>
 
                     <h3
@@ -629,13 +623,14 @@ function RelatedArticles({ posts }: { posts: WPPost[] }) {
 interface BlogPostContentProps {
   post: WPPost;
   relatedPosts: WPPost[];
+  locale: string;
 }
 
-export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
+export function BlogPostContent({ post, relatedPosts, locale }: BlogPostContentProps) {
   const t = useTranslations();
   const featuredImage = getFeaturedImage(post) || undefined;
   const sanitizedContent = sanitizeArticleContent(post.content.rendered);
-  const date = new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const date = formatDate(post.date, locale);
   const isoDate = new Date(post.date).toISOString();
   const title = post.title.rendered.replace(/<[^>]+>/g, "");
 
@@ -652,7 +647,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
           style={{ paddingTop: "120px", paddingBottom: "40px" }}
         >
           <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 24px" }}>
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[12px] text-[#aaa] font-medium mb-8 tracking-[0.06em] uppercase">
+            <nav aria-label={t("Breadcrumb")} className="flex items-center gap-2 text-[12px] text-[#aaa] font-medium mb-8 tracking-[0.06em] uppercase">
               <Link href="/" className="hover:text-[#3d8183] transition-colors">{t("Home")}</Link>
               <svg width="10" height="10" viewBox="0 0 20 20" fill="none" className="text-[#ddd]"><path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <Link href="/blog" className="hover:text-[#3d8183] transition-colors">{t("Blog")}</Link>
@@ -734,7 +729,7 @@ export function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
               </div>
             </div>
 
-            <RelatedArticles posts={relatedPosts} />
+            <RelatedArticles posts={relatedPosts} locale={locale} />
           </div>
         </div>
       </div>

@@ -112,6 +112,37 @@ export default function FAQ() {
   const [activeCategory, setActiveCategory] = useState<Category>("General");
   const [openIndex, setOpenIndex] = useState(0);
 
+  // Catalog so the build-time scanner picks up category labels + FAQ Q/A
+  void [
+    t("General"), t("Getting Started"), t("Using Dorascribe"), t("Security & Privacy"),
+    t("What is Dorascribe?"),
+    t("Dorascribe is a medical transcription app that converts patient consultations into text for seamless integration with Electronic Medical Records (EMRs)."),
+    t("How does Dorascribe work?"),
+    t("Dorascribe utilizes a combination of large medical language models, artificial intelligence and web3 technologies to generate medical dictations, transcriptions, and chart notes. Simply speak into the app, and it will transcribe your voice into accurate and detailed medical notes."),
+    t("How much time will Dorascribe save me?"),
+    t("The time saved will vary based on your individual workflow and the complexity of your medical cases. However, initial users have reported reducing their charting time by up to 60 to 70%. On average, users can expect to save 2 to 3 hours daily."),
+    t("What specialties is Dorascribe designed for?"),
+    t("Dorascribe is designed for a wide range of healthcare professionals, offering AI-powered medical transcription tailored to different specialties. Whether you’re a doctor, surgeon, psychiatrist, physiotherapist, massage therapist, optometrist, or specialize in another area, Dorascribe provides structured note formats to fit your practice."),
+    t("How accurate is Dorascribe?"),
+    t("Dorascribe’s AI-powered technology delivers over 99% accuracy for clear recordings and continues to learn and improve with usage."),
+    t("Does Dorascribe work on multiple devices?"),
+    t("Yes. Dorascribe supports multiple devices including smartphones, tablets and computers."),
+    t("What browser should I use?"),
+    t("While all commonly used browsers are supported, we recommend using Google Chrome for the best Dorascribe experience, including for Apple device users."),
+    t("Does it support multiple languages?"),
+    t("Yes. We support transcription in Spanish, French, Italian, German, Portuguese and English. After your note is generated, you can also ask the AI to translate it to any language you want in the “interact with note” section."),
+    t("How are errors addressed?"),
+    t("Dorascribe addresses potential errors in transcriptions through advanced algorithms and user-editing capabilities, ensuring a high level of accuracy in the final output."),
+    t("Any tips for best recording results?"),
+    t("If you’re using Dorascribe on a desktop or laptop, make sure the microphone is turned on. You can also use an external microphone for clearer audio. On a mobile device, keep the screen active and avoid letting it go to sleep."),
+    t("How long are notes kept?"),
+    t("Notes are kept for 28 days to comply with HIPAA guidelines and allow time for EMR transfers. They stay in your inbox for 14 days, then move to the trash for another 14 days before permanent deletion."),
+    t("Is my data secure and HIPAA-compliant?"),
+    t("Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and HIPAA regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous."),
+    t("Is my payment information secure?"),
+    t("Your payment information is fully secure. Dorascribe uses Stripe, a globally trusted and PCI-DSS Level 1 certified payment processor, to handle all transactions."),
+  ];
+
   const items = useMemo(() => faqContent[activeCategory], [activeCategory]);
 
   return (

@@ -122,7 +122,7 @@ export default async function BlogPostPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <BlogPostContent post={post} relatedPosts={relatedPosts} />
+      <BlogPostContent post={post} relatedPosts={relatedPosts} locale={locale} />
     </>
   );
 }

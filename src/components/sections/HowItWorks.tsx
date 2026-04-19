@@ -335,7 +335,7 @@ function Card3Illustration() {
 const cards = [
   {
     title: "Start Your Consult in Seconds",
-    desc: "Tap the \u201cStart Consult\u201d button, optionally enter patient details, select your note type, and begin recording instantly\u2014no setup, no disruption to your workflow.",
+    desc: "Tap the “Start Consult” button, optionally enter patient details, select your note type, and begin recording instantly—no setup, no disruption to your workflow.",
     illustration: <Card1Illustration />,
   },
   {
@@ -356,6 +356,16 @@ const cards = [
 export default function HowItWorks() {
   const t = useTranslations();
   const isMobile = useIsMobile()
+
+  // Catalog so the build-time scanner picks up card title + description strings
+  void [
+    t("Start Your Consult in Seconds"),
+    t("Tap the “Start Consult” button, optionally enter patient details, select your note type, and begin recording instantly—no setup, no disruption to your workflow."),
+    t("Your Notes, Ready the Moment You Finish"),
+    t("Clear, structured, and clinically accurate notes are generated in real time, so everything is ready for review as soon as your consult ends."),
+    t("Edit, Refine, and Finalize with Ease"),
+    t("Need to add more details? Easily update your notes using voice or text, with full control to refine, adjust, and finalize your documentation anytime."),
+  ];
 
   return (
     <section

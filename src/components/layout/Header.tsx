@@ -101,6 +101,7 @@ export default function Header() {
     t("How to Use"), t("Why Dora"), t("Pricing"), t("FAQ"),
     t("Resources"), t("Contact"), t("Blog"), t("Tutorials"),
     t("Select Language"), t("Get started"), t("Log in"),
+    t("Get Started"), t("Login"), t("Open menu"), t("Close menu"),
   ];
 
   useEffect(() => {
@@ -381,7 +382,7 @@ export default function Header() {
               <motion.button
                 type="button"
                 className="mobile-menu-button"
-                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-label={isMobileMenuOpen ? t("Close menu") : t("Open menu")}
                 aria-expanded={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 whileHover={{ scale: 1.05 }}
@@ -473,7 +474,7 @@ export default function Header() {
               <button 
                 onClick={closeMobileMenu} 
                 className="close-nav-btn"
-                aria-label="Close menu"
+                aria-label={t("Close menu")}
                 style={{
                   display: "flex",
                   width: "48px",
@@ -534,7 +535,7 @@ export default function Header() {
                           transition: "background-color 0.2s ease"
                         }}
                       >
-                        Get Started
+                        {t("Get Started")}
                       </Link>
                     </motion.div>
 
@@ -564,7 +565,7 @@ export default function Header() {
                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#d8f2f2"}
                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#EBF8F8"}
                        >
-                         Login
+                         {t("Login")}
                        </Link>
                      </motion.div>
                   </motion.div>
