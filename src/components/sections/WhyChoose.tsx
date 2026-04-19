@@ -202,6 +202,29 @@ export default function WhyChoose() {
             >
               {t("HIPAA, POPIA, PIPEDA, GDPR, and SOC2 compliance help ensure your data and your patients' information remain protected.")}
             </p>
+            <a 
+              href="https://app.vanta.com/dorascribe.ai/trust/8445rz2ypjuu77ka2jqdb8"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: "14px",
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600,
+                color: "#3d8183",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                marginTop: "16px"
+              }}
+            >
+              Visit Trust Center
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
           </motion.div>
 
           {/* Work Across All Devices */}

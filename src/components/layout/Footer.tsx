@@ -18,8 +18,8 @@ export default function Footer() {
     {
       title: t('RESOURCES'),
       links: [
-        { l: t('How to Use'), h: '/tutorials' },
-        { l: t('Pricing Plans'), h: '/pricing' },
+        { l: t('How to Use'), h: '/#how-it-works' },
+        { l: t('Pricing Plans'), h: '/#pricing' },
         { l: t('Tutorials'), h: '/tutorials' },
       ],
     },
@@ -34,7 +34,7 @@ export default function Footer() {
       title: t('USEFUL LINKS'),
       links: [
         { l: t('Blog & News'), h: '/blog' },
-        { l: t('Trust Center'), h: '/trust-center' },
+        { l: t('Trust Center'), h: 'https://app.vanta.com/dorascribe.ai/trust/8445rz2ypjuu77ka2jqdb8' },
       ],
     },
   ];
@@ -146,7 +146,7 @@ export default function Footer() {
                               href={link.h}
                               style={{
                                 textDecoration: 'none',
-                                color: '#64748b',
+                                color: '#000000',
                                 fontSize: '14px',
                                 fontFamily: "'DM Sans', sans-serif",
                                 transition: 'color 0.3s ease'
@@ -163,9 +163,11 @@ export default function Footer() {
                         <li key={link.l}>
                           <a
                             href={link.h}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             style={{
                               textDecoration: 'none',
-                              color: '#64748b',
+                              color: '#000000',
                               fontSize: '14px',
                               fontFamily: "'DM Sans', sans-serif",
                               transition: 'color 0.3s ease'
@@ -274,8 +276,8 @@ export default function Footer() {
           font-size: 14px !important;
         }
 
-        .footer-link-hover:hover {
-          color: var(--secondary, #FF6F00) !important;
+        :global(.footer-link-hover):hover {
+          color: #3d8183 !important;
         }
       `}</style>
     </footer>
