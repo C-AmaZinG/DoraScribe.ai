@@ -13,7 +13,7 @@ import type { Locale } from "@/lib/i18n";
 
 const navLinks = [
   { name: "How to Use", href: "/#how-it-works" },
-  { name: "Why Dora", href: "/#why-choose" },
+  { name: "Why Dorascribe", href: "/#why-choose" },
   { name: "Pricing", href: "/#pricing" },
   { name: "FAQ", href: "/#faq" },
   {
@@ -98,7 +98,7 @@ export default function Header() {
 
   // Catalog so the build-time scanner picks up strings referenced via variable
   void [
-    t("How to Use"), t("Why Dora"), t("Pricing"), t("FAQ"),
+    t("How to Use"), t("Why Dorascribe"), t("Pricing"), t("FAQ"),
     t("Resources"), t("Contact"), t("Blog"), t("Tutorials"),
     t("Select Language"), t("Get started"), t("Log in"),
     t("Get Started"), t("Login"), t("Open menu"), t("Close menu"),
@@ -573,7 +573,7 @@ export default function Header() {
                   <div className="nav-divider-slim" />
 
                   {/* 3. Main Links Group */}
-                  {["How to Use", "Why Dora", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
+                  {["How to Use", "Why Dorascribe", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
                     const linkObj = navLinks.find(l => l.name === name);
                     if (!linkObj) return null;
 

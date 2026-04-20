@@ -6,6 +6,10 @@ import { motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 import Image from "next/image";
 
+// Static imports for background patterns
+import leftPattern from "@/assets/dorascribe-cta-left-pattern.svg";
+import rightPattern from "@/assets/dorascribe-cta-right-pattern.svg";
+
 export default function BottomCTA() {
   const t = useTranslations();
   return (
@@ -28,7 +32,7 @@ export default function BottomCTA() {
           {/* Left Background Pattern */}
           <div style={{ position: "absolute", top: "50%", left: 0, transform: "translateY(-50%)", width: "18%", height: "72%", zIndex: 0, pointerEvents: "none" }}>
             <Image
-              src="/assets/dorascribe-cta-left-pattern.svg"
+              src={leftPattern}
               alt={t("Left decorative pattern")}
               fill
               style={{ objectFit: "contain", objectPosition: "left center" }}
@@ -39,7 +43,7 @@ export default function BottomCTA() {
           {/* Right Background Pattern */}
           <div style={{ position: "absolute", top: "50%", right: 0, transform: "translateY(-50%)", width: "18%", height: "72%", zIndex: 0, pointerEvents: "none" }}>
             <Image
-              src="/assets/dorascribe-cta-right-pattern.svg"
+              src={rightPattern}
               alt={t("Right decorative pattern")}
               fill
               style={{ objectFit: "contain", objectPosition: "right center" }}

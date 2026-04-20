@@ -1,33 +1,37 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import { useTranslations } from "@/lib/translations/translations-context";
+
+// Static imports for images
+import discoverEngage from "@/assets/discover-engage.svg";
+import discoverEfficiency from "@/assets/discover-efficiency.svg";
+import discoverPrecision from "@/assets/discover-precision.svg";
+import discoverAdapt from "@/assets/discover-adapt.svg";
 
 const featureRows = [
   {
     title: "Engage Your Patients",
     description:
       "Eliminate note-taking distractions, allowing you to focus on your patients and foster meaningful connections.",
-    image: "/assets/discover-engage.svg",
+    image: discoverEngage,
   },
   {
     title: "Maximize Your Efficiency",
     description:
       "Instantly capture live conversations with your patient or dictate a summary of the interaction.",
-    image: "/assets/discover-efficiency.svg",
+    image: discoverEfficiency,
   },
   {
     title: "Enhance Your Precision",
     description:
       "Reduce errors and enhance data accuracy with our AI medical scribe, ensuring your notes are detailed and compliant.",
-    image: "/assets/discover-precision.svg",
+    image: discoverPrecision,
   },
   {
     title: "Adapt to Your Needs",
     description:
       "Customize templates and workflows to suit your specific practice, making documentation tailored and efficient.",
-    image: "/assets/discover-adapt.svg",
+    image: discoverAdapt,
   },
 ];
 

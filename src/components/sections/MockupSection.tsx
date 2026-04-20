@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import MakroButton from '@/components/ui/MakroButton';
 import { useTranslations } from "@/lib/translations/translations-context";
 
+// Static imports for images
+import dashboardMockup from "@/assets/dorascribe-app-dashboard-mockup.png";
+
 export default function MockupSection() {
   const t = useTranslations();
   return (
@@ -100,7 +103,7 @@ export default function MockupSection() {
             boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
           }}>
             <Image
-              src="/assets/dorascribe-app-dashboard-mockup.png"
+              src={dashboardMockup}
               alt="Dorascribe app dashboard mockup – AI medical scribe clinical notes interface on iPad and desktop"
               width={1470}
               height={827}

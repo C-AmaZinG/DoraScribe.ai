@@ -6,16 +6,21 @@ import MakroButton from "@/components/ui/MakroButton"
 import { motion } from "framer-motion"
 import { useTranslations } from "@/lib/translations/translations-context"
 
+import Image from "next/image"
+
 /* ─────────────────────────────────────────────
    Local public/assets icons
 ───────────────────────────────────────────── */
-const iconMic        = "/assets/dorascribe-mic-white-icon.svg"     // white – for orange button in Card 3
-const iconMicGray    = "/assets/mic.svg"                             // gray  – for step buttons in Card 1
-const iconCopy       = "/assets/dorascribe-copy-icon.svg"
-const iconDownload   = "/assets/dorascribe-download-icon.svg"
-const iconEdit       = "/assets/dorascribe-edit-icon.svg"
-const iconGenerate   = "/assets/dorascribe-generate-note-icon.svg"
-const iconTemplate   = "/assets/dorascribe-template-icon.svg"
+import iconMic        from "@/assets/dorascribe-mic-white-icon.svg"
+import iconMicGray    from "@/assets/mic.svg"
+import iconCopy       from "@/assets/dorascribe-copy-icon.svg"
+import iconDownload   from "@/assets/dorascribe-download-icon.svg"
+import iconEdit       from "@/assets/dorascribe-edit-icon.svg"
+import iconGenerate   from "@/assets/dorascribe-generate-note-icon.svg"
+import iconTemplate   from "@/assets/dorascribe-template-icon.svg"
+import recordBg       from "@/assets/dorascribe-record-card-bg.png"
+import reviewBg       from "@/assets/dorascribe-review-card-bg.png"
+import exportBg       from "@/assets/dorascribe-export-card-bg.png"
 
 function Card1Illustration() {
   const t = useTranslations();
@@ -89,7 +94,7 @@ function Card1Illustration() {
         position: "relative", overflow: "hidden",
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>
-      <img src="/assets/dorascribe-record-card-bg.png" alt="Decorative background for ambient recording step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
+      <Image src={recordBg} alt="Decorative background for ambient recording step" fill style={{ objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 242, height: 260 }}>
         {/* Dots */}
         <div style={dotStyle(1, 15)} />
@@ -133,8 +138,7 @@ function Card1Illustration() {
 
         {/* Button 3 */}
         <div style={btnStyle(3, 136)}>
-          <img src={iconMicGray} alt="mic" style={{
-            width: 15, height: 15,
+          <Image src={iconMicGray} alt="mic" width={15} height={15} style={{
             filter: isActive(3) ? "var(--btn-icon-filter, brightness(0) invert(1))" : "none",
             transition: "filter 0.4s ease",
             transitionDelay: isActive(3) ? "0.4s" : "0s",
@@ -144,8 +148,7 @@ function Card1Illustration() {
 
         {/* Button 4 */}
         <div style={btnStyle(4, 204)}>
-          <img src={iconGenerate} alt="generate" style={{
-            width: 15, height: 15,
+          <Image src={iconGenerate} alt="generate" width={15} height={15} style={{
             filter: isActive(4) ? "var(--btn-icon-filter, brightness(0) invert(1))" : "none",
             transition: "filter 0.4s ease",
             transitionDelay: isActive(4) ? "0.4s" : "0s",
@@ -182,7 +185,7 @@ function Card2Illustration() {
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <img src="/assets/dorascribe-review-card-bg.png" alt="Decorative background for note review step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.13, pointerEvents: "none" }} />
+      <Image src={reviewBg} alt="Decorative background for note review step" fill style={{ objectFit: "cover", opacity: 0.13, pointerEvents: "none" }} />
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -197,10 +200,10 @@ function Card2Illustration() {
         }}>
           {/* Icon buttons */}
           <motion.div variants={itemVariants} custom={1} style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: 8 }}>
-            <img src={iconCopy} alt="copy" style={{ width: 16, height: 16 }} />
+            <Image src={iconCopy} alt="copy" width={16} height={16} />
           </motion.div>
           <motion.div variants={itemVariants} custom={2} style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: 8 }}>
-            <img src={iconDownload} alt="download" style={{ width: 16, height: 16 }} />
+            <Image src={iconDownload} alt="download" width={16} height={16} />
           </motion.div>
           
           {/* Dropdown */}
@@ -284,7 +287,7 @@ function Card3Illustration() {
         alignItems: "center",
         justifyContent: "center",
       }}>
-      <img src="/assets/dorascribe-export-card-bg.png" alt="Decorative background for export and download step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
+      <Image src={exportBg} alt="Decorative background for export and download step" fill style={{ objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 240, height: 110 }}>
         {items.map(item => {
           const pos = getPosition(item.id);
@@ -315,9 +318,7 @@ function Card3Illustration() {
               zIndex: isCenter ? 2 : 1,
               transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
             }}>
-              <img src={item.icon} alt="icon" style={{
-                width: isCenter ? item.activeScale : item.baseScale,
-                height: isCenter ? item.activeScale : item.baseScale,
+              <Image src={item.icon} alt="icon" width={isCenter ? item.activeScale : item.baseScale} height={isCenter ? item.activeScale : item.baseScale} style={{
                 filter: isCenter ? "var(--btn-icon-filter, brightness(0) invert(1))" : "none",
                 transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
               }} />

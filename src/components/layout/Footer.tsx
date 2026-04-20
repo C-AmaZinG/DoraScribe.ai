@@ -7,6 +7,10 @@ import Logo from '@/components/ui/Logo';
 import MakroButton from '@/components/ui/MakroButton';
 import { useTranslations } from "@/lib/translations/translations-context";
 
+// Static imports for icons
+import appStoreIcon from '@/assets/app-store.svg';
+import googlePlayIcon from '@/assets/google-play.svg';
+
 export default function Footer() {
   const t = useTranslations();
 
@@ -100,7 +104,7 @@ export default function Footer() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
                 <a href="https://apps.apple.com/" aria-label="Download on the App Store" style={{ display: 'inline-flex' }}>
                   <Image
-                    src="/assets/app-store.svg"
+                    src={appStoreIcon}
                     alt="Download on the App Store"
                     width={145}
                     height={44}
@@ -109,7 +113,7 @@ export default function Footer() {
                 </a>
                 <a href="https://play.google.com/store" aria-label="Get it on Google Play" style={{ display: 'inline-flex' }}>
                   <Image
-                    src="/assets/google-play.svg"
+                    src={googlePlayIcon}
                     alt="Get it on Google Play"
                     width={145}
                     height={44}

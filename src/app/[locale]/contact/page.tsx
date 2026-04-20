@@ -318,7 +318,7 @@ export default function ContactPage() {
           border: 1px solid var(--brand-primary);
           border-radius: 16px;
           background: var(--brand-primary);
-          color: #ffffff;
+          color: #000000;
           font-family: "DM Sans", sans-serif;
           font-size: 0.96rem;
           font-weight: 700;

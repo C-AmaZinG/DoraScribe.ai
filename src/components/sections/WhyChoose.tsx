@@ -5,6 +5,12 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useTranslations } from "@/lib/translations/translations-context"
 
+// Static imports for images
+import heroImg from "@/assets/dorascribe-smart-ambient-ai-hero.png"
+import privacyIcon from "@/assets/dorascribe-privacy-compliance-icon.svg"
+import crossPlatformIcon from "@/assets/dorascribe-cross-platform-icon.svg"
+import emrIntegrationIcon from "@/assets/dorascribe-emr-integration-icon.svg"
+
 export default function WhyChoose() {
   const t = useTranslations();
   return (
@@ -134,7 +140,7 @@ export default function WhyChoose() {
             }}
           >
             <Image
-              src="/assets/dorascribe-smart-ambient-ai-hero.png"
+              src={heroImg}
               alt="Dorascribe Smart Ambient AI Clinical Platform – AI-powered real-time medical documentation"
               fill
               style={{
@@ -175,7 +181,7 @@ export default function WhyChoose() {
           >
             <div style={{ position: "absolute", top: "40px", right: "40px" }}>
               <Image 
-                src="/assets/dorascribe-privacy-compliance-icon.svg" 
+                src={privacyIcon} 
                 alt="HIPAA, GDPR, and SOC2 privacy compliance badge" 
                 width={32} 
                 height={32} 
@@ -246,7 +252,7 @@ export default function WhyChoose() {
           >
             <div style={{ position: "absolute", top: "40px", right: "40px" }}>
               <Image 
-                src="/assets/dorascribe-cross-platform-icon.svg" 
+                src={crossPlatformIcon} 
                 alt="Dorascribe works across desktop, tablet, and mobile devices" 
                 width={32} 
                 height={32} 
@@ -294,7 +300,7 @@ export default function WhyChoose() {
           >
             <div style={{ position: "absolute", top: "40px", right: "40px" }}>
               <Image 
-                src="/assets/dorascribe-emr-integration-icon.svg" 
+                src={emrIntegrationIcon} 
                 alt="Dorascribe EMR and EHR integration icon" 
                 width={32} 
                 height={32} 
