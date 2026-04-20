@@ -4,27 +4,36 @@ import React from "react"
 import { useIsMobile } from "@/lib/hooks"
 import MakroButton from "@/components/ui/MakroButton"
 import { motion } from "framer-motion"
+import { useTranslations } from "@/lib/translations/translations-context"
+
+import Image from "next/image"
 
 /* ─────────────────────────────────────────────
    Local public/assets icons
 ───────────────────────────────────────────── */
-const iconMic        = "/assets/dorascribe-mic-white-icon.svg"     // white – for orange button in Card 3
-const iconMicGray    = "/assets/mic.svg"                             // gray  – for step buttons in Card 1
-const iconCopy       = "/assets/dorascribe-copy-icon.svg"
-const iconDownload   = "/assets/dorascribe-download-icon.svg"
-const iconEdit       = "/assets/dorascribe-edit-icon.svg"
-const iconGenerate   = "/assets/dorascribe-generate-note-icon.svg"
-const iconTemplate   = "/assets/dorascribe-template-icon.svg"
+import iconMic        from "@/assets/dorascribe-mic-white-icon.svg"
+import iconMicGray    from "@/assets/mic.svg"
+import iconCopy       from "@/assets/dorascribe-copy-icon.svg"
+import iconDownload   from "@/assets/dorascribe-download-icon.svg"
+import iconEdit       from "@/assets/dorascribe-edit-icon.svg"
+import iconGenerate   from "@/assets/dorascribe-generate-note-icon.svg"
+import iconTemplate   from "@/assets/dorascribe-template-icon.svg"
+import recordBg       from "@/assets/dorascribe-record-card-bg.png"
+import reviewBg       from "@/assets/dorascribe-review-card-bg.png"
+import exportBg       from "@/assets/dorascribe-export-card-bg.png"
 
 function Card1Illustration() {
+  const t = useTranslations();
   const [activeStep, setActiveStep] = React.useState(1);
+  const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
+    if (isPaused) return;
     const int = setInterval(() => {
       setActiveStep(s => s >= 4 ? 1 : s + 1);
     }, 2800); 
     return () => clearInterval(int);
-  }, []);
+  }, [isPaused]);
 
   const isActive = (step: number) => activeStep >= step;
 
@@ -75,12 +84,17 @@ function Card1Illustration() {
   });
 
   return (
-    <div style={{
-      background: "#f8f7f5", borderRadius: 8, width: "100%", height: 360,
-      position: "relative", overflow: "hidden",
-      display: "flex", alignItems: "center", justifyContent: "center",
-    }}>
-      <img src="/assets/dorascribe-record-card-bg.png" alt="Decorative background for ambient recording step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
+    <div 
+      onPointerDown={() => setIsPaused(true)}
+      onPointerUp={() => setIsPaused(false)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      style={{
+        background: "#f8f7f5", borderRadius: 8, width: "100%", height: 360,
+        position: "relative", overflow: "hidden",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}>
+      <Image src={recordBg} alt="Decorative background for ambient recording step" fill style={{ objectFit: "cover", opacity: 0.05, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 242, height: 260 }}>
         {/* Dots */}
         <div style={dotStyle(1, 15)} />
@@ -101,7 +115,7 @@ function Card1Illustration() {
 
         {/* Button 1 */}
         <div style={btnStyle(1, 0)}>
-          <span style={textStyle(1)}>+ Start Consult</span>
+          <span style={textStyle(1)}>{t("+ Start Consult")}</span>
         </div>
 
         {/* Button 2 */}
@@ -110,7 +124,7 @@ function Card1Illustration() {
           background: isActive(2) ? "var(--pd-step-bg, var(--how-it-works-orange, #ff7429))" : "#fff",
           borderColor: isActive(2) ? "var(--pd-step-bg, var(--how-it-works-orange, #ff7429))" : "#e8e8e8"
         }}>
-          <span style={textStyle(2)}>Patient Details</span>
+          <span style={textStyle(2)}>{t("Patient Details")}</span>
           <span style={{
             fontSize: 9, fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
             color: isActive(2) ? "var(--pd-step-text, #fff)" : "#158384",
@@ -119,29 +133,27 @@ function Card1Illustration() {
             borderRadius: 3, padding: "1px 5px", whiteSpace: "nowrap",
             transition: "all 0.4s ease",
             transitionDelay: isActive(2) ? "0.4s" : "0s",
-          }}>Optional</span>
+          }}>{t("Optional")}</span>
         </div>
 
         {/* Button 3 */}
         <div style={btnStyle(3, 136)}>
-          <img src={iconMicGray} alt="mic" style={{
-            width: 15, height: 15,
+          <Image src={iconMicGray} alt="mic" width={15} height={15} style={{
             filter: isActive(3) ? "var(--btn-icon-filter, brightness(0) invert(1))" : "none",
             transition: "filter 0.4s ease",
             transitionDelay: isActive(3) ? "0.4s" : "0s",
           }} />
-          <span style={textStyle(3)}>Start Recording</span>
+          <span style={textStyle(3)}>{t("Start Recording")}</span>
         </div>
 
         {/* Button 4 */}
         <div style={btnStyle(4, 204)}>
-          <img src={iconGenerate} alt="generate" style={{
-            width: 15, height: 15,
+          <Image src={iconGenerate} alt="generate" width={15} height={15} style={{
             filter: isActive(4) ? "var(--btn-icon-filter, brightness(0) invert(1))" : "none",
             transition: "filter 0.4s ease",
             transitionDelay: isActive(4) ? "0.4s" : "0s",
           }} />
-          <span style={textStyle(4)}>Generate Note</span>
+          <span style={textStyle(4)}>{t("Generate Note")}</span>
         </div>
       </div>
     </div>
@@ -152,6 +164,7 @@ function Card1Illustration() {
    Card 2 illustration – "Notes Ready"
 ───────────────────────────────────────────── */
 function Card2Illustration() {
+  const t = useTranslations();
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: (custom: number) => ({
@@ -172,7 +185,7 @@ function Card2Illustration() {
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <img src="/assets/dorascribe-review-card-bg.png" alt="Decorative background for note review step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.13, pointerEvents: "none" }} />
+      <Image src={reviewBg} alt="Decorative background for note review step" fill style={{ objectFit: "cover", opacity: 0.13, pointerEvents: "none" }} />
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -187,10 +200,10 @@ function Card2Illustration() {
         }}>
           {/* Icon buttons */}
           <motion.div variants={itemVariants} custom={1} style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: 8 }}>
-            <img src={iconCopy} alt="copy" style={{ width: 16, height: 16 }} />
+            <Image src={iconCopy} alt="copy" width={16} height={16} />
           </motion.div>
           <motion.div variants={itemVariants} custom={2} style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: 8 }}>
-            <img src={iconDownload} alt="download" style={{ width: 16, height: 16 }} />
+            <Image src={iconDownload} alt="download" width={16} height={16} />
           </motion.div>
           
           {/* Dropdown */}
@@ -198,7 +211,7 @@ function Card2Illustration() {
             background: "#fff", border: "1px solid #d1d5db", borderRadius: 6,
             padding: "8px 12px", display: "flex", alignItems: "center", gap: 6,
           }}>
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#0a0a0a", whiteSpace: "nowrap" }}>SOAP Note - Standard</span>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#0a0a0a", whiteSpace: "nowrap" }}>{t("SOAP Note - Standard")}</span>
           </motion.div>
         </div>
 
@@ -236,13 +249,15 @@ function Card2Illustration() {
 ───────────────────────────────────────────── */
 function Card3Illustration() {
   const [activeIndex, setActiveIndex] = React.useState(1);
+  const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
+    if (isPaused) return;
     const int = setInterval(() => {
       setActiveIndex(i => (i + 1) % 3);
     }, 2800); 
     return () => clearInterval(int);
-  }, []);
+  }, [isPaused]);
 
   const items = [
     { id: 0, icon: iconGenerate, baseScale: 22, activeScale: 28 },
@@ -256,18 +271,23 @@ function Card3Illustration() {
   };
 
   return (
-    <div style={{
-      background: "#f8f7f5",
-      borderRadius: 8,
-      width: "100%",
-      height: 360,
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}>
-      <img src="/assets/dorascribe-export-card-bg.png" alt="Decorative background for export and download step" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
+    <div 
+      onPointerDown={() => setIsPaused(true)}
+      onPointerUp={() => setIsPaused(false)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      style={{
+        background: "#f8f7f5",
+        borderRadius: 8,
+        width: "100%",
+        height: 360,
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+      <Image src={exportBg} alt="Decorative background for export and download step" fill style={{ objectFit: "cover", opacity: 0.04, pointerEvents: "none" }} />
       <div style={{ position: "relative", width: 240, height: 110 }}>
         {items.map(item => {
           const pos = getPosition(item.id);
@@ -298,9 +318,7 @@ function Card3Illustration() {
               zIndex: isCenter ? 2 : 1,
               transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
             }}>
-              <img src={item.icon} alt="icon" style={{
-                width: isCenter ? item.activeScale : item.baseScale,
-                height: isCenter ? item.activeScale : item.baseScale,
+              <Image src={item.icon} alt="icon" width={isCenter ? item.activeScale : item.baseScale} height={isCenter ? item.activeScale : item.baseScale} style={{
                 filter: isCenter ? "var(--btn-icon-filter, brightness(0) invert(1))" : "none",
                 transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
               }} />
@@ -318,7 +336,7 @@ function Card3Illustration() {
 const cards = [
   {
     title: "Start Your Consult in Seconds",
-    desc: "Tap the \u201cStart Consult\u201d button, optionally enter patient details, select your note type, and begin recording instantly\u2014no setup, no disruption to your workflow.",
+    desc: "Tap the “Start Consult” button, optionally enter patient details, select your note type, and begin recording instantly—no setup, no disruption to your workflow.",
     illustration: <Card1Illustration />,
   },
   {
@@ -337,7 +355,18 @@ const cards = [
    Main section
 ───────────────────────────────────────────── */
 export default function HowItWorks() {
+  const t = useTranslations();
   const isMobile = useIsMobile()
+
+  // Catalog so the build-time scanner picks up card title + description strings
+  void [
+    t("Start Your Consult in Seconds"),
+    t("Tap the “Start Consult” button, optionally enter patient details, select your note type, and begin recording instantly—no setup, no disruption to your workflow."),
+    t("Your Notes, Ready the Moment You Finish"),
+    t("Clear, structured, and clinically accurate notes are generated in real time, so everything is ready for review as soon as your consult ends."),
+    t("Edit, Refine, and Finalize with Ease"),
+    t("Need to add more details? Easily update your notes using voice or text, with full control to refine, adjust, and finalize your documentation anytime."),
+  ];
 
   return (
     <section
@@ -362,7 +391,7 @@ export default function HowItWorks() {
         width: "100%",
       }}>
         <h2 style={{
-          fontFamily: "'Playfair Display', Georgia, serif",
+          fontFamily: "'DM Sans', Georgia, sans-serif",
           fontWeight: 600,
           fontSize: isMobile ? "32px" : "40px",
           lineHeight: "50px",
@@ -370,7 +399,7 @@ export default function HowItWorks() {
           margin: "0 0 16px",
           letterSpacing: "-0.01em",
         }}>
-          How to use
+          {t("How to use")}
         </h2>
         <p style={{
           fontFamily: "'DM Sans', sans-serif",
@@ -381,7 +410,7 @@ export default function HowItWorks() {
           maxWidth: 680,
           margin: "0 auto",
         }}>
-          From recording to ready-to-file notes, Dorascribe handles every step automatically so you can stay focused on your patient.
+          {t("From recording to ready-to-file notes, Dorascribe handles every step automatically so you can stay focused on your patient.")}
         </p>
       </div>
 
@@ -412,14 +441,14 @@ export default function HowItWorks() {
             {/* Text */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <h3 style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
+                fontFamily: "'DM Sans', Georgia, sans-serif",
                 fontWeight: 600,
                 fontSize: 24,
                 lineHeight: 1.2,
                 color: "#0a0a0a",
                 margin: 0,
               }}>
-                {card.title}
+                {t(card.title)}
               </h3>
               <p style={{
                 fontFamily: "'DM Sans', sans-serif",
@@ -429,7 +458,7 @@ export default function HowItWorks() {
                 color: "#4D4D4D",
                 margin: 0,
               }}>
-                {card.desc}
+                {t(card.desc)}
               </p>
             </div>
 
@@ -443,7 +472,7 @@ export default function HowItWorks() {
       <div style={{ width: isMobile ? "calc(100% - 40px)" : "auto", maxWidth: isMobile ? "300px" : "none" }}>
         <MakroButton
           href="https://app.dorascribe.ai/signUp"
-          text="Start a free trial"
+          text={t("Start a free trial")}
           className="how-it-works-cta"
         />
       </div>

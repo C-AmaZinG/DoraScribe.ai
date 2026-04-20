@@ -56,8 +56,8 @@
     --btn-icon-filter: brightness(0) invert(1);
     
     /* Typography */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Monument Grotesk', sans-serif;
+    --font-heading: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
     --makro-accent-bg: #EBF8F8;
     --makro-accent-text: #0B1D33;
     --makro-accent-hover: #d8f2f2;
@@ -144,8 +144,8 @@
     --color-muted: #f1f5f9;
     --color-muted-foreground: #64748b;
     --color-border: rgba(0, 170, 170, 0.1);
-    --font-sans: 'Monument Grotesk', sans-serif;
-    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-serif: 'DM Sans', sans-serif;
 }
 
 * {
@@ -194,7 +194,7 @@ h3 {
 }
 
 [style*="DM Serif Display"] {
-    font-family: "Playfair Display", serif !important;
+    font-family: "DM Sans", sans-serif !important;
 }
 
 .hero-title,
@@ -1327,7 +1327,7 @@ main > section:last-of-type {
 }
 
 .wc-subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.1rem;
   color: #64748b;
   max-width: 700px;
@@ -1367,7 +1367,7 @@ main > section:last-of-type {
 }
 
 .wc-card h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   color: #111111;
@@ -1376,7 +1376,7 @@ main > section:last-of-type {
 }
 
 .wc-card p {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.05rem;
   line-height: 1.6;
   color: #4A4A4A;
@@ -1436,3 +1436,13 @@ main > section:last-of-type {
     background: rgba(0, 170, 170, 0.2) !important;
     color: var(--brand-primary) !important;
 }
+
+/* Tutorials Page - Yellow Text to Black Overrides */
+.tutorials-page .nav-caret,
+.tutorials-page .footer-link-hover:hover,
+.tutorials-page .mobile-nav-overlay a:hover,
+.tutorials-page .mobile-nav-overlay-v2 a:hover,
+.tutorials-page .close-nav-btn:hover {
+    color: #000000 !important;
+}
+

@@ -3,19 +3,23 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const quickActions = ["Subjective", "Objective", "Assessment"];
 
 export default function StepTwoSection() {
+  const t = useTranslations();
   const [activeAction, setActiveAction] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setActiveAction((prev) => (prev + 1) % quickActions.length);
     }, 2200);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section className="step-two-section">
@@ -27,11 +31,10 @@ export default function StepTwoSection() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="step-two-chip">Step 2</span>
-          <h2>Document</h2>
+          <span className="step-two-chip">{t("Step 2")}</span>
+          <h2>{t("Document")}</h2>
           <p>
-            Get a detailed summary of the encounter as a SOAP note that is ready
-            to copy and paste into your patient's EMR.
+            {t("Get a detailed summary of the encounter as a SOAP note that is ready to copy and paste into your patient's EMR.")}
           </p>
         </motion.div>
 
@@ -41,6 +44,10 @@ export default function StepTwoSection() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          onPointerDown={() => setIsPaused(true)}
+          onPointerUp={() => setIsPaused(false)}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           <div className="visual-top">
             <div className="icon-zone">
@@ -65,7 +72,7 @@ export default function StepTwoSection() {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <h4>SOAP Note</h4>
+              <h4>{t("SOAP Note")}</h4>
               <div className="line w-100" />
               <div className="line w-88" />
               <div className="line w-92" />
@@ -124,7 +131,7 @@ export default function StepTwoSection() {
           padding: 8px 14px;
           background: #F9F4F1;
           color: #1a2340;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.93rem;
           font-weight: 600;
           letter-spacing: 0.01em;
@@ -132,7 +139,7 @@ export default function StepTwoSection() {
 
         .step-two-left :global(h2) {
           margin-top: 18px;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2.4rem, 5vw, 4rem);
           line-height: 0.96;
           letter-spacing: -0.04em;
@@ -142,7 +149,7 @@ export default function StepTwoSection() {
 
         .step-two-left p {
           margin-top: 20px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.02rem;
           line-height: 1.55;
           color: #271623;
@@ -229,7 +236,7 @@ export default function StepTwoSection() {
 
         .note-card h4 {
           margin: 0 0 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 2rem;
           font-weight: 600;
           color: #23111d;
@@ -287,7 +294,7 @@ export default function StepTwoSection() {
           margin-bottom: 7px;
           border-bottom: 2px solid rgba(73, 21, 43, 0.15);
           color: #22121d;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.03rem;
           line-height: 1.2;
           transition: color 0.25s ease, border-color 0.25s ease;

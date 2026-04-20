@@ -15,6 +15,15 @@ dist-ssr
 tsconfig.tsbuildinfo
 temp_*.txt
 
+# AI Agent folders
+.agent
+.agents
+skills-lock.json
+
+# Cleanup artifacts
+index_old.css
+integrated_footer.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

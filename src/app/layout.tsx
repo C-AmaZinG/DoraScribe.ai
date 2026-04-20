@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import Script from "next/script";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { LocaleProvider } from "@/lib/locale-context";
+import { TranslationsProvider } from "@/lib/translations/translations-context";
+import { translateUiStrings } from "@/lib/translations/translate-ui";
+import LoadingBar from "@/components/ui/LoadingBar";
+import { config } from "@/lib/config";
+import type { Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(config.siteUrl),
   title: "Dorascribe | AI Clinical Notes Assistant",
   description: "Ambient AI Medical Scribe",
   openGraph: {
     title: "Dorascribe | AI Clinical Notes Assistant",
     description: "Ambient AI Medical Scribe",
-    url: "https://dora-scribe-ai.vercel.app",
+    url: config.siteUrl,
     siteName: "Dorascribe",
     images: [
       {
@@ -28,24 +37,45 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "en") as Locale;
+  const translations = await translateUiStrings(locale);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Sans:wght@400&display=swap"
           rel="stylesheet"
         />
+        <Script id="hotjar-tracking" strategy="afterInteractive">
+          {`
+            (function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:6691991,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+          `}
+        </Script>
       </head>
       <body suppressHydrationWarning>
-        <AppProviders>
-          <div id="root">{children}</div>
-        </AppProviders>
+        <LocaleProvider locale={locale}>
+          <TranslationsProvider translations={translations}>
+            <LoadingBar />
+            <AppProviders>
+              <div id="root">{children}</div>
+            </AppProviders>
+          </TranslationsProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

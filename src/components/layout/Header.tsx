@@ -2,14 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 import Logo from "@/components/ui/Logo";
-import { useLanguage } from "@/lib/language-context";
+import { useLocale } from "@/lib/locale-context";
+import { useTranslations } from "@/lib/translations/translations-context";
+import { locales, localePath, stripLocaleFromPath, localeMap } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
 const navLinks = [
   { name: "How to Use", href: "/#how-it-works" },
-  { name: "Why Dora", href: "/#why-choose" },
+  { name: "Why Dorascribe", href: "/#why-choose" },
   { name: "Pricing", href: "/#pricing" },
   { name: "FAQ", href: "/#faq" },
   {
@@ -26,6 +30,7 @@ const MOBILE_BREAKPOINT = 1080;
 
 const DropdownLink = ({ name, href }: { name: string; href: string }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   return (
     <Link
       href={href}
@@ -34,7 +39,7 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
       style={{
         position: "relative",
         textDecoration: "none",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'DM Sans', sans-serif",
         fontSize: "14px",
         fontWeight: 500,
         color: isHovered ? "#00aaaa" : "#2c1810",
@@ -48,13 +53,14 @@ const DropdownLink = ({ name, href }: { name: string; href: string }) => {
         boxShadow: isHovered ? "0 8px 18px rgba(61, 129, 131, 0.08)" : "none"
       }}
     >
-      {name}
+      {t(name)}
     </Link>
   );
 };
 
 const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; onClick: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   return (
     <Link
       href={href}
@@ -72,13 +78,16 @@ const MobileNavLink = ({ name, href, onClick }: { name: string; href: string; on
         textAlign: "left"
       }}
     >
-      {name}
+      {t(name)}
     </Link>
   );
 };
 
 export default function Header() {
-  const { activeLanguage, setActiveLanguageByCode, languageOptions } = useLanguage();
+  const currentLocale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
@@ -86,6 +95,14 @@ export default function Header() {
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
   const [isLoginHovered, setIsLoginHovered] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+
+  // Catalog so the build-time scanner picks up strings referenced via variable
+  void [
+    t("How to Use"), t("Why Dorascribe"), t("Pricing"), t("FAQ"),
+    t("Resources"), t("Contact"), t("Blog"), t("Tutorials"),
+    t("Select Language"), t("Get started"), t("Log in"),
+    t("Get Started"), t("Login"), t("Open menu"), t("Close menu"),
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,6 +149,12 @@ export default function Header() {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsMobileResourcesOpen(false);
+  };
+
+  const switchLocale = (locale: Locale) => {
+    document.cookie = `NEXT_LOCALE=${locale};path=/;max-age=${365 * 24 * 60 * 60}`;
+    window.location.href = localePath(stripLocaleFromPath(pathname), locale);
+    setIsLanguageOpen(false);
   };
 
   return (
@@ -215,7 +238,7 @@ export default function Header() {
                           : "2px solid transparent",
                     }}
                   >
-                    {link.name}
+                    {t(link.name)}
                     <span
                       className="nav-caret"
                       style={{
@@ -250,7 +273,7 @@ export default function Header() {
                         : "2px solid transparent",
                   }}
                 >
-                  {link.name}
+                  {t(link.name)}
                 </Link>
               )
             )}
@@ -273,10 +296,10 @@ export default function Header() {
                                 <span
                   className="language-flag-mini"
                   style={{
-                    backgroundImage: `url(https://flagcdn.com/w40/${activeLanguage.country}.png)`,
+                    backgroundImage: `url(https://flagcdn.com/w40/${localeMap[currentLocale].flag}.png)`,
                   }}
                 />
-                <span>{activeLanguage.code}</span>
+                <span>{localeMap[currentLocale].label}</span>
                                 <span className="language-trigger-caret">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 9l6 6 6-6" />
@@ -294,26 +317,23 @@ export default function Header() {
                       transition={{ duration: 0.12, ease: "easeOut" }}
                       className="language-menu-inner"
                     >
-                      <p className="language-menu-title">Select Language</p>
-                      {languageOptions.map((language) => (
+                      <p className="language-menu-title">{t("Select Language")}</p>
+                      {locales.map((locale) => (
                         <button
-                          key={language.code}
+                          key={locale}
                           type="button"
-                          className={`language-option ${activeLanguage.code === language.code ? "is-active" : ""}`}
-                          onClick={() => {
-                            setActiveLanguageByCode(language.code);
-                            setIsLanguageOpen(false);
-                          }}
+                          className={`language-option ${currentLocale === locale ? "is-active" : ""}`}
+                          onClick={() => switchLocale(locale)}
                         >
-                                                    <span
+                          <span
                             className="language-flag"
                             aria-hidden="true"
                             style={{
-                              backgroundImage: `url(https://flagcdn.com/w40/${language.country}.png)`,
+                              backgroundImage: `url(https://flagcdn.com/w40/${localeMap[locale].flag}.png)`,
                             }}
                           />
-                          <span className="language-option-label">{language.name} ({language.region})</span>
-                          {activeLanguage.code === language.code && (
+                          <span className="language-option-label">{localeMap[locale].name}</span>
+                          {currentLocale === locale && (
                             <span className="active-check">&#10003;</span>
                           )}
                         </button>
@@ -328,7 +348,7 @@ export default function Header() {
             {/* Swapped order: Get started first, then Login */}
             <div className="desktop-only">
               <MakroButton
-                text="Get started"
+                text={t("Get started")}
                 href="https://app.dorascribe.ai/signUp"
                 size="sm"
               />
@@ -342,7 +362,7 @@ export default function Header() {
                 style={{
                   textDecoration: "none",
                   display: "inline-block",
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.9rem",
                   fontWeight: 500,
                   color: "#000000",
@@ -354,7 +374,7 @@ export default function Header() {
                 }}
                 className="login-link"
               >
-                Log in
+                {t("Log in")}
               </Link>
             </div>
 
@@ -362,7 +382,7 @@ export default function Header() {
               <motion.button
                 type="button"
                 className="mobile-menu-button"
-                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-label={isMobileMenuOpen ? t("Close menu") : t("Open menu")}
                 aria-expanded={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 whileHover={{ scale: 1.05 }}
@@ -454,7 +474,7 @@ export default function Header() {
               <button 
                 onClick={closeMobileMenu} 
                 className="close-nav-btn"
-                aria-label="Close menu"
+                aria-label={t("Close menu")}
                 style={{
                   display: "flex",
                   width: "48px",
@@ -515,7 +535,7 @@ export default function Header() {
                           transition: "background-color 0.2s ease"
                         }}
                       >
-                        Get Started
+                        {t("Get Started")}
                       </Link>
                     </motion.div>
 
@@ -545,7 +565,7 @@ export default function Header() {
                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#d8f2f2"}
                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#EBF8F8"}
                        >
-                         Login
+                         {t("Login")}
                        </Link>
                      </motion.div>
                   </motion.div>
@@ -553,7 +573,7 @@ export default function Header() {
                   <div className="nav-divider-slim" />
 
                   {/* 3. Main Links Group */}
-                  {["How to Use", "Why Dora", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
+                  {["How to Use", "Why Dorascribe", "Pricing", "Resources", "FAQ", "Contact"].map((name, i) => {
                     const linkObj = navLinks.find(l => l.name === name);
                     if (!linkObj) return null;
 
@@ -585,13 +605,16 @@ export default function Header() {
                               justifyContent: "space-between",
                             }}
                           >
-                            <span>{name}</span>
-                            <span style={{ 
-                              fontSize: "12px", 
-                              transform: isMobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)",
-                              transition: "transform 0.3s ease",
-                              color: "var(--brand-primary)"
-                            }}>
+                            <span>{t(name)}</span>
+                            <span
+                              className="nav-caret"
+                              style={{ 
+                                fontSize: "12px", 
+                                transform: isMobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)",
+                                transition: "transform 0.3s ease",
+                                color: "var(--brand-primary)"
+                              }}
+                            >
                               ▾
                             </span>
                           </button>
@@ -647,8 +670,19 @@ export default function Header() {
               transition={{ delay: 0.7 }}
               className="mobile-nav-footer"
             >
-              <div className="social-tray">
-                <a href="#" className="tray-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              <div className="social-tray" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '20px' }}>
+                <a href="https://www.linkedin.com/company/dorascribe-inc/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://www.facebook.com/dorascribemedicalai" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://x.com/DorascribeInc" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@DorascribeTeam" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+                </a>
               </div>
               <p className="footer-copyright">© 2026 Dorascribe AI. All rights reserved.</p>
             </motion.div>
@@ -661,7 +695,7 @@ export default function Header() {
           position: relative;
           padding: 8px 16px;
           text-decoration: none;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 14px !important;
           white-space: nowrap;
           line-height: 1.1;
@@ -727,7 +761,7 @@ export default function Header() {
         .dropdown-link {
           position: relative;
           text-decoration: none;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 14px !important;
           font-weight: 500;
           color: #2c1810;
@@ -786,7 +820,7 @@ export default function Header() {
           border: 1px solid #dbe7eb;
           background: #ffffff;
           color: #1f2937;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           display: inline-flex;
@@ -851,7 +885,7 @@ export default function Header() {
 
         .language-menu-title {
           padding: 10px 14px 6px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.72rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -871,7 +905,7 @@ export default function Header() {
           text-align: left;
           cursor: pointer;
           color: #475569;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 500;
           transition: all 0.2s ease;
@@ -912,7 +946,7 @@ export default function Header() {
         }
 
         .mobile-nav-kicker {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.72rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -937,7 +971,7 @@ export default function Header() {
           align-items: center;
           justify-content: center;
           gap: 6px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           cursor: pointer;
@@ -1049,7 +1083,7 @@ export default function Header() {
         }
 
         .mobile-link-hero {
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 32px;
           font-weight: 700;
           color: white;
@@ -1074,7 +1108,7 @@ export default function Header() {
           margin-top: 20px;
           background: #EBF8F8;
           color: white;
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 20px;
           font-weight: 700;
           text-decoration: none;
@@ -1120,7 +1154,7 @@ export default function Header() {
         }
 
         .footer-copyright {
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 13px;
           color: rgba(255, 255, 255, 0.4);
         }

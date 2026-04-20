@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 function PracticeIcon({ className }: { className?: string }) {
   return (
@@ -55,20 +56,32 @@ const trustItems = [
 ];
 
 export default function DutyOfCare() {
+  const t = useTranslations();
+
+  // Catalog so the build-time scanner picks up badge + trust item strings
+  void [
+    t("HIPAA COMPLIANT"), t("PIPEDA COMPLIANT"), t("POPIA COMPLIANT"),
+    t("Validated in practice"),
+    t("We test and iterate our models in real-world scenarios to ensure Dorascribe remains accurate, reliable and clinically sound."),
+    t("Deep clinical review"),
+    t("Our medical team reviews and refines outputs, adding the reliability automation alone cannot provide."),
+    t("Privacy, without shortcuts"),
+    t("Our systems are built to the highest global standards, keeping every patient record secure, private, and protected."),
+  ];
+
   return (
     <section className="duty-section">
       <div className="duty-shell">
         <div className="duty-top">
           <div className="duty-copy">
-            <h2>Your duty of care, built in</h2>
+            <h2>{t("Your duty of care, built in")}</h2>
             <p>
-              We hold ourselves to the highest standard there is: the one you set when you care for
-              patients.
+              {t("We hold ourselves to the highest standard there is: the one you set when you care for patients.")}
             </p>
             <div className="badge-grid">
               {complianceBadges.map((badge) => (
                 <span key={badge} className="badge-pill">
-                  {badge}
+                  {t(badge)}
                 </span>
               ))}
             </div>
@@ -84,8 +97,8 @@ export default function DutyOfCare() {
                 <div className="card-icon">
                   <Icon className="icon-svg" />
                 </div>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
+                <h3>{t(item.title)}</h3>
+                <p>{t(item.body)}</p>
               </article>
             );
           })}
@@ -117,7 +130,7 @@ export default function DutyOfCare() {
 
         .duty-copy h2 {
           margin: 0;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2.3rem, 5vw, 4.4rem);
           line-height: 0.94;
           letter-spacing: -0.03em;
@@ -127,7 +140,7 @@ export default function DutyOfCare() {
 
         .duty-copy p {
           margin: 16px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.06rem;
           line-height: 1.5;
           color: #000000;
@@ -153,7 +166,7 @@ export default function DutyOfCare() {
           padding: 8px 10px;
           text-transform: uppercase;
           letter-spacing: 0.03em;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.68rem;
           font-weight: 700;
           color: #000000;
@@ -202,7 +215,7 @@ export default function DutyOfCare() {
 
         .duty-card h3 {
           margin: 16px 0 10px;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.9rem;
           line-height: 1.05;
           letter-spacing: -0.02em;
@@ -211,7 +224,7 @@ export default function DutyOfCare() {
 
         .duty-card p {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           line-height: 1.5;
           color: #000000;

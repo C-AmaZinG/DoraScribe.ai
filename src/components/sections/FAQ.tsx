@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 import { AnimatePresence, motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 
@@ -107,8 +108,40 @@ function PlusIcon({ open }: { open: boolean }) {
 }
 
 export default function FAQ() {
+  const t = useTranslations();
   const [activeCategory, setActiveCategory] = useState<Category>("General");
   const [openIndex, setOpenIndex] = useState(0);
+
+  // Catalog so the build-time scanner picks up category labels + FAQ Q/A
+  void [
+    t("General"), t("Getting Started"), t("Using Dorascribe"), t("Security & Privacy"),
+    t("What is Dorascribe?"),
+    t("Dorascribe is a medical transcription app that converts patient consultations into text for seamless integration with Electronic Medical Records (EMRs)."),
+    t("How does Dorascribe work?"),
+    t("Dorascribe utilizes a combination of large medical language models, artificial intelligence and web3 technologies to generate medical dictations, transcriptions, and chart notes. Simply speak into the app, and it will transcribe your voice into accurate and detailed medical notes."),
+    t("How much time will Dorascribe save me?"),
+    t("The time saved will vary based on your individual workflow and the complexity of your medical cases. However, initial users have reported reducing their charting time by up to 60 to 70%. On average, users can expect to save 2 to 3 hours daily."),
+    t("What specialties is Dorascribe designed for?"),
+    t("Dorascribe is designed for a wide range of healthcare professionals, offering AI-powered medical transcription tailored to different specialties. Whether you’re a doctor, surgeon, psychiatrist, physiotherapist, massage therapist, optometrist, or specialize in another area, Dorascribe provides structured note formats to fit your practice."),
+    t("How accurate is Dorascribe?"),
+    t("Dorascribe’s AI-powered technology delivers over 99% accuracy for clear recordings and continues to learn and improve with usage."),
+    t("Does Dorascribe work on multiple devices?"),
+    t("Yes. Dorascribe supports multiple devices including smartphones, tablets and computers."),
+    t("What browser should I use?"),
+    t("While all commonly used browsers are supported, we recommend using Google Chrome for the best Dorascribe experience, including for Apple device users."),
+    t("Does it support multiple languages?"),
+    t("Yes. We support transcription in Spanish, French, Italian, German, Portuguese and English. After your note is generated, you can also ask the AI to translate it to any language you want in the “interact with note” section."),
+    t("How are errors addressed?"),
+    t("Dorascribe addresses potential errors in transcriptions through advanced algorithms and user-editing capabilities, ensuring a high level of accuracy in the final output."),
+    t("Any tips for best recording results?"),
+    t("If you’re using Dorascribe on a desktop or laptop, make sure the microphone is turned on. You can also use an external microphone for clearer audio. On a mobile device, keep the screen active and avoid letting it go to sleep."),
+    t("How long are notes kept?"),
+    t("Notes are kept for 28 days to comply with HIPAA guidelines and allow time for EMR transfers. They stay in your inbox for 14 days, then move to the trash for another 14 days before permanent deletion."),
+    t("Is my data secure and HIPAA-compliant?"),
+    t("Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and HIPAA regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous."),
+    t("Is my payment information secure?"),
+    t("Your payment information is fully secure. Dorascribe uses Stripe, a globally trusted and PCI-DSS Level 1 certified payment processor, to handle all transactions."),
+  ];
 
   const items = useMemo(() => faqContent[activeCategory], [activeCategory]);
 
@@ -117,11 +150,11 @@ export default function FAQ() {
       <div className="faq-wrap">
         <div className="faq-head">
           <p className="faq-title">
-            We have the <mark>answers</mark>
+            {t("We have the")} <mark>{t("answers")}</mark>
           </p>
 
           <p className="faq-subtitle">
-            Have questions about Dorascribe? Our FAQ provides the information you need to maximize your medical documentation efficiency.
+            {t("Have questions about Dorascribe? Our FAQ provides the information you need to maximize your medical documentation efficiency.")}
           </p>
         </div>
 
@@ -141,7 +174,7 @@ export default function FAQ() {
                   }}
                   style={{ position: "relative", zIndex: 1, backgroundColor: "transparent" }}
                 >
-                  <span style={{ position: "relative", zIndex: 2 }}>{category}</span>
+                  <span style={{ position: "relative", zIndex: 2 }}>{t(category)}</span>
                   {activeCategory === category && (
                     <motion.div
                       layoutId="faq-active-highlight"
@@ -185,7 +218,7 @@ export default function FAQ() {
                         className="faq-q"
                         onClick={() => setOpenIndex(isOpen ? -1 : idx)}
                       >
-                        <span>{item.q}</span>
+                        <span>{t(item.q)}</span>
                         <PlusIcon open={isOpen} />
                       </button>
 
@@ -198,7 +231,7 @@ export default function FAQ() {
                             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                           >
                             <div className="faq-a-wrap">
-                              <p className="faq-a">{item.a}</p>
+                              <p className="faq-a">{t(item.a)}</p>
                             </div>
                           </motion.div>
                         )}
@@ -215,17 +248,16 @@ export default function FAQ() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
-                  Let's connect
+                  {t("Let's connect")}
                 </span>
 
-                <p className="faq-contact-title">Still have questions? We're here to help.</p>
+                <p className="faq-contact-title">{t("Still have questions? We're here to help.")}</p>
 
                 <p className="faq-contact-text">
-                  If you have unique practice setups, EMR integrations, or require
-                  custom workflows, our team can tailor Dorascribe to your needs.
+                  {t("If you have unique practice setups, EMR integrations, or require custom workflows, our team can tailor Dorascribe to your needs.")}
                 </p>
 
-                <MakroButton text="Contact us" href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
+                <MakroButton text={t("Contact us")} href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
               </div>
             </motion.div>
           </motion.div>
@@ -270,7 +302,7 @@ export default function FAQ() {
         .faq-subtitle {
           margin: 14px auto 0;
           max-width: 560px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           line-height: 1.55;
           color: var(--text-muted);
@@ -336,7 +368,7 @@ export default function FAQ() {
           width: 100%;
           padding: 24px;
           cursor: pointer;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           color: #8E8E8E;
           transition: background-color 0.2s ease, color 0.2s ease;
@@ -408,7 +440,7 @@ export default function FAQ() {
         }
 
         .faq-q span:first-child {
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 24px;
           font-weight: 400;
           line-height: 1.35;
@@ -433,7 +465,7 @@ export default function FAQ() {
         }
 
         .faq-a {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1rem;
           line-height: 1.55;
           color: #8E8E8E;
@@ -463,7 +495,7 @@ export default function FAQ() {
           border-radius: 999px;
           background: #ebeff5;
           color: var(--text-main);
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.75rem;
           font-weight: 500;
         }
@@ -484,7 +516,7 @@ export default function FAQ() {
           margin-top: 10px;
           margin-bottom: 44px;
           max-width: 640px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.92rem;
           line-height: 1.55;
           color: var(--text-muted);

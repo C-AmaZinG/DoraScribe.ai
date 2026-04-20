@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "@/lib/translations/translations-context";
 import {
   BadgeCheck,
   FileText,
@@ -16,14 +17,17 @@ const supportedLanguages = ["EN", "FR", "ES", "DE", "PT", "AR", "ZH", "HI"];
 const complianceStandards = ["HIPAA", "PIPEDA", "GDPR", "POPIA"];
 
 export default function EaseOfUseFeatures() {
+  const t = useTranslations();
   const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % workflowSteps.length);
     }, 1800);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const tileMotion = {
     whileHover: { y: -4, transition: { duration: 0.22 } },
@@ -32,7 +36,13 @@ export default function EaseOfUseFeatures() {
 
   return (
     <section className="ease-section">
-      <div className="ease-shell">
+      <div 
+        className="ease-shell"
+        onPointerDown={() => setIsPaused(true)}
+        onPointerUp={() => setIsPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div className="ease-grid">
           <motion.article
             className="ease-card card-easy"
@@ -51,9 +61,9 @@ export default function EaseOfUseFeatures() {
                 </button>
               ))}
             </div>
-            <p className="ease-title">Easy to Use</p>
+            <p className="ease-title">{t("Easy to Use")}</p>
             <p className="ease-desc">
-              Designed for a seamless experience with minimal learning curve.
+              {t("Designed for a seamless experience with minimal learning curve.")}
             </p>
           </motion.article>
 
@@ -71,9 +81,9 @@ export default function EaseOfUseFeatures() {
                 transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
-            <p className="ease-title">Clean Interface</p>
+            <p className="ease-title">{t("Clean Interface")}</p>
             <p className="ease-desc">
-              Simple, uncluttered layout that keeps the focus on your workflow.
+              {t("Simple, uncluttered layout that keeps the focus on your workflow.")}
             </p>
           </motion.article>
 
@@ -95,9 +105,9 @@ export default function EaseOfUseFeatures() {
                 ))}
               </div>
             </div>
-            <p className="ease-title">Accurate notes</p>
+            <p className="ease-title">{t("Accurate notes")}</p>
             <p className="ease-desc">
-              Capture every clinical detail with clarity and precision.
+              {t("Capture every clinical detail with clarity and precision.")}
             </p>
           </motion.article>
 
@@ -117,8 +127,8 @@ export default function EaseOfUseFeatures() {
                 </span>
               ))}
             </div>
-            <p className="ease-title">Privacy compliant</p>
-            <p className="ease-desc">HIPAA, PIPEDA, GDPR, POPIA</p>
+            <p className="ease-title">{t("Privacy compliant")}</p>
+            <p className="ease-desc">{t("HIPAA, PIPEDA, GDPR, POPIA")}</p>
           </motion.article>
 
           <motion.article
@@ -133,12 +143,12 @@ export default function EaseOfUseFeatures() {
               />
               <div className="soc2-core">
                 <BadgeCheck size={18} strokeWidth={2.2} />
-                <span>SOC2</span>
+                <span>{t("SOC2")}</span>
               </div>
             </div>
-            <p className="ease-title">SOC2</p>
+            <p className="ease-title">{t("SOC2")}</p>
             <p className="ease-desc">
-              Enterprise-grade security and audit-ready controls.
+              {t("Enterprise-grade security and audit-ready controls.")}
             </p>
           </motion.article>
 
@@ -150,7 +160,7 @@ export default function EaseOfUseFeatures() {
               <div className="handout-top">
                 <div className="left">
                   <FileText size={16} strokeWidth={2.1} />
-                  <span>Patient handout preview</span>
+                  <span>{t("Patient handout preview")}</span>
                 </div>
                 <div className="right">
                   <Sparkles size={14} strokeWidth={2.2} />
@@ -164,9 +174,9 @@ export default function EaseOfUseFeatures() {
                 <div className="line w-95" />
               </div>
             </div>
-            <p className="ease-title">Patient Handouts</p>
+            <p className="ease-title">{t("Patient Handouts")}</p>
             <p className="ease-desc">
-              Generate clear, professional handouts directly from your notes.
+              {t("Generate clear, professional handouts directly from your notes.")}
             </p>
           </motion.article>
         </div>
@@ -226,7 +236,7 @@ export default function EaseOfUseFeatures() {
 
         .ease-title {
           margin: 14px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(1.5rem, 2vw, 1.95rem);
           font-weight: 600;
           letter-spacing: -0.03em;
@@ -236,7 +246,7 @@ export default function EaseOfUseFeatures() {
 
         .ease-desc {
           margin: 12px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.02rem;
           line-height: 1.45;
           color: #8c9096;
@@ -263,7 +273,7 @@ export default function EaseOfUseFeatures() {
           border-radius: 999px;
           background: #f8fafc;
           color: #4b5563;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 500;
           padding: 7px 11px;
@@ -356,7 +366,7 @@ export default function EaseOfUseFeatures() {
           background: #f8fafc;
           border-radius: 999px;
           padding: 3px 8px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.66rem;
           font-weight: 600;
           color: #4a5563;
@@ -385,7 +395,7 @@ export default function EaseOfUseFeatures() {
           border: 1px solid #d7dce2;
           border-radius: 999px;
           padding: 5px 9px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.74rem;
           font-weight: 600;
           color: #364253;
@@ -434,7 +444,7 @@ export default function EaseOfUseFeatures() {
           display: grid;
           place-items: center;
           gap: 1px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.56rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -461,7 +471,7 @@ export default function EaseOfUseFeatures() {
         }
 
         .handout-top .left span {
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.78rem;
           font-weight: 600;
         }

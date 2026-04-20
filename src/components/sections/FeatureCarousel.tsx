@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Brain, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import MakroButton from '@/components/ui/MakroButton';
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const features = [
   {
@@ -43,6 +44,7 @@ const features = [
 ];
 
 export default function FeatureCarousel() {
+  const t = useTranslations();
   const [activeTab, setActiveTab] = useState(features[0]);
 
   return (
@@ -50,14 +52,14 @@ export default function FeatureCarousel() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 80px' }}>
           <h2 style={{ 
-            fontFamily: "'Playfair Display', serif", 
+            fontFamily: "'DM Sans', sans-serif", 
             fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
             fontWeight: 400, 
             color: '#000000', 
             lineHeight: 1.1,
             marginBottom: '24px'
           }}>
-            Advanced medical <br /> intelligence.
+            {t("Advanced medical")} <br /> {t("intelligence.")}
           </h2>
         </div>
 
@@ -152,11 +154,11 @@ export default function FeatureCarousel() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '10px',
-                      fontFamily: "'Inter', sans-serif"
+                      fontFamily: "'DM Sans', sans-serif"
                     }}
                   >
                     {isActive && <span style={{ color: 'var(--secondary, #FF6F00)' }}>{feature.icon}</span>}
-                    {feature.title}
+                    {t(feature.title)}
                   </button>
                 );
               })}
@@ -172,15 +174,15 @@ export default function FeatureCarousel() {
                 style={{ textAlign: 'center', maxWidth: '650px' }}
               >
                 <p style={{ 
-                  fontFamily: "'Inter', sans-serif", 
+                  fontFamily: "'DM Sans', sans-serif", 
                   fontSize: '1.2rem', 
                   color: '#64748b', 
                   lineHeight: 1.6,
                   marginBottom: '40px' 
                 }}>
-                  {activeTab.description}
+                  {t(activeTab.description)}
                 </p>
-                <MakroButton text={activeTab.cta} href="#" variant="primary" />
+                <MakroButton text={t(activeTab.cta)} href="#" variant="primary" />
               </motion.div>
             </AnimatePresence>
           </div>

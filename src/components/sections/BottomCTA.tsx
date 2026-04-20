@@ -1,11 +1,17 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 import { motion } from "framer-motion";
 import MakroButton from "@/components/ui/MakroButton";
 import Image from "next/image";
 
+// Static imports for background patterns
+import leftPattern from "@/assets/dorascribe-cta-left-pattern.svg";
+import rightPattern from "@/assets/dorascribe-cta-right-pattern.svg";
+
 export default function BottomCTA() {
+  const t = useTranslations();
   return (
     <section style={{ padding: "100px 24px", background: "#FDFCFA" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -26,8 +32,8 @@ export default function BottomCTA() {
           {/* Left Background Pattern */}
           <div style={{ position: "absolute", top: "50%", left: 0, transform: "translateY(-50%)", width: "18%", height: "72%", zIndex: 0, pointerEvents: "none" }}>
             <Image
-              src="/assets/dorascribe-cta-left-pattern.svg"
-              alt="Left decorative pattern"
+              src={leftPattern}
+              alt={t("Left decorative pattern")}
               fill
               style={{ objectFit: "contain", objectPosition: "left center" }}
               priority
@@ -37,8 +43,8 @@ export default function BottomCTA() {
           {/* Right Background Pattern */}
           <div style={{ position: "absolute", top: "50%", right: 0, transform: "translateY(-50%)", width: "18%", height: "72%", zIndex: 0, pointerEvents: "none" }}>
             <Image
-              src="/assets/dorascribe-cta-right-pattern.svg"
-              alt="Right decorative pattern"
+              src={rightPattern}
+              alt={t("Right decorative pattern")}
               fill
               style={{ objectFit: "contain", objectPosition: "right center" }}
               priority
@@ -62,7 +68,7 @@ export default function BottomCTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(2rem, 4vw, 3.5rem)",
                 fontWeight: 500,
                 color: "#FFFFFF",
@@ -72,7 +78,7 @@ export default function BottomCTA() {
                 margin: "0 auto 16px",
               }}
             >
-              Do less Admin,<br />Provide More Care
+              {t("Do less Admin,")}<br />{t("Provide More Care")}
             </motion.h2>
 
             <motion.p
@@ -81,7 +87,7 @@ export default function BottomCTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.16 }}
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(1rem, 1.6vw, 1.18rem)",
                 color: "rgba(255,255,255,0.9)",
                 lineHeight: 1.5,
@@ -89,8 +95,7 @@ export default function BottomCTA() {
                 margin: "0 auto 24px",
               }}
             >
-              Convert clinical consultations into notes quickly and easily. Book a live demo and explore
-              the features and capabilities that set us apart.
+              {t("Convert clinical consultations into notes quickly and easily. Book a live demo and explore the features and capabilities that set us apart.")}
             </motion.p>
 
             <motion.div
@@ -105,8 +110,8 @@ export default function BottomCTA() {
                 flexWrap: "wrap",
               }}
             >
-              <MakroButton text="Start Free Trial" href="https://dorascribe.ai/book-demo/" />
-              <MakroButton text="Book a Demo" href="https://dorascribe.ai/book-demo/" tone="accent" />
+              <MakroButton text={t("Start Free Trial")} href="https://dorascribe.ai/book-demo/" />
+              <MakroButton text={t("Book a Demo")} href="https://dorascribe.ai/book-demo/" tone="accent" />
             </motion.div>
           </div>
         </div>

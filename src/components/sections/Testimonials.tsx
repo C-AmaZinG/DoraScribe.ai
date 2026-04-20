@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const baseQuotes = [
   {
@@ -73,13 +74,33 @@ const col2Items = [baseQuotes[3], baseQuotes[4], baseQuotes[5]];
 const col3Items = [baseQuotes[6], baseQuotes[7], baseQuotes[8]];
 
 export default function Testimonials() {
+  const t = useTranslations();
+
+  // Catalog so the build-time scanner picks up testimonial quotes, names, roles
+  void [
+    t("I finish clinic with charting already done, and that has changed my evenings completely. Dorascribe captures the details accurately without breaking my flow with patients."),
+    t("The note quality is consistently strong, even on complex follow-ups. I spend less time correcting documentation and more time discussing treatment decisions with patients."),
+    t("Our team adopted Dorascribe quickly because it fits naturally into the visit. Documentation feels lighter, and we can stay focused on delivering safe, attentive care."),
+    t("What I value most is how reliable the summaries are after emotionally demanding sessions. It helps me preserve energy for patients instead of spending it all on admin work."),
+    t("Dorascribe seamlessly integrates into our daily routine. The ease of use and accuracy empower our clinical team to maintain high patient care standards."),
+    t("A game changer for patient engagement. I can actually look at my patients instead of my screen. The emotional connection I've reclaimed is invaluable."),
+    t("The immediate return on investment was obvious. Time saved on charting translates directly to more patients seen and fewer late nights."),
+    t("It captures the nuances of psychiatric evaluation perfectly. I never worry about a missed detail when reviewing past sessions."),
+    t("I've tried other scribes, but this is the most intuitive. It understands medical jargon out of the box and requires almost no edits."),
+    t("Lara M."), t("Nora I."), t("Chinelo A."), t("Ruth E."), t("Samuel K."),
+    t("Alice R."), t("David H."), t("Rachel T."), t("James F."),
+    t("Family Physician"), t("Internal Medicine Physician"), t("Family Medicine Physician"),
+    t("Clinical Psychologist"), t("Neurologist"), t("Pediatrician"),
+    t("Orthopedic Surgeon"), t("Psychiatrist"), t("Dermatologist"),
+  ];
+
   return (
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-shell">
         <div className="header-container">
-          <h2 className="section-title">Don't just take our word for it.</h2>
+          <h2 className="section-title">{t("Don't just take our word for it.")}</h2>
           <p className="section-subtitle">
-            See how Dorascribe is transforming practices across various specialties.
+            {t("See how Dorascribe is transforming practices across various specialties.")}
           </p>
         </div>
 
@@ -89,14 +110,14 @@ export default function Testimonials() {
             <div className="marquee-inner">
               {col1Items.map((card, idx) => (
                 <article key={`c1-a-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -105,14 +126,14 @@ export default function Testimonials() {
             <div className="marquee-inner" aria-hidden="true">
               {col1Items.map((card, idx) => (
                 <article key={`c1-b-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -125,14 +146,14 @@ export default function Testimonials() {
             <div className="marquee-inner">
               {col2Items.map((card, idx) => (
                 <article key={`c2-a-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -141,14 +162,14 @@ export default function Testimonials() {
             <div className="marquee-inner" aria-hidden="true">
               {col2Items.map((card, idx) => (
                 <article key={`c2-b-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -161,14 +182,14 @@ export default function Testimonials() {
             <div className="marquee-inner">
               {col3Items.map((card, idx) => (
                 <article key={`c3-a-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -177,14 +198,14 @@ export default function Testimonials() {
             <div className="marquee-inner" aria-hidden="true">
               {col3Items.map((card, idx) => (
                 <article key={`c3-b-${idx}`} className="quote-card">
-                  <p className="quote">"{card.quote}"</p>
+                  <p className="quote">"{t(card.quote)}"</p>
                   <div className="person">
                     <div className="avatar" style={{ background: card.avatarColor }}>
-                      {card.initials}
+                      {t(card.initials)}
                     </div>
                     <div>
-                      <p className="name">{card.name}</p>
-                      <p className="role">{card.role}</p>
+                      <p className="name">{t(card.name)}</p>
+                      <p className="role">{t(card.role)}</p>
                     </div>
                   </div>
                 </article>
@@ -218,7 +239,7 @@ export default function Testimonials() {
         }
 
         .section-title {
-          font-family: "Playfair Display", Georgia, serif;
+          font-family: "DM Sans", Georgia, sans-serif;
           font-size: clamp(36px, 5vw, 56px);
           font-weight: 500;
           color: #1c1c1c;
@@ -227,7 +248,7 @@ export default function Testimonials() {
         }
 
         .section-subtitle {
-          font-family: 'Inter', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: clamp(17px, 2vw, 20px);
           color: rgba(28, 28, 28, 0.5);
           font-weight: 300;
@@ -306,7 +327,7 @@ export default function Testimonials() {
 
         .quote {
           margin: 0 0 32px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           line-height: 1.6;
           color: #2d2d2d;
@@ -326,7 +347,7 @@ export default function Testimonials() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           font-weight: 700;
           color: #000000;
@@ -334,7 +355,7 @@ export default function Testimonials() {
 
         .name {
           margin: 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           font-weight: 600;
           color: #1c1c1c;
@@ -342,7 +363,7 @@ export default function Testimonials() {
 
         .role {
           margin: 4px 0 0;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           letter-spacing: 0.02em;
           font-size: 0.85rem;
           color: rgba(28, 28, 28, 0.5);

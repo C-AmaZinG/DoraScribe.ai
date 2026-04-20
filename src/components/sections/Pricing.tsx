@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import MakroButton from "@/components/ui/MakroButton";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 type ApiPlan = {
   id: number;
@@ -165,8 +166,25 @@ function mapApiToCards(apiPlans: ApiPlan[], cycle: BillingCycle): Plan[] {
 }
 
 export default function Pricing() {
+  const t = useTranslations();
   const [apiPlans, setApiPlans] = useState<ApiPlan[] | null>(null);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("month");
+
+  // Catalog so the build-time extractor registers plan strings sourced from the fallback
+  // object and the WP Plans API. These calls are thrown away; the extractor only cares
+  // that the literals appear inside t("...").
+  void [
+    t("Free Trial"), t("Essential"), t("Professional"), t("Premium"),
+    t("No credit card needed"),
+    t("per user / billed monthly"), t("per user / billed yearly"),
+    t("FREE"),
+    t("$39/month"), t("$59/month"), t("$89/month"),
+    t("$399/year"), t("$599/year"), t("$899/year"),
+    t("20 Transcripts/Month"), t("150 Transcripts/Month"), t("300 Transcripts/Month"), t("Unlimited Transcripts"),
+    t("Standard Email Support"), t("Priority Email Support"), t("Priority Phone & Email Support"),
+    t("Default Note Templates"), t("Custom Note Templates"),
+    t("Unlimited Dora Evidence Feature"), t("Prescription Generation"), t("1:1 Onboarding Support"),
+  ];
 
   useEffect(() => {
     let isMounted = true;
@@ -205,11 +223,11 @@ export default function Pricing() {
       <div className="pricing-wrap">
         <div className="pricing-top">
           <p className="pricing-title">
-            Find the right package
+            {t("Find the right package")}
           </p>
 
           <p className="pricing-subtitle">
-            Enhance your medical scribing experience at a price that fits your budget.
+            {t("Enhance your medical scribing experience at a price that fits your budget.")}
           </p>
 
           <div className="billing-toggle" role="tablist" aria-label="Billing cycle">
@@ -220,7 +238,7 @@ export default function Pricing() {
               role="tab"
               aria-selected={billingCycle === "month"}
             >
-              Monthly
+              {t("Monthly")}
             </button>
             <button
               type="button"
@@ -229,7 +247,7 @@ export default function Pricing() {
               role="tab"
               aria-selected={billingCycle === "year"}
             >
-              Yearly
+              {t("Yearly")}
             </button>
           </div>
         </div>
@@ -242,13 +260,13 @@ export default function Pricing() {
                 className={`pricing-card ${plan.name === "Premium" ? "is-premium" : ""}`}
               >
                 <div className="plan-copy">
-                  <p className="plan-name">{plan.name}</p>
-                  <p className="plan-description">{plan.description}</p>
-                  <p className="plan-price">{plan.priceLabel}</p>
+                  <p className="plan-name">{t(plan.name)}</p>
+                  <p className="plan-description">{t(plan.description)}</p>
+                  <p className="plan-price">{t(plan.priceLabel)}</p>
                 </div>
 
                 <MakroButton
-                  text="Get Started"
+                  text={t("Get Started")}
                   href="https://app.dorascribe.ai/signUp"
                   className="plan-default-btn"
                   tone={plan.name === "Free Trial" ? "gray" : "default"}
@@ -273,7 +291,7 @@ export default function Pricing() {
                             <path d="M20 6L9 17l-5-5" />
                           </svg>
                         </span>
-                        <span>{feature}</span>
+                        <span>{t(feature)}</span>
                       </li>
                     );
                   })}
@@ -304,7 +322,7 @@ export default function Pricing() {
         .pricing-title {
           margin: 20px auto 0;
           max-width: 620px;
-          font-family: "Playfair Display", serif !important;
+          font-family: "DM Sans", sans-serif !important;
           font-size: clamp(2.25rem, 5vw, 3.45rem);
           font-weight: 400;
           letter-spacing: -0.04em;
@@ -328,7 +346,7 @@ export default function Pricing() {
         .pricing-subtitle {
           margin: 14px auto 0;
           max-width: 560px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.05rem;
           line-height: 1.5;
           color: rgba(54, 56, 71, 0.7);
@@ -351,7 +369,7 @@ export default function Pricing() {
           background: transparent;
           border-radius: 999px;
           padding: 8px 14px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           color: #5f6b7d;
@@ -399,7 +417,7 @@ export default function Pricing() {
         }
 
         .plan-name {
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.8rem;
           line-height: 1.12;
           color: #2d3143;
@@ -414,7 +432,7 @@ export default function Pricing() {
         .plan-description {
           margin-top: 8px;
           min-height: 42px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.93rem;
           line-height: 1.45;
           color: #9298a9;
@@ -426,7 +444,7 @@ export default function Pricing() {
 
         .plan-price {
           margin-top: 24px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 30px;
           line-height: 1;
           letter-spacing: -0.04em;
@@ -455,7 +473,7 @@ export default function Pricing() {
           display: flex;
           align-items: center;
           gap: 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.9rem;
           color: #34384a;
         }

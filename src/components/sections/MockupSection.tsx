@@ -4,8 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import MakroButton from '@/components/ui/MakroButton';
+import { useTranslations } from "@/lib/translations/translations-context";
+
+// Static imports for images
+import dashboardMockup from "@/assets/dorascribe-app-dashboard-mockup.png";
 
 export default function MockupSection() {
+  const t = useTranslations();
   return (
     <section
       style={{
@@ -34,7 +39,7 @@ export default function MockupSection() {
         >
           <h2
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: 'clamp(2.5rem, 4vw, 3.8rem)',
               fontWeight: 400,
               color: 'var(--text-main)',
@@ -42,11 +47,11 @@ export default function MockupSection() {
               lineHeight: 1.15,
             }}
           >
-            Experience clinical freedom.
+            {t("Experience clinical freedom.")}
           </h2>
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: '1.2rem',
               color: 'var(--text-muted)',
               maxWidth: '500px',
@@ -54,24 +59,24 @@ export default function MockupSection() {
               lineHeight: 1.5,
             }}
           >
-            Dorascribe runs seamlessly on iPad and iPhone, capturing every nuance of your patient encounters.
+            {t("Dorascribe runs seamlessly on iPad and iPhone, capturing every nuance of your patient encounters.")}
           </p>
 
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
-            <MakroButton href="https://app.dorascribe.ai/signUp" text="Start a free trial" />
+            <MakroButton href="https://app.dorascribe.ai/signUp" text={t("Start a free trial")} />
           </div>
 
           <div
             style={{
               marginTop: '32px',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: '1rem',
               fontWeight: 500,
               color: 'var(--text-main)',
               opacity: 0.85,
             }}
           >
-            Trusted by healthcare professionals
+            {t("Trusted by healthcare professionals")}
           </div>
         </motion.div>
 
@@ -98,7 +103,7 @@ export default function MockupSection() {
             boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
           }}>
             <Image
-              src="/assets/dorascribe-app-dashboard-mockup.png"
+              src={dashboardMockup}
               alt="Dorascribe app dashboard mockup – AI medical scribe clinical notes interface on iPad and desktop"
               width={1470}
               height={827}

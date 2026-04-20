@@ -3,10 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Mic } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const quickActions = ["Referral letter", "Prescription", "Assessment"];
 
 export default function Sustainability() {
+  const t = useTranslations();
   const [activeAction, setActiveAction] = useState(0);
 
   useEffect(() => {
@@ -27,11 +29,10 @@ export default function Sustainability() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="burnout-chip">Step 1</span>
-          <h2>Record</h2>
+          <span className="burnout-chip">{t("Step 1")}</span>
+          <h2>{t("Record")}</h2>
           <p>
-            Instantly capture live conversations with your patient or dictate a
-            summary of the interaction.
+            {t("Instantly capture live conversations with your patient or dictate a summary of the interaction.")}
           </p>
         </motion.div>
 
@@ -65,7 +66,7 @@ export default function Sustainability() {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <h4>Note</h4>
+              <h4>{t("Note")}</h4>
               <div className="line w-100" />
               <div className="line w-88" />
               <div className="line w-92" />
@@ -125,7 +126,7 @@ export default function Sustainability() {
           padding: 8px 14px;
           background: #F9F4F1;
           color: #1a2340;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 0.93rem;
           font-weight: 600;
           letter-spacing: 0.01em;
@@ -133,7 +134,7 @@ export default function Sustainability() {
 
         .burnout-copy :global(h2) {
           margin-top: 18px;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: clamp(2.4rem, 5vw, 4rem);
           line-height: 0.96;
           letter-spacing: -0.04em;
@@ -143,7 +144,7 @@ export default function Sustainability() {
 
         .burnout-copy p {
           margin-top: 20px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.02rem;
           line-height: 1.55;
           color: #271623;
@@ -230,7 +231,7 @@ export default function Sustainability() {
 
         .note-card h4 {
           margin: 0 0 10px;
-          font-family: "Inter", sans-serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 2rem;
           font-weight: 600;
           color: #23111d;
@@ -288,7 +289,7 @@ export default function Sustainability() {
           margin-bottom: 7px;
           border-bottom: 2px solid rgba(73, 21, 43, 0.15);
           color: #22121d;
-          font-family: "Playfair Display", serif;
+          font-family: "DM Sans", sans-serif;
           font-size: 1.03rem;
           line-height: 1.2;
           transition: color 0.25s ease, border-color 0.25s ease;

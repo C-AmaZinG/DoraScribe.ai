@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import { Sparkles, Monitor, CheckCircle, ClipboardSignature, PenTool, Send, Pill, FileEdit, Library, FileCheck2, Languages, ChevronRight } from "lucide-react";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 const features = [
   {
@@ -15,98 +16,162 @@ const features = [
     title: "Clean Interface",
     description: "Simple, uncluttered layout that keeps the focus on your workflow",
     icon: <Monitor size={24} color="#4B6B7A" />,
-    iconBg: "#4B6B7A", // Slate blue
+    iconBg: "#4B6B7A",
     type: "text"
   },
   {
     title: "Accurate notes",
     description: "Capture every clinical detail with clarity and precision",
     icon: <CheckCircle size={24} color="#6E5B87" />,
-    iconBg: "#6E5B87", // Soft purple
+    iconBg: "#6E5B87",
     type: "text"
   },
   {
     title: "Supports Multiple Languages",
     description: "Transcribe patient conversations across multiple languages with confidence.",
     icon: <Languages size={24} color="#2F6F8F" />,
-    iconBg: "#2F6F8F", // Deep blue
+    iconBg: "#2F6F8F",
     type: "text"
   },
   {
     title: "Patient Handouts",
     description: "Generate clear, professional handouts directly from your notes",
     icon: <ClipboardSignature size={24} color="#3D8268" />,
-    iconBg: "#3D8268", // Teal/Green
+    iconBg: "#3D8268",
     type: "text"
   },
   {
     title: "Smart Editing",
     description: "Multiple ways to add more information to your note after creating it.",
     icon: <PenTool size={24} color="#C05A5A" />,
-    iconBg: "#C05A5A", // Soft red
+    iconBg: "#C05A5A",
     type: "text"
   },
   {
     title: "Referral Letter",
     description: "Let Dorascribe draft your referral letters for you",
     icon: <Send size={24} color="#2A6E91" />,
-    iconBg: "#2A6E91", // Cerulean
+    iconBg: "#2A6E91",
     type: "text"
   },
   {
     title: "Smart Prescription generation",
     description: "Create prescriptions seamlessly from your documentation, saving time while ensuring accuracy.",
     icon: <Pill size={24} color="#7B8E42" />,
-    iconBg: "#7B8E42", // Olive green
+    iconBg: "#7B8E42",
     type: "text"
   },
   {
     title: "Custom Templates",
     description: "Access your custom templates and have the ability to create your preferred note template",
     icon: <FileEdit size={24} color="#8F674A" />,
-    iconBg: "#8F674A", // Earthy brown
+    iconBg: "#8F674A",
     type: "text"
   },
   {
     title: "Dora Evidence",
     description: "Built-in clinical decision support tool designed to deliver evidence answers in seconds.",
     icon: <Library size={24} color="#114B69" />,
-    iconBg: "#114B69", // Dark blue
+    iconBg: "#114B69",
     type: "text"
   },
   {
     title: "Smart Form Completion",
     description: "Dorascribe can help automatically complete your medical forms.",
     icon: <FileCheck2 size={24} color="#50304C" />,
-    iconBg: "#50304C", // Deep magenta
+    iconBg: "#50304C",
     type: "text"
   }
 ];
 
 export default function FeatureCards() {
+  const t = useTranslations();
+  const [isPaused, setIsPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const x = useMotionValue(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  
+  // Base scrolling speed (pixels per frame at 60fps)
+  const speed = 1.0; 
+
+  useAnimationFrame((time, delta) => {
+    if (isDragging || isPaused) return;
+
+    let currentX = x.get() - (speed * (delta / 16.67));
+
+    // Seamless loop logic
+    if (trackRef.current) {
+      const halfWidth = trackRef.current.scrollWidth / 2;
+      if (currentX <= -halfWidth) {
+        currentX += halfWidth;
+      } else if (currentX > 0) {
+        currentX -= halfWidth;
+      }
+    }
+
+    x.set(currentX);
+  });
+
+  const handleDrag = () => {
+    if (trackRef.current) {
+        const halfWidth = trackRef.current.scrollWidth / 2;
+        let currentX = x.get();
+        if (currentX <= -halfWidth) {
+          x.set(currentX + halfWidth);
+        } else if (currentX > 0) {
+          x.set(currentX - halfWidth);
+        }
+    }
+  };
+
   return (
     <section className="feature-cards-section">
       <div className="fc-container">
-        <div className="fc-marquee">
-          <div className="fc-track">
+        <div 
+          className="fc-marquee"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <motion.div 
+            ref={trackRef}
+            className="fc-track"
+            style={{ 
+              x,
+              display: "flex",
+              flexDirection: "row",
+              gap: "20px",
+              padding: "0 10px",
+              minWidth: "max-content",
+            }}
+            drag="x"
+            onDragStart={() => setIsDragging(true)}
+            onDragEnd={() => setIsDragging(false)}
+            onDrag={handleDrag}
+            whileTap={{ cursor: "grabbing" }}
+          >
             {[...features, ...features].map((feature, idx) => (
-              <div key={idx} className="fc-card">
+              <div 
+                key={idx} 
+                className="fc-card"
+                draggable={false}
+                style={{ flexShrink: 0 }}
+              >
                 <div className="fc-icon-only">
                   {feature.icon}
                 </div>
-                <h3 className="fc-title">{feature.title}</h3>
+                <h3 className="fc-title">{t(feature.title)}</h3>
                 
                 {feature.type === "text" ? (
-                  <p className="fc-text">{feature.description}</p>
+                  <p className="fc-text">{t(feature.description)}</p>
                 ) : (
                   <div className="fc-search-bar">
-                    <span>{feature.description}</span>
+                    <span>{t(feature.description)}</span>
                     <ChevronRight size={14} className="fc-chevron" />
                   </div>
                 )}
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -152,28 +217,7 @@ export default function FeatureCards() {
         .fc-marquee {
           display: flex;
           width: 100%;
-          overflow: hidden;
-        }
-
-        .fc-track {
-          display: flex;
-          gap: 20px;
-          padding: 0 10px;
-          min-width: max-content;
-          animation: fc-scroll 50s linear infinite; /* Optimized speed for a more dynamic feel */
-        }
-
-        .fc-track:hover {
-          animation-play-state: paused;
-        }
-
-        @keyframes fc-scroll {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(calc(-50% - 10px));
-          }
+          cursor: grab;
         }
 
         .fc-card {
@@ -185,8 +229,8 @@ export default function FeatureCards() {
           flex-direction: column;
           height: 260px;
           width: 300px;
-          flex-shrink: 0;
-          transition: all 0.3s ease;
+          transition: background 0.3s ease;
+          user-select: none;
         }
 
         .fc-card:hover {
@@ -224,7 +268,7 @@ export default function FeatureCards() {
         }
 
         .fc-title {
-          font-family: 'Monument Grotesk', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           font-weight: 500;
           color: var(--fc-card-title, #000000);
@@ -233,7 +277,7 @@ export default function FeatureCards() {
         }
 
         .fc-text {
-          font-family: 'Monument Grotesk', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           line-height: 1.5;
           color: var(--fc-card-text, #555555);
