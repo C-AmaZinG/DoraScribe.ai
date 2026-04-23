@@ -56,7 +56,7 @@
     --btn-icon-filter: brightness(0) invert(1);
     
     /* Typography */
-    --font-heading: 'DM Sans', sans-serif;
+    --font-heading: 'Playfair Display', serif;
     --font-body: 'DM Sans', sans-serif;
     --makro-accent-bg: #EBF8F8;
     --makro-accent-text: #0B1D33;
@@ -145,7 +145,7 @@
     --color-muted-foreground: #64748b;
     --color-border: rgba(0, 170, 170, 0.1);
     --font-sans: 'DM Sans', sans-serif;
-    --font-serif: 'DM Sans', sans-serif;
+    --font-serif: 'Playfair Display', serif;
 }
 
 * {
@@ -194,7 +194,7 @@ h3 {
 }
 
 [style*="DM Serif Display"] {
-    font-family: "DM Sans", sans-serif !important;
+    font-family: "Playfair Display", serif !important;
 }
 
 .hero-title,

@@ -340,7 +340,7 @@ export default function WhyChoose() {
           }
           .smart-ambient-content {
             padding: 48px 40px !important;
-            justify-content: flex-end !important;
+            justify-content: flex-start !important;
           }
           .smart-ambient-image {
             display: none !important;
