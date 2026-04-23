@@ -22,6 +22,7 @@ export default function Footer() {
     {
       title: t('RESOURCES'),
       links: [
+        { l: t('Why Dorascribe'), h: '/#why-choose' },
         { l: t('How to Use'), h: '/#how-it-works' },
         { l: t('Pricing Plans'), h: '/#pricing' },
         { l: t('Tutorials'), h: '/tutorials' },
@@ -30,6 +31,7 @@ export default function Footer() {
     {
       title: t('QUICK LINKS'),
       links: [
+        { l: t('FAQ'), h: '/#faq' },
         { l: t('Support'), h: '/contact' },
         { l: t('Dashboard'), h: 'https://app.dorascribe.ai' },
       ],
