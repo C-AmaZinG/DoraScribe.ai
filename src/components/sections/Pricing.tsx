@@ -322,7 +322,7 @@ export default function Pricing() {
         .pricing-title {
           margin: 20px auto 0;
           max-width: 620px;
-          font-family: "DM Sans", sans-serif !important;
+          font-family: var(--font-heading), "Playfair Display", serif !important;
           font-size: clamp(2.25rem, 5vw, 3.45rem);
           font-weight: 400;
           letter-spacing: -0.04em;

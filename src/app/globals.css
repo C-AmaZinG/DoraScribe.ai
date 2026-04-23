@@ -56,8 +56,8 @@
     --btn-icon-filter: brightness(0) invert(1);
     
     /* Typography */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-heading: var(--font-playfair), serif;
+    --font-body: var(--font-playfair), serif;
     --makro-accent-bg: #EBF8F8;
     --makro-accent-text: #0B1D33;
     --makro-accent-hover: #d8f2f2;
@@ -144,8 +144,8 @@
     --color-muted: #f1f5f9;
     --color-muted-foreground: #64748b;
     --color-border: rgba(0, 170, 170, 0.1);
-    --font-sans: 'DM Sans', sans-serif;
-    --font-serif: 'Playfair Display', serif;
+    --font-sans: var(--font-playfair), serif;
+    --font-serif: var(--font-playfair), serif;
 }
 
 * {
@@ -191,6 +191,16 @@ h2 {
 
 h3 {
     font-size: 20px !important;
+}
+
+/* Force Playfair Display on any element with an inline DM Sans style that is a heading */
+h1[style*="DM Sans"],
+h2[style*="DM Sans"],
+h3[style*="DM Sans"],
+h4[style*="DM Sans"],
+h5[style*="DM Sans"],
+h6[style*="DM Sans"] {
+    font-family: 'Playfair Display', serif !important;
 }
 
 [style*="DM Serif Display"] {

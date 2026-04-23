@@ -133,7 +133,7 @@ export default function Hero() {
           margin: 0;
           width: 100%;
           max-width: 900px;
-          font-family: "DM Sans", sans-serif;
+          font-family: 'Playfair Display', serif;
           color: var(--hero-text, #000000);
           letter-spacing: -0.04em;
           font-size: clamp(2.15rem, 6vw, 4.15rem);

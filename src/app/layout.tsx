@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Script from "next/script";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { LocaleProvider } from "@/lib/locale-context";
@@ -9,6 +10,13 @@ import { translateUiStrings } from "@/lib/translations/translate-ui";
 import LoadingBar from "@/components/ui/LoadingBar";
 import { config } from "@/lib/config";
 import type { Locale } from "@/lib/i18n";
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
@@ -47,13 +55,9 @@ export default async function RootLayout({
   const translations = await translateUiStrings(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={playfairDisplay.variable}>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-          rel="stylesheet"
-        />
         <Script id="hotjar-tracking" strategy="afterInteractive">
           {`
             (function(h,o,t,j,a,r){
