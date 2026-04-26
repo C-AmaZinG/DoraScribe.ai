@@ -16,20 +16,13 @@ export default function ContactPage() {
     name: "",
     email: "",
     message: "",
-    newsletter: false,
   });
   const [status, setStatus] = useState<SubmitStatus>("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const target = e.target;
-    if (target instanceof HTMLInputElement && target.type === "checkbox") {
-      setFormData((prev) => ({ ...prev, [target.name]: target.checked }));
-      return;
-    }
-
-    setFormData((prev) => ({ ...prev, [target.name]: target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,7 +32,6 @@ export default function ContactPage() {
     const body = [
       `Name: ${formData.name}`,
       `Email: ${formData.email}`,
-      `Newsletter updates: ${formData.newsletter ? "Yes" : "No"}`,
       "",
       "Message:",
       formData.message,
@@ -110,18 +102,6 @@ export default function ContactPage() {
                       placeholder={t("Tell us about your team, your workflow, or what you want to achieve with Dorascribe.")}
                       required
                     />
-                  </label>
-
-                  <label className="contact-checkbox">
-                    <input
-                      type="checkbox"
-                      name="newsletter"
-                      checked={formData.newsletter}
-                      onChange={handleChange}
-                    />
-                    <span>
-                      {t("Keep me updated with Dorascribe product news, tutorials, and helpful workflow tips.")}
-                    </span>
                   </label>
 
                   <button
@@ -268,26 +248,6 @@ export default function ContactPage() {
         .contact-field textarea:focus {
           border-color: rgba(41, 105, 183, 0.5);
           box-shadow: 0 0 0 4px rgba(41, 105, 183, 0.08);
-        }
-
-        .contact-checkbox {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          margin-top: 2px;
-          font-family: "DM Sans", sans-serif;
-          font-size: 0.92rem;
-          line-height: 1.6;
-          color: #4b5563;
-          cursor: pointer;
-        }
-
-        .contact-checkbox input {
-          margin: 3px 0 0;
-          width: 18px;
-          height: 18px;
-          accent-color: #2969b7;
-          flex-shrink: 0;
         }
 
         .contact-submit {
