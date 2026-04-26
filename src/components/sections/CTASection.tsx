@@ -32,7 +32,7 @@ export default function CTASection() {
           <div className="cta-content">
             <h2>Feel the difference of Heidi by your side.</h2>
             <motion.a
-              href="https://dorascribe.ai/book-demo/"
+              href="/book-a-demo"
               className="cta-button"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}

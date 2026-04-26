@@ -50,9 +50,7 @@ export default function Hero() {
                 {t("Start a free trial")}
               </a>
               <a
-                href="https://dorascribe.ai/book-demo/"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/book-a-demo"
                 className="hero-secondary-cta"
               >
                 {t("Book a demo")}

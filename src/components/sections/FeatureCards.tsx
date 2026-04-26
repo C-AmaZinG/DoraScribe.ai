@@ -84,6 +84,11 @@ const features = [
   }
 ];
 
+const withTerminalPunctuation = (text: string) => {
+  const trimmed = text.trim();
+  return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
+};
+
 export default function FeatureCards() {
   const t = useTranslations();
   const [isPaused, setIsPaused] = useState(false);
@@ -162,7 +167,7 @@ export default function FeatureCards() {
                 <h3 className="fc-title">{t(feature.title)}</h3>
                 
                 {feature.type === "text" ? (
-                  <p className="fc-text">{t(feature.description)}</p>
+                  <p className="fc-text">{withTerminalPunctuation(t(feature.description))}</p>
                 ) : (
                   <div className="fc-search-bar">
                     <span>{t(feature.description)}</span>

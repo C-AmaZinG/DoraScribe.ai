@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Script from "next/script";
-import { Playfair_Display } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { LocaleProvider } from "@/lib/locale-context";
@@ -18,13 +18,24 @@ const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const defaultTitle = "AI Medical Scribe for Faster Clinical Documentation | Dorascribe";
+const defaultDescription =
+  "Medical scribe AI that converts patient conversations into structured clinical notes, SOAP notes, and EMR-ready documentation—helping clinicians save time and focus on patient care.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
-  title: "Dorascribe | AI Clinical Notes Assistant",
-  description: "Ambient AI Medical Scribe",
+  title: defaultTitle,
+  description: defaultDescription,
   openGraph: {
-    title: "Dorascribe | AI Clinical Notes Assistant",
-    description: "Ambient AI Medical Scribe",
+    title: defaultTitle,
+    description: defaultDescription,
     url: config.siteUrl,
     siteName: "Dorascribe",
     images: [
@@ -39,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dorascribe | AI Clinical Notes Assistant",
-    description: "Ambient AI Medical Scribe",
+    title: defaultTitle,
+    description: defaultDescription,
     images: ["/og-image.png"],
   },
 };
@@ -55,7 +66,7 @@ export default async function RootLayout({
   const translations = await translateUiStrings(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning className={playfairDisplay.variable}>
+    <html lang={locale} suppressHydrationWarning className={`${playfairDisplay.variable} ${dmSans.variable}`}>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
         <Script id="hotjar-tracking" strategy="afterInteractive">

@@ -53,7 +53,7 @@ const faqContent: Record<Category, FAQItem[]> = {
     },
     {
       q: "Does it support multiple languages?",
-      a: "Yes. We support transcription in Spanish, French, Italian, German, Portuguese and English. After your note is generated, you can also ask the AI to translate it to any language you want in the “interact with note” section.",
+      a: "Yes, Dorascribe supports a wide range of languages, with a curated list available for selection within the platform. If your preferred language is not currently listed, please contact us at help@dorascribe.com. Our team will be happy to assist and can accommodate requests to expand our supported language options.",
     },
   ],
   "Using Dorascribe": [
@@ -67,13 +67,13 @@ const faqContent: Record<Category, FAQItem[]> = {
     },
     {
       q: "How long are notes kept?",
-      a: "Notes are kept for 28 days to comply with HIPAA guidelines and allow time for EMR transfers. They stay in your inbox for 14 days, then move to the trash for another 14 days before permanent deletion.",
+      a: "By default, notes are securely stored for 30 days in alignment with HIPAA guidelines. You can customize your storage duration at any time through your account settings, with options to retain notes for 30, 60, or 90 days based on your preferences.",
     },
   ],
   "Security & Privacy": [
     {
       q: "Is my data secure and HIPAA-compliant?",
-      a: "Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and HIPAA regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous.",
+      a: "Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and privacy regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous.",
     },
     {
       q: "Is my payment information secure?",
@@ -107,6 +107,38 @@ function PlusIcon({ open }: { open: boolean }) {
   );
 }
 
+function FAQAnswer({ item }: { item: FAQItem }) {
+  const t = useTranslations();
+
+  if (item.q === "Does it support multiple languages?") {
+    return (
+      <div className="faq-a">
+        <p>
+          {t("Yes, Dorascribe supports a wide range of languages, with a curated list available for selection within the platform.")}
+        </p>
+        <p>
+          {t("If your preferred language is not currently listed, please contact us at")}{" "}
+          <a href="mailto:help@dorascribe.com">help@dorascribe.com</a>
+          {t(". Our team will be happy to assist and can accommodate requests to expand our supported language options.")}
+        </p>
+      </div>
+    );
+  }
+
+  if (item.q === "How long are notes kept?") {
+    return (
+      <div className="faq-a">
+        <p>{t("By default, notes are securely stored for 30 days in alignment with HIPAA guidelines.")}</p>
+        <p>
+          {t("You can customize your storage duration at any time through your account settings, with options to retain notes for 30, 60, or 90 days based on your preferences.")}
+        </p>
+      </div>
+    );
+  }
+
+  return <p className="faq-a">{t(item.a)}</p>;
+}
+
 export default function FAQ() {
   const t = useTranslations();
   const [activeCategory, setActiveCategory] = useState<Category>("General");
@@ -130,15 +162,18 @@ export default function FAQ() {
     t("What browser should I use?"),
     t("While all commonly used browsers are supported, we recommend using Google Chrome for the best Dorascribe experience, including for Apple device users."),
     t("Does it support multiple languages?"),
-    t("Yes. We support transcription in Spanish, French, Italian, German, Portuguese and English. After your note is generated, you can also ask the AI to translate it to any language you want in the “interact with note” section."),
+    t("Yes, Dorascribe supports a wide range of languages, with a curated list available for selection within the platform."),
+    t("If your preferred language is not currently listed, please contact us at"),
+    t(". Our team will be happy to assist and can accommodate requests to expand our supported language options."),
     t("How are errors addressed?"),
     t("Dorascribe addresses potential errors in transcriptions through advanced algorithms and user-editing capabilities, ensuring a high level of accuracy in the final output."),
     t("Any tips for best recording results?"),
     t("If you’re using Dorascribe on a desktop or laptop, make sure the microphone is turned on. You can also use an external microphone for clearer audio. On a mobile device, keep the screen active and avoid letting it go to sleep."),
     t("How long are notes kept?"),
-    t("Notes are kept for 28 days to comply with HIPAA guidelines and allow time for EMR transfers. They stay in your inbox for 14 days, then move to the trash for another 14 days before permanent deletion."),
+    t("By default, notes are securely stored for 30 days in alignment with HIPAA guidelines."),
+    t("You can customize your storage duration at any time through your account settings, with options to retain notes for 30, 60, or 90 days based on your preferences."),
     t("Is my data secure and HIPAA-compliant?"),
-    t("Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and HIPAA regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous."),
+    t("Yes. Dorascribe prioritizes the confidentiality and integrity of your medical data. We adhere to the highest security standards and privacy regulations, employing robust encryption, de-identification measures, and Google authentication to protect patient privacy and ensure data remains anonymous."),
     t("Is my payment information secure?"),
     t("Your payment information is fully secure. Dorascribe uses Stripe, a globally trusted and PCI-DSS Level 1 certified payment processor, to handle all transactions."),
   ];
@@ -231,7 +266,7 @@ export default function FAQ() {
                             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                           >
                             <div className="faq-a-wrap">
-                              <p className="faq-a">{t(item.a)}</p>
+                              <FAQAnswer item={item} />
                             </div>
                           </motion.div>
                         )}
@@ -257,7 +292,7 @@ export default function FAQ() {
                   {t("If you have unique practice setups, EMR integrations, or require custom workflows, our team can tailor Dorascribe to your needs.")}
                 </p>
 
-                <MakroButton text={t("Contact us")} href="https://dorascribe.ai/contact-us/" className="faq-contact-default-btn" />
+                <MakroButton text={t("Contact us")} href="/contact" className="faq-contact-default-btn" />
               </div>
             </motion.div>
           </motion.div>
@@ -440,7 +475,7 @@ export default function FAQ() {
         }
 
         .faq-q span:first-child {
-          font-family: "DM Sans", sans-serif;
+          font-family: var(--font-heading);
           font-size: 24px;
           font-weight: 400;
           line-height: 1.35;
@@ -460,15 +495,36 @@ export default function FAQ() {
         }
 
         .faq-a-wrap {
+          font-family: var(--font-dm-sans), "DM Sans", sans-serif !important;
           padding: 0;
           max-width: 600px;
         }
 
+        .faq-a-wrap * {
+          font-family: var(--font-dm-sans), "DM Sans", sans-serif !important;
+        }
+
         .faq-a {
-          font-family: "DM Sans", sans-serif;
+          font-family: var(--font-dm-sans), "DM Sans", sans-serif !important;
           font-size: 1rem;
           line-height: 1.55;
           color: #8E8E8E;
+        }
+
+        .faq-a p {
+          font-family: var(--font-dm-sans), "DM Sans", sans-serif !important;
+          margin: 0;
+        }
+
+        .faq-a p + p {
+          margin-top: 10px;
+        }
+
+        .faq-a a {
+          font-family: var(--font-dm-sans), "DM Sans", sans-serif !important;
+          color: var(--text-main);
+          text-decoration: underline;
+          text-underline-offset: 3px;
         }
 
         .faq-contact {

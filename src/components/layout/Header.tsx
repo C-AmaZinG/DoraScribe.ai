@@ -100,7 +100,7 @@ export default function Header() {
   void [
     t("How to Use"), t("Why Dorascribe"), t("Pricing"), t("FAQ"),
     t("Resources"), t("Contact"), t("Blog"), t("Tutorials"),
-    t("Select Language"), t("Get started"), t("Log in"),
+    t("Select Language"), t("Language"), t("Get started"), t("Log in"),
     t("Get Started"), t("Login"), t("Open menu"), t("Close menu"),
   ];
 
@@ -453,7 +453,7 @@ export default function Header() {
               left: 0,
               width: "100vw",
               height: "auto",
-              maxHeight: "85vh",
+              maxHeight: "96vh",
               borderBottomLeftRadius: "24px",
               borderBottomRightRadius: "24px",
               boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
@@ -461,7 +461,7 @@ export default function Header() {
               zIndex: 15000,
               display: "flex",
               flexDirection: "column",
-              padding: "20px 24px 30px",
+              padding: "16px 24px 22px",
               overflowY: "auto",
               boxSizing: "border-box",
             }}
@@ -508,7 +508,7 @@ export default function Header() {
                       alignItems: "center", 
                       gap: "16px",
                       width: "100%",
-                      marginBottom: "20px"
+                      marginBottom: "12px"
                     }}
                   >
                     {/* Swapped mobile order */}
@@ -598,7 +598,7 @@ export default function Header() {
                               fontWeight: 700,
                               width: "100%",
                               textAlign: "left",
-                              padding: "12px 0",
+                              padding: "8px 0",
                               cursor: "pointer",
                               display: "flex",
                               alignItems: "center",
@@ -670,7 +670,31 @@ export default function Header() {
               transition={{ delay: 0.7 }}
               className="mobile-nav-footer"
             >
-              <div className="social-tray" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '20px' }}>
+              <div className="mobile-language-wrap" data-no-translate="true">
+                <p className="mobile-nav-kicker">{t("Language")}</p>
+                <div className="mobile-language-grid">
+                  {locales.map((locale) => (
+                    <button
+                      key={locale}
+                      type="button"
+                      className={`mobile-lang-btn ${currentLocale === locale ? "is-active" : ""}`}
+                      aria-pressed={currentLocale === locale}
+                      onClick={() => switchLocale(locale)}
+                    >
+                      <span
+                        className="language-flag"
+                        aria-hidden="true"
+                        style={{
+                          backgroundImage: `url(https://flagcdn.com/w40/${localeMap[locale].flag}.png)`,
+                        }}
+                      />
+                      <span>{localeMap[locale].label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="social-tray" style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '12px' }}>
                 <a href="https://www.linkedin.com/company/dorascribe-inc/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="tray-icon" style={{ color: '#FFFFFF', opacity: 0.8 }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
@@ -695,7 +719,7 @@ export default function Header() {
           position: relative;
           padding: 8px 16px;
           text-decoration: none;
-          font-family: "DM Sans", sans-serif;
+          font-family: var(--font-heading);
           font-size: 14px !important;
           white-space: nowrap;
           line-height: 1.1;
@@ -941,8 +965,8 @@ export default function Header() {
 
         /* Mobile Language Styles */
         .mobile-language-wrap {
-          margin-top: 24px;
-          padding-bottom: 20px;
+          margin-top: 0;
+          padding-bottom: 18px;
         }
 
         .mobile-nav-kicker {
@@ -957,7 +981,7 @@ export default function Header() {
 
         .mobile-language-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(5, minmax(0, 1fr));
           gap: 8px;
         }
 
@@ -978,10 +1002,16 @@ export default function Header() {
           transition: all 0.2s ease;
         }
 
+        .mobile-lang-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
         .mobile-lang-btn.is-active {
-          background: #3d8183 !important;
-          border-color: #3d8183 !important;
-          box-shadow: 0 4px 12px rgba(61, 129, 131, 0.3);
+          background: var(--brand-primary) !important;
+          border-color: var(--brand-primary) !important;
+          color: var(--brand-primary-text) !important;
+          box-shadow: 0 4px 12px rgba(255, 227, 67, 0.24);
         }
 
         .mobile-menu-button {
@@ -1036,7 +1066,7 @@ export default function Header() {
           align-items: center;
           justify-content: space-between;
           height: 48px;
-          margin-bottom: 24px;
+          margin-bottom: 18px;
         }
 
         /* Ensure logo is white on dark */
@@ -1074,8 +1104,8 @@ export default function Header() {
         .mobile-nav-list {
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          padding-bottom: 40px;
+          gap: 8px;
+          padding-bottom: 18px;
         }
 
         .nav-item-wrap {
@@ -1089,7 +1119,7 @@ export default function Header() {
           color: white;
           text-decoration: none;
           letter-spacing: -0.02em;
-          padding: 8px 0;
+          padding: 6px 0;
           display: block;
           transition: transform 0.2s ease, color 0.2s ease;
         }
@@ -1128,12 +1158,12 @@ export default function Header() {
         .nav-divider-slim {
           height: 1px;
           background: rgba(255, 255, 255, 0.1);
-          margin: 32px 0;
+          margin: 18px 0;
           width: 60px;
         }
 
         .mobile-nav-footer {
-          padding-top: 32px;
+          padding-top: 18px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
           margin-top: auto;
         }

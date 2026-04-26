@@ -712,6 +712,29 @@ export function BlogPostContent({ post, relatedPosts, locale }: BlogPostContentP
                 .wp-content-wrapper img { width: 100%; height: auto; border-radius: 12px; margin: 2em 0; }
                 .wp-content-wrapper .wp-block-image { margin: 2em 0; }
                 .wp-content-wrapper .wp-block-image figcaption { text-align: center; font-size: 0.85rem; color: #888; margin-top: 0.75em; }
+                @media (max-width: 640px) {
+                  .wp-content-wrapper h2 {
+                    font-size: 1.38rem !important;
+                    line-height: 1.2;
+                    margin-top: 1.25em;
+                    margin-bottom: 0.45em;
+                    letter-spacing: -0.01em;
+                  }
+
+                  .wp-content-wrapper h3 {
+                    font-size: 1.16rem !important;
+                    line-height: 1.25;
+                    margin-top: 1.1em;
+                    margin-bottom: 0.4em;
+                  }
+
+                  .wp-content-wrapper h4 {
+                    font-size: 1.02rem !important;
+                    line-height: 1.3;
+                    margin-top: 1em;
+                    margin-bottom: 0.35em;
+                  }
+                }
               `}</style>
               <div className="wp-content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
             </motion.article>

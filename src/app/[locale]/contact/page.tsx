@@ -6,7 +6,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { useTranslations } from "@/lib/translations/translations-context";
 
-type SubmitStatus = "idle" | "sending" | "sent" | "error";
+type SubmitStatus = "idle" | "sent";
+
+const helpEmail = "help@dorascribe.com";
 
 export default function ContactPage() {
   const t = useTranslations();
@@ -30,40 +32,22 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [target.name]: target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("sending");
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          subscribe: formData.newsletter,
-        }),
-      });
+    const subject = `Dorascribe contact request from ${formData.name}`;
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Newsletter updates: ${formData.newsletter ? "Yes" : "No"}`,
+      "",
+      "Message:",
+      formData.message,
+    ].join("\n");
 
-      if (!response.ok) {
-        throw new Error("Submission failed");
-      }
-
-      setStatus("sent");
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-        newsletter: false,
-      });
-
-      window.setTimeout(() => setStatus("idle"), 4000);
-    } catch (error) {
-      console.error("Contact submission error:", error);
-      setStatus("error");
-      window.setTimeout(() => setStatus("idle"), 4000);
-    }
+    window.location.href = `mailto:${helpEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("sent");
+    window.setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -143,20 +127,13 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     className="contact-submit"
-                    disabled={status === "sending"}
                   >
-                    {status === "sending" ? t("Sending...") : t("Send message")}
+                    {t("Send message")}
                   </button>
 
                   {status === "sent" && (
                     <p className="contact-status success">
-                      {t("Your message has been sent. We will be in touch shortly.")}
-                    </p>
-                  )}
-
-                  {status === "error" && (
-                    <p className="contact-status error">
-                      {t("Something went wrong. Please try again in a moment.")}
+                      {t("Your email app is opening with your message ready to send.")}
                     </p>
                   )}
                 </form>
@@ -329,11 +306,6 @@ export default function ContactPage() {
         .contact-submit:hover:not(:disabled) {
           transform: translateY(-1px);
           box-shadow: 0 14px 28px rgba(0, 170, 170, 0.32);
-        }
-
-        .contact-submit:disabled {
-          opacity: 0.72;
-          cursor: wait;
         }
 
         .contact-status {

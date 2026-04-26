@@ -42,9 +42,6 @@ export default function DiscoverAmbientAI() {
       <div className="discover-shell">
         <div className="discover-heading">
           <h2>{t("Why Choose Dorascribe?")}</h2>
-          <p>
-            {t("Streamline your workflow and enhance patient interactions with these benefits.")}
-          </p>
         </div>
 
         <div className="discover-grid">
@@ -91,15 +88,6 @@ export default function DiscoverAmbientAI() {
           line-height: 1.03;
           letter-spacing: -0.02em;
           color: #1a1018;
-        }
-
-        .discover-heading > p {
-          margin: 14px 0 0;
-          font-family: "DM Sans", sans-serif;
-          font-size: 1.03rem;
-          color: #2a2830;
-          line-height: 1.55;
-          max-width: 64ch;
         }
 
         .discover-grid {

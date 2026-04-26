@@ -13,6 +13,10 @@ import Footer from "@/components/layout/Footer";
 import { locales, buildAlternates } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 
+const homeTitle = "AI Medical Scribe for Faster Clinical Documentation | Dorascribe";
+const homeDescription =
+  "Medical scribe AI that converts patient conversations into structured clinical notes, SOAP notes, and EMR-ready documentation—helping clinicians save time and focus on patient care.";
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -25,8 +29,31 @@ export async function generateMetadata({
   const { locale } = await params;
   const { canonical, languages } = buildAlternates("/");
   return {
+    title: homeTitle,
+    description: homeDescription,
     alternates: { canonical, languages },
-    openGraph: { locale },
+    openGraph: {
+      title: homeTitle,
+      description: homeDescription,
+      url: canonical,
+      siteName: "Dorascribe",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 2588,
+          height: 1620,
+          alt: "Dorascribe - AI Medical Scribe",
+        },
+      ],
+      locale,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: homeTitle,
+      description: homeDescription,
+      images: ["/og-image.png"],
+    },
   };
 }
 

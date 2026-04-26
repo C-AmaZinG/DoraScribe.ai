@@ -110,8 +110,8 @@ export default function BottomCTA() {
                 flexWrap: "wrap",
               }}
             >
-              <MakroButton text={t("Start Free Trial")} href="https://dorascribe.ai/book-demo/" />
-              <MakroButton text={t("Book a Demo")} href="https://dorascribe.ai/book-demo/" tone="accent" />
+              <MakroButton text={t("Start Free Trial")} href="https://app.dorascribe.ai/signUp" />
+              <MakroButton text={t("Book a Demo")} href="/book-a-demo" tone="accent" />
             </motion.div>
           </div>
         </div>

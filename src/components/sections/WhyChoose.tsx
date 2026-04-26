@@ -51,21 +51,6 @@ export default function WhyChoose() {
           >
             {t("Why Choose Dorascribe?")}
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            style={{
-              fontSize: "18px",
-              fontFamily: "'DM Sans', sans-serif",
-              color: "var(--feature-section-subtitle, #555555)",
-              maxWidth: "600px",
-              lineHeight: 1.5,
-            }}
-          >
-            {t("Streamline your workflow and enhance patient interactions with these benefits")}
-          </motion.p>
         </div>
 
         {/* Featured Card (Large) */}
