@@ -61,7 +61,7 @@ const MakroButton = ({
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (isInternalRoute) {
       event.preventDefault();
-      router.push(href);
+      router.push(href, { scroll: !href.includes("#") });
     }
   };
 
