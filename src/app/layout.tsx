@@ -25,9 +25,9 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const defaultTitle = "AI Medical Scribe for Faster Clinical Documentation | Dorascribe";
+const defaultTitle = "AI medical scribe that turns patient conversations into accurate, structured SOAP notes and EMR-ready documentation, so clinicians spend less time charting and more time with patients.";
 const defaultDescription =
-  "Medical scribe AI that converts patient conversations into structured clinical notes, SOAP notes, and EMR-ready documentation—helping clinicians save time and focus on patient care.";
+  "AI medical scribe that turns patient conversations into accurate, structured SOAP notes and EMR-ready documentation—so clinicians spend less time charting and more time with patients.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),

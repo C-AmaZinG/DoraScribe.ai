@@ -13,9 +13,9 @@ import Footer from "@/components/layout/Footer";
 import { locales, buildAlternates } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 
-const homeTitle = "AI Medical Scribe for Faster Clinical Documentation | Dorascribe";
+const homeTitle = "AI medical scribe that turns patient conversations into accurate, structured SOAP notes and EMR-ready documentation, so clinicians spend less time charting and more time with patients.";
 const homeDescription =
-  "Medical scribe AI that converts patient conversations into structured clinical notes, SOAP notes, and EMR-ready documentation—helping clinicians save time and focus on patient care.";
+  "AI medical scribe that turns patient conversations into accurate, structured SOAP notes and EMR-ready documentation—so clinicians spend less time charting and more time with patients.";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
