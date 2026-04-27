@@ -91,6 +91,37 @@ const withTerminalPunctuation = (text: string) => {
 
 export default function FeatureCards() {
   const t = useTranslations();
+
+  // Catalog so the build-time scanner picks up the feature titles and descriptions
+  void [
+    t("Easy to Use"),
+    t("Designed for a seamless experience with minimal learning curve"),
+    t("Clean Interface"),
+    t("Simple, uncluttered layout that keeps the focus on your workflow"),
+    t("Accurate notes"),
+    t("Capture every clinical detail with clarity and precision"),
+    t("Privacy compliant"),
+    t("HIPAA, PIPEDA, GDPR, POPIA"),
+    t("SOC2"),
+    t("Enterprise-grade security and audit-ready controls"),
+    t("Patient Handouts"),
+    t("Generate clear, professional handouts directly from your notes"),
+    t("Supports Multiple Languages"),
+    t("Transcribe patient conversations across multiple languages with confidence"),
+    t("Smart Editing"),
+    t("Multiple ways to add more information to your note after creating it"),
+    t("Referral Letter"),
+    t("Let Dorascribe draft your referral letters for you"),
+    t("Smart Prescription generation"),
+    t("Create prescriptions seamlessly from your documentation, saving time while ensuring accuracy"),
+    t("Custom Templates"),
+    t("Access your custom templates and have the ability to create your preferred note template"),
+    t("Dora Evidence"),
+    t("Built-in clinical decision support tool designed to deliver evidence answers in seconds"),
+    t("Smart Form Completion"),
+    t("Dorascribe can help automatically complete your medical forms"),
+  ];
+
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const x = useMotionValue(0);

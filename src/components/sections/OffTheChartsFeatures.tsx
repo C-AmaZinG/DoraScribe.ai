@@ -35,6 +35,19 @@ const languageCodes = [
 
 export default function OffTheChartsFeatures() {
   const t = useTranslations();
+
+  // Catalog so the build-time scanner picks up rotating prompts and insights
+  void [
+    t("Summarize the treatment plan"),
+    t("Add follow-up instructions for the patient"),
+    t("Include current medication changes"),
+    t("Create a concise assessment and plan"),
+    t("Add more details about patient's cardiovascular examination"),
+    t("Include current medication list and any recent changes"),
+    t("Specify follow-up timeline for lab results"),
+    t("Add vital signs from today's visit"),
+  ];
+
   const [promptIndex, setPromptIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -83,7 +96,7 @@ export default function OffTheChartsFeatures() {
               <div className="prompt-dot">
                 <ChevronRight size={13} strokeWidth={2.2} />
               </div>
-              <p className="prompt-text">{commandPrompts[promptIndex]}</p>
+              <p className="prompt-text">{t(commandPrompts[promptIndex])}</p>
               <div className="prompt-keys">
                 <span>{t("Ctrl")}</span>
                 <span>{t("Enter")}</span>
@@ -131,7 +144,7 @@ export default function OffTheChartsFeatures() {
               {insightLines.map((item) => (
                 <div className="insight-row" key={item}>
                   <Plus size={12} strokeWidth={2.4} />
-                  <span>{item}</span>
+                  <span>{t(item)}</span>
                 </div>
               ))}
             </div>
