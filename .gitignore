@@ -8,9 +8,21 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.next
 dist
 dist-ssr
 *.local
+tsconfig.tsbuildinfo
+temp_*.txt
+
+# AI Agent folders
+.agent
+.agents
+skills-lock.json
+
+# Cleanup artifacts
+index_old.css
+integrated_footer.html
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +34,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel

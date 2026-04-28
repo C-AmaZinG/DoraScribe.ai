@@ -1,31 +1,96 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import Script from "next/script";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import "../App.css";
-import "../zerodrift-scoped.css";
+import { AppProviders } from "@/components/providers/AppProviders";
+import { LocaleProvider } from "@/lib/locale-context";
+import { TranslationsProvider } from "@/lib/translations/translations-context";
+import { translateUiStrings } from "@/lib/translations/translate-ui";
+import LoadingBar from "@/components/ui/LoadingBar";
+import { config } from "@/lib/config";
+import type { Locale } from "@/lib/i18n";
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const defaultTitle = "AI medical scribe that turns patient conversations into accurate, structured SOAP notes and EMR-ready documentation, so clinicians spend less time charting and more time with patients.";
+const defaultDescription =
+  "AI medical scribe that turns patient conversations into accurate, structured SOAP notes and EMR-ready documentation—so clinicians spend less time charting and more time with patients.";
 
 export const metadata: Metadata = {
-  title: "DoraScribe | AI Clinical Notes Assistant",
-  description: "AI Clinical Notes Assistant",
+  metadataBase: new URL(config.siteUrl),
+  title: defaultTitle,
+  description: defaultDescription,
+  openGraph: {
+    title: defaultTitle,
+    description: defaultDescription,
+    url: config.siteUrl,
+    siteName: "Dorascribe",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 2588,
+        height: 1620,
+        alt: "Dorascribe – Ambient AI Medical Scribe",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: ["/og-image.png"],
+  },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "en") as Locale;
+  const translations = await translateUiStrings(locale);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={`${playfairDisplay.variable} ${dmSans.variable}`}>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-          rel="stylesheet"
-        />
+        <Script id="hotjar-tracking" strategy="afterInteractive">
+          {`
+            (function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:6691991,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+          `}
+        </Script>
       </head>
       <body suppressHydrationWarning>
-        <div id="root">{children}</div>
+        <LocaleProvider locale={locale}>
+          <TranslationsProvider translations={translations}>
+            <LoadingBar />
+            <AppProviders>
+              <div id="root">{children}</div>
+            </AppProviders>
+          </TranslationsProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

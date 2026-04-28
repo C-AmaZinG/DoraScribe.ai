@@ -1,40 +1,151 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Regular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Medium.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Monument Grotesk';
+    src: url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Bold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/michele-m/monument-grotesk@master/fonts/MonumentGrotesk-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
-    --primary: #00B7AF; /* Teal */
-    --primary-dark: #006167; /* Dark Teal */
-    --secondary: #006167; /* Dark Teal */
-    --accent: #FDD401; /* Yellow */
-    --accent-alt: #FABF00; /* Golden */
-    --bg-light: #ECEFF6; /* Original Background */
+    --brand-primary: #FFE343;
+    --brand-primary-text: #000000;
+    --brand-primary-hover: #d9b600;
+    --primary: #000000;
+    --primary-dark: #0B1D33;
+    --secondary: #FFE343; 
+    --makro-accent: #FFE343; 
+    --bg-light: #FCFAF8; 
     --bg-white: #ffffff;
-    --text-main: #1C1C1C;
-    --text-muted: #5b6b7a;
+    --text-main: #000000;
+    --text-muted: #64748b;
     --border-radius-lg: 32px;
     --border-radius-pill: 100px;
     --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --max-width: 1200px;
+
+    /* Brand Teal Updates */
+    --how-it-works-orange: #3d8183;
+    --how-it-works-orange-glow: rgba(61, 129, 131, 0.2);
+    --how-it-works-orange-shadow: rgba(61, 129, 131, 0.4);
+    --pd-step-bg: #3d8183;
+    --pd-step-dot-bg: #3d8183;
+    --pd-step-dot-shadow: rgba(61, 129, 131, 0.4);
+    --pd-step-line-bg: #3d8183;
+    --pd-step-text: #ffffff;
+    --btn-icon-filter: brightness(0) invert(1);
     
     /* Typography */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: var(--font-playfair), serif;
+    --font-body: var(--font-playfair), serif;
+    --makro-accent-bg: #EBF8F8;
+    --makro-accent-text: #0B1D33;
+    --makro-accent-hover: #d8f2f2;
+    --hero-secondary-cta-bg: #EBF8F8;
+    --hero-secondary-cta-text: #0B1D33;
+    --hero-secondary-cta-hover: #d8f2f2;
+
+    /* System-wide Peach -> Light Yellow override */
+    --peach-bg-override: #F8F7F5;
+    --hamburger-icon-color: #0B1D33;
+
+    /* Hero Badge specific */
+    --hero-badge-bg: transparent;
+    --hero-badge-text: #ffffff;
+    --hero-badge-spin-color: #3d8183;
+}
+
+/* Global Component Themes (Promoted from Variant B) */
+.hero-playground-clone {
+    background: #0B1D33 !important;
+    --hero-bg: #0B1D33;
+    --hero-text: #ffffff;
+    --hero-subtitle-text: rgba(255, 255, 255, 0.8);
+    --hero-secondary-cta-bg: #EBF8F8;
+    --hero-secondary-cta-text: #0B1D33;
+    --hero-secondary-cta-hover: #d8f2f2;
+    --hero-badge-bg: #0B1D33; /* Matches background to create stroke effect */
+    --hero-badge-text: #ffffff;
+    --hero-badge-spin-color: #3d8183;
+}
+
+.feature-cards-section {
+    --feature-section-bg: #0B1D33;
+    --feature-section-text: #ffffff;
+    --feature-section-subtitle: rgba(255, 255, 255, 0.7);
+}
+
+/* Light Theme overrides for specific sections */
+#why-choose {
+    --feature-section-bg: #ffffff;
+    --feature-section-text: #000000;
+    --feature-section-subtitle: #555555;
+}
+
+/* Blanket Background Overrides for specific elements across site */
+.hero-template-box,
+.wc-card,
+.burnout-visual,
+.mic-shell,
+.faq-cats,
+.faq-main,
+.faq-list,
+.blog-item-wrap,
+.faq-cat.is-active,
+.feature-visual,
+.v-device,
+.v-note-card,
+.v-monitor,
+.v-bubble {
+    background-color: var(--peach-bg-override) !important;
+}
+
+/* Specific inner element overrides for FAQ gradients and borders */
+.faq-cats::before,
+.faq-cats::after {
+    background: radial-gradient(circle at 0 0, transparent 0 68%, var(--peach-bg-override) 69% 100%) !important;
+}
+
+.feature-visual,
+.v-device,
+.v-note-card,
+.v-monitor,
+.v-bubble {
+    border-color: rgba(61, 129, 131, 0.2) !important;
 }
 
 @theme {
-    --color-background: #ECEFF6;
-    --color-foreground: #1c1c1c;
-    --color-primary: #00B7AF;
+    --color-background: #FCFAF8;
+    --color-foreground: #000000;
+    --color-primary: #000000;
     --color-primary-foreground: #ffffff;
-    --color-secondary: #006167;
-    --color-secondary-foreground: #ffffff;
-    --color-accent: #FDD401;
-    --color-accent-alt: #FABF00;
+    --color-secondary:	#FF6F00;
+    --color-accent: #FF6F00;
     --color-muted: #f1f5f9;
-    --color-muted-foreground: #5b6b7a;
-    --color-border: #b8d9bc;
-    --font-sans: 'Inter', sans-serif;
-    --font-serif: 'Playfair Display', serif;
+    --color-muted-foreground: #64748b;
+    --color-border: rgba(0, 170, 170, 0.1);
+    --font-sans: var(--font-playfair), serif;
+    --font-serif: var(--font-playfair), serif;
 }
 
 * {
@@ -45,6 +156,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-margin-top: 100px;
 }
 
 body {
@@ -58,8 +170,52 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Prevent first-paint FOUC/hydration flash by revealing app after client boot */
+body:not(.app-ready) #root {
+    opacity: 0;
+}
+
+body.app-ready #root {
+    opacity: 1;
+    transition: opacity 0.15s ease;
+}
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading) !important;
+    font-weight: 400 !important;
+}
+
+h2 {
+    font-size: 48px !important;
+}
+
+h3 {
+    font-size: 20px !important;
+}
+
+/* Force Playfair Display on any element with an inline DM Sans style that is a heading */
+h1[style*="DM Sans"],
+h2[style*="DM Sans"],
+h3[style*="DM Sans"],
+h4[style*="DM Sans"],
+h5[style*="DM Sans"],
+h6[style*="DM Sans"] {
+    font-family: 'Playfair Display', serif !important;
+}
+
+[style*="DM Serif Display"] {
+    font-family: "Playfair Display", serif !important;
+}
+
+.hero-title,
+.pricing-title,
+.enterprise-title,
+.form-title,
+.plan-name,
+.faq-title,
+.faq-contact-title,
+.info-title {
+    font-family: var(--font-heading) !important;
 }
 
 /* Scroll Reveal Base Class */
@@ -103,14 +259,14 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(236, 239, 246, 0.7);
+    background: #FEFEFE;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     transition: background 0.3s ease;
 }
 
 header.scrolled {
-    background: rgba(236, 239, 246, 0.9);
+    background: #FEFEFE;
 }
 
 header .container {
@@ -306,7 +462,7 @@ nav ul li a:hover {
     display: inline-flex;
     align-items: center;
     background: #ffffff;
-    color: #1a1a1a;
+    color: #000000;
     padding: 16px 32px;
     border-radius: 8px;
     font-family: var(--font-heading);
@@ -390,7 +546,7 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    color: #1a1a1a;
+    color: #000000;
 }
 
 .zd-play-btn svg {
@@ -401,6 +557,7 @@ nav ul li a:hover {
 /* Sections */
 section {
     padding: 140px 0;
+    scroll-margin-top: 100px;
 }
 
 .section-head {
@@ -1143,4 +1300,159 @@ main > section:last-of-type {
         grid-column: span 1;
     }
 }
+
+/* Force-hide legacy CTA decorative motifs */
+.cta-pattern {
+    display: none !important;
+}
+
+.cta-button svg {
+    display: none !important;
+}
 @import "tailwindcss";
+
+/* WhyChoose Section Redesign CSS extracted to prevent FOUC */
+.why-choose-redesign {
+  padding: 120px 24px;
+  background: #FFFFFF;
+}
+
+.wc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wc-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.wc-title {
+  font-family: 'Monument Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.wc-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.wc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.wc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wc-card {
+  background: #F9F4F1;
+  padding: 40px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.wc-card:hover {
+  transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+
+.wc-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.wc-card p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4A4A4A;
+  margin: 0;
+}
+
+.wc-card-hero {
+  background: var(--brand-primary);
+  border-radius: 12px;
+  height: 100%;
+  min-height: 400px;
+}
+
+@media (max-width: 1024px) {
+  .wc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wc-card-hero {
+    grid-column: span 2;
+    order: -1;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wc-grid {
+    grid-template-columns: 1fr;
+  }
+  .wc-card-hero {
+    grid-column: span 1;
+    order: -1;
+  }
+  .why-choose-redesign {
+    padding: 80px 20px;
+  }
+}
+
+/* Mobile Navigation Hover Effects */
+.mobile-nav-overlay a:hover,
+.mobile-nav-overlay-v2 a:hover,
+.mobile-link-hero:hover,
+.sub-link:hover,
+.mobile-nav-hero-link:hover {
+    color: var(--brand-primary) !important;
+}
+
+.mobile-cta-btn-main:hover {
+    background-color: var(--brand-primary-hover) !important;
+    color: var(--brand-primary-text) !important;
+}
+
+.mobile-close-toggle:hover {
+    background: rgba(0, 170, 170, 0.2) !important;
+}
+
+.close-nav-btn:hover {
+    background: rgba(0, 170, 170, 0.2) !important;
+    color: var(--brand-primary) !important;
+}
+
+/* Tutorials Page - Yellow Text to Black Overrides */
+.tutorials-page .nav-caret,
+.tutorials-page .footer-link-hover:hover,
+.tutorials-page .mobile-nav-overlay a:hover,
+.tutorials-page .mobile-nav-overlay-v2 a:hover,
+.tutorials-page .close-nav-btn:hover {
+    color: #000000 !important;
+}
+
